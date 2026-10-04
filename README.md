@@ -12,6 +12,7 @@
   <img src="https://img.shields.io/badge/Anti--Cheat-100%25%20Safe-success" alt="Anti-Cheat Safe" />
   <img src="https://img.shields.io/badge/Release-v1.64-EAB308" alt="Version" />
   <a href="https://koukou221.github.io/Better-Color-Profile/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
+  <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red" alt="License" />
 </p>
 
@@ -102,6 +103,18 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 * Minimizing or closing the window sends it directly to the system tray so the hotkey remains active.
 * Right-click tray menu provides quick slot switching, status overview, and settings.
 * Enable **Start with Windows** to keep your preferred profiles ready on startup.
+
+---
+
+## 💬 Official Community & Support
+
+Join the official **Better Color Profile** Discord community for release announcements, troubleshooting, calibration profiles, and feature requests:
+
+👉 **[🚀 Join Better Color Profile Discord](https://discord.gg/eeVBnK7Hmg)**
+
+* 📢 **#announcements**: Official release updates & changelogs.
+* 🛠️ **#support & #feature-requests**: Direct help & suggestions.
+* 🎨 **#profile-sharing**: Download & share community monitor calibrations & game presets.
 
 ---
 
