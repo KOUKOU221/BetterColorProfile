@@ -540,11 +540,11 @@
           <!-- Timeline Beat Marker Indicators: Omitted on public production deployment -->
         </div>
 
-        <!-- Right: Song Volume Slider & Mute (Default 50%) -->
+        <!-- Right: Song Volume Slider & Mute (Default 100%) -->
         <div class="flex items-center gap-2 flex-shrink-0 bg-black/40 px-3 py-1.5 rounded-xl border border-white/10">
           <button type="button" id="ad-volume-btn" onclick="toggleAdAudioMute()" class="text-gray-300 hover:text-white text-xs transition-colors" title="Toggle Sound">🔊</button>
-          <input type="range" id="ad-volume-slider" min="0" max="1" step="0.01" value="0.50" oninput="setAdVolume(this.value)" class="w-20 accent-amber-400 cursor-pointer" title="Song Volume">
-          <span id="ad-volume-percent" class="font-mono text-[10px] text-gray-400 min-w-[30px] text-right">50%</span>
+          <input type="range" id="ad-volume-slider" min="0" max="1" step="0.01" value="1.0" oninput="setAdVolume(this.value)" class="w-20 accent-amber-400 cursor-pointer" title="Song Volume">
+          <span id="ad-volume-percent" class="font-mono text-[10px] text-gray-400 min-w-[30px] text-right">100%</span>
         </div>
 
       </div>
@@ -1821,7 +1821,7 @@
     const AD_TOTAL_SEC = 24;
     let adIsPlaying = false;
     let adIsMuted = false;
-    let adUserVolume = 0.50;
+    let adUserVolume = 1.0;
 
     function openSpecAdReel() {
       const adEl = document.getElementById('spec-ad');
@@ -2111,7 +2111,7 @@
 
     function setAdVolume(val) {
       adUserVolume = parseFloat(val);
-      if (isNaN(adUserVolume)) adUserVolume = 0.50;
+      if (isNaN(adUserVolume)) adUserVolume = 1.0;
       adUserVolume = Math.max(0, Math.min(1, adUserVolume));
 
       const pct = Math.round(adUserVolume * 100);
@@ -2681,7 +2681,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       selectSlot(3);
       setAdAudioMode('file');
-      setAdVolume(0.50);
+      setAdVolume(1.0);
       renderAdFrame(0);
     });
   </script>
