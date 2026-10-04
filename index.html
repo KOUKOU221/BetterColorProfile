@@ -298,7 +298,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v1.65</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v1.66</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -595,29 +595,35 @@
 
   <!-- ================= UNIFIED INTERACTIVE COMMAND CENTER (SIMULATOR) ================= -->
   <section id="simulator" class="relative z-20">
-    <!-- Interactive Command Center Section -->
-    <div id="simulator-scroll-track" class="relative">
-      <div id="simulator-sticky-box" class="pt-6 pb-20 px-3 sm:px-6 max-w-[1600px] mx-auto transition-all">
+    <!-- Chapter Scroll Track: fast and responsive sliding runway -->
+    <div id="simulator-scroll-track" class="relative lg:min-h-[140vh]">
+      <div id="simulator-sticky-box" class="lg:sticky lg:top-14 pt-6 pb-20 px-3 sm:px-6 max-w-[1600px] mx-auto transition-all">
         
         <!-- Chapter Stepper & Header -->
         <div class="text-center mb-6 max-w-4xl mx-auto">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono font-bold theme-accent mb-2">
-            <span>● CHAPTER-DRIVEN TOUR</span>
-            <span class="text-gray-400">• SELECT CHAPTER BELOW</span>
+            <span>● CHAPTER-DRIVEN SLIDES</span>
+            <span class="text-gray-400">• SCROLL OR CLICK TO SLIDE</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">Interactive Command Center</h2>
           <p class="text-xs sm:text-sm text-gray-400 mt-1">Experience the authentic Windows app frontend on the left, and watch the virtual monitor transform in real time on the right.</p>
 
-          <!-- Chapter Navigation Pills -->
+          <!-- Chapter Navigation Pills with Slide Controls -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
-            <button id="step-btn-1" onclick="onSimulatorStepClick('profiles')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer">
+            <button type="button" onclick="prevSimulatorSlide()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1 shadow-sm cursor-pointer" title="Previous Slide">
+              <span>‹</span>
+            </button>
+            <button id="step-btn-1" onclick="onSimulatorStepClick('profiles')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer">
               01 / Profiles Hub
             </button>
-            <button id="step-btn-2" onclick="onSimulatorStepClick('tuner')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
+            <button id="step-btn-2" onclick="onSimulatorStepClick('tuner')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
               02 / 7-Slider Tuner
             </button>
-            <button id="step-btn-3" onclick="onSimulatorStepClick('options')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
+            <button id="step-btn-3" onclick="onSimulatorStepClick('options')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
               03 / Themes &amp; Options
+            </button>
+            <button type="button" onclick="nextSimulatorSlide()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1 shadow-sm cursor-pointer" title="Next Slide">
+              <span>›</span>
             </button>
           </div>
         </div>
@@ -675,8 +681,11 @@
               <span id="app-toast-text">✓ Profile applied via SetDeviceGammaRamp</span>
             </div>
 
-            <!-- ================= VIEW 1: PROFILES HUB ================= -->
-            <div id="view-profiles" class="h-full grid grid-cols-12 gap-3 p-3.5">
+            <!-- Horizontal Sliding View Track (300% width, each slide is 1/3 = 100% of body) -->
+            <div id="simulator-slides-track" class="flex w-[300%] h-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform">
+              
+              <!-- ================= VIEW 1: PROFILES HUB ================= -->
+              <div id="view-profiles" class="w-1/3 h-full flex-shrink-0 grid grid-cols-12 gap-3 p-3.5">
               
               <!-- Left Sidebar: Slot Cards (5 cols, #212327) -->
               <div class="col-span-5 bg-[#212327] p-2.5 rounded-xl border border-[#3A3E46] flex flex-col justify-between h-full">
@@ -855,7 +864,7 @@
             </div>
 
             <!-- ================= VIEW 2: 7-SLIDER DISPLAY TUNER ================= -->
-            <div id="view-tuner" class="h-full overflow-y-auto p-3.5 space-y-2.5 hidden">
+            <div id="view-tuner" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2.5">
               <div>
                 <h4 class="text-xs sm:text-sm font-bold text-white">Hardware Display Calibration (7-Channel Tuner &amp; ICC Creator)</h4>
                 <p class="text-[10px] text-[#A0AEC0]">Real-time GPU LUT calibration. Tune master levels or adjust individual RGB color channels below.</p>
@@ -940,7 +949,7 @@
             </div>
 
             <!-- ================= VIEW 3: OPTIONS & THEMES ================= -->
-            <div id="view-options" class="h-full overflow-y-auto p-3.5 space-y-2 hidden">
+            <div id="view-options" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
               <div>
                 <h4 class="text-xs sm:text-sm font-bold text-white">Options &amp; Settings</h4>
               </div>
@@ -952,7 +961,7 @@
                   <div>
                     <div class="font-bold text-white text-xs">Better Color Profile</div>
                     <div class="flex items-center gap-2 mt-0.5">
-                      <span class="font-mono text-[10px] text-[#A0AEC0]">v1.65</span>
+                      <span class="font-mono text-[10px] text-[#A0AEC0]">v1.66</span>
                       <span class="text-[10px] text-emerald-400 font-medium">✓ Up to date</span>
                     </div>
                   </div>
@@ -1026,6 +1035,8 @@
                 </div>
               </div>
 
+            </div>
+            <!-- /simulator-slides-track -->
             </div>
 
           </div>
@@ -2263,36 +2274,112 @@
       }
 
       const tabs = ['profiles', 'tuner', 'options'];
+      const tabIndex = tabs.indexOf(tab);
+      const slidesTrack = document.getElementById('simulator-slides-track');
+      if (slidesTrack && tabIndex !== -1) {
+        slidesTrack.style.transform = `translateX(-${tabIndex * 33.333333}%)`;
+      }
+
       tabs.forEach((t, idx) => {
-        const view = document.getElementById('view-' + t);
         const tabBtn = document.getElementById('tab-btn-' + t);
         const stepBtn = document.getElementById('step-btn-' + (idx + 1));
 
         if (t === tab) {
-          if (view) view.classList.remove('hidden');
           if (tabBtn) tabBtn.className = 'px-3 py-1 rounded-lg text-xs font-semibold transition-all text-white border-b-2 theme-border bg-white/5';
           if (stepBtn) {
-            stepBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer';
+            stepBtn.className = 'px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer';
           }
         } else {
-          if (view) view.classList.add('hidden');
           if (tabBtn) tabBtn.className = 'px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white';
           if (stepBtn) {
-            stepBtn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer';
+            stepBtn.className = 'px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer';
           }
         }
       });
 
       const badge = document.getElementById('app-stage-badge');
       if (badge) badge.textContent = tab.toUpperCase();
+
+      if (tab === 'tuner') {
+        const b = parseFloat(document.getElementById('tuner-b')?.value || 0);
+        const c = parseFloat(document.getElementById('tuner-c')?.value || 0);
+        const g = parseFloat(document.getElementById('tuner-g')?.value || 0);
+        const w = parseFloat(document.getElementById('tuner-w')?.value || 0);
+        const r = parseFloat(document.getElementById('tuner-r')?.value || 0);
+        const grn = parseFloat(document.getElementById('tuner-grn')?.value || 0);
+        const bl = parseFloat(document.getElementById('tuner-bl')?.value || 0);
+        applyLutToMonitor(b, c, g, w, r, grn, bl);
+      } else if (tab === 'profiles') {
+        const cur = slotData[activeSlotId] || slotData[1];
+        applyLutToMonitor(cur.b, cur.c, cur.g, cur.w, cur.r, cur.grn, cur.bl);
+      }
+    }
+
+    function prevSimulatorSlide() {
+      const tabs = ['profiles', 'tuner', 'options'];
+      const idx = tabs.indexOf(currentSimulatorTab);
+      if (idx > 0) onSimulatorStepClick(tabs[idx - 1]);
+      else onSimulatorStepClick(tabs[tabs.length - 1]);
+    }
+
+    function nextSimulatorSlide() {
+      const tabs = ['profiles', 'tuner', 'options'];
+      const idx = tabs.indexOf(currentSimulatorTab);
+      if (idx < tabs.length - 1) onSimulatorStepClick(tabs[idx + 1]);
+      else onSimulatorStepClick(tabs[0]);
     }
 
     function onSimulatorStepClick(tab) {
+      isManualSimulatorSwitch = true;
+      if (manualSimulatorTimer) clearTimeout(manualSimulatorTimer);
+
       switchSimulatorTab(tab, true);
+
+      const track = document.getElementById('simulator-scroll-track');
+      if (track && window.innerWidth >= 1024) {
+        const trackTop = track.getBoundingClientRect().top + window.scrollY;
+        const scrollableRange = track.offsetHeight - window.innerHeight;
+        if (scrollableRange > 0) {
+          let progressFactor = 0.05;
+          if (tab === 'tuner') progressFactor = 0.50;
+          else if (tab === 'options') progressFactor = 0.90;
+          const targetY = trackTop + scrollableRange * progressFactor;
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+      }
+
+      manualSimulatorTimer = setTimeout(() => {
+        isManualSimulatorSwitch = false;
+      }, 700);
     }
 
     function handleSimulatorScroll() {
-      // Natural scrolling mode active; chapters navigated directly via chapter buttons
+      if (isManualSimulatorSwitch) return;
+      const track = document.getElementById('simulator-scroll-track');
+      if (!track || window.innerWidth < 1024) return;
+
+      const rect = track.getBoundingClientRect();
+      const scrollableRange = track.offsetHeight - window.innerHeight;
+      if (scrollableRange <= 0) return;
+
+      // When the simulator track is within sticky viewport range
+      if (rect.top <= 140 && rect.bottom >= window.innerHeight * 0.4) {
+        const scrolled = -rect.top + 70;
+        const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+
+        let nextTab = 'profiles';
+        if (progress >= 0.66) {
+          nextTab = 'options';
+        } else if (progress >= 0.33) {
+          nextTab = 'tuner';
+        } else {
+          nextTab = 'profiles';
+        }
+
+        if (nextTab !== currentSimulatorTab) {
+          switchSimulatorTab(nextTab, false);
+        }
+      }
     }
 
     // Profiles slot state
@@ -2584,6 +2671,8 @@
       const progress = (window.scrollY / total) * 100;
       const bar = document.getElementById('scroll-progress');
       if (bar) bar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+
+      handleSimulatorScroll();
     }, { passive: true });
 
     // Initial setup on load - start with CS2 Boost (Slot 3), multi-game reel, and White Bat Audio at 09.5s drop offset!
