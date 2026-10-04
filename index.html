@@ -412,13 +412,184 @@
               ◀▶
             </div>
           </div>
+        </div>
 
-          <!-- Simulated Moving Mouse Cursor & Grab Indicator (Ultra-Smooth 60fps GPU Composited) -->
-          <div id="ad-simulated-cursor" class="absolute z-30 pointer-events-none will-change-[left,top,opacity] transition-opacity duration-150" style="left: 50%; top: 50%; transform: translate(-2px, -2px); opacity: 0;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)]">
-              <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.86a.5.5 0 0 0-.85.35Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.6" stroke-linejoin="round"/>
-            </svg>
-            <div id="ad-cursor-ring" class="absolute -top-2 -left-2 w-9 h-9 rounded-full border-2 border-amber-400 bg-amber-400/25 opacity-0 transition-opacity duration-150 pointer-events-none"></div>
+        <!-- Simulated Moving Mouse Cursor & Grab Indicator (Ultra-Smooth 60fps GPU Composited, reused across CS2 slider & Tutorial) -->
+        <div id="ad-simulated-cursor" class="absolute z-35 pointer-events-none will-change-[left,top,opacity] transition-opacity duration-150" style="left: 50%; top: 50%; transform: translate(-2px, -2px); opacity: 0;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)]">
+            <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.86a.5.5 0 0 0-.85.35Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+          <div id="ad-cursor-ring" class="absolute -top-2 -left-2 w-9 h-9 rounded-full border-2 border-amber-400 bg-amber-400/25 opacity-0 transition-opacity duration-150 pointer-events-none"></div>
+        </div>
+
+        <!-- Beat 3B: Interactive App Workflow - Steps to Make a Profile (13.5s - 19.5s) -->
+        <div id="ad-tutorial-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300 opacity-0 pointer-events-none select-none">
+          
+          <!-- Floating Step Notification Pill above window -->
+          <div id="ad-tut-step-pill" class="mb-2 px-3 py-1 rounded-full bg-amber-400 text-black font-mono font-black text-[10px] sm:text-xs shadow-lg uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300">
+            <span id="ad-tut-step-icon">⚡</span>
+            <span id="ad-tut-step-text">STEP 1: OPEN DISPLAY TUNER</span>
+          </div>
+
+          <!-- App Mockup Window (Styled authentic to user screenshots) -->
+          <div class="w-full max-w-xl sm:max-w-2xl bg-[#121319] rounded-xl sm:rounded-2xl border border-white/15 shadow-2xl overflow-hidden flex flex-col text-left text-xs">
+            
+            <!-- Window Title Bar -->
+            <div class="px-3 sm:px-4 py-1.5 bg-[#0A0B0F] border-b border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <img src="src/app_logo.png" alt="Logo" class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded" />
+                <span class="font-bold text-white text-[10px] sm:text-xs">Better Color Profile</span>
+                <span class="hidden sm:inline text-gray-500 text-[9px]">• Change your screen colors in one click</span>
+              </div>
+              <div class="flex items-center gap-1.5 opacity-60">
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+              </div>
+            </div>
+
+            <!-- Top Tab Bar -->
+            <div class="px-3 sm:px-4 py-1 bg-[#0F1016] border-b border-white/10 flex items-center gap-4 text-[10px] sm:text-xs font-semibold">
+              <span id="ad-tut-tab-profiles" class="pb-1 text-white border-b-2 border-amber-400 transition-colors">Profiles</span>
+              <span id="ad-tut-tab-tuner" class="pb-1 text-gray-400 border-b-2 border-transparent transition-colors">Display Tuner</span>
+              <span class="pb-1 text-gray-500">Options</span>
+            </div>
+
+            <!-- Window Content Area -->
+            <div class="p-2.5 sm:p-4 min-h-[160px] sm:min-h-[210px] relative">
+              
+              <!-- VIEW 1: Profiles Tab View -->
+              <div id="ad-tut-view-profiles" class="grid grid-cols-12 gap-2 sm:gap-3 transition-opacity duration-200">
+                <!-- Left Slots List (5 cols) -->
+                <div class="col-span-5 space-y-1 text-[9px] sm:text-[10px]">
+                  <div class="flex items-center justify-between text-gray-400 font-mono text-[8px] sm:text-[9px] mb-1">
+                    <span>« PROFILES</span>
+                    <span id="ad-tut-slots-count">3 Slots</span>
+                  </div>
+
+                  <!-- Slot 1 -->
+                  <div id="ad-tut-slot-1" class="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-amber-400/40 flex items-center justify-between">
+                    <div>
+                      <div class="font-bold text-gray-200">Default Profile</div>
+                      <div class="text-[8px] text-gray-400">Slot 1 • Default Windows</div>
+                    </div>
+                    <span id="ad-tut-slot-1-check" class="text-emerald-400 text-xs font-bold">✓</span>
+                  </div>
+
+                  <!-- Slot 2 -->
+                  <div class="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between opacity-75">
+                    <div>
+                      <div class="font-bold text-gray-300">night</div>
+                      <div class="text-[8px] text-gray-400">Slot 2 • Profile 2.icc</div>
+                    </div>
+                    <span class="px-1.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[8px]">Apply</span>
+                  </div>
+
+                  <!-- Slot 3 -->
+                  <div class="p-1 sm:p-1.5 rounded-lg bg-white/5 border border-white/5 flex items-center justify-between opacity-75">
+                    <div>
+                      <div class="font-bold text-gray-300">Profile 3</div>
+                      <div class="text-[8px] text-gray-400">Slot 3 • Profile 3.icc</div>
+                    </div>
+                    <span class="px-1.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[8px]">Apply</span>
+                  </div>
+
+                  <!-- Slot 4 (Appears when Profile 4 is created in Step 4!) -->
+                  <div id="ad-tut-slot-4" class="p-1 sm:p-1.5 rounded-lg bg-amber-400/15 border-2 border-amber-400 flex items-center justify-between shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300 opacity-0 transform translate-y-1">
+                    <div>
+                      <div class="font-bold text-amber-300">Profile 4</div>
+                      <div class="text-[8px] text-amber-200/70">Slot 4 • Profile 4.icc</div>
+                    </div>
+                    <span class="w-3.5 h-3.5 rounded-full bg-amber-400 text-black flex items-center justify-center font-bold text-[9px]">✓</span>
+                  </div>
+                </div>
+
+                <!-- Right Detail Panel (7 cols) -->
+                <div class="col-span-7 bg-black/40 rounded-xl p-2 sm:p-3 border border-white/5 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-1.5 text-[8px] sm:text-[9px] font-mono text-amber-400 uppercase font-bold mb-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                      <span>Assigned Color Profile (.ICC / .ICM)</span>
+                    </div>
+                    <div id="ad-tut-assigned-title" class="font-bold text-xs sm:text-sm text-white">Default Profile</div>
+                    <div id="ad-tut-assigned-sub" class="text-[9px] text-gray-400 mb-1.5">Slot 1 • Default Windows Profile</div>
+                    <div id="ad-tut-assigned-box" class="p-1.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[9px] text-gray-300 mb-2 truncate">
+                      Default Profile (sRGB Color Space Profile.icm)
+                    </div>
+
+                    <!-- Telemetry calibration preview for Profile 4 (shown in Step 4) -->
+                    <div id="ad-tut-assigned-telemetry" class="space-y-1 text-[8px] sm:text-[9px] font-mono opacity-0 transition-opacity duration-300">
+                      <div class="flex justify-between text-gray-300">
+                        <span>Brightness</span><span class="text-amber-300 font-bold">+30%</span>
+                      </div>
+                      <div class="w-full bg-black/60 h-1 rounded-full overflow-hidden">
+                        <div class="h-full bg-amber-400 w-[65%]"></div>
+                      </div>
+                      <div class="flex justify-between text-gray-300 pt-0.5">
+                        <span>Gamma (Midtones)</span><span class="text-amber-300 font-bold">+17%</span>
+                      </div>
+                      <div class="w-full bg-black/60 h-1 rounded-full overflow-hidden">
+                        <div class="h-full bg-amber-400 w-[58%]"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="pt-1.5 border-t border-white/5 flex items-center justify-between text-[8px] sm:text-[9px] text-gray-400">
+                    <span>Switch Profile Shortcut:</span>
+                    <span class="px-1.5 py-0.5 rounded bg-white/10 font-mono text-white">Ctrl + Shift + C</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- VIEW 2: Display Tuner Tab View (Steps 2 & 3) -->
+              <div id="ad-tut-view-tuner" class="absolute inset-0 p-2.5 sm:p-4 space-y-2 transition-opacity duration-200 opacity-0 pointer-events-none">
+                <div class="flex items-center justify-between text-[9px] sm:text-[10px] font-mono">
+                  <span class="font-bold text-white uppercase tracking-wider">Hardware Display Calibration (7-Channel Tuner)</span>
+                  <span class="text-gray-400">Real-time GPU LUT</span>
+                </div>
+
+                <!-- Master Display Calibration -->
+                <div class="bg-black/40 rounded-xl p-2 sm:p-2.5 border border-white/5 space-y-1.5">
+                  <div class="text-[9px] sm:text-[10px] font-bold text-gray-300 uppercase tracking-wider">Master Display Calibration</div>
+                  
+                  <!-- Brightness Slider -->
+                  <div class="space-y-0.5 text-[9px] sm:text-[10px]">
+                    <div class="flex justify-between text-gray-300">
+                      <span>Brightness</span>
+                      <span id="ad-tut-val-bright" class="font-mono text-amber-300 font-bold px-1.5 py-0.2 rounded bg-amber-400/10 border border-amber-400/30">+0%</span>
+                    </div>
+                    <div class="w-full bg-black/70 h-2 rounded-full overflow-hidden relative">
+                      <div id="ad-tut-fill-bright" class="h-full bg-amber-400 w-1/2 transition-none"></div>
+                    </div>
+                  </div>
+
+                  <!-- Gamma Slider -->
+                  <div class="space-y-0.5 text-[9px] sm:text-[10px]">
+                    <div class="flex justify-between text-gray-300">
+                      <span>Gamma (Midtones)</span>
+                      <span id="ad-tut-val-gamma" class="font-mono text-amber-300 font-bold px-1.5 py-0.2 rounded bg-amber-400/10 border border-amber-400/30">+0%</span>
+                    </div>
+                    <div class="w-full bg-black/70 h-2 rounded-full overflow-hidden relative">
+                      <div id="ad-tut-fill-gamma" class="h-full bg-amber-400 w-1/2 transition-none"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Save As Permanent ICC Profile -->
+                <div class="bg-black/40 rounded-xl p-2 border border-white/5 flex items-center justify-between gap-2">
+                  <div class="flex-1">
+                    <div class="text-[9px] font-bold text-gray-300 mb-0.5">Save As Permanent ICC Profile</div>
+                    <div class="px-2 py-0.5 sm:py-1 rounded bg-black/80 border border-white/15 font-mono text-[9px] text-white">
+                      Profile 4
+                    </div>
+                  </div>
+                  <div id="ad-tut-btn-save" class="px-3 py-1.5 sm:py-2 rounded-xl font-black text-[9px] sm:text-xs text-black bg-[#FACC15] shadow-[0_0_20px_rgba(250,204,21,0.5)] transition-transform flex items-center gap-1">
+                    <span>Create &amp; Save .ICC Profile</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -501,7 +672,7 @@
           </div>
         </div>
 
-        <!-- Beat 4: 100% Anti-Cheat Safe (13.5-19.5s) - PUBG & Apex Legends -->
+        <!-- Beat 4: 100% Anti-Cheat Safe (19.5-22.5s) - PUBG (Zero Game Injection) -->
         <div id="ad-beat-4" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/60 transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
           <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-4 shadow-xl text-2xl font-bold">🛡️</div>
           <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest mb-1">BEAT 04 &bull; 100% TOURNAMENT LEGAL</span>
@@ -522,8 +693,8 @@
           </div>
         </div>
 
-        <!-- Beat 5: Ending / Riccardo Bosso Spotify End Card v2 (19.5-24.0s) -->
-        <div id="ad-beat-5" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-[#08090C]/85 backdrop-blur-[2px] transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
+        <!-- Beat 5: Ending / Download End Card (22.5-30.0s - Extended) -->
+        <div id="ad-beat-5" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-[#08090C]/85 backdrop-blur-[2px] transition-opacity duration-500 ease-out opacity-0 pointer-events-none z-20">
           <div class="relative p-8 rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-md w-full">
             <img src="src/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-4 border border-white/20" />
             <h3 class="text-2xl font-black text-white tracking-tight">Better Color Profile</h3>
@@ -569,7 +740,17 @@
             <div id="ad-progress-bar" class="h-full theme-bg w-0 will-change-[width]"></div>
           </div>
           
-          <!-- Timeline Beat Marker Indicators: Omitted on public production deployment -->
+          <!-- Timeline Beat Marker Indicators (Clickable) -->
+          <div class="flex justify-between items-center text-[10px] font-mono text-gray-400 mt-1 px-0.5 select-none overflow-x-auto gap-2">
+            <button type="button" onclick="jumpToBeat(0)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:00 Arena Breakout: Infinite (Atmospheric Build In)">00:00 <span class="hidden sm:inline text-gray-500">Breakout</span></button>
+            <button type="button" onclick="jumpToBeat(3.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:03.5 THE FINALS (Pre-Drop Build-Up)">00:03.5 <span class="hidden sm:inline text-gray-500">Finals</span></button>
+            <button type="button" onclick="jumpToBeat(7.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:07.5 Call of Duty: Warzone (The Beat Drop: Meet Better Color Profile)">00:07.5 <span class="hidden sm:inline text-gray-500">COD Drop</span></button>
+            <button type="button" onclick="jumpToBeat(10.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:10.5 Counter-Strike 2 (Hardware LUT Boost)">00:10.5 <span class="hidden sm:inline text-gray-500">CS2 Boost</span></button>
+            <button type="button" onclick="jumpToBeat(13.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:13.5 App Workflow: Create &amp; Save Profile">00:13.5 <span class="hidden sm:inline text-gray-500">Create Profile</span></button>
+            <button type="button" onclick="jumpToBeat(19.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:19.5 PUBG (Zero Game Injection)">00:19.5 <span class="hidden sm:inline text-gray-500">PUBG</span></button>
+            <button type="button" onclick="jumpToBeat(22.5)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:22.5 Download &amp; End Card (Extended)">00:22.5 <span class="hidden sm:inline text-gray-500">Download</span></button>
+            <button type="button" onclick="jumpToBeat(30.0)" class="hover:text-amber-300 transition-colors whitespace-nowrap" title="00:30.0 Fade Out">00:30.0</button>
+          </div>
         </div>
 
         <!-- Right: Song Volume Slider & Mute (Default 50%) -->
@@ -1311,7 +1492,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v1.65
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v1.66
       </div>
 
     </div>
@@ -1476,9 +1657,9 @@
       // -------------------------------------------------------------
       resetAdSoundtrackFlags(sec = 0) {
         this.lastAdStep = -1;
-        this.playedBeat4Impact = (sec >= 12.6);
-        this.playedRiser = (sec >= 16.2);
-        this.playedEndCardChord = (sec >= 18.2);
+        this.playedBeat4Impact = (sec >= 14.5);
+        this.playedRiser = (sec >= 16.0);
+        this.playedEndCardChord = (sec >= 16.5);
       }
 
       stopAdSoundtrack() {
@@ -1690,7 +1871,7 @@
         }
 
         // Special moment triggers
-        if (sec >= 12.5 && sec < 12.7 && !this.playedBeat4Impact) {
+        if (sec >= 14.5 && sec < 14.7 && !this.playedBeat4Impact) {
           this.playedBeat4Impact = true;
           this.playShieldImpact();
         }
@@ -1698,7 +1879,7 @@
           this.playedRiser = true;
           this.playRiserSweep();
         }
-        if (sec >= 18.2 && !this.playedEndCardChord) {
+        if (sec >= 16.5 && !this.playedEndCardChord) {
           this.playedEndCardChord = true;
           this.playEndCardChord();
         }
@@ -1844,7 +2025,7 @@
     // -------------------------------------------------------------
     let adInterval = null;
     let adCurrentSec = 0;
-    const AD_TOTAL_SEC = 24;
+    const AD_TOTAL_SEC = 30;
     let adIsPlaying = false;
     let adIsMuted = false;
     let adUserVolume = 0.50;
@@ -2136,8 +2317,8 @@
 
     function applyCurrentAdVolume() {
       let volFactor = 1.0;
-      if (adCurrentSec > 22.5) {
-        volFactor = Math.max(0, (AD_TOTAL_SEC - adCurrentSec) / (AD_TOTAL_SEC - 22.5));
+      if (adCurrentSec > 27.5) {
+        volFactor = Math.max(0, (AD_TOTAL_SEC - adCurrentSec) / (AD_TOTAL_SEC - 27.5));
       }
       // Scaled volume: at 100% slider -> 1.00 * 0.25 = 0.25 physical gain (comfortable previous 50% sound level);
       // at 50% slider (default) -> 0.50 * 0.25 = 0.125 physical gain (gentle background listening)
@@ -2223,19 +2404,19 @@
       if (timer) {
         const s = Math.floor(sec).toString().padStart(2, '0');
         const ms = Math.floor((sec % 1) * 10).toString();
-        const timeStr = `00:${s}.${ms} / 00:24`;
+        const timeStr = `00:${s}.${ms} / 00:30`;
         if (timer.textContent !== timeStr) timer.textContent = timeStr;
       }
       if (bar) {
         bar.style.width = (sec / AD_TOTAL_SEC * 100).toFixed(3) + '%';
       }
 
-      // Visual Cinematic Fade-In (0.0s - 3.8s) & Fade-Out (21.0s - 24.0s)
+      // Visual Cinematic Fade-In (0.0s - 3.8s) & Fade-Out (28.0s - 30.0s)
       let fadeOpacity = 0;
       if (sec < 3.8) {
         fadeOpacity = Math.max(0, (3.8 - sec) / 3.8);
-      } else if (sec > 21.0) {
-        fadeOpacity = Math.min(1, (sec - 21.0) / (AD_TOTAL_SEC - 21.0));
+      } else if (sec > 28.0) {
+        fadeOpacity = Math.min(1, (sec - 28.0) / (AD_TOTAL_SEC - 28.0));
       }
       const fadeOverlay = document.getElementById('ad-cinematic-fade');
       if (fadeOverlay) {
@@ -2251,20 +2432,20 @@
       }
 
       // Hide all beat slides
-      const beatSlides = ['ad-beat-1', 'ad-beat-build', 'ad-beat-2', 'ad-beat-3', 'ad-beat-4', 'ad-beat-5'];
+      const beatSlides = ['ad-beat-1', 'ad-beat-build', 'ad-beat-2', 'ad-beat-3', 'ad-tutorial-stage', 'ad-beat-4', 'ad-beat-5'];
       beatSlides.forEach(id => {
         const slide = document.getElementById(id);
         if (slide) slide.classList.add('opacity-0', 'pointer-events-none');
       });
 
-      // Multi-Game Cinematic Choreography:
+      // Multi-Game Cinematic Choreography (30-second Commercial Cut):
       // 00:00 - 03.5s: Arena Breakout: Infinite (Beat 1: The Problem)
       // 03.5s - 07.5s: THE FINALS (Beat 1B: Pre-Drop Tension & Target Tracking)
-      // 07.5s - 10.5s: Call of Duty: Warzone (Beat 2: Meet Better Color Profile with Burning Building Soldier)
-      // 10.5s - 13.5s: Counter-Strike 2 (Beat 3: Hardware LUT Calibration Boost)
-      // 13.5s - 16.5s: PUBG (Beat 4 Part 1: Zero Game Injection)
-      // 16.5s - 19.5s: Apex Legends (Beat 4 Part 2: 100% Anti-Cheat Legal)
-      // 19.5s - 24.0s: Call of Duty: Warzone APC Soldier & Riccardo Bosso Spotify End Card v2
+      // 07.5s - 10.5s: Call of Duty: Warzone (Beat 2: Meet Better Color Profile)
+      // 10.5s - 13.5s: Counter-Strike 2 (Beat 3: Hardware LUT Calibration Boost & 60 FPS Split Slider)
+      // 13.5s - 19.5s: Profile Creation App Workflow Tutorial (Beat 3B: Recreating 4-Step User Calibration)
+      // 19.5s - 22.5s: PUBG (Beat 4: Zero Game Injection. Zero FPS Drop. — immediate cut, no delay)
+      // 22.5s - 30.0s: Extended Download End Card (7.5s closing call-to-action)
       if (sec < 3.5) {
         document.getElementById('ad-beat-1')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('arenabreakout', 'ARENA BREAKOUT: INFINITE • RAW MONITOR');
@@ -2287,17 +2468,20 @@
         document.getElementById('ad-beat-3')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('cs2', 'COUNTER-STRIKE 2 • HARDWARE LUT BOOST');
         setAdFilter('brightness(1.26) contrast(1.18) saturate(1.25)');
-      } else if (sec < 16.5) {
+      } else if (sec < 19.5) {
+        // 13.5s - 19.5s: Profile Creation Workflow Tutorial
+        document.getElementById('ad-tutorial-stage')?.classList.remove('opacity-0', 'pointer-events-none');
+        setAdActiveGame('cs2', 'CREATE & SAVE PROFILE • REAL-TIME CALIBRATION');
+        setAdFilter('brightness(0.35) blur(3px)');
+      } else if (sec < 22.5) {
+        // 19.5s - 22.5s: PUBG (Zero Game Injection. Zero FPS Drop. — immediate cut, no delay!)
         document.getElementById('ad-beat-4')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('pubg', 'PUBG: BATTLEGROUNDS • ZERO GAME INJECTION');
         setAdFilter('brightness(1.24) contrast(1.2) saturate(1.18)');
-      } else if (sec < 19.5) {
-        document.getElementById('ad-beat-4')?.classList.remove('opacity-0', 'pointer-events-none');
-        setAdActiveGame('apex', 'APEX LEGENDS • TOURNAMENT LEGAL');
-        setAdFilter('brightness(1.26) contrast(1.22) saturate(1.2)');
       } else {
+        // 22.5s - 30.0s: Extended Download End Card (Replaces Apex, stays longer)
         document.getElementById('ad-beat-5')?.classList.remove('opacity-0', 'pointer-events-none');
-        setAdActiveGame('endcard', 'CALL OF DUTY: WARZONE • UNIVERSAL COMPATIBILITY');
+        setAdActiveGame('endcard', 'BETTER COLOR PROFILE • DOWNLOAD (FREE)');
         setAdFilter('brightness(1.15) contrast(1.12) saturate(1.05)');
       }
 
@@ -2309,7 +2493,31 @@
       const simCursor = document.getElementById('ad-simulated-cursor');
       const cursorRing = document.getElementById('ad-cursor-ring');
 
+      // Tutorial Stage Elements (13.5s - 19.5s)
+      const tutStage = document.getElementById('ad-tutorial-stage');
+      const tutViewProfiles = document.getElementById('ad-tut-view-profiles');
+      const tutViewTuner = document.getElementById('ad-tut-view-tuner');
+      const tutTabProfiles = document.getElementById('ad-tut-tab-profiles');
+      const tutTabTuner = document.getElementById('ad-tut-tab-tuner');
+      const tutValBright = document.getElementById('ad-tut-val-bright');
+      const tutFillBright = document.getElementById('ad-tut-fill-bright');
+      const tutValGamma = document.getElementById('ad-tut-val-gamma');
+      const tutFillGamma = document.getElementById('ad-tut-fill-gamma');
+      const tutBtnSave = document.getElementById('ad-tut-btn-save');
+      const tutSlot1Check = document.getElementById('ad-tut-slot-1-check');
+      const tutSlot4 = document.getElementById('ad-tut-slot-4');
+      const tutSlotsCount = document.getElementById('ad-tut-slots-count');
+      const tutAssignedTitle = document.getElementById('ad-tut-assigned-title');
+      const tutAssignedSub = document.getElementById('ad-tut-assigned-sub');
+      const tutAssignedBox = document.getElementById('ad-tut-assigned-box');
+      const tutTelemetry = document.getElementById('ad-tut-assigned-telemetry');
+      const tutStepIcon = document.getElementById('ad-tut-step-icon');
+      const tutStepText = document.getElementById('ad-tut-step-text');
+
+      const easeInOutCubic = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
       if (sec >= 10.5 && sec < 13.5) {
+        // CS2 60 FPS Interactive Split Comparison Slider
         if (splitStage) {
           splitStage.classList.remove('opacity-0', 'pointer-events-none');
           splitStage.classList.add('opacity-100');
@@ -2324,8 +2532,6 @@
           let ringOpacity = 0;
           let handleScale = 1.0;
           let isGrabbing = false;
-
-          const easeInOutCubic = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
           if (t < 0.35) {
             // Mouse swoops in from bottom right towards handle
@@ -2398,10 +2604,194 @@
             cursorRing.style.opacity = ringOpacity;
           }
         }
+      } else if (sec >= 13.5 && sec < 19.5) {
+        // App Workflow Tutorial: Recreating 4-Step ICC Profile Creation with Animated Cursor
+        if (splitStage) {
+          splitStage.classList.remove('opacity-100');
+          splitStage.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        const t = sec - 13.5; // 0.0s to 6.0s window
+        let cursorX = 50;
+        let cursorY = 50;
+        let cursorOpacity = 1;
+        let ringOpacity = 0;
+
+        if (t < 1.3) {
+          // STEP 1: App on Profiles tab -> Cursor moves up and clicks "Display Tuner" tab
+          if (tutStepIcon) tutStepIcon.textContent = '⚡';
+          if (tutStepText) tutStepText.textContent = 'STEP 1: OPEN DISPLAY TUNER';
+
+          if (tutTabProfiles) {
+            tutTabProfiles.className = 'pb-1 text-white border-b-2 border-amber-400 transition-colors';
+          }
+          if (tutTabTuner) {
+            tutTabTuner.className = 'pb-1 text-gray-400 border-b-2 border-transparent transition-colors';
+          }
+          if (tutViewProfiles) tutViewProfiles.classList.remove('opacity-0', 'pointer-events-none');
+          if (tutViewTuner) tutViewTuner.classList.add('opacity-0', 'pointer-events-none');
+
+          // Reset tutorial state
+          if (tutSlotsCount) tutSlotsCount.textContent = '3 Slots';
+          if (tutSlot1Check) tutSlot1Check.classList.remove('hidden');
+          if (tutSlot4) {
+            tutSlot4.classList.remove('opacity-100', 'translate-y-0');
+            tutSlot4.classList.add('opacity-0', 'translate-y-1');
+          }
+          if (tutAssignedTitle) tutAssignedTitle.textContent = 'Default Profile';
+          if (tutAssignedSub) tutAssignedSub.textContent = 'Slot 1 • Default Windows Profile';
+          if (tutAssignedBox) tutAssignedBox.textContent = 'Default Profile (sRGB Color Space Profile.icm)';
+          if (tutTelemetry) tutTelemetry.classList.add('opacity-0');
+          if (tutValBright) tutValBright.textContent = '+0%';
+          if (tutFillBright) tutFillBright.style.width = '50%';
+          if (tutValGamma) tutValGamma.textContent = '+0%';
+          if (tutFillGamma) tutFillGamma.style.width = '50%';
+
+          if (t < 0.85) {
+            const p = easeInOutCubic(t / 0.85);
+            cursorX = 52 - p * 8;
+            cursorY = 65 - p * 38;
+            cursorOpacity = Math.min(1, t / 0.2);
+          } else {
+            // Hover & Click on Display Tuner Tab
+            cursorX = 44;
+            cursorY = 27;
+            ringOpacity = Math.max(0, 1 - (t - 0.85) / 0.35);
+          }
+        } else if (t < 3.3) {
+          // STEP 2: View switches to Display Tuner -> Cursor drags Brightness (+30%) & Gamma (+17%)
+          if (tutStepIcon) tutStepIcon.textContent = '🎚️';
+          if (tutStepText) tutStepText.textContent = 'STEP 2: ADJUST BRIGHTNESS & GAMMA';
+
+          if (tutTabProfiles) {
+            tutTabProfiles.className = 'pb-1 text-gray-400 border-b-2 border-transparent transition-colors';
+          }
+          if (tutTabTuner) {
+            tutTabTuner.className = 'pb-1 text-white border-b-2 border-amber-400 transition-colors';
+          }
+          if (tutViewProfiles) tutViewProfiles.classList.add('opacity-0', 'pointer-events-none');
+          if (tutViewTuner) tutViewTuner.classList.remove('opacity-0', 'pointer-events-none');
+
+          if (t < 2.3) {
+            // Adjust Brightness: 0% -> +30%
+            if (t < 1.55) {
+              const p = easeInOutCubic((t - 1.3) / 0.25);
+              cursorX = 44 + p * 6;
+              cursorY = 27 + p * 19.5;
+            } else {
+              const p = easeInOutCubic((t - 1.55) / 0.70);
+              const bVal = Math.round(p * 30);
+              if (tutValBright) tutValBright.textContent = `+${bVal}%`;
+              if (tutFillBright) tutFillBright.style.width = `${(50 + p * 15).toFixed(1)}%`;
+              cursorX = 50 + p * 15;
+              cursorY = 46.5;
+              ringOpacity = 0.35;
+            }
+            if (tutValGamma) tutValGamma.textContent = '+0%';
+            if (tutFillGamma) tutFillGamma.style.width = '50%';
+          } else {
+            // Brightness locked at +30%
+            if (tutValBright) tutValBright.textContent = '+30%';
+            if (tutFillBright) tutFillBright.style.width = '65%';
+
+            // Adjust Gamma: 0% -> +17%
+            if (t < 2.55) {
+              const p = easeInOutCubic((t - 2.3) / 0.25);
+              cursorX = 65 - p * 15;
+              cursorY = 46.5 + p * 11;
+            } else {
+              const p = easeInOutCubic((t - 2.55) / 0.70);
+              const gVal = Math.round(p * 17);
+              if (tutValGamma) tutValGamma.textContent = `+${gVal}%`;
+              if (tutFillGamma) tutFillGamma.style.width = `${(50 + p * 8.5).toFixed(1)}%`;
+              cursorX = 50 + p * 8.5;
+              cursorY = 57.5;
+              ringOpacity = 0.35;
+            }
+          }
+        } else if (t < 4.5) {
+          // STEP 3: Cursor moves to "Create & Save .ICC Profile" button and clicks
+          if (tutStepIcon) tutStepIcon.textContent = '💾';
+          if (tutStepText) tutStepText.textContent = 'STEP 3: SAVE TO ICC PROFILE';
+
+          if (tutValBright) tutValBright.textContent = '+30%';
+          if (tutFillBright) tutFillBright.style.width = '65%';
+          if (tutValGamma) tutValGamma.textContent = '+17%';
+          if (tutFillGamma) tutFillGamma.style.width = '58.5%';
+
+          if (t < 3.85) {
+            const p = easeInOutCubic((t - 3.3) / 0.55);
+            cursorX = 58.5 + p * 15.5;
+            cursorY = 57.5 + p * 14.5;
+            if (tutBtnSave) {
+              tutBtnSave.style.transform = 'scale(1)';
+              tutBtnSave.style.boxShadow = '';
+            }
+          } else {
+            // Click button with pulse effect
+            cursorX = 74;
+            cursorY = 72;
+            ringOpacity = Math.max(0, 1 - (t - 3.85) / 0.40);
+            if (tutBtnSave) {
+              tutBtnSave.style.transform = 'scale(0.93)';
+              tutBtnSave.style.boxShadow = '0 0 35px rgba(250,204,21,1.0), 0 0 10px rgba(255,255,255,0.8)';
+            }
+          }
+        } else {
+          // STEP 4: View switches back to Profiles -> Profile 4 is created in Slot 4 with telemetry
+          if (tutStepIcon) tutStepIcon.textContent = '✨';
+          if (tutStepText) tutStepText.textContent = 'STEP 4: INSTANTLY ASSIGNED TO SLOT 4';
+
+          if (tutBtnSave) {
+            tutBtnSave.style.transform = 'scale(1)';
+            tutBtnSave.style.boxShadow = '';
+          }
+          if (tutTabProfiles) {
+            tutTabProfiles.className = 'pb-1 text-white border-b-2 border-amber-400 transition-colors';
+          }
+          if (tutTabTuner) {
+            tutTabTuner.className = 'pb-1 text-gray-400 border-b-2 border-transparent transition-colors';
+          }
+          if (tutViewProfiles) tutViewProfiles.classList.remove('opacity-0', 'pointer-events-none');
+          if (tutViewTuner) tutViewTuner.classList.add('opacity-0', 'pointer-events-none');
+
+          if (tutSlotsCount) tutSlotsCount.textContent = '4 Slots';
+          if (tutSlot1Check) tutSlot1Check.classList.add('hidden');
+          if (tutSlot4) {
+            tutSlot4.classList.remove('opacity-0', 'translate-y-1');
+            tutSlot4.classList.add('opacity-100', 'translate-y-0');
+          }
+          if (tutAssignedTitle) tutAssignedTitle.textContent = 'Profile 4';
+          if (tutAssignedSub) tutAssignedSub.textContent = 'Slot 4 • Profile 4.icc';
+          if (tutAssignedBox) tutAssignedBox.textContent = 'Profile 4 (Profile 4.icc)';
+          if (tutTelemetry) tutTelemetry.classList.remove('opacity-0');
+
+          if (t < 5.3) {
+            const p = easeInOutCubic((t - 4.5) / 0.8);
+            cursorX = 74 - p * 44;
+            cursorY = 72 - p * 10;
+          } else {
+            cursorX = 30;
+            cursorY = 62;
+            cursorOpacity = Math.max(0, (6.0 - t) / 0.7);
+          }
+        }
+
+        if (simCursor) {
+          simCursor.style.left = `${cursorX.toFixed(3)}%`;
+          simCursor.style.top = `${cursorY.toFixed(3)}%`;
+          simCursor.style.opacity = cursorOpacity;
+        }
+        if (cursorRing) {
+          cursorRing.style.opacity = ringOpacity;
+        }
       } else {
         if (splitStage) {
           splitStage.classList.remove('opacity-100');
           splitStage.classList.add('opacity-0', 'pointer-events-none');
+        }
+        if (tutStage) {
+          tutStage.classList.add('opacity-0', 'pointer-events-none');
         }
         if (simCursor) {
           simCursor.style.opacity = '0';
