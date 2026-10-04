@@ -335,9 +335,9 @@
         </button>
 
         <!-- Direct Setup Download CTA -->
-        <a href="https://github.com/KOUKOU221/Better-Color-Profile/releases/latest/download/BetterColorProfileSetup.exe" onclick="sound.chord()" class="px-4 py-1.5 rounded-xl text-xs font-bold text-black theme-bg hover:brightness-110 shadow-lg transition-all flex items-center gap-1.5">
-          <span>Get Free</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <a href="https://github.com/KOUKOU221/Better-Color-Profile/releases/latest/download/BetterColorProfileSetup.exe" onclick="sound.chord()" class="px-5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-sm font-black text-black theme-bg hover:brightness-110 shadow-xl transition-all flex items-center gap-2" title="Download Better Color Profile for Windows">
+          <span>Download</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         </a>
       </div>
 
@@ -360,80 +360,25 @@
       Zero game injection, zero input lag, and instantaneous in-game hotkey switching.
     </p>
 
-    <!-- Hero CTA Buttons: Watch Spec Ad & Launch Simulator -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
-      <button onclick="openSpecAdReel()" class="px-6 py-3.5 rounded-2xl text-sm font-black text-black theme-bg hover:brightness-110 shadow-2xl theme-glow transition-all flex items-center gap-2.5 group">
-        <span class="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center text-black group-hover:scale-110 transition-transform">▶</span>
-        <span>Watch Cinematic Spec Ad Reel</span>
-      </button>
-
-      <a href="#simulator" onclick="sound.click()" class="px-6 py-3.5 rounded-2xl text-sm font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2">
-        <span>Try Live Simulator</span>
-        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-      </a>
-    </div>
-
-    <!-- Trust Badges Row -->
-    <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-gray-300">
-      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> 100% Anti-Cheat Safe</span>
-      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Zero Game Injection (Hardware LUT)</span>
-      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Zero Input Lag &amp; Zero FPS Drop</span>
-      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Windows 11 | 10 Compatible</span>
-    </div>
-
-  </section>
-
-
-  <!-- ================= KINETIC MARQUEE TICKER ================= -->
-  <div class="relative w-full overflow-hidden border-y border-white/5 bg-black/40 py-3 backdrop-blur-md z-10">
-    <div class="animate-marquee whitespace-nowrap text-xs font-mono font-bold tracking-widest uppercase text-gray-400">
-      <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
-      <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
-      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
-      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
-      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
-      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
-      <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
-      <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
-      <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
-      <span class="mx-4">🔒 PROTECTED DEFAULT WINDOWS BASELINE</span>
-      <!-- Repeated for continuous seamless loop -->
-      <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
-      <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
-      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
-      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
-      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
-      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
-      <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
-      <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
-      <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
-      <span class="mx-4">🔒 PROTECTED DEFAULT WINDOWS BASELINE</span>
-    </div>
-  </div>
-
-
-  <!-- ================= CINEMATIC SPEC AD SHOWCASE MODAL / PLAYER ================= -->
-  <div id="spec-ad-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
-    
-    <div class="relative w-full max-w-5xl rounded-3xl overflow-hidden border border-white/15 bg-[#0C0E14] shadow-2xl flex flex-col">
+    <!-- ================= EMBEDDED CINEMATIC SPEC AD REEL (OPEN DIRECTLY IN BIG) ================= -->
+    <div id="spec-ad" class="relative w-full max-w-5xl rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_80px_rgba(250,204,21,0.18)] flex flex-col mx-auto mb-10 text-left">
       
-      <!-- Modal Top Controls Bar -->
+      <!-- Top Controls Bar -->
       <div class="px-5 py-3 border-b border-white/10 flex items-center justify-between bg-[#12141C]">
         <div class="flex items-center gap-3">
           <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
           <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-          <span class="text-xs font-mono font-bold text-gray-300 ml-2">SPEC AD REEL • CINEMATIC SPEC AD</span>
+          <span class="text-xs font-mono font-bold text-gray-300 ml-2">SPEC AD REEL • 24S CINEMATIC SHOWCASE</span>
         </div>
 
         <div class="flex items-center gap-3">
           <span id="ad-timer" class="font-mono text-xs text-amber-300 font-bold">00:00 / 00:24</span>
-          <button onclick="closeSpecAdReel()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-gray-300 hover:text-white transition-colors text-xs font-bold">✕</button>
         </div>
       </div>
 
-      <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) -->
-      <div class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center">
+      <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) with click-to-play -->
+      <div class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center cursor-pointer group" onclick="toggleAdPlay()">
         
         <!-- Multi-Game Background Scene Layers -->
         <img id="ad-scene-arenabreakout" src="src/scene_arenabreakout.jpg" alt="Arena Breakout: Infinite" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
@@ -452,6 +397,13 @@
         <div id="ad-game-badge" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/15 text-xs font-mono font-bold text-white shadow-xl transition-all duration-200">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span id="ad-game-title">ARENA BREAKOUT: INFINITE</span>
+        </div>
+
+        <!-- Center Play Overlay Button (Visible when paused) -->
+        <div id="ad-center-play-overlay" class="absolute inset-0 flex items-center justify-center pointer-events-none z-25 transition-opacity duration-300">
+          <div class="w-20 h-20 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-amber-400 text-3xl shadow-2xl group-hover:scale-110 transition-transform pl-1">
+            ▶
+          </div>
         </div>
 
         <!-- Cinematic Opening Fade-in Overlay (first 2.0s) & Fade-out (last 2.5s) -->
@@ -575,8 +527,8 @@
         
         <!-- Left: Play/Pause Button (Replays when finished) -->
         <button id="ad-play-btn" onclick="toggleAdPlay()" class="px-4 py-1.5 rounded-lg text-xs font-bold text-black theme-bg hover:brightness-110 transition-all flex items-center gap-1.5 flex-shrink-0">
-          <span id="ad-play-icon">❚❚</span>
-          <span id="ad-play-text">Pause</span>
+          <span id="ad-play-icon">▶</span>
+          <span id="ad-play-text">Play</span>
         </button>
 
         <!-- Center: Interactive Progress Track with Section Tick Markers -->
@@ -601,20 +553,57 @@
       <audio id="ad-custom-audio" src="src/ad_soundtrack.mp3" preload="auto"></audio>
 
     </div>
+
+    <!-- Trust Badges Row -->
+    <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-gray-300">
+      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> 100% Anti-Cheat Safe</span>
+      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Zero Game Injection (Hardware LUT)</span>
+      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Zero Input Lag &amp; Zero FPS Drop</span>
+      <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Windows 11 | 10 Compatible</span>
+    </div>
+
+  </section>
+
+
+  <!-- ================= KINETIC MARQUEE TICKER ================= -->
+  <div class="relative w-full overflow-hidden border-y border-white/5 bg-black/40 py-3 backdrop-blur-md z-10">
+    <div class="animate-marquee whitespace-nowrap text-xs font-mono font-bold tracking-widest uppercase text-gray-400">
+      <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
+      <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
+      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
+      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
+      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
+      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
+      <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
+      <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
+      <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
+      <span class="mx-4">🔒 PROTECTED DEFAULT WINDOWS BASELINE</span>
+      <!-- Repeated for continuous seamless loop -->
+      <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
+      <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
+      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
+      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
+      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
+      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
+      <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
+      <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
+      <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
+      <span class="mx-4">🔒 PROTECTED DEFAULT WINDOWS BASELINE</span>
+    </div>
   </div>
 
 
   <!-- ================= UNIFIED INTERACTIVE COMMAND CENTER (SIMULATOR) ================= -->
   <section id="simulator" class="relative z-20">
-    <!-- Pinned Scroll Track: scrolling down advances Chapters 01 -> 02 -> 03 -->
-    <div id="simulator-scroll-track" class="relative lg:min-h-[260vh]">
-      <div id="simulator-sticky-box" class="lg:sticky lg:top-14 pt-6 pb-20 px-3 sm:px-6 max-w-[1600px] mx-auto transition-all">
+    <!-- Interactive Command Center Section -->
+    <div id="simulator-scroll-track" class="relative">
+      <div id="simulator-sticky-box" class="pt-6 pb-20 px-3 sm:px-6 max-w-[1600px] mx-auto transition-all">
         
         <!-- Chapter Stepper & Header -->
         <div class="text-center mb-6 max-w-4xl mx-auto">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono font-bold theme-accent mb-2">
             <span>● CHAPTER-DRIVEN TOUR</span>
-            <span class="text-gray-400">• SCROLL DOWN TO ADVANCE</span>
+            <span class="text-gray-400">• SELECT CHAPTER BELOW</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">Interactive Command Center</h2>
           <p class="text-xs sm:text-sm text-gray-400 mt-1">Experience the authentic Windows app frontend on the left, and watch the virtual monitor transform in real time on the right.</p>
@@ -1824,10 +1813,10 @@
     let adUserVolume = 0.45;
 
     function openSpecAdReel() {
-      const modal = document.getElementById('spec-ad-modal');
-      if (!modal) return;
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      modal.classList.add('opacity-100');
+      const adEl = document.getElementById('spec-ad');
+      if (adEl) {
+        adEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       sound.enabled = true;
       sound.init();
       const soundLabel = document.getElementById('sound-label');
@@ -1839,14 +1828,13 @@
         eq.children[1].className = 'w-1 bg-amber-400 rounded-full eq-bar-2';
         eq.children[2].className = 'w-1 bg-amber-400 rounded-full eq-bar-3';
       }
-      restartSpecAd();
+      if (!adIsPlaying) {
+        if (adCurrentSec >= AD_TOTAL_SEC) restartSpecAd();
+        else playSpecAd();
+      }
     }
 
     function closeSpecAdReel() {
-      const modal = document.getElementById('spec-ad-modal');
-      if (!modal) return;
-      modal.classList.add('opacity-0', 'pointer-events-none');
-      modal.classList.remove('opacity-100');
       pauseSpecAd();
       sound.click();
     }
@@ -1854,6 +1842,16 @@
     function updatePlayButtonUI() {
       const playIcon = document.getElementById('ad-play-icon');
       const playText = document.getElementById('ad-play-text');
+      const centerOverlay = document.getElementById('ad-center-play-overlay');
+      
+      if (centerOverlay) {
+        if (adIsPlaying) {
+          centerOverlay.classList.add('opacity-0');
+        } else {
+          centerOverlay.classList.remove('opacity-0');
+        }
+      }
+
       if (!playIcon || !playText) return;
       if (adIsPlaying) {
         playIcon.textContent = '❚❚';
@@ -2290,57 +2288,11 @@
     }
 
     function onSimulatorStepClick(tab) {
-      isManualSimulatorSwitch = true;
-      if (manualSimulatorTimer) clearTimeout(manualSimulatorTimer);
-      
       switchSimulatorTab(tab, true);
-
-      // Smooth scroll the runway to the respective chapter
-      const track = document.getElementById('simulator-scroll-track');
-      if (track && window.innerWidth >= 1024) {
-        const trackTop = track.getBoundingClientRect().top + window.scrollY;
-        const scrollableRange = track.offsetHeight - window.innerHeight;
-        if (scrollableRange > 0) {
-          let progressFactor = 0.05;
-          if (tab === 'tuner') progressFactor = 0.48;
-          else if (tab === 'options') progressFactor = 0.85;
-          const targetY = trackTop + scrollableRange * progressFactor;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        }
-      }
-
-      manualSimulatorTimer = setTimeout(() => {
-        isManualSimulatorSwitch = false;
-      }, 900);
     }
 
     function handleSimulatorScroll() {
-      if (isManualSimulatorSwitch) return;
-      const track = document.getElementById('simulator-scroll-track');
-      if (!track) return;
-
-      const rect = track.getBoundingClientRect();
-      const scrollableRange = track.offsetHeight - window.innerHeight;
-      if (scrollableRange <= 0) return;
-
-      // When the simulator track is within viewport range
-      if (rect.top <= 140 && rect.bottom >= window.innerHeight * 0.3) {
-        const scrolled = -rect.top + 80;
-        const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-
-        let nextTab = 'profiles';
-        if (progress >= 0.65) {
-          nextTab = 'options';
-        } else if (progress >= 0.30) {
-          nextTab = 'tuner';
-        } else {
-          nextTab = 'profiles';
-        }
-
-        if (nextTab !== currentSimulatorTab) {
-          switchSimulatorTab(nextTab, false);
-        }
-      }
+      // Natural scrolling mode active; chapters navigated directly via chapter buttons
     }
 
     // Profiles slot state
@@ -2631,9 +2583,7 @@
       const total = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / total) * 100;
       const bar = document.getElementById('scroll-progress');
-      if (bar) bar.style.width = progress + '%';
-
-      handleSimulatorScroll();
+      if (bar) bar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
     }, { passive: true });
 
     // Initial setup on load - start with CS2 Boost (Slot 3), multi-game reel, and White Bat Audio at 09.5s drop offset!
@@ -2647,3 +2597,4 @@
 
 </body>
 </html>
+
