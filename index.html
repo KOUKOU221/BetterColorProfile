@@ -378,7 +378,7 @@
       </div>
 
       <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) with click-to-play -->
-      <div class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center cursor-pointer group" onclick="toggleAdPlay()">
+      <div id="ad-stage-box" class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center cursor-pointer group" onclick="toggleAdPlay()">
         
         <!-- Multi-Game Background Scene Layers -->
         <img id="ad-scene-arenabreakout" src="src/scene_arenabreakout.jpg" alt="Arena Breakout: Infinite" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
@@ -389,6 +389,38 @@
         <img id="ad-scene-apex" src="src/scene_apex.jpg" alt="Apex Legends" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
         <img id="ad-scene-deltaforce" src="src/scene_deltaforce.jpg" alt="Delta Force: Hawk Ops" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
         <img id="ad-scene-endcard" src="src/scene_endcard.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+
+        <!-- Dynamic Live Before/After Split Comparison Layer (Featured in Video during Beat 3 Calibration) -->
+        <div id="ad-split-stage" class="absolute inset-0 pointer-events-none z-15 transition-opacity duration-300 opacity-0 overflow-hidden select-none">
+          <!-- Left Side / Base Layer: Raw Default sRGB Display -->
+          <img id="ad-split-raw-img" src="src/scene_inferno.jpg" alt="Raw Default Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" style="filter: brightness(0.82) contrast(0.88) saturate(0.85);" />
+          
+          <!-- Right Side / Calibrated Layer: Clipped at Split Percentage -->
+          <img id="ad-split-cal-img" src="src/scene_inferno.jpg" alt="Calibrated Boost Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none will-change-[clip-path]" style="clip-path: inset(0 0 0 50%); filter: brightness(1.28) contrast(1.18) saturate(1.26);" />
+
+          <!-- Comparison Badges (Matching Screenshot Design) -->
+          <div id="ad-split-badge-raw" class="absolute top-14 left-4 z-20 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-gray-300 shadow-xl pointer-events-none">
+            Default sRGB
+          </div>
+          <div id="ad-split-badge-cal" class="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-amber-400/40 text-[10px] font-mono theme-accent font-bold shadow-xl pointer-events-none">
+            Calibrated Boost
+          </div>
+
+          <!-- Draggable Comparison Divider Line & Circular Handle Button -->
+          <div id="ad-split-handle" class="comparison-handle pointer-events-auto cursor-ew-resize will-change-[left]" style="left: 50%;">
+            <div id="ad-split-handle-btn" class="comparison-handle-btn shadow-[0_0_20px_rgba(250,204,21,0.6)]">
+              ◀▶
+            </div>
+          </div>
+
+          <!-- Simulated Moving Mouse Cursor & Grab Indicator (Ultra-Smooth 60fps GPU Composited) -->
+          <div id="ad-simulated-cursor" class="absolute z-30 pointer-events-none will-change-[left,top,opacity] transition-opacity duration-150" style="left: 50%; top: 50%; transform: translate(-2px, -2px); opacity: 0;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)]">
+              <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.86a.5.5 0 0 0-.85.35Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            <div id="ad-cursor-ring" class="absolute -top-2 -left-2 w-9 h-9 rounded-full border-2 border-amber-400 bg-amber-400/25 opacity-0 transition-opacity duration-150 pointer-events-none"></div>
+          </div>
+        </div>
 
         <!-- Screen Overlay Vignette & Lighting -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none z-10"></div>
@@ -443,26 +475,26 @@
           </p>
         </div>
 
-        <!-- Beat 3: Live Calibration (10.5-13.5s) - Counter-Strike 2 -->
-        <div id="ad-beat-3" class="ad-slide absolute inset-0 flex flex-col justify-end p-6 sm:p-10 transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
-          <div class="glass-panel p-4 rounded-2xl max-w-lg border border-amber-400/40 shadow-2xl">
-            <div class="flex items-center justify-between text-xs font-mono font-bold theme-accent mb-2">
-              <span>🎛️ HARDWARE LUT CALIBRATION</span>
-              <span>CALIBRATED BOOST ACTIVE</span>
+        <!-- Beat 3: Live Calibration (10.5-13.5s) - Counter-Strike 2 Telemetry Overlay -->
+        <div id="ad-beat-3" class="ad-slide absolute inset-0 flex flex-col justify-end p-4 sm:p-6 transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
+          <div class="glass-panel p-3 sm:p-3.5 rounded-xl max-w-xs border border-amber-400/40 shadow-2xl backdrop-blur-md bg-black/75">
+            <div class="flex items-center justify-between text-[11px] font-mono font-bold theme-accent mb-1.5">
+              <span>🎛️ HARDWARE LUT</span>
+              <span>CALIBRATED BOOST</span>
             </div>
-            <div class="space-y-1.5 text-xs">
+            <div class="space-y-1 text-[11px]">
               <div class="flex items-center justify-between text-gray-300">
-                <span>Shadow Visibility (Dark Corners)</span>
+                <span>Shadow Visibility</span>
                 <span class="font-mono text-amber-300 font-bold">+35%</span>
               </div>
-              <div class="w-full bg-black/60 h-2 rounded-full overflow-hidden">
+              <div class="w-full bg-black/60 h-1.5 rounded-full overflow-hidden">
                 <div class="h-full theme-bg w-[67%] transition-all duration-700"></div>
               </div>
-              <div class="flex items-center justify-between text-gray-300 pt-1">
+              <div class="flex items-center justify-between text-gray-300 pt-0.5">
                 <span>Target Edge Contrast &amp; Vibrance</span>
                 <span class="font-mono text-amber-300 font-bold">+20%</span>
               </div>
-              <div class="w-full bg-black/60 h-2 rounded-full overflow-hidden">
+              <div class="w-full bg-black/60 h-1.5 rounded-full overflow-hidden">
                 <div class="h-full theme-bg w-[60%] transition-all duration-700"></div>
               </div>
             </div>
@@ -486,7 +518,7 @@
             <span class="px-2.5 py-1 rounded-md bg-white/10 border border-white/10">✓ Delta Force</span>
           </div>
           <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-emerald-400">
-            <span>🛡️ Vanguard</span> &bull; <span>🛡️ Easy Anti-Cheat</span> &bull; <span>🛡️ BattlEye</span> &bull; <span>🛡️ Valve VAC</span> &bull; <span>🛡️ Ricochet</span>
+            <span>🛡️ 100% Anti-Cheat Friendly &bull; Hardware LUT Level</span>
           </div>
         </div>
 
@@ -534,7 +566,7 @@
         <!-- Center: Interactive Progress Track with Section Tick Markers -->
         <div class="flex-1 flex flex-col justify-center relative">
           <div id="ad-scrubber-track" class="bg-black/60 h-2.5 rounded-full overflow-hidden relative cursor-pointer border border-white/10" onclick="seekAd(event)">
-            <div id="ad-progress-bar" class="h-full theme-bg w-0 transition-all duration-100"></div>
+            <div id="ad-progress-bar" class="h-full theme-bg w-0 will-change-[width]"></div>
           </div>
           
           <!-- Timeline Beat Marker Indicators: Omitted on public production deployment -->
@@ -570,10 +602,7 @@
     <div class="animate-marquee whitespace-nowrap text-xs font-mono font-bold tracking-widest uppercase text-gray-400">
       <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
       <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
-      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
-      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
-      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
-      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
+      <span class="mx-4">🛡️ 100% ANTI-CHEAT FRIENDLY</span>
       <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
       <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
       <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
@@ -581,10 +610,7 @@
       <!-- Repeated for continuous seamless loop -->
       <span class="mx-4">● CS2 COMPETITIVE BOOST</span>
       <span class="mx-4">★ SPOT ENEMIES IN DARK CORNERS</span>
-      <span class="mx-4">🛡️ RIOT VANGUARD APPROVED</span>
-      <span class="mx-4">🛡️ EASY ANTI-CHEAT SAFE</span>
-      <span class="mx-4">🛡️ BATTLEYE COMPLIANT</span>
-      <span class="mx-4">🛡️ VAC &amp; RICOCHET SAFE</span>
+      <span class="mx-4">🛡️ 100% ANTI-CHEAT FRIENDLY</span>
       <span class="mx-4">⚡ 0.0MS HARDWARE LUT DISPLAY GAMMA</span>
       <span class="mx-4">⌨️ INSTANT IN-GAME GLOBAL HOTKEYS</span>
       <span class="mx-4">🎨 7-SLIDER PRECISION CALIBRATION</span>
@@ -1906,6 +1932,7 @@
 
       const audio = document.getElementById('ad-custom-audio');
       if (sound.adSourceMode === 'file' && audio) {
+        applyCurrentAdVolume();
         const targetTime = Math.max(0, sound.customAudioOffset + adCurrentSec);
         audio.currentTime = targetTime;
         audio.play().catch(() => {});
@@ -1917,17 +1944,29 @@
       function adLoop(now) {
         if (!adIsPlaying) return;
 
+        const dt = Math.max(0, Math.min(0.08, (now - lastRafTime) / 1000));
+        lastRafTime = now;
+
         if (sound.adSourceMode === 'file' && audio && !audio.paused) {
-          // Hardware audio clock: zero drift, zero audio re-seeking, 100% seamless playback
-          const audioSec = audio.currentTime - sound.customAudioOffset;
-          if (audioSec >= 0) {
-            adCurrentSec = audioSec;
+          // Continuous 60fps/120fps/144fps sub-millisecond timeline progression:
+          // Advance smoothly by true display frame delta (dt)
+          adCurrentSec += dt;
+
+          // Anchor check: synchronize gently with hardware audio clock without discrete jumps
+          const targetAudioSec = audio.currentTime - sound.customAudioOffset;
+          if (targetAudioSec >= 0) {
+            const drift = targetAudioSec - adCurrentSec;
+            if (Math.abs(drift) > 0.12) {
+              // Large drift (e.g. seeking or buffer stall): snap to audio
+              adCurrentSec = targetAudioSec;
+            } else {
+              // Smooth micro-adjustment (smooth lerp 8% per frame) so motion is 100% fluid at 60fps/120fps/144fps!
+              adCurrentSec += drift * 0.08;
+            }
           }
         } else {
-          const dt = Math.min(0.1, (now - lastRafTime) / 1000);
           adCurrentSec += dt;
         }
-        lastRafTime = now;
 
         if (adCurrentSec >= AD_TOTAL_SEC) {
           adCurrentSec = AD_TOTAL_SEC;
@@ -2022,6 +2061,7 @@
         }
         sound.stopAdSoundtrack();
         if (audio && adIsPlaying) {
+          applyCurrentAdVolume();
           audio.currentTime = sound.customAudioOffset + adCurrentSec;
           audio.play().catch(() => {});
         }
@@ -2092,15 +2132,15 @@
       }
     }
 
-    const MAX_AUDIO_CEILING = 0.50; // Previous 50% physical volume is now the 100% maximum ceiling
+    const MAX_AUDIO_CEILING = 0.25; // Scaled ceiling: 100% on slider now outputs 0.25 gain (your previous 50% sound level); 50% slider outputs 0.125 gain
 
     function applyCurrentAdVolume() {
       let volFactor = 1.0;
       if (adCurrentSec > 22.5) {
         volFactor = Math.max(0, (AD_TOTAL_SEC - adCurrentSec) / (AD_TOTAL_SEC - 22.5));
       }
-      // Scaled volume: at 50% slider -> 0.50 * 0.50 = 0.25 physical gain (comfortable 25% sound);
-      // at 100% slider -> 1.00 * 0.50 = 0.50 physical gain (never exceeds 50% of raw track)
+      // Scaled volume: at 100% slider -> 1.00 * 0.25 = 0.25 physical gain (comfortable previous 50% sound level);
+      // at 50% slider (default) -> 0.50 * 0.25 = 0.125 physical gain (gentle background listening)
       const effectiveVol = adIsMuted ? 0 : (adUserVolume * MAX_AUDIO_CEILING * volFactor);
       sound.setVolume(effectiveVol);
       const audio = document.getElementById('ad-custom-audio');
@@ -2183,10 +2223,11 @@
       if (timer) {
         const s = Math.floor(sec).toString().padStart(2, '0');
         const ms = Math.floor((sec % 1) * 10).toString();
-        timer.textContent = `00:${s}.${ms} / 00:24`;
+        const timeStr = `00:${s}.${ms} / 00:24`;
+        if (timer.textContent !== timeStr) timer.textContent = timeStr;
       }
       if (bar) {
-        bar.style.width = (sec / AD_TOTAL_SEC * 100) + '%';
+        bar.style.width = (sec / AD_TOTAL_SEC * 100).toFixed(3) + '%';
       }
 
       // Visual Cinematic Fade-In (0.0s - 3.8s) & Fade-Out (21.0s - 24.0s)
@@ -2258,6 +2299,113 @@
         document.getElementById('ad-beat-5')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('endcard', 'CALL OF DUTY: WARZONE • UNIVERSAL COMPATIBILITY');
         setAdFilter('brightness(1.15) contrast(1.12) saturate(1.05)');
+      }
+
+      // Dynamic Before/After Split Comparison & Animated Mouse Pointer in Video (CS2: 10.5s - 13.5s)
+      const splitStage = document.getElementById('ad-split-stage');
+      const splitCalImg = document.getElementById('ad-split-cal-img');
+      const splitHandle = document.getElementById('ad-split-handle');
+      const splitHandleBtn = document.getElementById('ad-split-handle-btn');
+      const simCursor = document.getElementById('ad-simulated-cursor');
+      const cursorRing = document.getElementById('ad-cursor-ring');
+
+      if (sec >= 10.5 && sec < 13.5) {
+        if (splitStage) {
+          splitStage.classList.remove('opacity-0', 'pointer-events-none');
+          splitStage.classList.add('opacity-100');
+        }
+
+        if (!isUserDraggingAdSplit) {
+          const t = sec - 10.5; // 0.0s to 3.0s window
+          let splitPct = 50;
+          let cursorX = 50;
+          let cursorY = 50;
+          let cursorOpacity = 1;
+          let ringOpacity = 0;
+          let handleScale = 1.0;
+          let isGrabbing = false;
+
+          const easeInOutCubic = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+          if (t < 0.35) {
+            // Mouse swoops in from bottom right towards handle
+            const p = easeInOutCubic(t / 0.35);
+            cursorX = 68 - p * 18;
+            cursorY = 74 - p * 24;
+            cursorOpacity = Math.min(1, t / 0.12);
+            splitPct = 50;
+          } else if (t < 0.55) {
+            // Mouse clicks & grabs handle with visual pulse
+            cursorX = 50;
+            cursorY = 50;
+            splitPct = 50;
+            ringOpacity = 1;
+            handleScale = 1.18;
+            isGrabbing = true;
+          } else if (t < 1.45) {
+            // Mouse drags slider LEFT: 50% -> 18% (revealing Calibrated Boost across 82% of screen)
+            const p = easeInOutCubic((t - 0.55) / 0.90);
+            splitPct = 50 - p * 32;
+            cursorX = splitPct;
+            cursorY = 50;
+            ringOpacity = 0.45;
+            handleScale = 1.15;
+            isGrabbing = true;
+          } else if (t < 2.35) {
+            // Mouse drags slider RIGHT: 18% -> 82% (revealing Default sRGB across 82% of screen)
+            const p = easeInOutCubic((t - 1.45) / 0.90);
+            splitPct = 18 + p * 64;
+            cursorX = splitPct;
+            cursorY = 50;
+            ringOpacity = 0.45;
+            handleScale = 1.15;
+            isGrabbing = true;
+          } else if (t < 2.85) {
+            // Mouse drags slider back to 50% CENTER
+            const p = easeInOutCubic((t - 2.35) / 0.50);
+            splitPct = 82 - p * 32;
+            cursorX = splitPct;
+            cursorY = 50;
+            ringOpacity = (1 - p) * 0.45;
+            handleScale = 1.15 - p * 0.15;
+            isGrabbing = true;
+          } else {
+            // Mouse releases and drifts away
+            const p = (t - 2.85) / 0.15;
+            splitPct = 50;
+            cursorX = 50 + p * 12;
+            cursorY = 50 + p * 16;
+            cursorOpacity = 1 - p;
+            ringOpacity = 0;
+            handleScale = 1.0;
+          }
+
+          if (splitCalImg) splitCalImg.style.clipPath = `inset(0 0 0 ${splitPct.toFixed(3)}%)`;
+          if (splitHandle) splitHandle.style.left = `${splitPct.toFixed(3)}%`;
+          if (splitHandleBtn) {
+            splitHandleBtn.style.transform = `translate(-50%, -50%) scale(${handleScale})`;
+            splitHandleBtn.style.borderColor = isGrabbing ? '#FACC15' : '#FFFFFF';
+            splitHandleBtn.style.boxShadow = isGrabbing
+              ? '0 0 25px rgba(250,204,21,0.9), 0 4px 20px rgba(0,0,0,0.8)'
+              : '0 4px 20px rgba(0,0,0,0.8), 0 0 12px rgba(255,255,255,0.4)';
+          }
+          if (simCursor) {
+            simCursor.style.left = `${cursorX.toFixed(3)}%`;
+            simCursor.style.top = `${cursorY.toFixed(3)}%`;
+            simCursor.style.opacity = cursorOpacity;
+          }
+          if (cursorRing) {
+            cursorRing.style.opacity = ringOpacity;
+          }
+        }
+      } else {
+        if (splitStage) {
+          splitStage.classList.remove('opacity-100');
+          splitStage.classList.add('opacity-0', 'pointer-events-none');
+        }
+        if (simCursor) {
+          simCursor.style.opacity = '0';
+        }
       }
     }
 
@@ -2664,6 +2812,57 @@
       window.addEventListener('touchend', onPointerUp);
     }
 
+    // Video Reel Interactive Split Slider Drag Support
+    let isUserDraggingAdSplit = false;
+
+    function setAdSplitPosition(clientX) {
+      const stage = document.getElementById('ad-stage-box');
+      if (!stage) return;
+      const rect = stage.getBoundingClientRect();
+      let pos = (clientX - rect.left) / rect.width;
+      pos = Math.max(0.04, Math.min(0.96, pos));
+      const pct = (pos * 100).toFixed(2);
+
+      const calImg = document.getElementById('ad-split-cal-img');
+      const handle = document.getElementById('ad-split-handle');
+      const simCursor = document.getElementById('ad-simulated-cursor');
+
+      if (calImg) calImg.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      if (handle) handle.style.left = `${pct}%`;
+      if (simCursor) simCursor.style.opacity = '0';
+    }
+
+    const adSplitHandle = document.getElementById('ad-split-handle');
+    if (adSplitHandle) {
+      adSplitHandle.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        isUserDraggingAdSplit = true;
+        setAdSplitPosition(e.clientX);
+        if (typeof sound !== 'undefined') sound.click(650);
+      });
+      adSplitHandle.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        isUserDraggingAdSplit = true;
+        if (e.touches && e.touches[0]) setAdSplitPosition(e.touches[0].clientX);
+        if (typeof sound !== 'undefined') sound.click(650);
+      }, { passive: true });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isUserDraggingAdSplit) return;
+      setAdSplitPosition(e.clientX);
+    });
+    window.addEventListener('touchmove', (e) => {
+      if (!isUserDraggingAdSplit) return;
+      if (e.touches && e.touches[0]) setAdSplitPosition(e.touches[0].clientX);
+    }, { passive: true });
+    window.addEventListener('mouseup', () => {
+      isUserDraggingAdSplit = false;
+    });
+    window.addEventListener('touchend', () => {
+      isUserDraggingAdSplit = false;
+    });
+
 
     // -------------------------------------------------------------
     // 7. SCROLL PROGRESS & SIMULATOR CHAPTER ADVANCEMENT
@@ -2688,4 +2887,3 @@
 
 </body>
 </html>
-
