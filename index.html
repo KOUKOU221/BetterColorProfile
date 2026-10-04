@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Better Color Profile • The Modern Windows Color Profile Manager</title>
-  <link rel="icon" type="image/x-icon" href="src/app.ico">
+  <link rel="icon" type="image/x-icon" href="assets/app.ico">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -294,7 +294,7 @@
       
       <!-- Brand Logo & Title -->
       <a href="#hero" class="flex items-center gap-3 group" onclick="sound.click()">
-        <img src="src/app_logo.png" alt="Better Color Profile Logo" class="w-9 h-9 rounded-xl shadow-lg border border-white/10 group-hover:scale-105 transition-transform" />
+        <img src="assets/app_logo.png" alt="Better Color Profile Logo" class="w-9 h-9 rounded-xl shadow-lg border border-white/10 group-hover:scale-105 transition-transform" />
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
@@ -381,22 +381,22 @@
       <div id="ad-stage-box" class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center cursor-pointer group" onclick="toggleAdPlay()">
         
         <!-- Multi-Game Background Scene Layers -->
-        <img id="ad-scene-arenabreakout" src="src/scene_arenabreakout.jpg" alt="Arena Breakout: Infinite" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-thefinals" src="src/scene_thefinals.jpg" alt="THE FINALS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-cod" src="src/scene_cod.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-cs2" src="src/scene_inferno.jpg" alt="Counter-Strike 2" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-pubg" src="src/scene_pubg.jpg" alt="PUBG: BATTLEGROUNDS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-apex" src="src/scene_apex.jpg" alt="Apex Legends" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-deltaforce" src="src/scene_deltaforce.jpg" alt="Delta Force: Hawk Ops" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-endcard" src="src/scene_endcard.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-arenabreakout" src="assets/scene_arenabreakout.jpg" alt="Arena Breakout: Infinite" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-thefinals" src="assets/scene_thefinals.jpg" alt="THE FINALS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-cod" src="assets/scene_cod.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-cs2" src="assets/scene_inferno.jpg" alt="Counter-Strike 2" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-pubg" src="assets/scene_pubg.jpg" alt="PUBG: BATTLEGROUNDS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-apex" src="assets/scene_apex.jpg" alt="Apex Legends" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-deltaforce" src="assets/scene_deltaforce.jpg" alt="Delta Force: Hawk Ops" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-endcard" src="assets/scene_endcard.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
 
         <!-- Dynamic Live Before/After Split Comparison Layer (Featured in Video during Beat 3 Calibration) -->
         <div id="ad-split-stage" class="absolute inset-0 pointer-events-none z-15 transition-opacity duration-300 opacity-0 overflow-hidden select-none">
           <!-- Left Side / Base Layer: Raw Default sRGB Display -->
-          <img id="ad-split-raw-img" src="src/scene_inferno.jpg" alt="Raw Default Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" style="filter: brightness(0.82) contrast(0.88) saturate(0.85);" />
+          <img id="ad-split-raw-img" src="assets/scene_inferno.jpg" alt="Raw Default Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" style="filter: brightness(0.82) contrast(0.88) saturate(0.85);" />
           
           <!-- Right Side / Calibrated Layer: Clipped at Split Percentage -->
-          <img id="ad-split-cal-img" src="src/scene_inferno.jpg" alt="Calibrated Boost Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none will-change-[clip-path]" style="clip-path: inset(0 0 0 50%); filter: brightness(1.28) contrast(1.18) saturate(1.26);" />
+          <img id="ad-split-cal-img" src="assets/scene_inferno.jpg" alt="Calibrated Boost Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none will-change-[clip-path]" style="clip-path: inset(0 0 0 50%); filter: brightness(1.28) contrast(1.18) saturate(1.26);" />
 
           <!-- Comparison Badges (Matching Screenshot Design) -->
           <div id="ad-split-badge-raw" class="absolute top-14 left-4 z-20 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-gray-300 shadow-xl pointer-events-none">
@@ -437,7 +437,7 @@
             <!-- Window Title Bar -->
             <div class="px-3 sm:px-4 py-1.5 bg-[#0A0B0F] border-b border-white/10 flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <img src="src/app_logo.png" alt="Logo" class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded" />
+                <img src="assets/app_logo.png" alt="Logo" class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded" />
                 <span class="font-bold text-white text-[10px] sm:text-xs">Better Color Profile</span>
                 <span class="hidden sm:inline text-gray-500 text-[9px]">• Change your screen colors in one click</span>
               </div>
@@ -636,7 +636,7 @@
 
         <!-- Beat 2: The Solution on The Drop (7.5-10.5s) - Call of Duty: Warzone -->
         <div id="ad-beat-2" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/40 transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
-          <img src="src/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mb-4 border border-white/20 logo-smooth-pulse" />
+          <img src="assets/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mb-4 border border-white/20 logo-smooth-pulse" />
           <span class="text-xs font-mono font-bold theme-accent uppercase tracking-widest mb-1">BEAT 02 &bull; THE MODERN FIX</span>
           <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight max-w-2xl mb-2">
             Meet <span class="theme-accent">Better Color Profile.</span>
@@ -696,7 +696,7 @@
         <!-- Beat 5: Ending / Download End Card (22.5-30.0s - Extended) -->
         <div id="ad-beat-5" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-[#08090C]/85 backdrop-blur-[2px] transition-opacity duration-500 ease-out opacity-0 pointer-events-none z-20">
           <div class="relative p-8 rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-md w-full">
-            <img src="src/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-4 border border-white/20" />
+            <img src="assets/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-4 border border-white/20" />
             <h3 class="text-2xl font-black text-white tracking-tight">Better Color Profile</h3>
             <p class="text-xs text-gray-400 mt-1 mb-4">Universal Display Calibration for Windows 11 &amp; 10</p>
 
@@ -763,7 +763,7 @@
       </div>
 
       <!-- Hidden HTML5 Audio Element for White Bat Audio Track -->
-      <audio id="ad-custom-audio" src="src/ad_soundtrack.mp3" preload="auto"></audio>
+      <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="auto"></audio>
 
     </div>
 
@@ -859,7 +859,7 @@
           <!-- App Native Navigation Bar (#1E2023) -->
           <div class="flex items-center justify-between px-4 py-2 bg-[#1E2023] border-b border-[#3A3E46] flex-shrink-0 h-[48px]">
             <div class="flex items-center gap-2.5">
-              <img src="src/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-sm" />
+              <img src="assets/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-sm" />
               <div>
                 <div class="text-xs sm:text-sm font-bold text-white leading-tight">Better Color Profile</div>
                 <div class="text-[10px] text-[#A0AEC0] hidden sm:block">Hardware LUT Color Management</div>
@@ -1164,7 +1164,7 @@
               <!-- About Card -->
               <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <img src="src/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-md" />
+                  <img src="assets/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-md" />
                   <div>
                     <div class="font-bold text-white text-xs">Better Color Profile</div>
                     <div class="flex items-center gap-2 mt-0.5">
@@ -1285,13 +1285,13 @@
             <div id="comparison-box" class="comparison-container relative w-full aspect-video rounded-xl overflow-hidden bg-black">
               
               <!-- LAYER 1: Raw Uncalibrated Base Image (Visible on the LEFT of the divider) -->
-              <img id="monitor-raw-img" src="src/scene_inferno.jpg" alt="Default sRGB View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" />
+              <img id="monitor-raw-img" src="assets/scene_inferno.jpg" alt="Default sRGB View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" />
               <div class="absolute top-2.5 left-2.5 z-20 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-gray-300 pointer-events-none">
                 Default sRGB
               </div>
 
               <!-- LAYER 2: Calibrated Enhanced Image (Clipped on the left, Visible on the RIGHT of the divider) -->
-              <img id="monitor-calibrated-img" src="src/scene_inferno.jpg" alt="Calibrated Boost View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-[filter] duration-75 ease-out" style="clip-path: inset(0 0 0 50%); filter: brightness(1.26) contrast(1.13) saturate(1.2);" />
+              <img id="monitor-calibrated-img" src="assets/scene_inferno.jpg" alt="Calibrated Boost View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-[filter] duration-75 ease-out" style="clip-path: inset(0 0 0 50%); filter: brightness(1.26) contrast(1.13) saturate(1.2);" />
               <div class="absolute top-2.5 right-2.5 z-20 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-amber-400/30 text-[10px] font-mono theme-accent font-bold pointer-events-none">
                 Calibrated Boost
               </div>
@@ -1463,7 +1463,7 @@
       
       <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full theme-bg blur-[140px] opacity-20 pointer-events-none"></div>
 
-      <img src="src/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-6 border border-white/20" />
+      <img src="assets/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-6 border border-white/20" />
 
       <h3 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
         Ready to transform your screen?
@@ -1503,7 +1503,7 @@
   <footer class="py-12 px-4 border-t border-white/10 text-center text-xs text-gray-400 relative z-10">
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
-        <img src="src/app_logo.png" alt="Logo" class="w-6 h-6 rounded-lg opacity-80" />
+        <img src="assets/app_logo.png" alt="Logo" class="w-6 h-6 rounded-lg opacity-80" />
         <span class="font-bold text-white">Better Color Profile</span>
         <span class="text-gray-400">&bull; Copyright &copy; 2026 KOUKOU221. All rights reserved.</span>
       </div>
@@ -3090,12 +3090,12 @@
     // 5. MONITOR SCENE & HARDWARE GPU LUT MATRIX ENGINE
     // -------------------------------------------------------------
     const SCENE_MAP = {
-      inferno: 'src/scene_inferno.jpg',
-      arenabreakout: 'src/scene_arenabreakout.jpg',
-      cod: 'src/scene_cod.jpg',
-      thefinals: 'src/scene_thefinals.jpg',
-      pubg: 'src/scene_pubg.jpg',
-      apex: 'src/scene_apex.jpg'
+      inferno: 'assets/scene_inferno.jpg',
+      arenabreakout: 'assets/scene_arenabreakout.jpg',
+      cod: 'assets/scene_cod.jpg',
+      thefinals: 'assets/scene_thefinals.jpg',
+      pubg: 'assets/scene_pubg.jpg',
+      apex: 'assets/scene_apex.jpg'
     };
 
     function switchMonitorScene(scene) {
