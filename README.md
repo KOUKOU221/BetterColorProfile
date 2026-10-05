@@ -1,10 +1,10 @@
-﻿<p align="center">
+<p align="center">
   <img src="assets/app_logo.png" alt="Better Color Profile Logo" width="128" />
 </p>
 
 <h1 align="center">Better Color Profile</h1>
 <p align="center">
-  <em>Change your screen colors in one click � The modern Windows color profile manager</em>
+  <em>Change your screen colors in one click • The modern Windows color profile manager</em>
 </p>
 
 <p align="center">
@@ -20,13 +20,13 @@
 
 **Better Color Profile** is the modern, lightweight display calibration and color profile manager that Windows always needed. 
 
-Built for **Windows 11 and Windows 10**, it completely replaces the clunky, buried Windows Color Management applet (`colorcpl.exe`) with a sleek interface, global hotkeys, and real-time display tuning � allowing you to effortlessly create, customize, and cycle through color profiles with zero lag.
+Built for **Windows 11 and Windows 10**, it completely replaces the clunky, buried Windows Color Management applet (`colorcpl.exe`) with a sleek interface, global hotkeys, and real-time display tuning — allowing you to effortlessly create, customize, and cycle through color profiles with zero lag.
 
 ---
 
-## ?? Try It Live: Interactive Web Showcase & Simulator
+## 🌐 Try It Live: Interactive Web Showcase & Simulator
 
-?? **[?? Launch Live Web Simulator](https://better.colorprofile.workers.dev/)** *(Runs instantly in your browser � zero installation required)*
+👉 **[🚀 Launch Live Web Simulator](https://better.colorprofile.workers.dev/)** *(Runs instantly in your browser — zero installation required)*
 
 Test Better Color Profile directly in your web browser:
 
@@ -42,11 +42,11 @@ Test Better Color Profile directly in your web browser:
 
 ---
 
-## ?? Installation & Download
+## 📦 Installation & Download
 
 Compatible with **Windows 11 and Windows 10** (64-bit and 32-bit):
 
-1. Download [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/Better-Color-Profile/releases/latest/download/BetterColorProfileSetup.exe) (Direct download � automatically gets the latest release).
+1. Download [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/Better-Color-Profile/releases/latest/download/BetterColorProfileSetup.exe) (Direct download — automatically gets the latest release).
 2. Run the setup wizard:
    - Modern installation wizard with custom destination directory selection (automatically creates and installs into a dedicated `BetterColorProfile` folder).
    - Optional Start with Windows and desktop/start-menu shortcuts (enabled by default).
@@ -54,7 +54,7 @@ Compatible with **Windows 11 and Windows 10** (64-bit and 32-bit):
 
 ---
 
-## ??? 100% Anti-Cheat Friendly & Gamer Safe
+## 🛡️ 100% Anti-Cheat Friendly & Gamer Safe
 
 Unlike shader injectors (such as ReShade) or custom overlays that hook into game processes, **Better Color Profile is 100% safe for all competitive online games**:
 
@@ -65,7 +65,7 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 
 ---
 
-## ?? Why It's a Game-Changer for Gamers & Creators
+## 🎮 Why It's a Game-Changer for Gamers & Creators
 
 * **Spot Enemies in Dark Corners**: Boost shadow visibility and contrast in competitive shooters (*CS2, Valorant, Apex Legends, Warzone, Escape from Tarkov*) without washing out bright areas.
 * **Custom Digital Vibrance & Color Temperature**: Give your display punchy colors, vibrant highlights, or a warm eye-friendly night tint per game.
@@ -74,15 +74,15 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 
 ---
 
-## ?? Key Features
+## 🚀 Key Features
 
-### 1. ? Instant Profile Application & Sidebar Slots
+### 1. ⚡ Instant Profile Application & Sidebar Slots
 * **One-Click Apply**: Preview profiles in your sidebar without interrupting your display until you click the prominent **Apply** button.
 * **Slot Management**: Organize your favorite profiles into custom slots (Slot 1, Slot 2, Slot 3...).
-* **Protected Default Profile**: Your default Windows sRGB color profile is protected in a hidden internal directory (`.internal\`) � impossible to delete or corrupt accidentally.
+* **Protected Default Profile**: Your default Windows sRGB color profile is protected in a hidden internal directory (`.internal\`) — impossible to delete or corrupt accidentally.
 * **Ghost Profile Cleanup**: Automatically synchronizes with installed Windows profiles and unregisters orphaned or deleted display associations from Windows Color Management.
 
-### 2. ??? 7-Slider Real-Time Display Tuner
+### 2. 🎛️ 7-Slider Real-Time Display Tuner
 * **Fine-Grained Hardware Calibration**:
   - Master Brightness (-100% to +100%)
   - Master Contrast (-100% to +100%)
@@ -92,34 +92,34 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 * **Automatic Sequential Naming**: Creating a new profile? If no name is provided, names are automatically pre-filled sequentially (`Profile 1`, `Profile 2`, etc.).
 * **Instant ICC Generation**: Saves calibrated profiles directly into the `list\` directory and auto-associates them with your primary monitor.
 
-### 3. ?? Global & Per-Slot Hotkeys
+### 3. ⌨️ Global & Per-Slot Hotkeys
 * **Direct Per-Slot Shortcuts**: Assign an individual shortcut to any profile slot (e.g. `Ctrl + 1`, `F1`, or any custom key combination) to jump directly to that profile without cycling.
 * **Cycle Shortcut**: Press your cycle shortcut anywhere to sequentially cycle through all configured profile slots:
-  `Slot 1` ? `Slot 2` ? `Slot 3` ? � ? `Slot 1`
+  `Slot 1` ➔ `Slot 2` ➔ `Slot 3` ➔ … ➔ `Slot 1`
 * **Zero Latency**: Fully customizable hotkey bindings in the Profiles tab (supports single keys and custom combinations with zero latency).
 * Subtle balloon toast notifications confirm the active profile name.
 
-### 4. ?? System Tray & Background Daemon
+### 4. 🧰 System Tray & Background Daemon
 * Minimizing or closing the window sends it directly to the system tray so the hotkey remains active.
 * Right-click tray menu provides quick slot switching, status overview, and settings.
 * Enable **Start with Windows** to keep your preferred profiles ready on startup.
 
 ---
 
-## ?? Official Community & Support
+## 💬 Official Community & Support
 
 Join the official **Better Color Profile** Discord community for release announcements, troubleshooting, calibration profiles, and feature requests:
 
-?? **[?? Join Better Color Profile Discord](https://discord.gg/eeVBnK7Hmg)**
+👉 **[🚀 Join Better Color Profile Discord](https://discord.gg/eeVBnK7Hmg)**
 
-* ?? **#announcements**: Official release updates & changelogs.
-* ??? **#support & #feature-requests**: Direct help & suggestions.
-* ?? **#profile-sharing**: Download & share community monitor calibrations & game presets.
+* 📢 **#announcements**: Official release updates & changelogs.
+* 🛠️ **#support & #feature-requests**: Direct help & suggestions.
+* 🎨 **#profile-sharing**: Download & share community monitor calibrations & game presets.
 
 ---
 
-## ?? License & Copyright
-Copyright � 2026 KOUKOU221. All rights reserved.
+## 📄 License & Copyright
+
+Copyright © 2026 KOUKOU221. All rights reserved.
 
 This software and associated documentation files are proprietary. Unauthorized copying, distribution, modification, reverse engineering, or commercial use of this software, in source or binary form, is strictly prohibited without explicit written permission from the copyright owner.
-
