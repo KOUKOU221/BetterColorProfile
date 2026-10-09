@@ -1,8 +1,6 @@
-Better Color Profile (v1.7)
+Better Color Profile (v1.7.1)
 Copyright (C) 2026 KOUKOU221. All rights reserved.
 
-This repository provides official pre-compiled application releases and presentation documentation.
-The application source code is proprietary, closed-source, and privately maintained.
+This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
 
-To install Better Color Profile, download "BetterColorProfileSetup.exe" from:
-https://github.com/KOUKOU221/Better-Color-Profile/releases
+Permission is granted to anyone to use this software for any personal or non-commercial purpose. Redistribution or modification of the binary distribution or source code without explicit written permission from the copyright holder is strictly prohibited.
