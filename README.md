@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/app_logo.gif" alt="Better Color Profile Logo" width="168" />
+  <img src="assets/app_logo.webp" alt="Better Color Profile Logo" width="168" />
 </p>
 
 <h1 align="center">Better Color Profile</h1>
