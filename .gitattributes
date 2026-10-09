@@ -1,5 +1,0 @@
-# Exclude documentation and meta assets from GitHub auto-generated release archives
-README.md export-ignore
-assets/ export-ignore
-.gitattributes export-ignore
-NOTICE.txt export-ignore

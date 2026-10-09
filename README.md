@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/app_logo.webp" alt="Better Color Profile Logo" width="168" />
+  <img src="src/app_logo.webp" alt="Better Color Profile Logo" width="168" />
 </p>
 
 <h1 align="center">Better Color Profile</h1>
@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/Release-v1.7.1-EAB308" alt="Version" />
   <a href="https://better.colorprofile.workers.dev/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
-  <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red" alt="License" />
+  <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
 </p>
 
 ---
@@ -32,7 +32,7 @@ Test Better Color Profile directly in your web browser:
 
 <p align="center">
   <a href="https://better.colorprofile.workers.dev/">
-    <img src="assets/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
+    <img src="src/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
   </a>
 </p>
 
@@ -46,7 +46,7 @@ Test Better Color Profile directly in your web browser:
 
 Compatible with **Windows 11 and Windows 10** (64-bit and 32-bit):
 
-1. Download [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/Better-Color-Profile/releases/latest/download/BetterColorProfileSetup.exe) (Direct download — automatically gets the latest release).
+1. Download [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe) (Direct download — automatically gets the latest release).
 2. Run the setup wizard:
    - Modern installation wizard with custom destination directory selection (automatically creates and installs into a dedicated `BetterColorProfile` folder).
    - Optional Start with Windows and desktop/start-menu shortcuts (enabled by default).
@@ -106,6 +106,34 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 
 ---
 
+## 🛠️ Building from Source
+
+To compile from source using the built-in Microsoft .NET C# compiler:
+
+```cmd
+build.bat
+```
+
+This compiles both:
+* `dist\BetterColorProfile.exe` (Standalone portable application)
+* `dist\BetterColorProfileSetup.exe` (Complete setup wizard installer)
+* Copies the standalone executable to the root directory for immediate local testing.
+
+---
+
+<!--
+## ☕ Support the Project
+
+If **Better Color Profile** enhances your gaming experience, competitive visibility, or daily workflow, consider supporting ongoing development!
+
+<p align="left">
+  <a href="https://buymeacoffee.com/KOUKOU221" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" />
+  </a>
+</p>
+
+---
+
 ## 💬 Official Community & Support
 
 Join the official **Better Color Profile** Discord community for release announcements, troubleshooting, calibration profiles, and feature requests:
@@ -118,8 +146,9 @@ Join the official **Better Color Profile** Discord community for release announc
 
 ---
 
-## 📄 License & Copyright
+## 📄 License & Distribution
+
+**Better Color Profile** is free proprietary software (Freeware) for personal and commercial use.
 
 Copyright © 2026 KOUKOU221. All rights reserved.
 
-This software and associated documentation files are proprietary. Unauthorized copying, distribution, modification, reverse engineering, or commercial use of this software, in source or binary form, is strictly prohibited without explicit written permission from the copyright owner.
