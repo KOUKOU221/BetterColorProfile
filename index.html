@@ -3649,7 +3649,32 @@
       triggerToast(`⌨️ Hotkey Triggered: Cycled to Slot ${activeSlotId} (${slotData[activeSlotId].name})`);
     }
 
+    
+    function showGlobalToast(msg, duration = 4000) {
+      const toast = document.getElementById('global-toast');
+      const text = document.getElementById('global-toast-text');
+      if (!toast || !text) return;
+      text.innerHTML = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+      toast.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      clearTimeout(window.globalToastTimer);
+      window.globalToastTimer = setTimeout(() => {
+        hideGlobalToast();
+      }, duration);
+    }
+
+    function hideGlobalToast() {
+      const toast = document.getElementById('global-toast');
+      if (toast) {
+        toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+        toast.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    }
+    window.showGlobalToast = showGlobalToast;
+    window.hideGlobalToast = hideGlobalToast;
+
     function triggerToast(msg) {
+      showGlobalToast(msg);
       const toast = document.getElementById('app-toast');
       const txt = document.getElementById('app-toast-text');
       if (!toast || !txt) return;
@@ -3845,6 +3870,15 @@
     }, { passive: true });
 
     // Initial setup on load - start with CS2 Boost (Slot 3), multi-game reel, and White Bat Audio at 09.5s drop offset!
+    
+    window.signInWithGoogle = function() {
+      if (window._firebaseSignIn) {
+        window._firebaseSignIn();
+      } else {
+        showGlobalToast('⏳ Initializing Google Sign-In, please try again in a second...', 3000);
+      }
+    };
+
     window.addEventListener('DOMContentLoaded', () => {
       selectSlot(3);
       setAdAudioMode('file');
@@ -3942,6 +3976,13 @@
     }
 
     async function signInWithGoogle() {
+      const btn = document.getElementById('auth-signin-btn');
+      let origHtml = '';
+      if (btn) {
+        origHtml = btn.innerHTML;
+        btn.innerHTML = '<svg class="w-4 h-4 animate-spin shrink-0" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg><span class="hidden sm:inline">Connecting...</span>';
+        btn.disabled = true;
+      }
       try {
         if (typeof sound !== 'undefined') sound.click();
         const result = await signInWithPopup(auth, provider);
@@ -3952,8 +3993,14 @@
           return;
         }
         handleAuthError(err);
+      } finally {
+        if (btn) {
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }
       }
     }
+    window._firebaseSignIn = signInWithGoogle;
 
     function handleUserSignedIn(user) {
       window.currentUser = user;
@@ -3968,16 +4015,20 @@
       console.error('Firebase Auth Error:', err);
       let msg = err.message || 'Authentication error';
       if (err.code === 'auth/configuration-not-found') {
-        msg = 'Google Sign-In is not enabled in Firebase Console. Go to Authentication > Sign-in method > Enable Google.';
+        msg = 'Google Sign-In is NOT enabled in Firebase Console!\n\nFix: Go to Firebase Console -> Build -> Authentication -> Sign-in method -> Click Google -> Enable and Save.';
       } else if (err.code === 'auth/unauthorized-domain') {
-        msg = 'Domain not authorized. Add better.colorprofile.workers.dev in Firebase Authentication > Settings > Authorized domains.';
+        msg = 'Domain "better.colorprofile.workers.dev" is NOT authorized!\n\nFix: In Firebase Console -> Authentication -> Settings -> Authorized domains -> Add "better.colorprofile.workers.dev".';
       } else if (err.code === 'auth/popup-closed-by-user') {
+        msg = 'Google sign-in popup was closed.';
+      } else if (err.code === 'auth/cancelled-popup-request') {
         return;
       }
-      if (typeof triggerToast === 'function') {
-        triggerToast('⚠️ ' + msg);
-      } else {
-        alert(msg);
+
+      if (typeof showGlobalToast === 'function') {
+        showGlobalToast('⚠️ ' + msg.replace(/\n/g, ' '), 7000);
+      }
+      if (err.code === 'auth/configuration-not-found' || err.code === 'auth/unauthorized-domain') {
+        alert('⚠️ Google Sign-In Setup Required:\n\n' + msg);
       }
     }
 
