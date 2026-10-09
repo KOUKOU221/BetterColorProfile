@@ -1,4 +1,4 @@
-Better Color Profile (v1.68)
+Better Color Profile (v1.7)
 Copyright (C) 2026 KOUKOU221. All rights reserved.
 
 This repository provides official pre-compiled application releases and presentation documentation.
