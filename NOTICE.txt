@@ -1,0 +1,6 @@
+Better Color Profile (v1.7.1)
+Copyright (C) 2026 KOUKOU221. All rights reserved.
+
+This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
+
+Permission is granted to anyone to use this software for any personal or non-commercial purpose. Redistribution or modification of the binary distribution or source code without explicit written permission from the copyright holder is strictly prohibited.
