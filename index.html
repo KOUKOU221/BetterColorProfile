@@ -6,6 +6,10 @@
   <title>Better Color Profile • The Modern Windows Color Profile Manager</title>
   <link rel="icon" type="image/x-icon" href="assets/app.ico">
   
+  <!-- Preload Critical Showcase Images for Instant Zero-Delay Display -->
+  <link rel="preload" as="image" href="assets/scene_arenabreakout.jpg">
+  <link rel="preload" as="image" href="assets/scene_inferno.jpg">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -319,22 +323,12 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.1.3</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.2.2</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
       </a>
 
-      <!-- Center Quick Links -->
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-gray-300">
-        <a href="#simulator" class="hover:text-white transition-colors" onclick="sound.click()">Simulator</a>
-        <a href="#spec-ad" class="hover:theme-accent transition-colors flex items-center gap-1.5" onclick="sound.click()">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-          Spec Ad Reel
-        </a>
-        <a href="#anti-cheat" class="hover:text-white transition-colors" onclick="sound.click()">Anti-Cheat Safety</a>
-        <a href="#hotkeys" class="hover:text-white transition-colors" onclick="sound.click()">Hotkeys</a>
-      </nav>
 
       <!-- Right Action Pill: Sound FX Toggle & CTA -->
       <div class="flex items-center gap-2.5">
@@ -344,15 +338,6 @@
           <span class="hidden sm:inline">Discord</span>
         </a>
 
-        <!-- Interactive Web Audio Toggle Button -->
-        <button id="sound-toggle-btn" onclick="toggleSound()" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-white/5 hover:bg-white/10 transition-all flex items-center gap-2 text-gray-300" title="Toggle Procedural Audio Effects">
-          <div id="eq-bars" class="flex items-end gap-0.5 h-4 opacity-40">
-            <span class="w-1 bg-amber-400 rounded-full h-1"></span>
-            <span class="w-1 bg-amber-400 rounded-full h-2"></span>
-            <span class="w-1 bg-amber-400 rounded-full h-1.5"></span>
-          </div>
-          <span id="sound-label" class="font-mono text-[11px]">Audio: OFF</span>
-        </button>
 
 
 
@@ -408,22 +393,22 @@
       <div id="ad-stage-box" class="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center cursor-pointer group" onclick="toggleAdPlay()">
         
         <!-- Multi-Game Background Scene Layers -->
-        <img id="ad-scene-arenabreakout" src="assets/scene_arenabreakout.jpg" alt="Arena Breakout: Infinite" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-thefinals" src="assets/scene_thefinals.jpg" alt="THE FINALS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-cod" src="assets/scene_cod.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-cs2" src="assets/scene_inferno.jpg" alt="Counter-Strike 2" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-pubg" src="assets/scene_pubg.jpg" alt="PUBG: BATTLEGROUNDS" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-apex" src="assets/scene_apex.jpg" alt="Apex Legends" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-deltaforce" src="assets/scene_deltaforce.jpg" alt="Delta Force: Hawk Ops" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
-        <img id="ad-scene-endcard" src="assets/scene_endcard.jpg" alt="Call of Duty: Warzone" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-arenabreakout" src="assets/scene_arenabreakout.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-100" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-thefinals" src="assets/scene_thefinals.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-cod" src="assets/scene_cod.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-cs2" src="assets/scene_inferno.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-pubg" src="assets/scene_pubg.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-apex" src="assets/scene_apex.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-deltaforce" src="assets/scene_deltaforce.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
+        <img id="ad-scene-endcard" src="assets/scene_endcard.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async" class="ad-game-layer absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out opacity-0" style="filter: brightness(1) contrast(1);" />
 
         <!-- Dynamic Live Before/After Split Comparison Layer (Featured in Video during Beat 3 Calibration) -->
         <div id="ad-split-stage" class="absolute inset-0 pointer-events-none z-15 transition-opacity duration-300 opacity-0 overflow-hidden select-none">
           <!-- Left Side / Base Layer: Raw Default sRGB Display -->
-          <img id="ad-split-raw-img" src="assets/scene_inferno.jpg" alt="Raw Default Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" style="filter: brightness(0.82) contrast(0.88) saturate(0.85);" />
+          <img id="ad-split-raw-img" src="assets/scene_inferno.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" style="filter: brightness(0.82) contrast(0.88) saturate(0.85);" />
           
           <!-- Right Side / Calibrated Layer: Clipped at Split Percentage -->
-          <img id="ad-split-cal-img" src="assets/scene_inferno.jpg" alt="Calibrated Boost Display" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none will-change-[clip-path]" style="clip-path: inset(0 0 0 50%); filter: brightness(1.28) contrast(1.18) saturate(1.26);" />
+          <img id="ad-split-cal-img" src="assets/scene_inferno.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none will-change-[clip-path]" style="clip-path: inset(0 0 0 50%); filter: brightness(1.28) contrast(1.18) saturate(1.26);" />
 
           <!-- Comparison Badges (Matching Screenshot Design) -->
           <div id="ad-split-badge-raw" class="absolute top-14 left-4 z-20 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono font-bold text-gray-300 shadow-xl pointer-events-none">
@@ -806,7 +791,7 @@
         </div>
 
         <!-- Screen Overlay Vignette & Lighting -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none z-10"></div>
 
         <!-- Dynamic Game Title Badge (Top-left HUD) -->
         <div id="ad-game-badge" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-black/75 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/15 text-xs font-mono font-bold text-white shadow-xl transition-all duration-200">
@@ -832,7 +817,7 @@
         <div id="ad-cinematic-fade" class="absolute inset-0 bg-black pointer-events-none z-30 opacity-0"></div>
 
         <!-- Beat 1: The Problem (0-3.5s) - Arena Breakout -->
-        <div id="ad-beat-1" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/60 transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
+        <div id="ad-beat-1" class="ad-slide absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/35 backdrop-blur-[1px] transition-opacity duration-300 ease-out opacity-0 pointer-events-none z-20">
           <span class="text-xs font-mono font-bold text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full mb-3 uppercase tracking-widest">BEAT 01 &bull; THE PROBLEM</span>
           <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight max-w-2xl mb-3">
             Enemies hiding in dark shadows?
@@ -1038,8 +1023,8 @@
 
       </div>
 
-      <!-- Hidden HTML5 Audio Element for White Bat Audio Track -->
-      <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="auto"></audio>
+      <!-- Hidden HTML5 Audio Element for White Bat Audio Track (loaded on play) -->
+      <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="none"></audio>
 
     </div>
 
@@ -1453,12 +1438,12 @@
                   <div>
                     <div class="font-bold text-white text-xs">Better Color Profile</div>
                     <div class="flex items-center gap-2 mt-0.5">
-                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.1.3</span>
+                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.2.2</span>
                       <span class="text-[10px] text-emerald-400 font-medium">✓ Up to date</span>
                     </div>
                   </div>
                 </div>
-                <button onclick="triggerToast('✓ You are using the latest release (v2.1.3)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
+                <button onclick="triggerToast('✓ You are using the latest release (v2.2.2)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
                   Check for Updates
                 </button>
               </div>
@@ -1570,13 +1555,13 @@
             <div id="comparison-box" class="comparison-container relative w-full aspect-video rounded-xl overflow-hidden bg-black">
               
               <!-- LAYER 1: Raw Uncalibrated Base Image (Visible on the LEFT of the divider) -->
-              <img id="monitor-raw-img" src="assets/scene_inferno.jpg" alt="Default sRGB View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" />
+              <img id="monitor-raw-img" src="assets/scene_inferno.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" />
               <div class="absolute top-2.5 left-2.5 z-20 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono font-bold text-gray-300 pointer-events-none">
                 Default sRGB
               </div>
 
               <!-- LAYER 2: Calibrated Enhanced Image (Clipped on the left, Visible on the RIGHT of the divider) -->
-              <img id="monitor-calibrated-img" src="assets/scene_inferno.jpg" alt="Calibrated Boost View" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-[filter] duration-75 ease-out" style="clip-path: inset(0 0 0 50%); filter: brightness(1.26) contrast(1.13) saturate(1.2);" />
+              <img id="monitor-calibrated-img" src="assets/scene_inferno.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-[filter] duration-75 ease-out" style="clip-path: inset(0 0 0 50%); filter: brightness(1.26) contrast(1.13) saturate(1.2);" />
               <div class="absolute top-2.5 right-2.5 z-20 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-amber-400/30 text-[10px] font-mono theme-accent font-bold pointer-events-none">
                 Calibrated Boost
               </div>
@@ -1771,10 +1756,6 @@
           <span>Download Setup Wizard (.exe)</span>
         </a>
 
-        <!-- Portable Standalone -->
-        <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest" onclick="sound.click()" class="px-6 py-4 rounded-2xl text-sm font-bold text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2">
-          <span>All Releases &amp; Portable</span>
-        </a>
 
         <!-- Discord Community Hub -->
         <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener" class="px-6 py-4 rounded-2xl text-sm font-bold text-white bg-[#5865F2]/20 hover:bg-[#5865F2]/30 border border-[#5865F2]/40 transition-all flex items-center gap-2 shadow-lg">
@@ -1784,7 +1765,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.1.3
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.2.2
       </div>
 
     </div>
@@ -2762,7 +2743,9 @@
       // 4. Fully Visible Showcase: 25.5s - 26.5s (100% visible download card)
       // 5. Outro Fade-Out: 26.5s - 30.0s (slow 3.5-second cinematic fade to black)
       let fadeOpacity = 0;
-      if (sec < 2.5) {
+      if (!adIsPlaying && sec === 0) {
+        fadeOpacity = 0;
+      } else if (sec < 2.5) {
         fadeOpacity = Math.max(0, (2.5 - sec) / 2.5);
       } else if (sec >= 23.2 && sec < 23.5) {
         fadeOpacity = (sec - 23.2) / 0.3; // dip to black
@@ -2807,7 +2790,7 @@
       if (sec < 3.5) {
         document.getElementById('ad-beat-1')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('arenabreakout', 'ARENA BREAKOUT: INFINITE • RAW MONITOR');
-        setAdFilter('brightness(0.72) contrast(0.82) saturate(0.8)');
+        setAdFilter('brightness(0.96) contrast(0.98) saturate(0.96)');
       } else if (sec < 7.5) {
         document.getElementById('ad-beat-build')?.classList.remove('opacity-0', 'pointer-events-none');
         setAdActiveGame('thefinals', 'THE FINALS • PRE-DROP TENSION');
