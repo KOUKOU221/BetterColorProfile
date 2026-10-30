@@ -39,7 +39,7 @@ Test Better Color Profile directly in your web browser:
 </p>
 
 * **Interactive Interface**: Test the real-time calibration sliders, tuner, and themes.
-* **Live Game Preview**: Move the sliders and watch game colors transform instantly.
+* **Live Game Preview**: Test tuner sliders in your browser to see hardware gamma and color adjustments on a virtual display.
 * **Zero Install Required**: Runs completely inside your web browser.
 
 ---
