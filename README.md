@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://better.colorprofile.workers.dev/">
-    <img src="assets/app_logo.png" alt="Better Color Profile Logo" width="168" />
+    <img src="src/app_logo.webp" alt="Better Color Profile Logo" width="168" />
   </a>
 </p>
 
@@ -34,7 +34,7 @@ Test Better Color Profile directly in your web browser:
 
 <p align="center">
   <a href="https://better.colorprofile.workers.dev/">
-    <img src="assets/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
+    <img src="src/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
   </a>
 </p>
 
@@ -118,6 +118,34 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 * Minimizing or closing the window sends it directly to the system tray so hotkeys remain active.
 * Right-click tray menu provides quick slot switching, status overview, and settings.
 * Enable **Start with Windows** to keep your preferred profiles ready on startup.
+
+---
+
+## 🛠️ Building from Source
+
+To compile from source using the built-in Microsoft .NET C# compiler:
+
+```cmd
+build.bat
+```
+
+This compiles both:
+* `dist\BetterColorProfile.exe` (Standalone portable application)
+* `dist\BetterColorProfileSetup.exe` (Complete setup wizard installer)
+* Copies the standalone executable to the root directory for immediate local testing.
+
+---
+
+<!--
+## ☕ Support the Project
+
+If **Better Color Profile** enhances your gaming experience, competitive visibility, or daily workflow, consider supporting ongoing development!
+
+<p align="left">
+  <a href="https://buymeacoffee.com/KOUKOU221" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" />
+  </a>
+</p>
 
 ---
 
