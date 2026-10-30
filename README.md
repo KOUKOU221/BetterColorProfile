@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://better.colorprofile.workers.dev/">
-    <img src="src/app_logo.webp" alt="Better Color Profile Logo" width="168" />
+    <img src="assets/app_logo.webp" alt="Better Color Profile Logo" width="168" />
   </a>
 </p>
 
@@ -34,7 +34,7 @@ Test Better Color Profile directly in your web browser:
 
 <p align="center">
   <a href="https://better.colorprofile.workers.dev/">
-    <img src="src/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
+    <img src="assets/showcase_preview.png" alt="Better Color Profile Live Interactive Showcase" width="100%" />
   </a>
 </p>
 
