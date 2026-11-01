@@ -6,7 +6,7 @@
 
 <h1 align="center">Better Color Profile</h1>
 <p align="center">
-  <em>Change your screen colors in one click • The modern Windows color profile manager</em>
+  <em>The modern Windows color profile manager</em>
 </p>
 
 <p align="center">
