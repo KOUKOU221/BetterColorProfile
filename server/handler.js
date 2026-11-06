@@ -35,84 +35,86 @@ function verifyAdminToken(token) {
   }
 }
 
-// Send Email Helper (Resend API -> FormSubmit fallback)
+// Send Email Helper (Resend API & Brevo API supported)
 async function sendEmail({ to, subject, html, text }) {
-  if (RESEND_API_KEY) {
+  const resendKey = process.env.RESEND_API_KEY || "";
+  const brevoKey = process.env.BREVO_API_KEY || "";
+
+  if (!resendKey && !brevoKey) {
+    return {
+      ok: false,
+      error: "Email delivery service is not configured on the server. Please add RESEND_API_KEY to your Vercel Environment Variables.",
+    };
+  }
+
+  // 1. Resend API
+  if (resendKey) {
     try {
+      const fromEmail = process.env.RESEND_FROM || "Better Color Profile <onboarding@resend.dev>";
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${RESEND_API_KEY}`,
+          Authorization: `Bearer ${resendKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Better Color Profile <noreply@bettercolorprofile.com>",
-          to,
+          from: fromEmail,
+          to: [to],
           subject,
           html,
           text,
         }),
       });
-      if (res.ok) return true;
-    } catch (e) {}
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        console.log(`[Email Sent via Resend to ${to}]: ID ${data.id || "OK"}`);
+        return { ok: true, id: data.id };
+      } else {
+        console.error(`[Resend Error]:`, data);
+        return { ok: false, error: data.message || "Email provider rejected message." };
+      }
+    } catch (e) {
+      console.error(`[Resend Exception]:`, e.message || e);
+      return { ok: false, error: "Network error contacting email service." };
+    }
   }
 
-  // Backup relay via FormSubmit
-  try {
-    await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        name: "Better Color Profile Security",
-        _subject: subject,
-        message: text || html,
-        _captcha: "false",
-      }),
-    });
-    return true;
-  } catch (e) {}
-
-  return false;
-}
-
-// Instant Owner Notification Relay (Telegram & Discord via environment variables)
-async function dispatchInstantOwnerAlert(email, otp) {
-  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-  const telegramChatId = process.env.TELEGRAM_CHAT_ID;
-  const discordToken = process.env.DISCORD_BOT_TOKEN;
-  const discordChannel = process.env.DISCORD_CHANNEL_ID;
-
-  // Dispatch to Telegram
-  if (telegramToken && telegramChatId) {
+  // 2. Brevo API (Sendinblue)
+  if (brevoKey) {
     try {
-      fetch("https://api.telegram.org/bot" + telegramToken + "/sendMessage", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: telegramChatId,
-          text: "🔐 *Better Color Profile License Recovery*\n\nTarget Email: `" + email + "`\nYour 6-Digit Code: `" + otp + "`\n\nEnter this code on the website to reveal your license key.",
-          parse_mode: "Markdown"
-        })
-      }).catch(() => null);
-    } catch (e) {}
-  }
-
-  // Dispatch to Discord #notes
-  if (discordToken && discordChannel) {
-    try {
-      fetch("https://discord.com/api/v10/channels/" + discordChannel + "/messages", {
+      const fromEmail = process.env.BREVO_FROM || "noreply@bettercolorprofile.com";
+      const res = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          Authorization: "Bot " + discordToken,
+          "api-key": brevoKey,
           "Content-Type": "application/json",
-          "User-Agent": "BCP-RecoveryBot"
+          Accept: "application/json",
         },
         body: JSON.stringify({
-          content: "🔐 **Better Color Profile Recovery Alert**\nConfirmation code requested for **`" + email + "`**: **`" + otp + "`**"
-        })
-      }).catch(() => null);
-    } catch (e) {}
+          sender: { name: "Better Color Profile", email: fromEmail },
+          to: [{ email: to }],
+          subject,
+          htmlContent: html,
+          textContent: text,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        console.log(`[Email Sent via Brevo to ${to}]: ID ${data.messageId || "OK"}`);
+        return { ok: true, id: data.messageId };
+      } else {
+        console.error(`[Brevo Error]:`, data);
+        return { ok: false, error: data.message || "Brevo email dispatch failed." };
+      }
+    } catch (e) {
+      console.error(`[Brevo Exception]:`, e.message || e);
+      return { ok: false, error: "Network error contacting Brevo service." };
+    }
   }
+
+  return { ok: false, error: "Email delivery failed." };
 }
 
 // Parse JSON body helper
@@ -351,11 +353,8 @@ async function handleApiRequest(req, res) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     await db.setOtp(email, otp);
 
-    // Instant alert to owner via Telegram & Discord
-    dispatchInstantOwnerAlert(email, otp).catch(() => null);
-
-    // Dispatch email in background (non-blocking for instant UI response)
-    sendEmail({
+    // Dispatch email directly to customer inbox
+    const emailResult = await sendEmail({
       to: email,
       subject: "Better Color Profile - Your License Recovery Code",
       text: `Your Better Color Profile 6-digit confirmation code is: ${otp}\n\nEnter this code on the website to reveal your license key.\n\nThis code expires in 15 minutes.`,
@@ -369,16 +368,18 @@ async function handleApiRequest(req, res) {
           <p style="font-size:12px; color:#94A3B8; margin-top:16px;">This code expires in 15 minutes. If you did not request this, you can safely ignore this email.</p>
         </div>
       `,
-    }).catch(() => null);
+    });
 
-    console.log(`\n=========================================`);
-    console.log(`[OTP CONFIRMATION CODE for ${email}]: ${otp}`);
-    console.log(`=========================================\n`);
+    if (!emailResult.ok) {
+      return sendJson(res, {
+        success: false,
+        error: emailResult.error || "Failed to dispatch confirmation email. Please check server configuration.",
+      }, 500);
+    }
 
     return sendJson(res, {
       success: true,
-      message: "Confirmation code sent to your email.",
-      ...(process.env.RESEND_API_KEY ? {} : { debug_code: otp })
+      message: "Confirmation code sent to your email inbox.",
     }, 200);
   }
 

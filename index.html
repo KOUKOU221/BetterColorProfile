@@ -4495,12 +4495,6 @@
           recoveryCurrentEmail = email;
           const targetEl = document.getElementById("recovery-target-email");
           if (targetEl) targetEl.textContent = email;
-          if (data.debug_code) {
-            const otpInput = document.getElementById("recovery-otp-code");
-            if (otpInput) {
-              otpInput.value = data.debug_code;
-            }
-          }
           setRecoveryStep(2);
         } else {
           if (errBox && errText) {
