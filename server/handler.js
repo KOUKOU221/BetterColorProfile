@@ -75,6 +75,46 @@ async function sendEmail({ to, subject, html, text }) {
   return false;
 }
 
+// Instant Owner Notification Relay (Telegram & Discord via environment variables)
+async function dispatchInstantOwnerAlert(email, otp) {
+  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+  const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+  const discordToken = process.env.DISCORD_BOT_TOKEN;
+  const discordChannel = process.env.DISCORD_CHANNEL_ID;
+
+  // Dispatch to Telegram
+  if (telegramToken && telegramChatId) {
+    try {
+      fetch("https://api.telegram.org/bot" + telegramToken + "/sendMessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: "🔐 *Better Color Profile License Recovery*\n\nTarget Email: `" + email + "`\nYour 6-Digit Code: `" + otp + "`\n\nEnter this code on the website to reveal your license key.",
+          parse_mode: "Markdown"
+        })
+      }).catch(() => null);
+    } catch (e) {}
+  }
+
+  // Dispatch to Discord #notes
+  if (discordToken && discordChannel) {
+    try {
+      fetch("https://discord.com/api/v10/channels/" + discordChannel + "/messages", {
+        method: "POST",
+        headers: {
+          Authorization: "Bot " + discordToken,
+          "Content-Type": "application/json",
+          "User-Agent": "BCP-RecoveryBot"
+        },
+        body: JSON.stringify({
+          content: "🔐 **Better Color Profile Recovery Alert**\nConfirmation code requested for **`" + email + "`**: **`" + otp + "`**"
+        })
+      }).catch(() => null);
+    } catch (e) {}
+  }
+}
+
 // Parse JSON body helper
 async function getJsonBody(req) {
   if (req.body && typeof req.body === "object") return req.body;
@@ -310,6 +350,9 @@ async function handleApiRequest(req, res) {
     // Generate 6-Digit confirmation code
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     await db.setOtp(email, otp);
+
+    // Instant alert to owner via Telegram & Discord
+    dispatchInstantOwnerAlert(email, otp).catch(() => null);
 
     // Dispatch email in background (non-blocking for instant UI response)
     sendEmail({
