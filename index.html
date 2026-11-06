@@ -323,7 +323,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.8.0</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.9.0</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -337,6 +337,12 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Free Trial</span>
         </a>
+
+        <!-- Key Recovery Button -->
+        <button onclick="openKeyRecoveryModal(); sound.click();" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer" title="Recover your license key">
+          <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+          <span class="hidden sm:inline">Recover Key</span>
+        </button>
 
         <!-- Official Discord Community Link -->
         <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-[#5865F2]/40 bg-[#5865F2]/15 hover:bg-[#5865F2]/25 text-[#9bb0f5] hover:text-white transition-all flex items-center gap-1.5" title="Join Official Better Color Profile Discord">
@@ -1437,12 +1443,12 @@
                   <div>
                     <div class="font-bold text-white text-xs">Better Color Profile</div>
                     <div class="flex items-center gap-2 mt-0.5">
-                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.8.0</span>
+                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.9.0</span>
                       <span class="text-[10px] text-emerald-400 font-medium">✓ Up to date</span>
                     </div>
                   </div>
                 </div>
-                <button onclick="triggerToast('✓ You are using the latest release (v2.8.0)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
+                <button onclick="triggerToast('✓ You are using the latest release (v2.9.0)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
                   Check for Updates
                 </button>
               </div>
@@ -1942,7 +1948,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.8.0
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.9.0
       </div>
 
     </div>
@@ -4299,7 +4305,7 @@
 
   <!-- ================= KEY RECOVERY MODAL POPUP ================= -->
   <div id="key-recovery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-    <div id="key-recovery-card" class="relative w-full max-w-[460px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
+    <div id="key-recovery-card" class="relative w-full max-w-[480px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
       
       <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-white/10 pb-4">
@@ -4307,46 +4313,84 @@
           <span class="w-8 h-8 rounded-lg bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-300 text-base">🔑</span>
           <div>
             <h3 class="text-lg font-bold text-white tracking-tight">Recover License Key</h3>
-            <span class="text-xs text-gray-400">Lost your key or deleted your confirmation email?</span>
+            <span class="text-xs text-gray-400">Lost your key or need to check your active seat?</span>
           </div>
         </div>
         <button onclick="closeKeyRecoveryModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-all text-sm" title="Close">✕</button>
       </div>
 
-      <!-- Explainer Box -->
-      <div class="p-4 rounded-xl bg-[#1A1D25] border border-white/10 text-xs text-gray-300 space-y-2.5">
-        <div class="flex items-start gap-2">
-          <span class="text-amber-400 font-bold text-sm">1.</span>
-          <span>Click the button below to open the official <b>Whop Customer Portal</b>.</span>
+      <!-- STEP 1: Enter Email -->
+      <div id="recovery-step-1" class="flex flex-col gap-4">
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Enter the email address you used when purchasing your license. We will send a secure <b>6-digit confirmation code</b> to verify ownership.
+        </p>
+
+        <div class="flex flex-col gap-1.5">
+          <label for="recovery-email" class="text-xs font-semibold text-gray-400">Customer Email</label>
+          <div class="relative">
+            <input id="recovery-email" type="email" placeholder="you@example.com" autocomplete="email" class="w-full px-4 py-3 rounded-xl bg-[#1C1F28] border border-[#303544] text-white text-sm placeholder-gray-500 focus:outline-none focus:border-amber-400 transition-all" onkeydown="if(event.key==='Enter') requestRecoveryOtp()" />
+          </div>
         </div>
-        <div class="flex items-start gap-2">
-          <span class="text-amber-400 font-bold text-sm">2.</span>
-          <span>Enter the <b>same email address</b> you used when purchasing or starting the trial.</span>
+
+        <div id="recovery-error-1" class="hidden text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-xl p-3 flex items-start gap-2">
+          <span>⚠️</span>
+          <span id="recovery-error-1-text"></span>
         </div>
-        <div class="flex items-start gap-2">
-          <span class="text-amber-400 font-bold text-sm">3.</span>
-          <span>Whop will email you a <b>secure 6-digit confirmation code</b> to verify your inbox.</span>
+
+        <button id="btn-request-otp" onclick="requestRecoveryOtp()" class="w-full py-3.5 rounded-xl font-bold text-black bg-[#F59E0B] hover:bg-[#FBBF24] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all flex items-center justify-center gap-2 text-sm shadow-lg disabled:opacity-50 disabled:pointer-events-none">
+          <span>Send 6-Digit Code</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+
+      <!-- STEP 2: Enter 6-Digit OTP -->
+      <div id="recovery-step-2" class="hidden flex flex-col gap-4">
+        <div class="p-3 rounded-xl bg-amber-400/10 border border-amber-400/20 text-xs text-amber-200">
+          We emailed a 6-digit confirmation code to <b id="recovery-target-email" class="text-white"></b>. Enter it below to reveal your key.
         </div>
-        <div class="flex items-start gap-2">
-          <span class="text-amber-400 font-bold text-sm">4.</span>
-          <span>Type the code into Whop, and your <b>active license key and order receipt</b> will be shown immediately!</span>
+
+        <div class="flex flex-col gap-1.5">
+          <label for="recovery-otp-code" class="text-xs font-semibold text-gray-400">Confirmation Code</label>
+          <input id="recovery-otp-code" type="text" maxlength="6" placeholder="123456" class="w-full px-4 py-3 rounded-xl bg-[#1C1F28] border border-[#303544] text-amber-300 font-mono text-center text-xl tracking-[0.4em] font-bold focus:outline-none focus:border-amber-400 transition-all" onkeydown="if(event.key==='Enter') verifyRecoveryOtp()" />
+        </div>
+
+        <div id="recovery-error-2" class="hidden text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-xl p-3 flex items-start gap-2">
+          <span>⚠️</span>
+          <span id="recovery-error-2-text"></span>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="setRecoveryStep(1)" class="w-1/3 py-3 rounded-xl font-semibold text-gray-300 bg-white/5 hover:bg-white/10 border border-white/10 text-xs transition-all">
+            Back
+          </button>
+          <button id="btn-verify-otp" onclick="verifyRecoveryOtp()" class="w-2/3 py-3 rounded-xl font-bold text-black bg-[#F59E0B] hover:bg-[#FBBF24] transition-all text-xs flex items-center justify-center gap-1.5 shadow-md">
+            <span>Verify &amp; Reveal Key</span>
+          </button>
         </div>
       </div>
 
-      <div class="text-[11px] text-gray-400 bg-amber-400/10 border border-amber-400/20 rounded-lg p-2.5 flex items-center gap-2">
-        <span>💡</span>
-        <span><b>Note:</b> If your 7-day free trial has expired, Whop will display <i>Expired</i> and no active key will be given.</span>
-      </div>
+      <!-- STEP 3: Revealed Key Display -->
+      <div id="recovery-step-3" class="hidden flex flex-col gap-4">
+        <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 flex items-center gap-2">
+          <span>✓</span>
+          <span><b>Identity verified!</b> Here is your license key:</span>
+        </div>
 
-      <!-- Open Whop Portal Button -->
-      <a href="https://whop.com/@me/settings/orders/" target="_blank" rel="noopener" class="w-full py-3.5 rounded-xl font-bold text-black bg-[#F59E0B] hover:bg-[#FBBF24] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] transition-all flex items-center justify-center gap-2 text-sm sm:text-base shadow-lg">
-        <span>Open Whop Key Recovery Portal</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      </a>
+        <div class="p-4 rounded-xl bg-[#0D0F14] border border-amber-400/40 flex items-center justify-between gap-3 shadow-inner">
+          <span id="recovered-key-display" class="font-mono text-base font-bold text-amber-300 select-all tracking-wider break-all"></span>
+          <button onclick="copyRecoveredKey()" class="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1 shrink-0">
+            <span>Copy</span>
+          </button>
+        </div>
 
-      <!-- Secondary info -->
-      <div class="text-center text-xs text-gray-400 pt-1">
-        <span>Or activate directly inside the app using your <b>Whop Email</b></span>
+        <div class="text-[11px] text-gray-400 space-y-1 bg-white/5 border border-white/10 rounded-xl p-3">
+          <p>✉️ A backup copy has also been sent to your email inbox.</p>
+          <p>💻 <b>Note:</b> Each key permits usage on <b>1 device at a time</b>. Paste this key directly into the Better Color Profile app.</p>
+        </div>
+
+        <button onclick="closeKeyRecoveryModal()" class="w-full py-3 rounded-xl font-semibold text-white bg-white/10 hover:bg-white/15 border border-white/15 text-xs transition-all">
+          Done
+        </button>
       </div>
 
     </div>
@@ -4388,7 +4432,163 @@
       }
     }
 
+    // ================= KEY RECOVERY CLIENT LOGIC =================
+    const BCP_API_BASE = window.BCP_API_BASE || (
+      (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+        ? "/api"
+        : "https://bettercolorprofile.vercel.app/api"
+    );
+    let recoveryCurrentEmail = "";
+
+    function setRecoveryStep(step) {
+      const s1 = document.getElementById("recovery-step-1");
+      const s2 = document.getElementById("recovery-step-2");
+      const s3 = document.getElementById("recovery-step-3");
+      const err1 = document.getElementById("recovery-error-1");
+      const err2 = document.getElementById("recovery-error-2");
+      if (err1) err1.classList.add("hidden");
+      if (err2) err2.classList.add("hidden");
+
+      if (s1) s1.classList.toggle("hidden", step !== 1);
+      if (s2) s2.classList.toggle("hidden", step !== 2);
+      if (s3) s3.classList.toggle("hidden", step !== 3);
+
+      if (step === 2) {
+        const otpInput = document.getElementById("recovery-otp-code");
+        if (otpInput) {
+          otpInput.value = "";
+          setTimeout(() => otpInput.focus(), 100);
+        }
+      }
+    }
+
+    async function requestRecoveryOtp() {
+      const emailInput = document.getElementById("recovery-email");
+      const errBox = document.getElementById("recovery-error-1");
+      const errText = document.getElementById("recovery-error-1-text");
+      const btn = document.getElementById("btn-request-otp");
+      const email = emailInput ? emailInput.value.trim() : "";
+
+      if (!email || !email.includes("@")) {
+        if (errBox && errText) {
+          errText.textContent = "Please enter a valid email address.";
+          errBox.classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (errBox) errBox.classList.add("hidden");
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span>Sending Code...</span>`;
+      }
+
+      try {
+        const res = await fetch(`${BCP_API_BASE}/license/recover/request-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          recoveryCurrentEmail = email;
+          const targetEl = document.getElementById("recovery-target-email");
+          if (targetEl) targetEl.textContent = email;
+          if (data.debug_code) {
+            const otpInput = document.getElementById("recovery-otp-code");
+            if (otpInput) {
+              otpInput.value = data.debug_code;
+            }
+          }
+          setRecoveryStep(2);
+        } else {
+          if (errBox && errText) {
+            errText.textContent = data.error || "No active license key found for this email address.";
+            errBox.classList.remove("hidden");
+          }
+        }
+      } catch (err) {
+        if (errBox && errText) {
+          errText.textContent = "Network error connecting to recovery server. Please try again shortly.";
+          errBox.classList.remove("hidden");
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<span>Send 6-Digit Code</span><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>`;
+        }
+      }
+    }
+
+    async function verifyRecoveryOtp() {
+      const otpInput = document.getElementById("recovery-otp-code");
+      const errBox = document.getElementById("recovery-error-2");
+      const errText = document.getElementById("recovery-error-2-text");
+      const btn = document.getElementById("btn-verify-otp");
+      const code = otpInput ? otpInput.value.trim() : "";
+
+      if (!code || code.length !== 6) {
+        if (errBox && errText) {
+          errText.textContent = "Please enter the 6-digit confirmation code from your email.";
+          errBox.classList.remove("hidden");
+        }
+        return;
+      }
+
+      if (errBox) errBox.classList.add("hidden");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Verifying...";
+      }
+
+      try {
+        const res = await fetch(`${BCP_API_BASE}/license/recover/verify-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: recoveryCurrentEmail, code })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success && data.key) {
+          const keyEl = document.getElementById("recovered-key-display");
+          if (keyEl) keyEl.textContent = data.key;
+          setRecoveryStep(3);
+        } else {
+          if (errBox && errText) {
+            errText.textContent = data.error || "Invalid or expired confirmation code. Please request a new one.";
+            errBox.classList.remove("hidden");
+          }
+        }
+      } catch (err) {
+        if (errBox && errText) {
+          errText.textContent = "Server connection error. Please verify your connection.";
+          errBox.classList.remove("hidden");
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Verify & Reveal Key";
+        }
+      }
+    }
+
+    function copyRecoveredKey() {
+      const keyEl = document.getElementById("recovered-key-display");
+      const key = keyEl ? keyEl.textContent.trim() : "";
+      if (key) {
+        navigator.clipboard.writeText(key).then(() => {
+          if (typeof triggerToast === "function") {
+            triggerToast("📋 License key copied to clipboard!");
+          } else {
+            alert("License key copied to clipboard!");
+          }
+        });
+      }
+    }
+
     function openKeyRecoveryModal() {
+      setRecoveryStep(1);
       const modal = document.getElementById("key-recovery-modal");
       const card = document.getElementById("key-recovery-card");
       if (modal && card) {
@@ -4463,6 +4663,10 @@
     window.closeKeyRecoveryModal = closeKeyRecoveryModal;
     window.selectPlan = selectPlan;
     window.continueToCheckout = continueToCheckout;
+    window.setRecoveryStep = setRecoveryStep;
+    window.requestRecoveryOtp = requestRecoveryOtp;
+    window.verifyRecoveryOtp = verifyRecoveryOtp;
+    window.copyRecoveredKey = copyRecoveredKey;
   </script>
 
 </body>
