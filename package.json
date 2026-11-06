@@ -1,0 +1,17 @@
+{
+  "name": "bettercolorprofile-server",
+  "version": "2.9.0",
+  "description": "Better Color Profile Licensing, Anti-Exploit, Recovery & Admin Backend",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "keywords": [
+    "colorprofile",
+    "licensing",
+    "anti-exploit"
+  ],
+  "author": "KOUKOU221",
+  "license": "UNLICENSED"
+}
