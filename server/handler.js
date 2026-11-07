@@ -294,30 +294,44 @@ async function handleApiRequest(req, res) {
       }, 200);
     }
 
-    // STRICT ANTI-EXPLOIT: Concurrent use detection
+    // SINGLE DEVICE PER KEY CONCURRENCY CONTROL:
+    // If key is active on another device, inform caller without destroying the license.
     if (lic.hwid && hwid && lic.hwid !== hwid) {
-      // Two distinct computers are actively heartbeat-pinging with the same key!
-      lic.status = "BANNED";
-      lic.ban_reason = "Concurrent multi-device exploit detected (Key used on 2 devices simultaneously)";
-      await db.saveLicense(lic);
+      const lastPing = lic.last_seen_at ? new Date(lic.last_seen_at).getTime() : 0;
+      const isDormant = (Date.now() - lastPing) > 10 * 60 * 1000;
 
-      await db.recordAlert({
-        key: lic.key,
-        email: lic.email,
-        active_hwid: lic.hwid,
-        incoming_hwid: hwid,
-      });
+      if (!isDormant) {
+        // Active on another device right now
+        await db.recordAlert({
+          key: lic.key,
+          email: lic.email,
+          active_hwid: lic.hwid,
+          incoming_hwid: hwid,
+          type: "concurrent_heartbeat_attempt",
+        });
 
-      return sendJson(res, {
-        success: false,
-        valid: false,
-        status: "CONCURRENT_USE_DETECTED",
-        error: "Simultaneous usage on 2 devices detected. This license has been permanently locked.",
-      }, 200);
+        return sendJson(res, {
+          success: false,
+          valid: false,
+          status: "CONCURRENT_ACTIVE",
+          active_machine: lic.machine_name || "Another Device",
+          can_transfer: true,
+          error: `This license is currently active on ${lic.machine_name || "another device"}. Each license permits usage on 1 computer at a time.`,
+        }, 200);
+      } else {
+        // Old device is dormant (> 10 minutes inactive) - allow automatic handover
+        lic.hwid = hwid;
+        lic.machine_name = machineName;
+        lic.last_seen_at = new Date().toISOString();
+        await db.saveLicense(lic);
+
+        return sendJson(res, { success: true, valid: true, status: "active" }, 200);
+      }
     }
 
-    // Valid heartbeat ping
+    // Valid heartbeat ping - update device state
     lic.last_seen_at = new Date().toISOString();
+    if (!lic.hwid && hwid) lic.hwid = hwid;
     if (machineName) lic.machine_name = machineName;
     await db.saveLicense(lic);
 
@@ -336,13 +350,16 @@ async function handleApiRequest(req, res) {
       return sendJson(res, { success: false, error: "Valid email address is required." }, 400);
     }
 
-    let lic = await db.getLicense(email);
-    if (!lic) {
+    let lics = await db.getLicensesByEmail(email);
+    if (!lics || lics.length === 0) {
       // Whop email sync fallback
-      lic = await syncWhopLicense(email);
+      const synced = await syncWhopLicense(email);
+      if (synced) {
+        lics = await db.getLicensesByEmail(email);
+      }
     }
 
-    if (!lic) {
+    if (!lics || lics.length === 0) {
       return sendJson(res, {
         success: false,
         error: "No active Better Color Profile license found associated with this email address.",
@@ -357,7 +374,7 @@ async function handleApiRequest(req, res) {
     const emailResult = await sendEmail({
       to: email,
       subject: "Better Color Profile - Your License Recovery Code",
-      text: `Your Better Color Profile 6-digit confirmation code is: ${otp}\n\nEnter this code on the website to reveal your license key.\n\nThis code expires in 15 minutes.`,
+      text: `Your Better Color Profile 6-digit confirmation code is: ${otp}\n\nEnter this code on the website to reveal your license key(s).\n\nThis code expires in 15 minutes.`,
       html: `
         <div style="font-family:sans-serif; background:#0F1117; color:#FFFFFF; padding:28px; border-radius:12px; max-width:520px;">
           <h2 style="color:#F59E0B; margin-top:0;">Better Color Profile</h2>
@@ -404,33 +421,58 @@ async function handleApiRequest(req, res) {
       }, 400);
     }
 
-    const lic = await db.getLicense(email);
-    if (!lic) {
+    const lics = await db.getLicensesByEmail(email);
+    if (!lics || lics.length === 0) {
       return sendJson(res, { success: false, error: "License not found." }, 404);
+    }
+
+    // Format keys for email and response
+    let keyListText = "";
+    let keyListHtml = "";
+    if (lics.length === 1) {
+      keyListText = `Your license key: ${lics[0].key}\nPlan: ${lics[0].plan || "Pro License"}`;
+      keyListHtml = `
+        <div style="background:#161922; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px; font-size:16px; font-weight:bold; color:#FBBF24; font-family:monospace; word-break:break-all;">
+          ${lics[0].key}
+        </div>
+      `;
+    } else {
+      keyListText = `You own ${lics.length} licenses registered to this email:\n\n` +
+        lics.map((l, i) => `License ${i + 1}: ${l.key} (${l.plan || "Pro License"})${l.machine_name ? ` - Device: ${l.machine_name}` : ""}`).join("\n");
+      keyListHtml = `
+        <p style="margin-bottom:8px;">You have <b>${lics.length} licenses</b> associated with your email:</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          ${lics.map((l, i) => `
+            <div style="background:#161922; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; font-size:14px; font-family:monospace; color:#FBBF24; word-break:break-all;">
+              <span style="color:#94A3B8; font-size:11px; display:block; font-family:sans-serif; margin-bottom:4px;">License ${i + 1} (${l.plan || "Pro"})${l.machine_name ? ` · Bound to: ${l.machine_name}` : ""}</span>
+              ${l.key}
+            </div>
+          `).join("")}
+        </div>
+      `;
     }
 
     // Send backup copy to customer's email
     sendEmail({
       to: email,
-      subject: "Better Color Profile - License Key Backup",
-      text: `Your license key: ${lic.key}\n\nPaste this key directly into the Better Color Profile application.\nNote: Each license permits usage on 1 device at a time.`,
+      subject: `Better Color Profile - Your License Key${lics.length > 1 ? "s" : ""}`,
+      text: `${keyListText}\n\nNote: Each license permits usage on 1 device at a time. Paste your key into the Better Color Profile application to activate.`,
       html: `
-        <div style="font-family:sans-serif; background:#0F1117; color:#FFFFFF; padding:28px; border-radius:12px; max-width:520px;">
-          <h2 style="color:#F59E0B; margin-top:0;">Your License Key</h2>
-          <p>Here is your recovered Better Color Profile license key:</p>
-          <div style="background:#161922; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px; font-size:16px; font-weight:bold; color:#FBBF24; font-family:monospace; word-break:break-all;">
-            ${lic.key}
-          </div>
-          <p style="font-size:12px; color:#94A3B8; margin-top:16px;"><b>Note:</b> Each key permits usage on 1 device at a time. Paste this key into the app to activate.</p>
+        <div style="font-family:sans-serif; background:#0F1117; color:#FFFFFF; padding:28px; border-radius:12px; max-width:540px;">
+          <h2 style="color:#F59E0B; margin-top:0;">Your Better Color Profile License${lics.length > 1 ? "s" : ""}</h2>
+          ${keyListHtml}
+          <p style="font-size:12px; color:#94A3B8; margin-top:16px;"><b>Note:</b> Each individual license permits active usage on 1 device at a time.</p>
         </div>
       `,
     }).catch(() => null);
 
     return sendJson(res, {
       success: true,
-      key: lic.key,
-      email: lic.email,
-      plan: lic.plan || "Pro License",
+      key: lics[0].key,
+      keys: lics.map(l => ({ key: l.key, plan: l.plan || "Pro License", machine_name: l.machine_name, status: l.status })),
+      count: lics.length,
+      email: email,
+      plan: lics[0].plan || "Pro License",
     }, 200);
   }
 

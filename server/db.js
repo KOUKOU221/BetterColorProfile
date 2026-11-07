@@ -37,22 +37,11 @@ function seedDefaultLicenses() {
       email: "alroufa21@gmail.com",
       plan: "Lifetime Admin Pro",
       status: "ACTIVE",
-      hwid: "90efe48343937eeb5f3b9e23ad5f01f35d49efed559a950723f051cb5bfa375e",
-      machine_name: "Admin Device",
+      hwid: null,
+      machine_name: null,
       created_at: "2026-11-06T19:00:00.000Z",
-      last_seen_at: new Date().toISOString(),
-      note: "Admin / Creator Lifetime Key (Tied to user device)",
-    },
-    {
-      key: "BCP-ADMIN-ALROUFA21-LIFETIME",
-      email: "alroufa21@gmail.com",
-      plan: "Lifetime Admin Pro",
-      status: "ACTIVE",
-      hwid: "90efe48343937eeb5f3b9e23ad5f01f35d49efed559a950723f051cb5bfa375e",
-      machine_name: "Admin Device",
-      created_at: "2026-11-06T19:00:00.000Z",
-      last_seen_at: new Date().toISOString(),
-      note: "Admin Master Lifetime Key",
+      last_seen_at: null,
+      note: "Admin / Creator Lifetime Key",
     },
     {
       key: "BCP-PRO-2026-LIFETIME-001",
@@ -167,17 +156,51 @@ module.exports = {
       return memoryStore.licenses[cleanKey];
     }
 
-    // Email match
+    // Email match (returns primary/first license)
     if (cleanKey.includes("@")) {
-      const lower = cleanKey.toLowerCase();
-      for (const k in memoryStore.licenses) {
-        if ((memoryStore.licenses[k].email || "").toLowerCase() === lower) {
-          return memoryStore.licenses[k];
+      const list = await this.getLicensesByEmail(cleanKey);
+      return list.length > 0 ? list[0] : null;
+    }
+
+    return null;
+  },
+
+  // Find all licenses associated with an email
+  async getLicensesByEmail(email) {
+    if (!email) return [];
+    const cleanEmail = email.trim().toLowerCase();
+    const results = [];
+    const seenKeys = new Set();
+
+    // 1. In-memory licenses
+    for (const k in memoryStore.licenses) {
+      const lic = memoryStore.licenses[k];
+      if ((lic.email || "").toLowerCase() === cleanEmail) {
+        if (!seenKeys.has(lic.key)) {
+          seenKeys.add(lic.key);
+          results.push(lic);
         }
       }
     }
 
-    return null;
+    // 2. Vercel KV email index
+    const kvEmailList = await kvFetch("GET", `bcp:email:${cleanEmail}`);
+    if (kvEmailList) {
+      try {
+        const keys = Array.isArray(kvEmailList) ? kvEmailList : JSON.parse(kvEmailList);
+        for (const k of keys) {
+          if (!seenKeys.has(k)) {
+            const lic = await this.getLicense(k);
+            if (lic) {
+              seenKeys.add(lic.key);
+              results.push(lic);
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    return results;
   },
 
   // Save / Update license
@@ -188,6 +211,22 @@ module.exports = {
 
     // Persist to Vercel KV if configured
     await kvFetch("SET", `bcp:lic:${cleanKey}`, JSON.stringify(license));
+
+    // Update email index in KV if email exists
+    if (license.email && license.email.includes("@")) {
+      const cleanEmail = license.email.trim().toLowerCase();
+      try {
+        let existing = await kvFetch("GET", `bcp:email:${cleanEmail}`);
+        let keyList = [];
+        if (existing) {
+          keyList = Array.isArray(existing) ? existing : JSON.parse(existing);
+        }
+        if (!keyList.includes(cleanKey)) {
+          keyList.push(cleanKey);
+          await kvFetch("SET", `bcp:email:${cleanEmail}`, JSON.stringify(keyList));
+        }
+      } catch (e) {}
+    }
 
     saveLocalData();
     return license;

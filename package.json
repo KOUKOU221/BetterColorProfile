@@ -1,6 +1,6 @@
 {
   "name": "bettercolorprofile-server",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "description": "Better Color Profile Licensing, Anti-Exploit, Recovery & Admin Backend",
   "main": "api/index.js",
   "scripts": {

@@ -323,7 +323,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.0</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.1</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -1443,12 +1443,12 @@
                   <div>
                     <div class="font-bold text-white text-xs">Better Color Profile</div>
                     <div class="flex items-center gap-2 mt-0.5">
-                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.10.0</span>
+                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.10.1</span>
                       <span class="text-[10px] text-emerald-400 font-medium">✓ Up to date</span>
                     </div>
                   </div>
                 </div>
-                <button onclick="triggerToast('✓ You are using the latest release (v2.10.0)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
+                <button onclick="triggerToast('✓ You are using the latest release (v2.10.1)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
                   Check for Updates
                 </button>
               </div>
@@ -1948,7 +1948,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.0
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.1
       </div>
 
     </div>
@@ -4373,14 +4373,16 @@
       <div id="recovery-step-3" class="hidden flex flex-col gap-4">
         <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 flex items-center gap-2">
           <span>✓</span>
-          <span><b>Identity verified!</b> Here is your license key:</span>
+          <span id="recovery-success-heading"><b>Identity verified!</b> Here is your license key:</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-[#0D0F14] border border-amber-400/40 flex items-center justify-between gap-3 shadow-inner">
-          <span id="recovered-key-display" class="font-mono text-base font-bold text-amber-300 select-all tracking-wider break-all"></span>
-          <button onclick="copyRecoveredKey()" class="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1 shrink-0">
-            <span>Copy</span>
-          </button>
+        <div id="recovery-keys-container" class="flex flex-col gap-2.5 max-h-[260px] overflow-y-auto">
+          <div class="p-4 rounded-xl bg-[#0D0F14] border border-amber-400/40 flex items-center justify-between gap-3 shadow-inner">
+            <span id="recovered-key-display" class="font-mono text-base font-bold text-amber-300 select-all tracking-wider break-all"></span>
+            <button onclick="copyRecoveredKey()" class="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1 shrink-0">
+              <span>Copy</span>
+            </button>
+          </div>
         </div>
 
         <div class="text-[11px] text-gray-400 space-y-1 bg-white/5 border border-white/10 rounded-xl p-3">
@@ -4544,9 +4546,39 @@
         });
         const data = await res.json();
 
-        if (res.ok && data.success && data.key) {
-          const keyEl = document.getElementById("recovered-key-display");
-          if (keyEl) keyEl.textContent = data.key;
+        if (res.ok && data.success) {
+          const container = document.getElementById("recovery-keys-container");
+          const heading = document.getElementById("recovery-success-heading");
+          const keys = data.keys && data.keys.length > 0 ? data.keys : [{ key: data.key, plan: data.plan }];
+
+          if (heading) {
+            heading.innerHTML = keys.length > 1
+              ? `<b>Identity verified!</b> You have <b>${keys.length} active licenses</b>:`
+              : `<b>Identity verified!</b> Here is your license key:`;
+          }
+
+          if (container) {
+            container.innerHTML = "";
+            keys.forEach((item, idx) => {
+              const card = document.createElement("div");
+              card.className = "p-3.5 rounded-xl bg-[#0D0F14] border border-amber-400/30 flex items-center justify-between gap-3 shadow-inner";
+              card.innerHTML = `
+                <div class="flex flex-col min-w-0">
+                  <span class="text-[10px] text-gray-400 font-sans">${keys.length > 1 ? `License ${idx + 1} · ` : ""}${item.plan || "Pro License"}${item.machine_name ? ` · (${item.machine_name})` : ""}</span>
+                  <span class="font-mono text-sm font-bold text-amber-300 select-all tracking-wider break-all">${item.key}</span>
+                </div>
+                <button class="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 text-xs font-bold transition-all shrink-0 cursor-pointer">Copy</button>
+              `;
+              const copyBtn = card.querySelector("button");
+              copyBtn.onclick = () => {
+                navigator.clipboard.writeText(item.key).then(() => {
+                  copyBtn.textContent = "Copied!";
+                  setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+                });
+              };
+              container.appendChild(card);
+            });
+          }
           setRecoveryStep(3);
         } else {
           if (errBox && errText) {
