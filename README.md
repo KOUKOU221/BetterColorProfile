@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Anti--Cheat-100%25%20Safe-success" alt="Anti-Cheat Safe" />
-  <img src="https://img.shields.io/badge/Release-v2.10.8-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.10-EAB308" alt="Version" />
   <a href="https://bettercolorprofile.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
@@ -49,6 +49,7 @@ Test Better Color Profile directly in your web browser:
 Compatible with **Windows 11 and Windows 10** (64-bit and 32-bit):
 
 1. Download [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe) (Direct download — automatically gets the latest release).
+   - *Authenticity Verification*: Official releases and the built-in auto-updater feature native SHA-256 integrity checksum verification before executing downloads.
 2. Run the setup wizard:
    - Modern installation wizard with custom destination directory selection (automatically creates and installs into a dedicated `BetterColorProfile` folder).
    - Optional Start with Windows and desktop/start-menu shortcuts (enabled by default).
@@ -86,11 +87,14 @@ Unlike shader injectors (such as ReShade) or custom overlays that hook into game
 
 ### 2. 🎛️ 7-Slider Real-Time Display Tuner
 * **Fine-Grained Hardware Calibration**:
-  - Master Brightness (-100% to +100%)
-  - Master Contrast (-100% to +100%)
-  - Color Temperature (Warm to Cool)
-  - Color Balance: Red, Green, and Blue fine-tuning
-  - Gamma Curve adjustment
+  - **Master Brightness**: (-100% to +100%) linear gain control.
+  - **Master Contrast**: (-100% to +100%) dynamic range curve.
+  - **Gamma Curve**: (-100% to +100%) non-linear midpoint luminance tuning.
+  - **Color Temperature**: (2500K Warm to 10000K Cool, 6500K neutral).
+  - **Digital Vibrance**: (-100% to +100%) hardware GPU vibrance control (NVIDIA / AMD dynamic saturation).
+  - **Shadows / Black Equalizer**: (-100% to +100%) toe/shadow curve lifter for competitive visibility.
+  - **Midtone Clarity**: (0% to +100%) S-curve micro-contrast enhancer for crystal-clear textures.
+* **Keycode Diagnostics**: Interactive keycode test indicator directly beneath the profile cycle hotkey box displaying raw Windows Virtual Key numbers (decimal & hex), hardware scan codes, and key/mouse bindings for non-standard gaming and international layouts.
 * **Automatic Sequential Naming**: Creating a new profile? If no name is provided, names are automatically pre-filled sequentially (`Profile 1`, `Profile 2`, etc.).
 * **Instant ICC Generation**: Saves calibrated profiles directly into the `list\` directory and auto-associates them with your primary monitor.
 
