@@ -1,9 +1,17 @@
-{
+﻿{
   "version": 2,
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/index.js"
+    },
+    {
+      "source": "/guide",
+      "destination": "/guide.html"
+    },
+    {
+      "source": "/guide.html",
+      "destination": "/guide.html"
     },
     {
       "source": "/(.*)",
