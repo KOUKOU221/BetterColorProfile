@@ -1,21 +1,8 @@
 ﻿{
-  "version": 2,
+  "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/guide",
-      "destination": "/guide.html"
-    },
-    {
-      "source": "/guide.html",
-      "destination": "/guide.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/guide", "destination": "/guide.html" },
+    { "source": "/guide.html", "destination": "/guide.html" }
   ]
 }

@@ -6,14 +6,15 @@
 const crypto = require("crypto");
 const db = require("./db");
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "bcp_admin_2026_secure";
-const JWT_SECRET = process.env.JWT_SECRET || "bcp_secret_session_token_key_2026";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+const JWT_SECRET = process.env.JWT_SECRET || "";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
-const WHOP_API_KEY = process.env.WHOP_API_KEY || "apik_A7SIk5YjdIL2T_C7175694_C_7e6c757dc22b603868ed7404ed254b31cbd17886abed2768b5db07ee8f1dd4";
+const WHOP_API_KEY = process.env.WHOP_API_KEY || "";
 const WHOP_PRODUCT_ID = "prod_mL7apgdSCn59Y";
 
 // Simple Token Generator & Verifier
 function generateAdminToken() {
+  if (!JWT_SECRET) throw new Error("JWT_SECRET environment variable is missing.");
   const payload = { role: "admin", exp: Date.now() + 24 * 60 * 60 * 1000 };
   const str = Buffer.from(JSON.stringify(payload)).toString("base64");
   const sig = crypto.createHmac("sha256", JWT_SECRET).update(str).digest("hex");
@@ -21,13 +22,16 @@ function generateAdminToken() {
 }
 
 function verifyAdminToken(token) {
-  if (!token) return false;
+  if (!token || !JWT_SECRET) return false;
   const parts = token.split(".");
   if (parts.length !== 2) return false;
   const [str, sig] = parts;
   const expectedSig = crypto.createHmac("sha256", JWT_SECRET).update(str).digest("hex");
-  if (sig !== expectedSig) return false;
+  if (sig.length !== expectedSig.length) return false;
   try {
+    if (!crypto.timingSafeEqual(Buffer.from(sig, "utf-8"), Buffer.from(expectedSig, "utf-8"))) {
+      return false;
+    }
     const payload = JSON.parse(Buffer.from(str, "base64").toString("utf-8"));
     return payload.exp > Date.now();
   } catch (e) {
@@ -219,6 +223,17 @@ async function handleApiRequest(req, res) {
         lic.last_seen_at = nowIso;
         await db.saveLicense(lic);
       } else if (lic.hwid !== hwid) {
+        // Prevent email-only license hijacking across devices
+        if (key.includes("@")) {
+          return sendJson(res, {
+            success: true,
+            valid: false,
+            status: "device_mismatch",
+            can_transfer: false,
+            error: "This license is active on another PC. To transfer devices, please activate using your official License Key instead of your email address.",
+          }, 200);
+        }
+
         if (transfer) {
           // Rebind to new device
           lic.hwid = hwid;
@@ -483,6 +498,10 @@ async function handleApiRequest(req, res) {
     if (req.method !== "POST") return sendJson(res, { error: "Method not allowed" }, 405);
     const body = await getJsonBody(req);
     const password = (body.password || "").trim();
+
+    if (!ADMIN_PASSWORD || !JWT_SECRET) {
+      return sendJson(res, { success: false, error: "Admin authentication is disabled: ADMIN_PASSWORD and JWT_SECRET must be configured in environment variables." }, 503);
+    }
 
     if (password === ADMIN_PASSWORD) {
       const token = generateAdminToken();

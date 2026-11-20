@@ -8,6 +8,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const DATA_DIR = path.join(__dirname, "..", ".data");
 const DB_FILE = path.join(DATA_DIR, "licenses.json");
@@ -253,12 +254,13 @@ module.exports = {
     return memoryStore.alerts;
   },
 
-  // OTP Storage
+  // OTP Storage with Attempt Rate-Limiting
   async setOtp(email, code, expiresMs = 15 * 60 * 1000) {
     const cleanEmail = email.toLowerCase().trim();
     memoryStore.otps[cleanEmail] = {
       code: String(code).trim(),
       expires_at: Date.now() + expiresMs,
+      attempts: 0,
     };
   },
 
@@ -272,17 +274,29 @@ module.exports = {
       return false;
     }
 
+    entry.attempts = (entry.attempts || 0) + 1;
+
+    // Brute-force protection: invalidate after 5 failed attempts
+    if (entry.attempts > 5) {
+      delete memoryStore.otps[cleanEmail];
+      return false;
+    }
+
     if (entry.code === String(code).trim()) {
       delete memoryStore.otps[cleanEmail];
       return true;
     }
 
+    if (entry.attempts >= 5) {
+      delete memoryStore.otps[cleanEmail];
+    }
+
     return false;
   },
 
-  // Generate unique formatted license key
+  // Generate unique formatted license key using cryptographically secure random bytes
   generateKey() {
-    const part = () => Math.random().toString(36).substring(2, 6).toUpperCase();
+    const part = () => crypto.randomBytes(2).toString("hex").toUpperCase();
     return `BCP-${part()}-${part()}-${part()}-${part()}`;
   },
 };
