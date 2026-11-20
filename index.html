@@ -323,7 +323,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.20</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.21</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -1094,6 +1094,9 @@
             <button id="step-btn-3" onclick="onSimulatorStepClick('options')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
               03 / Options
             </button>
+            <button id="step-btn-4" onclick="onSimulatorStepClick('feedback')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
+              04 / Feedback
+            </button>
             <button type="button" onclick="nextSimulatorSlide()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1 shadow-sm cursor-pointer" title="Next Slide">
               <span>›</span>
             </button>
@@ -1122,26 +1125,34 @@
           </div>
 
           <!-- App Native Navigation Bar (#1E2023) -->
-          <div class="flex items-center justify-between px-4 py-2 bg-[#1E2023] border-b border-[#3A3E46] flex-shrink-0 h-[48px]">
-            <div class="flex items-center gap-2.5">
-              <img src="assets/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-sm" />
+          <div class="flex items-center justify-between px-3 sm:px-4 py-2 bg-[#1E2023] border-b border-[#3A3E46] flex-shrink-0 h-[48px]">
+            <div class="flex items-center gap-2">
+              <img src="assets/app_logo.png" alt="Logo" class="w-6 h-6 rounded-lg shadow-sm" />
               <div>
                 <div class="text-xs sm:text-sm font-bold text-white leading-tight">Better Color Profile</div>
-                <div class="text-[10px] text-[#A0AEC0] hidden sm:block">Hardware LUT Color Management</div>
               </div>
             </div>
 
             <!-- Authentic Tabs -->
-            <div class="flex items-center gap-1 bg-[#15171A] p-1 rounded-xl border border-white/5">
-              <button id="tab-btn-profiles" onclick="switchSimulatorTab('profiles')" class="px-3 py-1 rounded-lg text-xs font-semibold transition-all text-white border-b-2 theme-border bg-white/5">
+            <div class="flex items-center gap-1 bg-[#15171A] p-1 rounded-xl border border-white/5 text-[11px] sm:text-xs">
+              <button id="tab-btn-profiles" onclick="switchSimulatorTab('profiles')" class="px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5">
                 Profiles
               </button>
-              <button id="tab-btn-tuner" onclick="switchSimulatorTab('tuner')" class="px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white">
+              <button id="tab-btn-tuner" onclick="switchSimulatorTab('tuner')" class="px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-[#A0AEC0] hover:text-white">
                 Create Profile
               </button>
-              <button id="tab-btn-options" onclick="switchSimulatorTab('options')" class="px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white">
+              <button id="tab-btn-options" onclick="switchSimulatorTab('options')" class="px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-[#A0AEC0] hover:text-white">
                 Options
               </button>
+              <button id="tab-btn-feedback" onclick="switchSimulatorTab('feedback')" class="px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-[#A0AEC0] hover:text-white">
+                Feedback
+              </button>
+            </div>
+
+            <!-- Authentic License Status Pill -->
+            <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[9px] font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>PRO LICENSE</span>
             </div>
           </div>
 
@@ -1153,11 +1164,11 @@
               <span id="app-toast-text">✓ Profile applied via SetDeviceGammaRamp</span>
             </div>
 
-            <!-- Horizontal Sliding View Track (300% width, each slide is 1/3 = 100% of body) -->
-            <div id="simulator-slides-track" class="flex w-[300%] h-full transition-transform duration-200 ease-out will-change-transform">
+            <!-- Horizontal Sliding View Track (400% width, each slide is 1/4 = 100% of body) -->
+            <div id="simulator-slides-track" class="flex w-[400%] h-full transition-transform duration-200 ease-out will-change-transform">
               
               <!-- ================= VIEW 1: PROFILES HUB ================= -->
-              <div id="view-profiles" class="w-1/3 h-full flex-shrink-0 grid grid-cols-12 gap-3 p-3.5">
+              <div id="view-profiles" class="w-1/4 h-full flex-shrink-0 grid grid-cols-12 gap-3 p-3.5">
               
               <!-- Left Sidebar: Slot Cards (5 cols, #212327) -->
               <div class="col-span-5 bg-[#212327] p-2.5 rounded-xl border border-[#3A3E46] flex flex-col justify-between h-full">
@@ -1236,14 +1247,14 @@
               </div>
 
               <!-- Right Panel: Profile Detail & Sliders (7 cols, #27292D) -->
-              <div class="col-span-7 flex flex-col h-full overflow-y-auto space-y-2.5 pr-1">
+              <div class="col-span-7 flex flex-col h-full overflow-y-auto space-y-2 pr-1">
                 
-                <!-- Master Assigned Card -->
+                <!-- Card 1: Master Assigned Card (cardMapping) -->
                 <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2 flex-shrink-0">
                   <div class="flex items-center justify-between">
                     <div class="text-[10px] font-mono uppercase tracking-wider theme-accent font-bold flex items-center gap-1.5">
                       <span class="w-2 h-2 rounded-full theme-bg inline-block animate-pulse"></span>
-                      ASSIGNED DISPLAY PROFILE
+                      <span>ASSIGNED DISPLAY PROFILE</span>
                     </div>
                     <button id="btn-toggle-edit-mode" onclick="toggleEditMode()" class="px-2.5 py-1 rounded-lg text-xs font-bold text-black theme-bg hover:brightness-110 shadow-sm transition-all hidden">
                       Edit Calibration
@@ -1260,14 +1271,16 @@
                     </button>
                   </div>
 
-                  <!-- Dropdown selector -->
-                  <div>
-                    <select id="profile-dropdown" onchange="changeProfileDropdown(this.value)" class="w-full bg-[#27292D] border border-[#444952] rounded-lg px-2 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] transition-all">
-                      <option value="srgb">Default Profile (sRGB Color Space Profile.icm)</option>
-                      <option value="night">night (Profile 2.icc)</option>
-                      <option value="cs2">CS2 Competitive Boost (vcgt).icc</option>
-                      <option value="cinema">Cinema Gamma 2.4 (Studio).icc</option>
-                    </select>
+                  <!-- Monitor & Linked App Controls -->
+                  <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-[#444952]/60 text-[10px]">
+                    <div class="flex items-center justify-between px-2 py-1 rounded-lg bg-[#27292D] border border-[#444952] text-gray-300 cursor-pointer">
+                      <span class="flex items-center gap-1"><span class="theme-accent">🖥️</span> Display 1 (Primary)</span>
+                      <span class="text-[9px] text-gray-500">▾</span>
+                    </div>
+                    <div class="flex items-center justify-between px-2 py-1 rounded-lg bg-[#27292D] border border-[#444952] text-gray-300 cursor-pointer">
+                      <span class="flex items-center gap-1"><span class="theme-accent">🎮</span> Link Game / Window</span>
+                      <span class="text-[9px] text-gray-500">▾</span>
+                    </div>
                   </div>
 
                   <!-- Slot Shortcut Row -->
@@ -1282,62 +1295,77 @@
                   </div>
                 </div>
 
-                <!-- Protected Baseline info card -->
-                <div id="baseline-info-card" class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-1.5">
-                  <div class="font-bold text-white text-xs flex items-center gap-1.5">
-                    <span class="theme-accent">🛡️ Protected Windows Color Baseline</span>
-                  </div>
-                  <p class="text-[10px] text-[#A0AEC0] leading-relaxed">
-                    Slot 1 is your safe default profile. Your original monitor colors are protected in an internal directory and can always be restored with one single click.
-                  </p>
-                  <div class="flex gap-2 pt-1">
-                    <span class="px-2 py-0.5 rounded bg-[#27292D] border border-[#444952] text-[9px] text-gray-300">✓ Factory standard colors</span>
-                    <span class="px-2 py-0.5 rounded bg-[#27292D] border border-[#444952] text-[9px] text-gray-300">✓ 1-Click Restoration</span>
-                  </div>
-                </div>
-
-                <!-- Live Calibration Sliders Panel (When unfolded in Edit Mode) -->
-                <div id="slot-edit-panel" class="p-3 rounded-xl bg-[#31343A] border theme-border space-y-2.5 hidden transition-all duration-300">
+                <!-- Card 2: Display Calibration (cardProfileMaster with 7 Sliders) -->
+                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2 flex-shrink-0">
                   <div class="flex items-center justify-between border-b border-[#444952] pb-1.5">
-                    <div>
-                      <span class="text-xs font-bold text-white">Master Display Calibration</span>
-                      <span class="text-[10px] theme-accent font-mono ml-2 font-bold">• Active</span>
-                    </div>
                     <div class="flex items-center gap-2">
+                      <span class="text-xs font-bold text-white">Display Calibration</span>
+                      <span id="prof-master-status" class="text-[10px] text-[#A0AEC0] font-mono font-medium">• Read-Only</span>
+                    </div>
+                    <div id="slot-edit-actions" class="flex items-center gap-1.5 hidden">
                       <button onclick="applySlotEdit()" class="px-2.5 py-0.5 rounded-lg text-xs font-bold text-black theme-bg hover:brightness-110 shadow-sm transition-all">Apply</button>
                       <button onclick="cancelSlotEdit()" class="px-2 py-0.5 rounded-lg text-xs font-semibold text-gray-300 bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] transition-all">Cancel</button>
                     </div>
                   </div>
 
-                  <!-- Master Sliders -->
+                  <!-- All 7 calibrated hardware sliders -->
                   <div class="space-y-1.5">
                     <div class="flex items-center gap-2">
-                      <span class="w-16 text-[#CBD5E1] text-[10px] font-medium">Brightness</span>
-                      <input type="range" id="slot-b" min="-100" max="100" value="35" oninput="updateSlotSlider('b', this.value)" class="fluent-slider flex-1">
-                      <span id="slot-b-val" class="w-10 text-center font-mono font-bold text-[10px] theme-accent bg-black/40 py-0.5 rounded">+35%</span>
-                      <button onclick="resetSlotSlider('b')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Brightness</span>
+                      <input type="range" id="slot-b" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('b', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-b-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-b" onclick="resetSlotSlider('b')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
                     </div>
 
                     <div class="flex items-center gap-2">
-                      <span class="w-16 text-[#CBD5E1] text-[10px] font-medium">Contrast</span>
-                      <input type="range" id="slot-c" min="-100" max="100" value="20" oninput="updateSlotSlider('c', this.value)" class="fluent-slider flex-1">
-                      <span id="slot-c-val" class="w-10 text-center font-mono font-bold text-[10px] theme-accent bg-black/40 py-0.5 rounded">+20%</span>
-                      <button onclick="resetSlotSlider('c')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Contrast</span>
+                      <input type="range" id="slot-c" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('c', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-c-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-c" onclick="resetSlotSlider('c')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
                     </div>
 
                     <div class="flex items-center gap-2">
-                      <span class="w-16 text-[#CBD5E1] text-[10px] font-medium">Gamma</span>
-                      <input type="range" id="slot-g" min="-100" max="100" value="15" oninput="updateSlotSlider('g', this.value)" class="fluent-slider flex-1">
-                      <span id="slot-g-val" class="w-10 text-center font-mono font-bold text-[10px] theme-accent bg-black/40 py-0.5 rounded">+15%</span>
-                      <button onclick="resetSlotSlider('g')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Gamma</span>
+                      <input type="range" id="slot-g" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('g', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-g-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-g" onclick="resetSlotSlider('g')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
                     </div>
 
                     <div class="flex items-center gap-2">
-                      <span class="w-16 text-[#CBD5E1] text-[10px] font-medium">Warmth</span>
-                      <input type="range" id="slot-w" min="-100" max="100" value="0" oninput="updateSlotSlider('w', this.value)" class="fluent-slider flex-1">
-                      <span id="slot-w-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
-                      <button onclick="resetSlotSlider('w')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Color Temp</span>
+                      <input type="range" id="slot-t" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('t', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-t-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">6500K</span>
+                      <button id="slot-reset-t" onclick="resetSlotSlider('t')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
                     </div>
+
+                    <div class="flex items-center gap-2">
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Digital Vibrance</span>
+                      <input type="range" id="slot-v" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('v', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-v-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-v" onclick="resetSlotSlider('v')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Black Equalizer</span>
+                      <input type="range" id="slot-be" min="-100" max="100" value="0" disabled oninput="updateSlotSlider('be', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-be-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-be" onclick="resetSlotSlider('be')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Midtone Clarity</span>
+                      <input type="range" id="slot-cl" min="0" max="100" value="0" disabled oninput="updateSlotSlider('cl', this.value)" class="fluent-slider flex-1">
+                      <span id="slot-cl-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                      <button id="slot-reset-cl" onclick="resetSlotSlider('cl')" class="text-gray-500 hover:text-white text-xs px-0.5 hidden">↺</button>
+                    </div>
+                  </div>
+
+                  <!-- Protected Baseline info pill -->
+                  <div id="baseline-info-card" class="p-2 rounded-lg bg-[#27292D] border border-[#444952] flex items-center justify-between text-[10px]">
+                    <span class="flex items-center gap-1.5 text-gray-300">
+                      <span class="theme-accent">🛡️</span> Protected Windows Color Baseline
+                    </span>
+                    <span class="text-[9px] text-emerald-400 font-mono">1-Click Reset Safe</span>
                   </div>
                 </div>
 
@@ -1345,7 +1373,7 @@
             </div>
 
             <!-- ================= VIEW 2: CREATE PROFILE (7-SLIDER TUNER) ================= -->
-            <div id="view-tuner" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2.5">
+            <div id="view-tuner" class="w-1/4 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2.5">
               <div class="flex items-center justify-between">
                 <div>
                   <h4 class="text-xs sm:text-sm font-bold text-white">Display Calibration</h4>
@@ -1434,10 +1462,10 @@
             </div>
 
             <!-- ================= VIEW 3: OPTIONS & SETTINGS ================= -->
-            <div id="view-options" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
+            <div id="view-options" class="w-1/4 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
               <div class="flex items-center justify-between">
                 <h4 class="text-xs sm:text-sm font-bold text-white">Options &amp; Settings</h4>
-                <span class="text-[10px] text-emerald-400 font-medium">● v2.10.20</span>
+                <span class="text-[10px] text-emerald-400 font-medium">● v2.10.21</span>
               </div>
 
               <!-- 4 Subtabs Matching App Frontend -->
@@ -1497,7 +1525,7 @@
                     <div class="font-bold text-white text-xs">Check for Updates</div>
                     <div class="text-[10px] text-emerald-400">Integrated updater with SHA-256 integrity</div>
                   </div>
-                  <button onclick="triggerToast('✓ Up to date: v2.10.20')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
+                  <button onclick="triggerToast('✓ Up to date: v2.10.21')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
                 </div>
               </div>
 
@@ -1559,6 +1587,52 @@
               </div>
 
             </div>
+
+            <!-- ================= VIEW 4: SEND FEEDBACK ================= -->
+            <div id="view-feedback" class="w-1/4 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-3">
+              <div class="flex items-center justify-between border-b border-[#3A3E46] pb-2">
+                <div>
+                  <h4 class="text-xs sm:text-sm font-bold text-white">Send Feedback</h4>
+                  <p class="text-[10px] text-[#A0AEC0]">Direct line to developer &bull; alroufa21@gmail.com</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[9px] font-bold">24/7 Response</span>
+              </div>
+
+              <!-- Feedback Form Card (cardFb Replica) -->
+              <div class="p-3.5 rounded-xl bg-[#31343A] border border-[#444952] space-y-2.5">
+                <p class="text-[10px] text-[#A0AEC0]">Have a bug report, display preset idea, or feature suggestion? Send a message directly to the developer at <span class="text-white font-mono">alroufa21@gmail.com</span>.</p>
+
+                <!-- Feedback Title -->
+                <div class="space-y-1">
+                  <label class="text-[11px] font-semibold text-white">Feedback Title / Subject <span class="text-red-400">*</span></label>
+                  <input type="text" id="fb-title" placeholder="e.g. CS2 profile recommendation for OLED" class="w-full px-2.5 py-1.5 rounded-lg bg-[#27292D] border border-[#444952] text-white text-xs placeholder:text-gray-500 focus:outline-none focus:border-amber-400/60">
+                </div>
+
+                <!-- Feedback Email -->
+                <div class="space-y-1">
+                  <label class="text-[11px] font-semibold text-white">Your Email Address <span class="text-red-400">*</span></label>
+                  <input type="email" id="fb-email" placeholder="your-email@example.com" class="w-full px-2.5 py-1.5 rounded-lg bg-[#27292D] border border-[#444952] text-white text-xs placeholder:text-gray-500 focus:outline-none focus:border-amber-400/60">
+                </div>
+
+                <!-- Feedback Message -->
+                <div class="space-y-1">
+                  <label class="text-[11px] font-semibold text-white">Message Description <span class="text-red-400">*</span></label>
+                  <textarea id="fb-msg" rows="4" placeholder="Describe the issue, requested feature, or display calibration preset..." class="w-full px-2.5 py-1.5 rounded-lg bg-[#27292D] border border-[#444952] text-white text-xs placeholder:text-gray-500 focus:outline-none focus:border-amber-400/60 resize-none"></textarea>
+                </div>
+
+                <!-- Action Buttons & Status -->
+                <div class="flex items-center gap-2 pt-1">
+                  <button id="btn-fb-send" onclick="submitFeedbackSimulator()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-black theme-bg hover:brightness-110 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer">
+                    <span>✉ Send Feedback</span>
+                  </button>
+                  <button onclick="openFeedbackMailtoSimulator()" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-200 bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] transition-all cursor-pointer">
+                    Open in Email App
+                  </button>
+                  <span id="fb-status" class="text-[10px] text-emerald-400 font-semibold"></span>
+                </div>
+              </div>
+            </div>
+            
             <!-- /simulator-slides-track -->
             </div>
 
@@ -1991,7 +2065,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.20
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.21
       </div>
 
     </div>
@@ -3542,7 +3616,7 @@
 
 
     // -------------------------------------------------------------
-    // 4. SIMULATOR TABS & APP CONTROLS
+    // 4. SIMULATOR TABS & APP CONTROLS (1:1 DESKTOP APP PARITY)
     // -------------------------------------------------------------
     let currentSimulatorTab = 'profiles';
     let isManualSimulatorSwitch = false;
@@ -3554,11 +3628,11 @@
         sound.click();
       }
 
-      const tabs = ['profiles', 'tuner', 'options'];
+      const tabs = ['profiles', 'tuner', 'options', 'feedback'];
       const tabIndex = tabs.indexOf(tab);
       const slidesTrack = document.getElementById('simulator-slides-track');
       if (slidesTrack && tabIndex !== -1) {
-        slidesTrack.style.transform = `translateX(-${tabIndex * 33.333333}%)`;
+        slidesTrack.style.transform = `translateX(-${tabIndex * 25}%)`;
       }
 
       tabs.forEach((t, idx) => {
@@ -3566,12 +3640,12 @@
         const stepBtn = document.getElementById('step-btn-' + (idx + 1));
 
         if (t === tab) {
-          if (tabBtn) tabBtn.className = 'px-3 py-1 rounded-lg text-xs font-semibold transition-all text-white border-b-2 theme-border bg-white/5';
+          if (tabBtn) tabBtn.className = 'px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5';
           if (stepBtn) {
             stepBtn.className = 'px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer';
           }
         } else {
-          if (tabBtn) tabBtn.className = 'px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white';
+          if (tabBtn) tabBtn.className = 'px-2.5 sm:px-3 py-1 rounded-lg font-semibold transition-all text-[#A0AEC0] hover:text-white';
           if (stepBtn) {
             stepBtn.className = 'px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer';
           }
@@ -3590,21 +3664,21 @@
         const be = parseFloat(document.getElementById('tuner-be')?.value || 0);
         const cl = parseFloat(document.getElementById('tuner-cl')?.value || 0);
         applyLutToMonitor(b, c, g, t, v, be, cl);
-      } else if (tab === 'profiles') {
+      } else {
         const cur = slotData[activeSlotId] || slotData[1];
-        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || cur.w || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
+        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
       }
     }
 
     function prevSimulatorSlide() {
-      const tabs = ['profiles', 'tuner', 'options'];
+      const tabs = ['profiles', 'tuner', 'options', 'feedback'];
       const idx = tabs.indexOf(currentSimulatorTab);
       if (idx > 0) onSimulatorStepClick(tabs[idx - 1]);
       else onSimulatorStepClick(tabs[tabs.length - 1]);
     }
 
     function nextSimulatorSlide() {
-      const tabs = ['profiles', 'tuner', 'options'];
+      const tabs = ['profiles', 'tuner', 'options', 'feedback'];
       const idx = tabs.indexOf(currentSimulatorTab);
       if (idx < tabs.length - 1) onSimulatorStepClick(tabs[idx + 1]);
       else onSimulatorStepClick(tabs[0]);
@@ -3622,8 +3696,9 @@
         const scrollableRange = track.offsetHeight - window.innerHeight;
         if (scrollableRange > 0) {
           let progressFactor = 0.05;
-          if (tab === 'tuner') progressFactor = 0.50;
-          else if (tab === 'options') progressFactor = 0.90;
+          if (tab === 'tuner') progressFactor = 0.35;
+          else if (tab === 'options') progressFactor = 0.65;
+          else if (tab === 'feedback') progressFactor = 0.95;
           const targetY = trackTop + scrollableRange * progressFactor;
           window.scrollTo({ top: targetY, behavior: 'smooth' });
         }
@@ -3643,15 +3718,16 @@
       const scrollableRange = track.offsetHeight - window.innerHeight;
       if (scrollableRange <= 0) return;
 
-      // When the simulator track is within sticky viewport range
       if (rect.top <= 140 && rect.bottom >= window.innerHeight * 0.4) {
         const scrolled = -rect.top + 70;
         const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
 
         let nextTab = 'profiles';
-        if (progress >= 0.66) {
+        if (progress >= 0.75) {
+          nextTab = 'feedback';
+        } else if (progress >= 0.50) {
           nextTab = 'options';
-        } else if (progress >= 0.33) {
+        } else if (progress >= 0.25) {
           nextTab = 'tuner';
         } else {
           nextTab = 'profiles';
@@ -3687,22 +3763,43 @@
       });
 
       const cur = slotData[id] || slotData[1];
-      document.getElementById('selected-slot-title').textContent = cur.name;
-      document.getElementById('selected-slot-sub').textContent = cur.sub;
-      document.getElementById('slot-shortcut-display').textContent = cur.shortcut || 'None';
+      const titleEl = document.getElementById('selected-slot-title');
+      const subEl = document.getElementById('selected-slot-sub');
+      const shortcutDisplay = document.getElementById('slot-shortcut-display');
+      if (titleEl) titleEl.textContent = cur.name;
+      if (subEl) subEl.textContent = cur.sub;
+      if (shortcutDisplay) shortcutDisplay.textContent = cur.shortcut || 'None (Click to assign)';
 
       const editBtn = document.getElementById('btn-toggle-edit-mode');
       const baselineCard = document.getElementById('baseline-info-card');
-      const editPanel = document.getElementById('slot-edit-panel');
 
       if (id === 1) {
         if (editBtn) editBtn.classList.add('hidden');
         if (baselineCard) baselineCard.classList.remove('hidden');
-        if (editPanel) editPanel.classList.add('hidden');
       } else {
         if (editBtn) editBtn.classList.remove('hidden');
         if (baselineCard) baselineCard.classList.add('hidden');
       }
+
+      // Reset calibration card to read-only state for newly selected slot
+      cancelSlotEdit(false);
+
+      // Populate 7 hardware sliders
+      ['b', 'c', 'g', 't', 'v', 'be', 'cl'].forEach(k => {
+        const inp = document.getElementById('slot-' + k);
+        const valSpan = document.getElementById('slot-' + k + '-val');
+        const v = cur[k] !== undefined ? cur[k] : 0;
+        if (inp) inp.value = v;
+        if (valSpan) {
+          if (k === 't') {
+            const num = parseInt(v, 10);
+            const kelvin = num <= -100 ? 2500 : (num >= 100 ? 10000 : (num === 0 ? 6500 : (num < 0 ? 6500 + num * 40 : 6500 + num * 35)));
+            valSpan.textContent = kelvin + 'K';
+          } else {
+            valSpan.textContent = (v > 0 ? '+' : '') + v + '%';
+          }
+        }
+      });
 
       applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
     }
@@ -3714,20 +3811,78 @@
     }
 
     function toggleEditMode() {
-      const panel = document.getElementById('slot-edit-panel');
-      if (!panel) return;
-      panel.classList.toggle('hidden');
-      sound.click();
+      const statusEl = document.getElementById('prof-master-status');
+      const isEditing = statusEl && statusEl.textContent.includes('Live Editing');
+      if (isEditing) {
+        cancelSlotEdit(true);
+      } else {
+        if (statusEl) {
+          statusEl.textContent = '• Live Editing';
+          statusEl.className = 'text-[10px] theme-accent font-mono font-bold animate-pulse';
+        }
+        document.getElementById('slot-edit-actions')?.classList.remove('hidden');
+        ['b', 'c', 'g', 't', 'v', 'be', 'cl'].forEach(k => {
+          const inp = document.getElementById('slot-' + k);
+          const rst = document.getElementById('slot-reset-' + k);
+          if (inp) inp.disabled = false;
+          if (rst) rst.classList.remove('hidden');
+        });
+        sound.click();
+      }
     }
 
-    function cancelSlotEdit() {
-      document.getElementById('slot-edit-panel')?.classList.add('hidden');
-      sound.click();
+    function cancelSlotEdit(revert = true) {
+      const statusEl = document.getElementById('prof-master-status');
+      if (statusEl) {
+        statusEl.textContent = '• Read-Only';
+        statusEl.className = 'text-[10px] text-[#A0AEC0] font-mono font-medium';
+      }
+      document.getElementById('slot-edit-actions')?.classList.add('hidden');
+      ['b', 'c', 'g', 't', 'v', 'be', 'cl'].forEach(k => {
+        const inp = document.getElementById('slot-' + k);
+        const rst = document.getElementById('slot-reset-' + k);
+        if (inp) inp.disabled = true;
+        if (rst) rst.classList.add('hidden');
+      });
+
+      if (revert && slotData[activeSlotId]) {
+        const cur = slotData[activeSlotId];
+        ['b', 'c', 'g', 't', 'v', 'be', 'cl'].forEach(k => {
+          const inp = document.getElementById('slot-' + k);
+          const valSpan = document.getElementById('slot-' + k + '-val');
+          const v = cur[k] !== undefined ? cur[k] : 0;
+          if (inp) inp.value = v;
+          if (valSpan) {
+            if (k === 't') {
+              const num = parseInt(v, 10);
+              const kelvin = num <= -100 ? 2500 : (num >= 100 ? 10000 : (num === 0 ? 6500 : (num < 0 ? 6500 + num * 40 : 6500 + num * 35)));
+              valSpan.textContent = kelvin + 'K';
+            } else {
+              valSpan.textContent = (v > 0 ? '+' : '') + v + '%';
+            }
+          }
+        });
+        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
+      }
     }
 
     function applySlotEdit() {
-      document.getElementById('slot-edit-panel')?.classList.add('hidden');
-      triggerToast('✓ Saved display calibration for ' + slotData[activeSlotId]?.name);
+      const statusEl = document.getElementById('prof-master-status');
+      if (statusEl) {
+        statusEl.textContent = '• Read-Only';
+        statusEl.className = 'text-[10px] text-[#A0AEC0] font-mono font-medium';
+      }
+      document.getElementById('slot-edit-actions')?.classList.add('hidden');
+      ['b', 'c', 'g', 't', 'v', 'be', 'cl'].forEach(k => {
+        const inp = document.getElementById('slot-' + k);
+        const rst = document.getElementById('slot-reset-' + k);
+        if (inp) {
+          inp.disabled = true;
+          if (slotData[activeSlotId]) slotData[activeSlotId][k] = parseFloat(inp.value);
+        }
+        if (rst) rst.classList.add('hidden');
+      });
+      triggerToast('✓ Saved display calibration for ' + (slotData[activeSlotId]?.name || 'Profile'));
       sound.chord();
       if (typeof window.syncPresetsToCloud === 'function' && window.currentUser) {
         window.syncPresetsToCloud(true);
@@ -3737,12 +3892,23 @@
     function updateSlotSlider(key, val) {
       sound.sliderTone(val);
       const span = document.getElementById(`slot-${key}-val`);
-      if (span) span.textContent = (val > 0 ? '+' : '') + val + '%';
-      if (slotData[activeSlotId]) {
-        slotData[activeSlotId][key] = parseFloat(val);
-        const cur = slotData[activeSlotId];
-        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
+      if (span) {
+        if (key === 't') {
+          const num = parseInt(val, 10);
+          const k = num <= -100 ? 2500 : (num >= 100 ? 10000 : (num === 0 ? 6500 : (num < 0 ? 6500 + num * 40 : 6500 + num * 35)));
+          span.textContent = k + 'K';
+        } else {
+          span.textContent = (val > 0 ? '+' : '') + val + '%';
+        }
       }
+      const b = parseFloat(document.getElementById('slot-b')?.value || 0);
+      const c = parseFloat(document.getElementById('slot-c')?.value || 0);
+      const g = parseFloat(document.getElementById('slot-g')?.value || 0);
+      const t = parseFloat(document.getElementById('slot-t')?.value || 0);
+      const v = parseFloat(document.getElementById('slot-v')?.value || 0);
+      const be = parseFloat(document.getElementById('slot-be')?.value || 0);
+      const cl = parseFloat(document.getElementById('slot-cl')?.value || 0);
+      applyLutToMonitor(b, c, g, t, v, be, cl);
     }
 
     function resetSlotSlider(key) {
@@ -3820,7 +3986,7 @@
 
     function createPermanentIcc() {
       const name = document.getElementById('tuner-icc-name')?.value || 'Profile';
-      triggerToast(`✓ Generated &amp; registered: list\\${name}.icc`);
+      triggerToast(`✓ Generated & registered: list\\${name}.icc`);
       sound.chord();
     }
 
@@ -3855,10 +4021,39 @@
       sound.whoosh();
       activeSlotId = activeSlotId >= 3 ? 1 : activeSlotId + 1;
       selectSlot(activeSlotId);
-      triggerToast(`⌨️ Hotkey Triggered: Cycled to Slot ${activeSlotId} (${slotData[activeSlotId].name})`);
+      triggerToast(`⌨ Hotkey Triggered: Cycled to Slot ${activeSlotId} (${slotData[activeSlotId].name})`);
     }
 
-    
+    function submitFeedbackSimulator() {
+      const title = document.getElementById('fb-title')?.value.trim();
+      const email = document.getElementById('fb-email')?.value.trim();
+      const msg = document.getElementById('fb-msg')?.value.trim();
+      const status = document.getElementById('fb-status');
+      if (!title || !email || !msg) {
+        if (status) {
+          status.textContent = 'Please fill out all fields.';
+          status.className = 'text-[10px] text-red-400 font-semibold';
+        }
+        return;
+      }
+      if (status) {
+        status.textContent = '✓ Feedback sent successfully to alroufa21@gmail.com!';
+        status.className = 'text-[10px] text-emerald-400 font-semibold';
+      }
+      triggerToast('✉ Feedback sent! Thank you for helping improve Better Color Profile.');
+      sound.chord();
+      setTimeout(() => {
+        if (document.getElementById('fb-title')) document.getElementById('fb-title').value = '';
+        if (document.getElementById('fb-msg')) document.getElementById('fb-msg').value = '';
+      }, 1500);
+    }
+
+    function openFeedbackMailtoSimulator() {
+      const title = encodeURIComponent(document.getElementById('fb-title')?.value.trim() || 'Better Color Profile Feedback');
+      const body = encodeURIComponent(document.getElementById('fb-msg')?.value.trim() || 'Hi Koukou,\n\n');
+      window.open(`mailto:alroufa21@gmail.com?subject=${title}&body=${body}`, '_blank');
+    }
+
     function showGlobalToast(msg, duration = 4000) {
       const toast = document.getElementById('global-toast');
       const text = document.getElementById('global-toast-text');

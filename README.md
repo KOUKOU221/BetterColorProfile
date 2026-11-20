@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Anti--Cheat-100%25%20Safe-success" alt="Anti-Cheat Safe" />
-  <img src="https://img.shields.io/badge/Release-v2.10.20-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.21-EAB308" alt="Version" />
   <a href="https://bettercolorprofile.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
@@ -61,7 +61,7 @@ Fine-tune your display with 7 live hardware sliders:
 Tweak colors and switch profiles inside any game without Alt-Tabbing (`RCtrl + Enter`):
 - `Ctrl + Up / Down` — Select a slider or profile row
 - `Ctrl + Left / Right` — Adjust values (±5%) or switch profiles
-- `Shift + Left / Right` — Fine-tune values (±1%)
+- `Ctrl + Shift + Left / Right` — Fine-tune values (±1%)
 - `Ctrl + S` — Save adjustments to the active profile
 - `Ctrl + Shift + S` — Save adjustments as a new profile
 - `Esc` or `RCtrl + Enter` — Close overlay
