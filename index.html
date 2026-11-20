@@ -323,7 +323,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.18</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.19</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -1095,13 +1095,13 @@
               <span>‹</span>
             </button>
             <button id="step-btn-1" onclick="onSimulatorStepClick('profiles')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all theme-bg text-[#111215] theme-border shadow-lg cursor-pointer">
-              01 / Profiles Hub
+              01 / Profiles
             </button>
             <button id="step-btn-2" onclick="onSimulatorStepClick('tuner')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
-              02 / 7-Slider Tuner
+              02 / Create Profile
             </button>
             <button id="step-btn-3" onclick="onSimulatorStepClick('options')" class="px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-400 hover:text-white transition-all cursor-pointer">
-              03 / Themes &amp; Options
+              03 / Options
             </button>
             <button type="button" onclick="nextSimulatorSlide()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold border border-white/10 bg-[#161820] text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1 shadow-sm cursor-pointer" title="Next Slide">
               <span>›</span>
@@ -1146,7 +1146,7 @@
                 Profiles
               </button>
               <button id="tab-btn-tuner" onclick="switchSimulatorTab('tuner')" class="px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white">
-                Display Tuner
+                Create Profile
               </button>
               <button id="tab-btn-options" onclick="switchSimulatorTab('options')" class="px-3 py-1 rounded-lg text-xs font-semibold transition-all text-[#A0AEC0] hover:text-white">
                 Options
@@ -1353,173 +1353,217 @@
               </div>
             </div>
 
-            <!-- ================= VIEW 2: 7-SLIDER DISPLAY TUNER ================= -->
+            <!-- ================= VIEW 2: CREATE PROFILE (7-SLIDER TUNER) ================= -->
             <div id="view-tuner" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2.5">
-              <div>
-                <h4 class="text-xs sm:text-sm font-bold text-white">Hardware Display Calibration (7-Channel Tuner &amp; ICC Creator)</h4>
-                <p class="text-[10px] text-[#A0AEC0]">Real-time GPU LUT calibration. Tune master levels or adjust individual RGB color channels below.</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="text-xs sm:text-sm font-bold text-white">Display Calibration</h4>
+                  <p class="text-[10px] text-[#A0AEC0]">7 live hardware sliders &bull; Real-time GPU calibration</p>
+                </div>
+                <!-- Target Monitor Selector -->
+                <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-[#212327] border border-[#3A3E46] text-[10px] text-gray-200 cursor-pointer shadow-sm">
+                  <span class="theme-accent">🖥️</span>
+                  <span class="font-medium">Display 1 (Primary)</span>
+                  <span class="text-[9px] text-gray-400">▾</span>
+                </div>
               </div>
 
-              <!-- Master Tuning Card -->
+              <!-- Master Tuning Card (7 Real Sliders) -->
               <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
-                <div class="text-[11px] font-bold text-white">Master Display Calibration</div>
-                
                 <div class="space-y-1.5">
                   <div class="flex items-center gap-2">
-                    <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Brightness</span>
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Brightness</span>
                     <input type="range" id="tuner-b" min="-100" max="100" value="0" oninput="updateTunerSlider('b', this.value)" class="fluent-slider flex-1">
-                    <span id="tuner-b-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <span id="tuner-b-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
                     <button onclick="resetTunerSlider('b')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
                   </div>
 
                   <div class="flex items-center gap-2">
-                    <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Contrast</span>
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Contrast</span>
                     <input type="range" id="tuner-c" min="-100" max="100" value="0" oninput="updateTunerSlider('c', this.value)" class="fluent-slider flex-1">
-                    <span id="tuner-c-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <span id="tuner-c-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
                     <button onclick="resetTunerSlider('c')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
                   </div>
 
                   <div class="flex items-center gap-2">
-                    <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Gamma Midtones</span>
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Gamma</span>
                     <input type="range" id="tuner-g" min="-100" max="100" value="0" oninput="updateTunerSlider('g', this.value)" class="fluent-slider flex-1">
-                    <span id="tuner-g-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <span id="tuner-g-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
                     <button onclick="resetTunerSlider('g')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
                   </div>
 
                   <div class="flex items-center gap-2">
-                    <span class="w-20 text-[#CBD5E1] text-[10px] font-medium">Warmth</span>
-                    <input type="range" id="tuner-w" min="-100" max="100" value="0" oninput="updateTunerSlider('w', this.value)" class="fluent-slider flex-1">
-                    <span id="tuner-w-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
-                    <button onclick="resetTunerSlider('w')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Color Temp</span>
+                    <input type="range" id="tuner-t" min="-100" max="100" value="0" oninput="updateTunerSlider('t', this.value)" class="fluent-slider flex-1">
+                    <span id="tuner-t-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">6500K</span>
+                    <button onclick="resetTunerSlider('t')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Digital Vibrance</span>
+                    <input type="range" id="tuner-v" min="-100" max="100" value="0" oninput="updateTunerSlider('v', this.value)" class="fluent-slider flex-1">
+                    <span id="tuner-v-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <button onclick="resetTunerSlider('v')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Shadows</span>
+                    <input type="range" id="tuner-be" min="-100" max="100" value="0" oninput="updateTunerSlider('be', this.value)" class="fluent-slider flex-1">
+                    <span id="tuner-be-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <button onclick="resetTunerSlider('be')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span class="w-24 text-[#CBD5E1] text-[10px] font-medium">Clarity</span>
+                    <input type="range" id="tuner-cl" min="0" max="100" value="0" oninput="updateTunerSlider('cl', this.value)" class="fluent-slider flex-1">
+                    <span id="tuner-cl-val" class="w-11 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
+                    <button onclick="resetTunerSlider('cl')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
                   </div>
                 </div>
               </div>
 
-              <!-- RGB Balance Card -->
+              <!-- Action Card (Save .ICC Profile + Share Code) -->
               <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
-                <div class="text-[11px] font-bold text-white">RGB Color Balance</div>
-                
-                <div class="space-y-1.5">
-                  <div class="flex items-center gap-2">
-                    <span class="w-20 text-red-400 text-[10px] font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>Red</span>
-                    <input type="range" id="tuner-r" min="-100" max="100" value="0" oninput="updateTunerSlider('r', this.value)" class="fluent-slider slider-red flex-1">
-                    <span id="tuner-r-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
-                    <button onclick="resetTunerSlider('r')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
-                  </div>
-
-                  <div class="flex items-center gap-2">
-                    <span class="w-20 text-green-400 text-[10px] font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>Green</span>
-                    <input type="range" id="tuner-grn" min="-100" max="100" value="0" oninput="updateTunerSlider('grn', this.value)" class="fluent-slider slider-green flex-1">
-                    <span id="tuner-grn-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
-                    <button onclick="resetTunerSlider('grn')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
-                  </div>
-
-                  <div class="flex items-center gap-2">
-                    <span class="w-20 text-blue-400 text-[10px] font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Blue</span>
-                    <input type="range" id="tuner-bl" min="-100" max="100" value="0" oninput="updateTunerSlider('bl', this.value)" class="fluent-slider slider-blue flex-1">
-                    <span id="tuner-bl-val" class="w-10 text-center font-mono font-bold text-[10px] text-gray-400 bg-black/40 py-0.5 rounded">0%</span>
-                    <button onclick="resetTunerSlider('bl')" class="text-gray-400 hover:text-white text-xs px-0.5">↺</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Save As Permanent ICC Profile Card -->
-              <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-1.5">
-                <div class="text-[11px] font-bold text-white">Save As Permanent ICC Profile</div>
-                <div class="text-[10px] text-[#A0AEC0]">Builds a standard ICC profile from your calibration and installs it to Windows color management.</div>
-                
-                <div class="flex items-center gap-2 pt-1">
-                  <input type="text" id="tuner-icc-name" value="Competitive Boost" class="flex-1 bg-[#27292D] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-amber-400 font-medium">
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                  <input type="text" id="tuner-icc-name" value="Profile 1" class="flex-1 min-w-[120px] bg-[#27292D] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] font-medium">
                   <button onclick="createPermanentIcc()" class="px-3 py-1 rounded-lg text-xs font-bold text-black theme-bg hover:brightness-110 shadow-sm transition-all whitespace-nowrap">
-                    Create &amp; Save .ICC Profile
+                    Save .ICC Profile
+                  </button>
+                </div>
+                <div class="flex items-center gap-2 pt-1 border-t border-[#444952]/60">
+                  <button onclick="copyShareCodeSimulator()" class="flex-1 py-1 rounded-lg bg-[#27292D] hover:bg-[#31343A] border border-[#3A3E46] text-gray-200 text-[11px] font-medium transition-all flex items-center justify-center gap-1">
+                    <span>📋 Copy Share Code</span>
+                  </button>
+                  <button onclick="importShareCodeSimulator()" class="flex-1 py-1 rounded-lg bg-[#27292D] hover:bg-[#31343A] border border-[#3A3E46] text-gray-200 text-[11px] font-medium transition-all flex items-center justify-center gap-1">
+                    <span>📥 Import Share Code</span>
                   </button>
                 </div>
               </div>
 
             </div>
 
-            <!-- ================= VIEW 3: OPTIONS & THEMES ================= -->
+            <!-- ================= VIEW 3: OPTIONS & SETTINGS ================= -->
             <div id="view-options" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
-              <div>
+              <div class="flex items-center justify-between">
                 <h4 class="text-xs sm:text-sm font-bold text-white">Options &amp; Settings</h4>
+                <span class="text-[10px] text-emerald-400 font-medium">● v2.10.19</span>
               </div>
 
-              <!-- About Card -->
-              <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <img src="assets/app_logo.png" alt="Logo" class="w-7 h-7 rounded-lg shadow-md" />
+              <!-- 4 Subtabs Matching App Frontend -->
+              <div class="flex items-center gap-1 bg-[#1E2023] p-1 rounded-xl border border-white/5 text-[11px]">
+                <button id="opt-subtab-btn-pref" onclick="switchOptionsSubTab('pref')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5">Preferences</button>
+                <button id="opt-subtab-btn-win" onclick="switchOptionsSubTab('win')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Window Detection</button>
+                <button id="opt-subtab-btn-cycle" onclick="switchOptionsSubTab('cycle')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Profile Cycle</button>
+                <button id="opt-subtab-btn-hud" onclick="switchOptionsSubTab('hud')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">HUD Overlay</button>
+              </div>
+
+              <!-- Subtab 1: Preferences -->
+              <div id="opt-panel-pref" class="space-y-2">
+                <!-- Theme Select -->
+                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
                   <div>
-                    <div class="font-bold text-white text-xs">Better Color Profile</div>
-                    <div class="flex items-center gap-2 mt-0.5">
-                      <span class="font-mono text-[10px] text-[#A0AEC0]">v2.10.18</span>
-                      <span class="text-[10px] text-emerald-400 font-medium">✓ Up to date</span>
+                    <div class="font-bold text-white text-xs">Appearance</div>
+                    <div class="text-[10px] text-[#A0AEC0]">Theme &amp; Accent Colors</div>
+                  </div>
+                  <select id="options-theme-select" onchange="setDynamicTheme(this.value)" class="bg-[#27292D] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] font-medium">
+                    <option value="Yellow" selected>🟡 Yellow</option>
+                    <option value="Amber">🟠 Amber</option>
+                    <option value="Blue">🔷 Blue</option>
+                    <option value="Emerald">🟢 Emerald</option>
+                    <option value="Fuchsia">🟣 Fuchsia</option>
+                    <option value="Green">🍏 Green</option>
+                    <option value="Indigo">🫐 Indigo</option>
+                    <option value="Pink">🌸 Pink</option>
+                    <option value="Purple">🟪 Purple</option>
+                    <option value="Red">🔴 Red</option>
+                    <option value="Sky">🌐 Sky</option>
+                    <option value="Violet">🔮 Violet</option>
+                  </select>
+                </div>
+                <!-- Startup -->
+                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white text-xs">Start with Windows</div>
+                    <div class="text-[10px] text-[#A0AEC0]">Launch quietly on system boot</div>
+                  </div>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Start with Windows enabled' : 'Start with Windows disabled')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                  </label>
+                </div>
+                <!-- Sound Effects -->
+                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white text-xs">Audio Feedback</div>
+                    <div class="text-[10px] text-[#A0AEC0]">Subtle audio cues on profile switches</div>
+                  </div>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Audio feedback enabled' : 'Audio feedback muted')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                  </label>
+                </div>
+                <!-- Updates -->
+                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
+                  <div>
+                    <div class="font-bold text-white text-xs">Check for Updates</div>
+                    <div class="text-[10px] text-emerald-400">Integrated updater with SHA-256 integrity</div>
+                  </div>
+                  <button onclick="triggerToast('✓ Up to date: v2.10.19')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
+                </div>
+              </div>
+
+              <!-- Subtab 2: Window Detection -->
+              <div id="opt-panel-win" class="space-y-2 hidden">
+                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="font-bold text-white text-xs">Auto Game &amp; Window Detection</div>
+                      <div class="text-[10px] text-[#A0AEC0]">Automatically swaps profiles when games launch</div>
                     </div>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Window Detection active' : 'Window Detection paused')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                    </label>
+                  </div>
+                  <p class="text-[10px] text-gray-300 leading-relaxed">
+                    Link games in the Profiles tab (e.g. CS2, Valorant). When active, your custom profile applies automatically and restores your desktop profile when you exit.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Subtab 3: Profile Cycle -->
+              <div id="opt-panel-cycle" class="space-y-2 hidden">
+                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
+                  <div class="font-bold text-white text-xs">Profile Cycle Shortcut</div>
+                  <p class="text-[10px] text-[#A0AEC0]">Press your cycle key anywhere to switch profile slots sequentially.</p>
+                  <div class="p-2 rounded-lg bg-[#27292D] border border-[#444952] text-center font-mono text-xs text-amber-300">
+                    Ctrl + Shift + C
+                  </div>
+                  <div class="p-2 rounded-lg bg-[#212327] border border-white/5 text-[10px] text-gray-400">
+                    Keycode Diagnostics: <span class="text-white font-mono">VK 0x43 (C) &bull; No Repeat</span>
                   </div>
                 </div>
-                <button onclick="triggerToast('✓ You are using the latest release (v2.10.18)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
-                  Check for Updates
-                </button>
               </div>
 
-              <!-- Dynamic 12 Themes Card -->
-              <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                <div>
-                  <div class="font-bold text-white text-xs">Appearance</div>
-                  <div class="text-[10px] text-[#A0AEC0]">App Theme &amp; Ambient Glowing Accents</div>
-                </div>
-                <select id="options-theme-select" onchange="setDynamicTheme(this.value)" class="bg-[#27292D] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] font-medium">
-                  <option value="Yellow" selected>🟡 Yellow</option>
-                  <option value="Amber">🟠 Amber</option>
-                  <option value="Blue">🔷 Blue</option>
-                  <option value="Emerald">🟢 Emerald</option>
-                  <option value="Fuchsia">🟣 Fuchsia</option>
-                  <option value="Green">🍏 Green</option>
-                  <option value="Indigo">🫐 Indigo</option>
-                  <option value="Pink">🌸 Pink</option>
-                  <option value="Purple">🟪 Purple</option>
-                  <option value="Red">🔴 Red</option>
-                  <option value="Sky">🌐 Sky</option>
-                  <option value="Violet">🔮 Violet</option>
-                </select>
-              </div>
-
-              <!-- Startup Card -->
-              <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                <div>
-                  <div class="font-bold text-white text-xs">Startup</div>
-                  <div class="text-[10px] text-[#A0AEC0]">Launch automatically when Windows starts</div>
-                </div>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Startup with Windows enabled' : 'Startup with Windows disabled')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
-                  <span class="text-[11px] text-gray-300 font-medium">Start GUI</span>
-                </label>
-              </div>
-
-              <!-- Transitions Card -->
-              <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                <div>
-                  <div class="font-bold text-white text-xs">Transitions</div>
-                  <div class="text-[10px] text-[#A0AEC0]">Interpolate 12 gamma frames over 150ms</div>
-                </div>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Cinema Fade active' : 'Direct cut transitions')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
-                  <span class="text-[11px] text-gray-300 font-medium">Cinema Fade</span>
-                </label>
-              </div>
-
-              <!-- Backup & Restore Card -->
-              <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                <div>
-                  <div class="font-bold text-white text-xs">Backup &amp; Profiles</div>
-                  <div class="text-[10px] text-[#A0AEC0]">Export or import complete profile backups</div>
-                </div>
-                <div class="flex items-center gap-2">
-                  <button onclick="triggerToast('📥 Ready to import profile backup ZIP')" class="px-2 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
-                    ⬇ Import
-                  </button>
-                  <button onclick="triggerToast('📦 Backup created: BetterColorProfile_Backup.zip')" class="px-2 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">
-                    ⬆ Export
-                  </button>
+              <!-- Subtab 4: HUD Overlay -->
+              <div id="opt-panel-hud" class="space-y-2 hidden">
+                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <div class="font-bold text-white text-xs">In-Game HUD Overlay</div>
+                      <div class="text-[10px] text-[#A0AEC0]">Semi-transparent glass HUD inside games</div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Enabled</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs pt-1">
+                    <span class="text-gray-300 text-[11px]">Toggle Shortcut:</span>
+                    <span class="font-mono text-amber-300 bg-[#27292D] px-2 py-0.5 rounded border border-[#444952] text-[10px]">Ctrl + Shift + V</span>
+                  </div>
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="text-gray-300 text-[11px]">Screen Position:</span>
+                    <div class="flex gap-1 text-[10px]">
+                      <button class="px-2 py-0.5 rounded bg-white/10 text-white font-bold">Top-Right</button>
+                      <button class="px-2 py-0.5 rounded bg-[#27292D] text-gray-400">Center</button>
+                      <button class="px-2 py-0.5 rounded bg-[#27292D] text-gray-400">Top-Left</button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -1956,7 +2000,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.18
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.19
       </div>
 
     </div>
@@ -3550,14 +3594,14 @@
         const b = parseFloat(document.getElementById('tuner-b')?.value || 0);
         const c = parseFloat(document.getElementById('tuner-c')?.value || 0);
         const g = parseFloat(document.getElementById('tuner-g')?.value || 0);
-        const w = parseFloat(document.getElementById('tuner-w')?.value || 0);
-        const r = parseFloat(document.getElementById('tuner-r')?.value || 0);
-        const grn = parseFloat(document.getElementById('tuner-grn')?.value || 0);
-        const bl = parseFloat(document.getElementById('tuner-bl')?.value || 0);
-        applyLutToMonitor(b, c, g, w, r, grn, bl);
+        const t = parseFloat(document.getElementById('tuner-t')?.value || 0);
+        const v = parseFloat(document.getElementById('tuner-v')?.value || 0);
+        const be = parseFloat(document.getElementById('tuner-be')?.value || 0);
+        const cl = parseFloat(document.getElementById('tuner-cl')?.value || 0);
+        applyLutToMonitor(b, c, g, t, v, be, cl);
       } else if (tab === 'profiles') {
         const cur = slotData[activeSlotId] || slotData[1];
-        applyLutToMonitor(cur.b, cur.c, cur.g, cur.w, cur.r, cur.grn, cur.bl);
+        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || cur.w || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
       }
     }
 
@@ -3631,9 +3675,9 @@
     // Profiles slot state
     let activeSlotId = 1;
     window.slotData = window.slotData || {
-      1: { name: 'Default Profile', sub: 'Slot 1 • Protected Baseline', b: 0, c: 0, g: 0, w: 0, r: 0, grn: 0, bl: 0, shortcut: 'Ctrl+1' },
-      2: { name: 'night', sub: 'Slot 2 • Profile 2.icc', b: 20, c: -10, g: 0, w: 40, r: 15, grn: 0, bl: -25, shortcut: 'Ctrl+2' },
-      3: { name: 'CS2 Boost', sub: 'Slot 3 • Competitive.icc', b: 35, c: 20, g: 15, w: 0, r: 5, grn: 5, bl: 5, shortcut: 'Ctrl+3' }
+      1: { name: 'Default Profile', sub: 'Slot 1 • Protected Baseline', b: 0, c: 0, g: 0, t: 0, v: 0, be: 0, cl: 0, shortcut: 'Ctrl+1' },
+      2: { name: 'night', sub: 'Slot 2 • Profile 2.icc', b: 15, c: -5, g: 0, t: 35, v: -10, be: 0, cl: 0, shortcut: 'Ctrl+2' },
+      3: { name: 'CS2 Boost', sub: 'Slot 3 • Competitive.icc', b: 25, c: 20, g: 15, t: 0, v: 35, be: 40, cl: 20, shortcut: 'Ctrl+3' }
     };
     let slotData = window.slotData;
 
@@ -3669,7 +3713,7 @@
         if (baselineCard) baselineCard.classList.add('hidden');
       }
 
-      applyLutToMonitor(cur.b, cur.c, cur.g, cur.w, cur.r, cur.grn, cur.bl);
+      applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
     }
 
     function applySlot(id) {
@@ -3706,7 +3750,7 @@
       if (slotData[activeSlotId]) {
         slotData[activeSlotId][key] = parseFloat(val);
         const cur = slotData[activeSlotId];
-        applyLutToMonitor(cur.b, cur.c, cur.g, cur.w, cur.r, cur.grn, cur.bl);
+        applyLutToMonitor(cur.b, cur.c, cur.g, cur.t || 0, cur.v || 0, cur.be || 0, cur.cl || 0);
       }
     }
 
@@ -3721,16 +3765,24 @@
     function updateTunerSlider(key, val) {
       sound.sliderTone(val);
       const span = document.getElementById(`tuner-${key}-val`);
-      if (span) span.textContent = (val > 0 ? '+' : '') + val + '%';
+      if (span) {
+        if (key === 't') {
+          const num = parseInt(val, 10);
+          const k = num <= -100 ? 2500 : (num >= 100 ? 10000 : (num === 0 ? 6500 : (num < 0 ? 6500 + num * 40 : 6500 + num * 35)));
+          span.textContent = k + 'K';
+        } else {
+          span.textContent = (val > 0 ? '+' : '') + val + '%';
+        }
+      }
       
       const b = parseFloat(document.getElementById('tuner-b')?.value || 0);
       const c = parseFloat(document.getElementById('tuner-c')?.value || 0);
       const g = parseFloat(document.getElementById('tuner-g')?.value || 0);
-      const w = parseFloat(document.getElementById('tuner-w')?.value || 0);
-      const r = parseFloat(document.getElementById('tuner-r')?.value || 0);
-      const grn = parseFloat(document.getElementById('tuner-grn')?.value || 0);
-      const bl = parseFloat(document.getElementById('tuner-bl')?.value || 0);
-      applyLutToMonitor(b, c, g, w, r, grn, bl);
+      const t = parseFloat(document.getElementById('tuner-t')?.value || 0);
+      const v = parseFloat(document.getElementById('tuner-v')?.value || 0);
+      const be = parseFloat(document.getElementById('tuner-be')?.value || 0);
+      const cl = parseFloat(document.getElementById('tuner-cl')?.value || 0);
+      applyLutToMonitor(b, c, g, t, v, be, cl);
     }
 
     function resetTunerSlider(key) {
@@ -3739,6 +3791,40 @@
         input.value = 0;
         updateTunerSlider(key, 0);
       }
+    }
+
+    function copyShareCodeSimulator() {
+      const b = document.getElementById('tuner-b')?.value || 0;
+      const c = document.getElementById('tuner-c')?.value || 0;
+      const g = document.getElementById('tuner-g')?.value || 0;
+      const v = document.getElementById('tuner-v')?.value || 0;
+      const code = `BCP-${Math.abs(b)}${Math.abs(c)}-${Math.abs(g)}${Math.abs(v)}-PRO`;
+      triggerToast('📋 Copied Share Code: ' + code);
+      sound.chord();
+    }
+
+    function importShareCodeSimulator() {
+      const code = prompt('Paste Better Color Profile Share Code (e.g. BCP-1020-0515-PRO):', 'BCP-1520-1035-PRO');
+      if (code) {
+        triggerToast('✓ Imported calibration from ' + code.trim());
+        sound.chord();
+      }
+    }
+
+    function switchOptionsSubTab(sub) {
+      sound.click();
+      const tabs = ['pref', 'win', 'cycle', 'hud'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('opt-subtab-btn-' + t);
+        const pnl = document.getElementById('opt-panel-' + t);
+        if (t === sub) {
+          if (btn) btn.className = 'px-2.5 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5';
+          if (pnl) pnl.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = 'px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white';
+          if (pnl) pnl.classList.add('hidden');
+        }
+      });
     }
 
     function createPermanentIcc() {
@@ -3857,29 +3943,32 @@
       triggerToast('🎮 Game Scene: ' + label);
     }
 
-    function applyLutToMonitor(b, c, g, w, r, grn, bl) {
+    function applyLutToMonitor(b, c, g, t = 0, v = 0, be = 0, cl = 0) {
       const calImg = document.getElementById('monitor-calibrated-img');
       const badge = document.getElementById('screen-stats-badge');
 
       // Realistic GPU Hardware LUT calibration simulation
-      const brightnessVal = 1 + (b / 100) * 0.75;
+      const brightnessVal = 1 + (b / 100) * 0.70;
       const contrastVal = 1 + (c / 100) * 0.65;
       const gammaBoost = (g / 100) * 0.35;
-      const totalBrightness = Math.max(0.2, brightnessVal + gammaBoost);
+      const shadowBoost = (be / 100) * 0.25; // Shadows / Black Equalizer
+      const totalBrightness = Math.max(0.2, brightnessVal + gammaBoost + shadowBoost);
       
-      const sepiaVal = Math.max(0, (w / 100) * 0.5);
-      const hueVal = w < 0 ? (w / 100) * 20 : 0;
+      // Color Temperature (Warm / Cool kelvin)
+      const sepiaVal = Math.max(0, (t / 100) * 0.45);
+      const hueVal = t < 0 ? (t / 100) * 15 : 0;
       
-      const rgbBoost = ((r + grn + bl) / 300) * 0.7;
-      const satVal = Math.max(0.2, 1 + rgbBoost + (Math.abs(b) > 0 || Math.abs(c) > 0 ? 0.2 : 0));
+      // Digital Vibrance & Clarity
+      const vibranceVal = Math.max(0.2, 1 + (v / 100) * 0.85);
+      const clarityVal = Math.max(0.8, 1 + (cl / 100) * 0.25);
 
       if (calImg) {
-        calImg.style.filter = `brightness(${totalBrightness.toFixed(3)}) contrast(${contrastVal.toFixed(3)}) saturate(${satVal.toFixed(3)}) sepia(${sepiaVal.toFixed(3)}) hue-rotate(${hueVal.toFixed(1)}deg)`;
+        calImg.style.filter = `brightness(${totalBrightness.toFixed(3)}) contrast(${(contrastVal * clarityVal).toFixed(3)}) saturate(${vibranceVal.toFixed(3)}) sepia(${sepiaVal.toFixed(3)}) hue-rotate(${hueVal.toFixed(1)}deg)`;
       }
 
       if (badge) {
         const effectiveGamma = (1.0 + (g / 100) * 0.4).toFixed(2);
-        badge.textContent = `B: ${b > 0 ? '+' : ''}${b}% | C: ${c > 0 ? '+' : ''}${c}% | γ: ${effectiveGamma}`;
+        badge.textContent = `B: ${b > 0 ? '+' : ''}${b}% | C: ${c > 0 ? '+' : ''}${c}% | γ: ${effectiveGamma} | Vib: ${v > 0 ? '+' : ''}${v}%`;
       }
     }
 
