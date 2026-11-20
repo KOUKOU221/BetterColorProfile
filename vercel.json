@@ -1,7 +1,10 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": null,
+  "outputDirectory": ".",
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/:match*", "destination": "/api/index.js" },
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
     { "source": "/guide", "destination": "/guide.html" }
   ]
 }

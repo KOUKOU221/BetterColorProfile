@@ -4,7 +4,6 @@
   "description": "Better Color Profile Licensing, Anti-Exploit, Recovery & Admin Backend",
   "main": "api/index.js",
   "scripts": {
-    "build": "echo 'No build step required'",
     "start": "node server/server.js",
     "dev": "node server/server.js"
   },
