@@ -323,7 +323,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.19</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.20</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -460,7 +460,7 @@
           <!-- Floating Step Notification Pill above window -->
           <div id="ad-tut-step-pill" class="mb-2 px-3 py-1 rounded-full bg-amber-400 text-black font-mono font-black text-[10px] sm:text-xs shadow-lg uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300">
             <span id="ad-tut-step-icon">⚡</span>
-            <span id="ad-tut-step-text">STEP 1: OPEN DISPLAY TUNER</span>
+            <span id="ad-tut-step-text">STEP 1: OPEN CREATE PROFILE</span>
           </div>
 
           <!-- App Mockup Window (Pixel-Perfect to C# Source BetterColorProfile.cs: #27292D, #1E2023, #212327, #31343A, #444952) -->
@@ -483,7 +483,7 @@
             <div class="px-3 sm:px-4 py-1.5 bg-[#1E2023] border-b border-[#3A3E46] flex items-center justify-between text-[10px] sm:text-xs font-semibold">
               <div class="flex items-center gap-1.5 bg-[#15171A] p-0.5 rounded-lg border border-white/5">
                 <button type="button" id="ad-tut-tab-profiles" class="px-3 py-1 rounded-md text-[#F8FAFC] bg-[#31343A] border-b-2 border-amber-400 transition-all">Profiles</button>
-                <button type="button" id="ad-tut-tab-tuner" class="px-3 py-1 rounded-md text-[#A0AEC0] hover:text-white transition-all">Display Tuner</button>
+                <button type="button" id="ad-tut-tab-tuner" class="px-3 py-1 rounded-md text-[#A0AEC0] hover:text-white transition-all">Create Profile</button>
                 <button type="button" class="px-3 py-1 rounded-md text-[#718096]">Options</button>
               </div>
               <div class="flex items-center gap-1.5 text-[9px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
@@ -617,47 +617,47 @@
                       </div>
                     </div>
 
-                    <!-- Read-Only RGB Color Balance Preview -->
+                    <!-- Read-Only Advanced Enhancements Preview -->
                     <div class="bg-[#27292D] rounded-lg p-1.5 border border-[#3A3E46] space-y-0.5 mt-1">
                       <div class="flex items-center justify-between text-[7.5px] font-bold text-[#A0AEC0]">
-                        <span class="text-gray-200">RGB Color Balance</span>
+                        <span class="text-gray-200">Advanced Enhancements</span>
                         <span class="text-[7px] text-gray-500">• Read-Only</span>
                       </div>
                       <div class="flex items-center justify-between text-[7px] text-gray-400">
-                        <span class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-red-500"></span>Red</span>
+                        <span class="truncate">Digital Vibrance</span>
                         <div class="flex-1 bg-[#1E2023] h-1 rounded-full relative mx-1">
-                          <div class="h-full bg-red-500 w-1/2 rounded-full"></div>
-                          <div class="absolute w-2 h-2 rounded-full bg-white border border-red-500 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
+                          <div id="ad-tut-ro-fill-vibrance" class="h-full bg-amber-400 w-1/2 rounded-full"></div>
+                          <div id="ad-tut-ro-thumb-vibrance" class="absolute w-2 h-2 rounded-full bg-white border border-amber-400 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 text-right font-mono text-red-400">0%</span>
+                        <span id="ad-tut-ro-val-vibrance" class="w-6 text-right font-mono text-gray-400">0%</span>
                       </div>
                       <div class="flex items-center justify-between text-[7px] text-gray-400">
-                        <span class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-green-500"></span>Green</span>
+                        <span class="truncate">Black Equalizer</span>
                         <div class="flex-1 bg-[#1E2023] h-1 rounded-full relative mx-1">
-                          <div class="h-full bg-green-500 w-1/2 rounded-full"></div>
-                          <div class="absolute w-2 h-2 rounded-full bg-white border border-green-500 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
+                          <div id="ad-tut-ro-fill-shadows" class="h-full bg-amber-400 w-1/2 rounded-full"></div>
+                          <div id="ad-tut-ro-thumb-shadows" class="absolute w-2 h-2 rounded-full bg-white border border-amber-400 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 text-right font-mono text-green-400">0%</span>
+                        <span id="ad-tut-ro-val-shadows" class="w-6 text-right font-mono text-gray-400">0%</span>
                       </div>
                       <div class="flex items-center justify-between text-[7px] text-gray-400">
-                        <span class="flex items-center gap-1"><span class="w-1 h-1 rounded-full bg-blue-500"></span>Blue</span>
+                        <span class="truncate">Midtone Clarity</span>
                         <div class="flex-1 bg-[#1E2023] h-1 rounded-full relative mx-1">
-                          <div class="h-full bg-blue-500 w-1/2 rounded-full"></div>
-                          <div class="absolute w-2 h-2 rounded-full bg-white border border-blue-500 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
+                          <div id="ad-tut-ro-fill-clarity" class="h-full bg-amber-400 w-1/2 rounded-full"></div>
+                          <div id="ad-tut-ro-thumb-clarity" class="absolute w-2 h-2 rounded-full bg-white border border-amber-400 -translate-x-1/2 top-1/2 -translate-y-1/2" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 text-right font-mono text-blue-400">0%</span>
+                        <span id="ad-tut-ro-val-clarity" class="w-6 text-right font-mono text-gray-400">0%</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- VIEW 2: Display Tuner Tab View (Steps 2 & 3: Authentic 7-Channel Tuner from BetterColorProfile.cs) -->
+              <!-- VIEW 2: Create Profile Tab View (Authentic 7-Slider Calibration from BetterColorProfile.cs) -->
               <div id="ad-tut-view-tuner" class="absolute inset-0 p-2 sm:p-2.5 space-y-1.5 transition-opacity duration-200 opacity-0 pointer-events-none bg-[#27292D] overflow-y-auto">
                 <div class="flex items-center justify-between text-[9px] sm:text-[10px]">
                   <div>
-                    <div class="font-bold text-[#F8FAFC]">Hardware Display Calibration (7-Channel Tuner &amp; ICC Creator)</div>
-                    <div class="text-[7.5px] sm:text-[8px] text-[#A0AEC0]">Real-time GPU LUT calibration. Tune master levels or adjust individual RGB color channels below.</div>
+                    <div class="font-bold text-[#F8FAFC]">Create Profile (7-Slider Hardware Calibration)</div>
+                    <div class="text-[7.5px] sm:text-[8px] text-[#A0AEC0]">Real-time GPU LUT calibration. Tune master levels and hardware enhancements below.</div>
                   </div>
                   <span class="text-[7.5px] font-mono text-amber-400 bg-amber-400/10 border border-amber-400/30 px-1.5 py-0.5 rounded">GPU LUT Active</span>
                 </div>
@@ -699,7 +699,7 @@
 
                   <!-- Gamma (Midtones) Slider Row -->
                   <div class="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px]">
-                    <span class="w-16 sm:w-24 text-gray-300 shrink-0 font-medium truncate">Gamma (Midtones)</span>
+                    <span class="w-16 sm:w-24 text-gray-300 shrink-0 font-medium truncate">Gamma</span>
                     <div id="ad-tut-track-gamma" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
                       <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 -translate-x-1/2"></div>
                       <div id="ad-tut-fill-gamma" class="absolute left-1/2 h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
@@ -726,61 +726,52 @@
                   </div>
                 </div>
 
-                <!-- 2. RGB Color Balance Card (#31343A) -->
+                <!-- 2. Advanced Enhancements Card (#31343A) -->
                 <div class="bg-[#31343A] rounded-xl p-2 sm:p-2.5 border border-[#444952] space-y-1.5 shadow-sm">
                   <div class="flex items-center justify-between">
-                    <div class="text-[9px] sm:text-[10px] font-bold text-[#F8FAFC]">RGB Color Balance</div>
-                    <div class="text-[7.5px] text-[#A0AEC0]">Individual hardware channel gains</div>
+                    <div class="text-[9px] sm:text-[10px] font-bold text-[#F8FAFC]">Advanced Enhancements</div>
+                    <div class="text-[7.5px] text-[#A0AEC0]">Vibrance, shadow equalizer &amp; clarity</div>
                   </div>
 
-                  <!-- Red Channel -->
+                  <!-- Digital Vibrance Slider Row -->
                   <div class="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px]">
-                    <div class="w-16 sm:w-24 flex items-center gap-1 text-gray-300 shrink-0 font-medium truncate">
-                      <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                      <span>Red Channel</span>
-                    </div>
-                    <div id="ad-tut-track-red" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
+                    <span class="w-16 sm:w-24 text-gray-300 shrink-0 font-medium truncate">Digital Vibrance</span>
+                    <div id="ad-tut-track-vibrance" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
                       <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 -translate-x-1/2"></div>
-                      <div id="ad-tut-fill-red" class="absolute left-1/2 h-full bg-red-500 rounded-full" style="width: 0%;"></div>
-                      <div id="ad-tut-thumb-red" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
-                        <span class="w-1 h-1 rounded-full bg-red-500"></span>
+                      <div id="ad-tut-fill-vibrance" class="absolute left-1/2 h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                      <div id="ad-tut-thumb-vibrance" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
+                        <span class="w-1 h-1 rounded-full bg-amber-400"></span>
                       </div>
                     </div>
-                    <span id="ad-tut-val-red" class="w-9 sm:w-10 text-center font-mono text-red-400 font-bold px-1 py-0.2 rounded bg-red-500/10 border border-red-500/30 text-[8px] sm:text-[9px] shrink-0">0%</span>
+                    <span id="ad-tut-val-vibrance" class="w-9 sm:w-10 text-center font-mono text-gray-300 font-bold px-1 py-0.2 rounded bg-white/5 border border-white/10 text-[8px] sm:text-[9px] shrink-0">0%</span>
                     <span class="w-4 h-4 rounded bg-[#2B2E34] text-[#A0AEC0] border border-[#444952] flex items-center justify-center text-[8px] shrink-0 select-none">↺</span>
                   </div>
 
-                  <!-- Green Channel -->
+                  <!-- Shadows (Black Equalizer) Slider Row -->
                   <div class="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px]">
-                    <div class="w-16 sm:w-24 flex items-center gap-1 text-gray-300 shrink-0 font-medium truncate">
-                      <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                      <span>Green Channel</span>
-                    </div>
-                    <div id="ad-tut-track-green" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
+                    <span class="w-16 sm:w-24 text-gray-300 shrink-0 font-medium truncate">Black Equalizer</span>
+                    <div id="ad-tut-track-shadows" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
                       <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 -translate-x-1/2"></div>
-                      <div id="ad-tut-fill-green" class="absolute left-1/2 h-full bg-green-500 rounded-full" style="width: 0%;"></div>
-                      <div id="ad-tut-thumb-green" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
-                        <span class="w-1 h-1 rounded-full bg-green-500"></span>
+                      <div id="ad-tut-fill-shadows" class="absolute left-1/2 h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                      <div id="ad-tut-thumb-shadows" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
+                        <span class="w-1 h-1 rounded-full bg-amber-400"></span>
                       </div>
                     </div>
-                    <span id="ad-tut-val-green" class="w-9 sm:w-10 text-center font-mono text-green-400 font-bold px-1 py-0.2 rounded bg-green-500/10 border border-green-500/30 text-[8px] sm:text-[9px] shrink-0">0%</span>
+                    <span id="ad-tut-val-shadows" class="w-9 sm:w-10 text-center font-mono text-gray-300 font-bold px-1 py-0.2 rounded bg-white/5 border border-white/10 text-[8px] sm:text-[9px] shrink-0">0%</span>
                     <span class="w-4 h-4 rounded bg-[#2B2E34] text-[#A0AEC0] border border-[#444952] flex items-center justify-center text-[8px] shrink-0 select-none">↺</span>
                   </div>
 
-                  <!-- Blue Channel -->
+                  <!-- Midtone Clarity Slider Row -->
                   <div class="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[9px]">
-                    <div class="w-16 sm:w-24 flex items-center gap-1 text-gray-300 shrink-0 font-medium truncate">
-                      <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                      <span>Blue Channel</span>
-                    </div>
-                    <div id="ad-tut-track-blue" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
+                    <span class="w-16 sm:w-24 text-gray-300 shrink-0 font-medium truncate">Midtone Clarity</span>
+                    <div id="ad-tut-track-clarity" class="flex-1 bg-[#1E2023] h-1.5 sm:h-2 rounded-full relative border border-white/5 flex items-center">
                       <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-white/20 -translate-x-1/2"></div>
-                      <div id="ad-tut-fill-blue" class="absolute left-1/2 h-full bg-blue-500 rounded-full" style="width: 0%;"></div>
-                      <div id="ad-tut-thumb-blue" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
-                        <span class="w-1 h-1 rounded-full bg-blue-500"></span>
+                      <div id="ad-tut-fill-clarity" class="absolute left-1/2 h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                      <div id="ad-tut-thumb-clarity" class="absolute w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-white border-2 border-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.6)] -translate-x-1/2 pointer-events-none transition-none z-10 flex items-center justify-center" style="left: 50%;">
+                        <span class="w-1 h-1 rounded-full bg-amber-400"></span>
                       </div>
                     </div>
-                    <span id="ad-tut-val-blue" class="w-9 sm:w-10 text-center font-mono text-blue-400 font-bold px-1 py-0.2 rounded bg-blue-500/10 border border-blue-500/30 text-[8px] sm:text-[9px] shrink-0">0%</span>
+                    <span id="ad-tut-val-clarity" class="w-9 sm:w-10 text-center font-mono text-gray-300 font-bold px-1 py-0.2 rounded bg-white/5 border border-white/10 text-[8px] sm:text-[9px] shrink-0">0%</span>
                     <span class="w-4 h-4 rounded bg-[#2B2E34] text-[#A0AEC0] border border-[#444952] flex items-center justify-center text-[8px] shrink-0 select-none">↺</span>
                   </div>
                 </div>
@@ -788,7 +779,7 @@
                 <!-- 3. Save As Permanent ICC Profile Card (#31343A) -->
                 <div class="bg-[#31343A] rounded-xl p-2 sm:p-2.5 border border-[#444952] flex items-center justify-between gap-2.5 shadow-sm">
                   <div class="flex-1 min-w-0">
-                    <div class="text-[7.5px] sm:text-[8px] font-bold text-[#A0AEC0] mb-0.5">Save As Permanent ICC Profile</div>
+                    <div class="text-[7.5px] sm:text-[8px] font-bold text-[#A0AEC0] mb-0.5">Profile Name (.ICC)</div>
                     <div class="px-2 py-1 rounded bg-[#2B2E34] border border-[#444952] font-mono text-[8.5px] sm:text-[9px] text-[#F8FAFC]">
                       Profile 4
                     </div>
@@ -1446,7 +1437,7 @@
             <div id="view-options" class="w-1/3 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
               <div class="flex items-center justify-between">
                 <h4 class="text-xs sm:text-sm font-bold text-white">Options &amp; Settings</h4>
-                <span class="text-[10px] text-emerald-400 font-medium">● v2.10.19</span>
+                <span class="text-[10px] text-emerald-400 font-medium">● v2.10.20</span>
               </div>
 
               <!-- 4 Subtabs Matching App Frontend -->
@@ -1506,7 +1497,7 @@
                     <div class="font-bold text-white text-xs">Check for Updates</div>
                     <div class="text-[10px] text-emerald-400">Integrated updater with SHA-256 integrity</div>
                   </div>
-                  <button onclick="triggerToast('✓ Up to date: v2.10.19')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
+                  <button onclick="triggerToast('✓ Up to date: v2.10.20')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
                 </div>
               </div>
 
@@ -1554,7 +1545,7 @@
                   </div>
                   <div class="flex items-center justify-between text-xs pt-1">
                     <span class="text-gray-300 text-[11px]">Toggle Shortcut:</span>
-                    <span class="font-mono text-amber-300 bg-[#27292D] px-2 py-0.5 rounded border border-[#444952] text-[10px]">Ctrl + Shift + V</span>
+                    <span class="font-mono text-amber-300 bg-[#27292D] px-2 py-0.5 rounded border border-[#444952] text-[10px]">RCtrl + Enter</span>
                   </div>
                   <div class="flex items-center justify-between text-xs">
                     <span class="text-gray-300 text-[11px]">Screen Position:</span>
@@ -1831,7 +1822,7 @@
             </div>
             <div class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
-              <span>Real-Time Display Tuner &amp; Gamma</span>
+              <span>Real-Time 7-Slider Hardware Calibration</span>
             </div>
             <div class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
@@ -2000,7 +1991,7 @@
       </div>
 
       <div class="text-xs text-gray-400 font-mono">
-        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.19
+        Compatible with Windows 11 &bull; Windows 10 (64-bit &amp; 32-bit) &bull; Release v2.10.20
       </div>
 
     </div>
@@ -3185,15 +3176,15 @@
       const tutValTemp = document.getElementById('ad-tut-val-temp');
       const tutFillTemp = document.getElementById('ad-tut-fill-temp');
       const tutThumbTemp = document.getElementById('ad-tut-thumb-temp');
-      const tutValRed = document.getElementById('ad-tut-val-red');
-      const tutFillRed = document.getElementById('ad-tut-fill-red');
-      const tutThumbRed = document.getElementById('ad-tut-thumb-red');
-      const tutValGreen = document.getElementById('ad-tut-val-green');
-      const tutFillGreen = document.getElementById('ad-tut-fill-green');
-      const tutThumbGreen = document.getElementById('ad-tut-thumb-green');
-      const tutValBlue = document.getElementById('ad-tut-val-blue');
-      const tutFillBlue = document.getElementById('ad-tut-fill-blue');
-      const tutThumbBlue = document.getElementById('ad-tut-thumb-blue');
+      const tutValVibrance = document.getElementById('ad-tut-val-vibrance');
+      const tutFillVibrance = document.getElementById('ad-tut-fill-vibrance');
+      const tutThumbVibrance = document.getElementById('ad-tut-thumb-vibrance');
+      const tutValShadows = document.getElementById('ad-tut-val-shadows');
+      const tutFillShadows = document.getElementById('ad-tut-fill-shadows');
+      const tutThumbShadows = document.getElementById('ad-tut-thumb-shadows');
+      const tutValClarity = document.getElementById('ad-tut-val-clarity');
+      const tutFillClarity = document.getElementById('ad-tut-fill-clarity');
+      const tutThumbClarity = document.getElementById('ad-tut-thumb-clarity');
       const tutBtnSave = document.getElementById('ad-tut-btn-save');
       const tutSlot1Check = document.getElementById('ad-tut-slot-1-check');
       const tutSlot4 = document.getElementById('ad-tut-slot-4');
@@ -3325,9 +3316,9 @@
         const tabTarget = getStageCoords(tutTabTuner, 0.5, 0.5, 36, 29);
 
         if (t < 1.3) {
-          // STEP 1: App on Profiles tab -> Cursor moves up and clicks "Display Tuner" tab
+          // STEP 1: App on Profiles tab -> Cursor moves up and clicks "Create Profile" tab
           if (tutStepIcon) tutStepIcon.textContent = '⚡';
-          if (tutStepText) tutStepText.textContent = 'STEP 1: OPEN DISPLAY TUNER';
+          if (tutStepText) tutStepText.textContent = 'STEP 1: OPEN CREATE PROFILE';
 
           if (tutTabProfiles) {
             tutTabProfiles.className = 'px-3 py-1 rounded-md text-[#F8FAFC] bg-[#31343A] border-b-2 border-amber-400 transition-all';
@@ -3351,15 +3342,15 @@
           if (tutValTemp) tutValTemp.textContent = '6500K';
           if (tutFillTemp) tutFillTemp.style.width = '0%';
           if (tutThumbTemp) tutThumbTemp.style.left = '50%';
-          if (tutValRed) tutValRed.textContent = '0%';
-          if (tutFillRed) tutFillRed.style.width = '0%';
-          if (tutThumbRed) tutThumbRed.style.left = '50%';
-          if (tutValGreen) tutValGreen.textContent = '0%';
-          if (tutFillGreen) tutFillGreen.style.width = '0%';
-          if (tutThumbGreen) tutThumbGreen.style.left = '50%';
-          if (tutValBlue) tutValBlue.textContent = '0%';
-          if (tutFillBlue) tutFillBlue.style.width = '0%';
-          if (tutThumbBlue) tutThumbBlue.style.left = '50%';
+          if (tutValVibrance) tutValVibrance.textContent = '0%';
+          if (tutFillVibrance) tutFillVibrance.style.width = '0%';
+          if (tutThumbVibrance) tutThumbVibrance.style.left = '50%';
+          if (tutValShadows) tutValShadows.textContent = '0%';
+          if (tutFillShadows) tutFillShadows.style.width = '0%';
+          if (tutThumbShadows) tutThumbShadows.style.left = '50%';
+          if (tutValClarity) tutValClarity.textContent = '0%';
+          if (tutFillClarity) tutFillClarity.style.width = '0%';
+          if (tutThumbClarity) tutThumbClarity.style.left = '50%';
 
           // Reset tutorial state
           if (tutSlotsCount) tutSlotsCount.textContent = '3 Slots';
@@ -3382,15 +3373,15 @@
             cursorY = startY + (tabTarget.y - startY) * p;
             cursorOpacity = Math.min(1, t / 0.2);
           } else {
-            // Hover & Click on Display Tuner Tab
+            // Hover & Click on Create Profile Tab
             cursorX = tabTarget.x;
             cursorY = tabTarget.y;
             ringOpacity = Math.max(0, 1 - (t - 0.85) / 0.35);
           }
         } else if (t < 3.3) {
-          // STEP 2: View switches to Display Tuner -> Cursor drags Brightness (+30%) & Gamma (+17%)
+          // STEP 2: View switches to Create Profile -> Cursor drags Brightness (+30%) & Gamma (+17%)
           if (tutStepIcon) tutStepIcon.textContent = '🎚️';
-          if (tutStepText) tutStepText.textContent = 'STEP 2: 7-CHANNEL HARDWARE CALIBRATION';
+          if (tutStepText) tutStepText.textContent = 'STEP 2: 7-SLIDER HARDWARE CALIBRATION';
 
           if (tutTabProfiles) {
             tutTabProfiles.className = 'px-3 py-1 rounded-md text-[#A0AEC0] hover:text-white transition-all';

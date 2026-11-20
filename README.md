@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Anti--Cheat-100%25%20Safe-success" alt="Anti-Cheat Safe" />
-  <img src="https://img.shields.io/badge/Release-v2.10.19-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.20-EAB308" alt="Version" />
   <a href="https://bettercolorprofile.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
@@ -58,21 +58,21 @@ Fine-tune your display with 7 live hardware sliders:
 - **Import Share Code**: Paste any code to instantly apply those exact slider settings.
 
 ### 🎮 In-Game HUD Overlay
-Tweak colors and switch profiles inside any game without Alt-Tabbing (`Ctrl + Shift + V`):
-- `↑ / ↓` — Select a slider or profile row
-- `← / →` — Adjust values or switch profiles
-- `Ctrl + ← / →` — Fine-tune values (±1%)
-- `Enter` or `Ctrl + S` — Save adjustments to the active profile
-- `Ctrl + N` — Save adjustments as a new profile
-- `Esc` — Close overlay
+Tweak colors and switch profiles inside any game without Alt-Tabbing (`RCtrl + Enter`):
+- `Ctrl + Up / Down` — Select a slider or profile row
+- `Ctrl + Left / Right` — Adjust values (±5%) or switch profiles
+- `Shift + Left / Right` — Fine-tune values (±1%)
+- `Ctrl + S` — Save adjustments to the active profile
+- `Ctrl + Shift + S` — Save adjustments as a new profile
+- `Esc` or `RCtrl + Enter` — Close overlay
 
 ### 🪟 Auto Window & Game Detection
 - Automatically activates your chosen profile when a specific game or app launches.
 - Restores your default desktop profile as soon as you close or switch away from the game.
 
 ### ⌨️ Global Shortcuts
-- **Cycle Hotkey**: Cycle through your saved profile slots with a single keypress anywhere in Windows.
-- **Direct Slot Hotkeys**: Assign dedicated shortcuts (e.g. `Ctrl + 1`, `Ctrl + 2`) to jump straight to a profile.
+- **Cycle Hotkey**: `Ctrl + Shift + C` (or any custom key) to cycle through saved profile slots anywhere in Windows.
+- **Direct Slot Hotkeys**: Assign dedicated shortcuts (e.g. `F1`, `F2`, `Ctrl + 1`) to jump straight to a profile.
 - **Keycode Diagnostics**: Built-in test box confirms key codes and international layout compatibility.
 
 ### 🛡️ 100% Anti-Cheat Safe
@@ -87,7 +87,7 @@ Tweak colors and switch profiles inside any game without Alt-Tabbing (`Ctrl + Sh
 1. **Download**: Grab [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe).
 2. **Install**: Run the setup wizard and launch the app.
 3. **Calibrate**: Use the **Create Profile** tab to adjust your sliders, or pick an existing profile from the **Profiles** tab.
-4. **Play**: Press `Ctrl + Shift + V` in-game to tweak on the fly, or use your cycle hotkey to swap profiles instantly.
+4. **Play**: Press `RCtrl + Enter` in-game to tweak on the fly, or use your cycle hotkey (`Ctrl + Shift + C`) to swap profiles instantly.
 
 ---
 

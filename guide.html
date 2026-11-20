@@ -160,7 +160,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.19</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.20</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">Official User Guide & Documentation</span>
         </div>
@@ -200,7 +200,7 @@
   <section class="relative pt-12 pb-8 px-4 text-center z-10 max-w-5xl mx-auto">
     <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono mb-4">
       <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-      <span>OFFICIAL DOCUMENTATION &bull; RELEASE v2.10.19</span>
+      <span>OFFICIAL DOCUMENTATION &bull; RELEASE v2.10.20</span>
     </div>
 
     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-4">
@@ -236,7 +236,7 @@
         <nav class="space-y-1">
           <a href="#quick-start" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">1. Quick Start & Setup</a>
           <a href="#anti-cheat" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">2. 100% Anti-Cheat Safety</a>
-          <a href="#display-tuner" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">3. 7-Slider Display Tuner</a>
+          <a href="#display-tuner" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">3. Create Profile (7-Slider Calibration)</a>
           <a href="#auto-detection" class="block px-3 py-2 rounded-lg text-amber-300 font-bold bg-amber-400/10 border-l-2 border-amber-400 transition-colors">4. Auto Game Detection <span class="text-[9px] px-1 py-0.5 rounded bg-amber-400/20">NEW</span></a>
           <a href="#hud-overlay" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">5. HUD Overlay & Hotkeys</a>
           <a href="#profiles-slots" class="block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">6. Profiles & Backup</a>
@@ -361,12 +361,12 @@
         </div>
       </section>
 
-      <!-- SECTION 3: 7-SLIDER DISPLAY TUNER -->
+      <!-- SECTION 3: 7-SLIDER HARDWARE CALIBRATION (CREATE PROFILE) -->
       <section id="display-tuner" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">3</div>
           <div>
-            <h2 class="text-xl sm:text-2xl font-black text-white">7-Slider Hardware Display Tuner</h2>
+            <h2 class="text-xl sm:text-2xl font-black text-white">7-Slider Hardware Calibration (Create Profile)</h2>
             <p class="text-xs text-gray-400">Fine-grained precision controls for esports visibility and creator color accuracy.</p>
           </div>
         </div>
@@ -527,35 +527,35 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Toggle HUD Overlay</span>
-                <span class="kbd-badge">Ctrl + Shift + V</span>
+                <span class="kbd-badge">RCtrl + Enter</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Navigate Settings</span>
-                <span class="kbd-badge">&uarr; / &darr;</span>
+                <span class="kbd-badge">Ctrl + &uarr; / &darr;</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Adjust Value (&plusmn;5%) / Switch Profile</span>
-                <span class="kbd-badge">&larr; / &rarr;</span>
-              </div>
-              <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Fine Adjustment (&plusmn;1%)</span>
+                <span class="text-gray-300">Coarse Step (&plusmn;5%) / Switch Profile</span>
                 <span class="kbd-badge">Ctrl + &larr; / &rarr;</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
+                <span class="text-gray-300">Fine Step (&plusmn;1%)</span>
+                <span class="kbd-badge">Shift + &larr; / &rarr;</span>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Save to Active Profile</span>
-                <span class="kbd-badge">Enter / Ctrl + S</span>
+                <span class="kbd-badge">Ctrl + S</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Save as New Profile</span>
-                <span class="kbd-badge">Ctrl + N</span>
+                <span class="kbd-badge">Ctrl + Shift + S</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Close Overlay</span>
-                <span class="kbd-badge">Esc</span>
+                <span class="kbd-badge">Esc / RCtrl + Enter</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Global Cycle Hotkey</span>
-                <span class="kbd-badge">Custom Shortcut</span>
+                <span class="kbd-badge">Ctrl + Shift + C</span>
               </div>
             </div>
           </div>
