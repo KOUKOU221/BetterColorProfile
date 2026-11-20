@@ -1110,17 +1110,20 @@
       <div class="lg:col-span-6 overflow-x-auto">
         <div class="relative rounded-2xl overflow-hidden border-2 border-[#444952] bg-[#27292D] shadow-[0_25px_60px_rgba(0,0,0,0.85)] h-[580px] flex flex-col select-none min-w-[340px]">
           
-          <!-- Mockup Top Window Header (OS Title Bar #1E2023) -->
-          <div class="flex items-center justify-between px-4 py-2 border-b border-[#3A3E46] bg-[#1E2023] flex-shrink-0 h-[36px]">
+          <!-- Mockup Windows Title Bar (#1E2023) -->
+          <div class="flex items-center justify-between px-3 py-1.5 border-b border-[#3A3E46] bg-[#1E2023] flex-shrink-0 h-[32px]">
             <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
-              <span class="text-xs font-semibold text-white/90 ml-2">Better Color Profile</span>
+              <img src="assets/app_logo.png" alt="Logo" class="w-3.5 h-3.5 rounded" />
+              <span class="text-xs font-semibold text-white/90">Better Color Profile</span>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">● Daemon Active</span>
-              <span id="app-stage-badge" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-black/60 theme-accent border border-white/10">PROFILES</span>
+            <div class="flex items-center gap-3">
+              <span class="text-[9px] font-medium px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">● Daemon Active</span>
+              <span id="app-stage-badge" class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-black/60 theme-accent border border-white/10">PROFILES</span>
+              <div class="flex items-center gap-3 text-gray-400 text-xs pl-2 border-l border-white/10">
+                <span class="hover:text-white cursor-pointer" title="Minimize">─</span>
+                <span class="hover:text-white cursor-pointer" title="Maximize">□</span>
+                <span class="hover:text-red-400 cursor-pointer" title="Close">✕</span>
+              </div>
             </div>
           </div>
 
@@ -1149,10 +1152,10 @@
               </button>
             </div>
 
-            <!-- Authentic License Status Pill -->
+            <!-- Authentic License Status Pill (LicenseStatusPill) -->
             <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[9px] font-bold">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>PRO LICENSE</span>
+              <span>✓ Pro Active</span>
             </div>
           </div>
 
@@ -1462,130 +1465,196 @@
             </div>
 
             <!-- ================= VIEW 3: OPTIONS & SETTINGS ================= -->
-            <div id="view-options" class="w-1/4 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-2">
-              <div class="flex items-center justify-between">
+            <div id="view-options" class="w-1/4 h-full flex-shrink-0 overflow-y-auto p-3.5 space-y-3">
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-1 border-b border-[#3A3E46]">
                 <h4 class="text-xs sm:text-sm font-bold text-white">Options &amp; Settings</h4>
                 <span class="text-[10px] text-emerald-400 font-medium">● v2.10.21</span>
               </div>
 
-              <!-- 4 Subtabs Matching App Frontend -->
-              <div class="flex items-center gap-1 bg-[#1E2023] p-1 rounded-xl border border-white/5 text-[11px]">
-                <button id="opt-subtab-btn-pref" onclick="switchOptionsSubTab('pref')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5">Preferences</button>
-                <button id="opt-subtab-btn-win" onclick="switchOptionsSubTab('win')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Window Detection</button>
-                <button id="opt-subtab-btn-cycle" onclick="switchOptionsSubTab('cycle')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Profile Cycle</button>
-                <button id="opt-subtab-btn-hud" onclick="switchOptionsSubTab('hud')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">HUD Overlay</button>
-              </div>
-
-              <!-- Subtab 1: Preferences -->
-              <div id="opt-panel-pref" class="space-y-2">
-                <!-- Theme Select -->
-                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                  <div>
-                    <div class="font-bold text-white text-xs">Appearance</div>
-                    <div class="text-[10px] text-[#A0AEC0]">Theme &amp; Accent Colors</div>
-                  </div>
-                  <select id="options-theme-select" onchange="setDynamicTheme(this.value)" class="bg-[#27292D] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] font-medium">
-                    <option value="Yellow" selected>🟡 Yellow</option>
-                    <option value="Amber">🟠 Amber</option>
-                    <option value="Blue">🔷 Blue</option>
-                    <option value="Emerald">🟢 Emerald</option>
-                    <option value="Fuchsia">🟣 Fuchsia</option>
-                    <option value="Green">🍏 Green</option>
-                    <option value="Indigo">🫐 Indigo</option>
-                    <option value="Pink">🌸 Pink</option>
-                    <option value="Purple">🟪 Purple</option>
-                    <option value="Red">🔴 Red</option>
-                    <option value="Sky">🌐 Sky</option>
-                    <option value="Violet">🔮 Violet</option>
-                  </select>
-                </div>
-                <!-- Startup -->
-                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                  <div>
-                    <div class="font-bold text-white text-xs">Start with Windows</div>
-                    <div class="text-[10px] text-[#A0AEC0]">Launch quietly on system boot</div>
-                  </div>
-                  <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Start with Windows enabled' : 'Start with Windows disabled')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
-                  </label>
-                </div>
-                <!-- Sound Effects -->
-                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                  <div>
-                    <div class="font-bold text-white text-xs">Audio Feedback</div>
-                    <div class="text-[10px] text-[#A0AEC0]">Subtle audio cues on profile switches</div>
-                  </div>
-                  <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Audio feedback enabled' : 'Audio feedback muted')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
-                  </label>
-                </div>
-                <!-- Updates -->
-                <div class="p-2.5 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between">
-                  <div>
-                    <div class="font-bold text-white text-xs">Check for Updates</div>
-                    <div class="text-[10px] text-emerald-400">Integrated updater with SHA-256 integrity</div>
-                  </div>
-                  <button onclick="triggerToast('✓ Up to date: v2.10.21')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-xs font-medium transition-all">Check Now</button>
-                </div>
-              </div>
-
-              <!-- Subtab 2: Window Detection -->
-              <div id="opt-panel-win" class="space-y-2 hidden">
-                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
-                  <div class="flex items-center justify-between">
+              <!-- 1. About & Updates Card (cardAbout Replica) -->
+              <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2.5">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="flex items-center gap-3">
+                    <img src="assets/app_logo.png" alt="Better Color Profile Logo" class="w-12 h-12 rounded-xl border border-white/10 shadow-md flex-shrink-0" />
                     <div>
-                      <div class="font-bold text-white text-xs">Auto Game &amp; Window Detection</div>
-                      <div class="text-[10px] text-[#A0AEC0]">Automatically swaps profiles when games launch</div>
+                      <div class="font-bold text-white text-xs sm:text-sm leading-snug">Better Color Profile</div>
+                      <div class="flex items-center gap-2 mt-0.5">
+                        <span class="font-mono text-[11px] text-gray-200 font-bold">v2.10.21</span>
+                        <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">✓ Up to date</span>
+                      </div>
+                      <a href="https://github.com/KOUKOU221/BetterColorProfile" target="_blank" rel="noopener noreferrer" class="text-[10px] theme-accent hover:underline block mt-0.5 font-mono">
+                        https://github.com/KOUKOU221/BetterColorProfile
+                      </a>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1.5 items-end flex-shrink-0">
+                    <button onclick="triggerToast('✓ You are running the latest version (v2.10.21)')" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-[11px] font-semibold transition-all cursor-pointer whitespace-nowrap">
+                      Check for Updates
+                    </button>
+                    <a href="guide.html" target="_blank" class="px-2.5 py-1 rounded-lg bg-[#383C44] hover:bg-[#444952] border border-[#4F5561] text-gray-200 text-[11px] font-semibold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1">
+                      <span>📖</span> User Guide
+                    </a>
+                  </div>
+                </div>
+                <div class="text-[9px] text-[#A0AEC0] pt-1 border-t border-[#444952]/50">
+                  © 2026 Better Color Profile • Free &amp; Closed Source
+                </div>
+              </div>
+
+              <!-- 2. Discord Community Card (cardDiscord Replica) -->
+              <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-[#5865F2] flex items-center justify-center flex-shrink-0 shadow-md">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-xs">Discord Community</div>
+                    <div class="text-[10px] text-[#A0AEC0]">Share profiles, suggestions, and get community support.</div>
+                  </div>
+                </div>
+                <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-[#5865F2] hover:bg-[#4752C4] transition-all flex items-center gap-1 cursor-pointer whitespace-nowrap shadow-sm">
+                  Join Discord
+                </a>
+              </div>
+
+              <!-- 3. Settings Container Card (cardSettings Replica) -->
+              <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2.5">
+                <!-- 4 Subtabs Matching App Frontend -->
+                <div class="flex items-center gap-1 bg-[#1E2023] p-1 rounded-xl border border-white/5 text-[11px]">
+                  <button id="opt-subtab-btn-pref" onclick="switchOptionsSubTab('pref')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-white border-b-2 theme-border bg-white/5">Preferences</button>
+                  <button id="opt-subtab-btn-win" onclick="switchOptionsSubTab('win')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Window Detection</button>
+                  <button id="opt-subtab-btn-cycle" onclick="switchOptionsSubTab('cycle')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">Profile Cycle</button>
+                  <button id="opt-subtab-btn-hud" onclick="switchOptionsSubTab('hud')" class="px-2.5 py-1 rounded-lg font-semibold transition-all text-gray-400 hover:text-white">In-Game HUD</button>
+                </div>
+
+                <!-- Subtab 1: Preferences -->
+                <div id="opt-panel-pref" class="space-y-2">
+                  <!-- Theme Select -->
+                  <div class="p-2.5 rounded-xl bg-[#27292D] border border-[#444952] flex items-center justify-between">
+                    <div>
+                      <div class="font-bold text-white text-xs">Appearance</div>
+                      <div class="text-[10px] text-[#A0AEC0]">Theme &amp; Accent Colors</div>
+                    </div>
+                    <select id="options-theme-select" onchange="setDynamicTheme(this.value)" class="bg-[#1E2023] border border-[#444952] rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[var(--accent)] font-medium">
+                      <option value="Yellow" selected>🟡 Yellow</option>
+                      <option value="Amber">🟠 Amber</option>
+                      <option value="Blue">🔷 Blue</option>
+                      <option value="Emerald">🟢 Emerald</option>
+                      <option value="Fuchsia">🟣 Fuchsia</option>
+                      <option value="Green">🍏 Green</option>
+                      <option value="Indigo">🫐 Indigo</option>
+                      <option value="Pink">🌸 Pink</option>
+                      <option value="Purple">🟪 Purple</option>
+                      <option value="Red">🔴 Red</option>
+                      <option value="Sky">🌐 Sky</option>
+                      <option value="Violet">🔮 Violet</option>
+                    </select>
+                  </div>
+                  <!-- Startup -->
+                  <div class="p-2.5 rounded-xl bg-[#27292D] border border-[#444952] flex items-center justify-between">
+                    <div>
+                      <div class="font-bold text-white text-xs">Start with Windows</div>
+                      <div class="text-[10px] text-[#A0AEC0]">Launch quietly on system boot</div>
                     </div>
                     <label class="flex items-center gap-2 cursor-pointer">
-                      <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Window Detection active' : 'Window Detection paused')" class="w-4 h-4 rounded bg-[#27292D] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                      <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Start with Windows enabled' : 'Start with Windows disabled')" class="w-4 h-4 rounded bg-[#1E2023] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
                     </label>
                   </div>
-                  <p class="text-[10px] text-gray-300 leading-relaxed">
-                    Link games in the Profiles tab (e.g. CS2, Valorant). When active, your custom profile applies automatically and restores your desktop profile when you exit.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Subtab 3: Profile Cycle -->
-              <div id="opt-panel-cycle" class="space-y-2 hidden">
-                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
-                  <div class="font-bold text-white text-xs">Profile Cycle Shortcut</div>
-                  <p class="text-[10px] text-[#A0AEC0]">Press your cycle key anywhere to switch profile slots sequentially.</p>
-                  <div class="p-2 rounded-lg bg-[#27292D] border border-[#444952] text-center font-mono text-xs text-amber-300">
-                    Ctrl + Shift + C
-                  </div>
-                  <div class="p-2 rounded-lg bg-[#212327] border border-white/5 text-[10px] text-gray-400">
-                    Keycode Diagnostics: <span class="text-white font-mono">VK 0x43 (C) &bull; No Repeat</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Subtab 4: HUD Overlay -->
-              <div id="opt-panel-hud" class="space-y-2 hidden">
-                <div class="p-3 rounded-xl bg-[#31343A] border border-[#444952] space-y-2">
-                  <div class="flex items-center justify-between">
+                  <!-- Sound Effects -->
+                  <div class="p-2.5 rounded-xl bg-[#27292D] border border-[#444952] flex items-center justify-between">
                     <div>
-                      <div class="font-bold text-white text-xs">In-Game HUD Overlay</div>
-                      <div class="text-[10px] text-[#A0AEC0]">Semi-transparent glass HUD inside games</div>
+                      <div class="font-bold text-white text-xs">Audio Feedback</div>
+                      <div class="text-[10px] text-[#A0AEC0]">Subtle audio cues on profile switches</div>
                     </div>
-                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Enabled</span>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Audio feedback enabled' : 'Audio feedback muted')" class="w-4 h-4 rounded bg-[#1E2023] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                    </label>
                   </div>
-                  <div class="flex items-center justify-between text-xs pt-1">
-                    <span class="text-gray-300 text-[11px]">Toggle Shortcut:</span>
-                    <span class="font-mono text-amber-300 bg-[#27292D] px-2 py-0.5 rounded border border-[#444952] text-[10px]">RCtrl + Enter</span>
+                </div>
+
+                <!-- Subtab 2: Window Detection -->
+                <div id="opt-panel-win" class="space-y-2 hidden">
+                  <div class="p-3 rounded-xl bg-[#27292D] border border-[#444952] space-y-2">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <div class="font-bold text-white text-xs">Auto Game &amp; Window Detection</div>
+                        <div class="text-[10px] text-[#A0AEC0]">Automatically swaps profiles when games launch</div>
+                      </div>
+                      <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" checked onchange="triggerToast(this.checked ? '✓ Window Detection active' : 'Window Detection paused')" class="w-4 h-4 rounded bg-[#1E2023] border-[#444952] cursor-pointer" style="accent-color: var(--accent);">
+                      </label>
+                    </div>
+                    <p class="text-[10px] text-gray-300 leading-relaxed">
+                      Link games in the Profiles tab (e.g. CS2, Valorant). When active, your custom profile applies automatically and restores your desktop profile when you exit.
+                    </p>
                   </div>
-                  <div class="flex items-center justify-between text-xs">
-                    <span class="text-gray-300 text-[11px]">Screen Position:</span>
-                    <div class="flex gap-1 text-[10px]">
-                      <button class="px-2 py-0.5 rounded bg-white/10 text-white font-bold">Top-Right</button>
-                      <button class="px-2 py-0.5 rounded bg-[#27292D] text-gray-400">Center</button>
-                      <button class="px-2 py-0.5 rounded bg-[#27292D] text-gray-400">Top-Left</button>
+                </div>
+
+                <!-- Subtab 3: Profile Cycle -->
+                <div id="opt-panel-cycle" class="space-y-2 hidden">
+                  <div class="p-3 rounded-xl bg-[#27292D] border border-[#444952] space-y-2">
+                    <div class="font-bold text-white text-xs">Profile Cycle Shortcut</div>
+                    <p class="text-[10px] text-[#A0AEC0]">Press your cycle key anywhere to switch profile slots sequentially.</p>
+                    <div class="p-2 rounded-lg bg-[#1E2023] border border-[#444952] text-center font-mono text-xs text-amber-300">
+                      Ctrl + Shift + C
+                    </div>
+                    <div class="p-2 rounded-lg bg-[#181A1D] border border-white/5 text-[10px] text-gray-400">
+                      Keycode Diagnostics: <span class="text-white font-mono">VK 0x43 (C) &bull; No Repeat</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
+                <!-- Subtab 4: HUD Overlay -->
+                <div id="opt-panel-hud" class="space-y-2 hidden">
+                  <div class="p-3 rounded-xl bg-[#27292D] border border-[#444952] space-y-2.5">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <div class="font-bold text-white text-xs">In-Game HUD Overlay</div>
+                        <div class="text-[10px] text-[#A0AEC0]">Semi-transparent glass HUD inside games</div>
+                      </div>
+                      <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Enabled</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs pt-1">
+                      <span class="text-gray-300 text-[11px]">Toggle Shortcut:</span>
+                      <span class="font-mono text-amber-300 bg-[#1E2023] px-2 py-0.5 rounded border border-[#444952] text-[10px]">RCtrl + Enter</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                      <span class="text-gray-300 text-[11px]">Screen Position:</span>
+                      <div class="flex gap-1 text-[10px]">
+                        <button class="px-2 py-0.5 rounded bg-white/10 text-white font-bold">Top-Right</button>
+                        <button class="px-2 py-0.5 rounded bg-[#1E2023] text-gray-400">Center</button>
+                        <button class="px-2 py-0.5 rounded bg-[#1E2023] text-gray-400">Top-Left</button>
+                      </div>
+                    </div>
+                    <!-- Detailed In-Game Shortcuts Reference inside Subtab -->
+                    <div class="pt-2 border-t border-[#444952]/60 space-y-1">
+                      <div class="text-[10px] font-semibold text-gray-300">In-Game Calibration Hotkeys:</div>
+                      <div class="grid grid-cols-2 gap-1 text-[9.5px]">
+                        <div class="p-1 rounded bg-[#1E2023] border border-white/5 flex items-center justify-between">
+                          <span class="text-gray-400">Fine Adjust (±1%):</span>
+                          <span class="font-mono text-amber-300">Ctrl+Shift+←/→</span>
+                        </div>
+                        <div class="p-1 rounded bg-[#1E2023] border border-white/5 flex items-center justify-between">
+                          <span class="text-gray-400">Coarse (±5%):</span>
+                          <span class="font-mono text-gray-300">Ctrl+←/→</span>
+                        </div>
+                        <div class="p-1 rounded bg-[#1E2023] border border-white/5 flex items-center justify-between">
+                          <span class="text-gray-400">Save to Profile:</span>
+                          <span class="font-mono text-emerald-400">Ctrl + S</span>
+                        </div>
+                        <div class="p-1 rounded bg-[#1E2023] border border-white/5 flex items-center justify-between">
+                          <span class="text-gray-400">Save as New:</span>
+                          <span class="font-mono text-sky-400">Ctrl+Shift+S</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             <!-- ================= VIEW 4: SEND FEEDBACK ================= -->

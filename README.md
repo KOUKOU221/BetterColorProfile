@@ -44,7 +44,7 @@ Easily tune monitor colors, organize profiles into quick-access slots, and switc
 - **Multi-Monitor Support**: Assign different color profiles to each connected display.
 - **Protected Defaults**: Your original Windows sRGB calibration is safely preserved so you can always revert.
 
-### 🎛️ Real-Time Display Tuner
+### 🎛️ Real-Time Display Calibration & Profile Creator
 Fine-tune your display with 7 live hardware sliders:
 - **Brightness & Contrast**: Clean hardware luminance and contrast adjustments.
 - **Gamma**: Adjust midtones for clear visibility in any lighting.
