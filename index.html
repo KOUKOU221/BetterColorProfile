@@ -596,7 +596,7 @@
             <span class="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover/play:scale-110 transition-transform">
               <svg class="w-4 h-4 fill-current ml-0.5 text-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </span>
-            <span>Watch In-Game Showcase</span>
+            <span>Watch Showcase</span>
           </button>
         </div>
 
@@ -814,7 +814,7 @@
                   <div id="ad-tut-slot-4" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
                     <div class="flex items-center gap-2.5">
                       <div id="ad-tut-slot4-strip" class="w-1 h-6 bg-amber-400 rounded-full hidden"></div>
-                      <img src="assets/icon_cs2.png" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <img src="assets/icon_cs2.png?v=2.10.31" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
                       <div>
                         <div id="ad-tut-slot4-title" class="text-xs sm:text-sm font-bold text-white">cs2</div>
                         <div id="ad-tut-slot4-sub" class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 3</div>
@@ -1325,24 +1325,29 @@
         <!-- ============================================================ -->
         <!-- SCENE 4: CLEAN DOWNLOAD END CARD                             -->
         <!-- ============================================================ -->
-        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="restartSpecAd();">
-          <div class="relative p-8 rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-md w-full" onclick="event.stopPropagation();">
+        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="event.stopPropagation();">
+          
+          <!-- Replay Button in Top-Right of the BIG THEATER WINDOW -->
+          <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-5 sm:top-6 right-5 sm:right-6 py-2.5 px-4 rounded-full text-xs sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-all flex items-center gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
+            <svg class="w-4 h-4 text-amber-400 group-hover:rotate-[-45deg] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>Replay</span>
+          </button>
+
+          <!-- Middle-Center Dialog Box -->
+          <div class="relative p-8 sm:p-10 rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-md w-full pointer-events-auto" onclick="event.stopPropagation();">
             <img src="assets/app_logo.png" alt="Better Color Profile" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-4 border border-white/20 object-contain" />
             <h3 class="text-2xl font-black text-white tracking-tight">Better Color Profile</h3>
             <p class="text-xs text-gray-400 mt-1 mb-6 font-mono">Universal Display Calibration for Windows 11 &amp; 10</p>
 
-            <div class="flex flex-col sm:flex-row items-center gap-3 w-full">
-              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord();" class="flex-1 w-full py-3.5 px-6 rounded-2xl text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_30px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <!-- Download Now in the Middle Center -->
+            <div class="w-full flex justify-center">
+              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord();" class="w-full py-4 px-6 rounded-2xl text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_35px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
                 <span>Download Now</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               </a>
-
-              <button type="button" onclick="restartSpecAd();" class="w-full sm:w-auto py-3.5 px-5 rounded-2xl text-sm font-bold text-gray-200 bg-white/5 hover:bg-white/15 border border-white/15 hover:border-amber-400/50 hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg" title="Replay video showcase">
-                <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Replay</span>
-              </button>
             </div>
           </div>
+
         </div>
 
       <!-- Hidden HTML5 Audio Element for White Bat Audio Track (loaded on play) -->
@@ -2285,6 +2290,19 @@
       if (specAd) {
         specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+      // If at start, jump straight into the showcase action immediately with zero delay
+      if (adCurrentSec < 1.8) {
+        adCurrentSec = 1.8;
+        const b2 = document.getElementById('ad-beat-2');
+        if (b2) { b2.style.display = 'none'; b2.style.opacity = '0'; }
+        const tutStage = document.getElementById('ad-tutorial-stage');
+        if (tutStage) {
+          tutStage.style.display = 'flex';
+          tutStage.style.opacity = '1';
+          tutStage.style.pointerEvents = 'auto';
+        }
+        renderAdFrame(1.8);
+      }
       if (!adIsPlaying) {
         playSpecAd();
       }
@@ -2303,6 +2321,18 @@
         const specAd = document.getElementById('spec-ad');
         if (specAd) {
           specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        if (adCurrentSec < 1.8) {
+          adCurrentSec = 1.8;
+          const b2 = document.getElementById('ad-beat-2');
+          if (b2) { b2.style.display = 'none'; b2.style.opacity = '0'; }
+          const tutStage = document.getElementById('ad-tutorial-stage');
+          if (tutStage) {
+            tutStage.style.display = 'flex';
+            tutStage.style.opacity = '1';
+            tutStage.style.pointerEvents = 'auto';
+          }
+          renderAdFrame(1.8);
         }
         if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
           restartSpecAd();
