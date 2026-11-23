@@ -335,9 +335,9 @@
           <span>User Guide</span>
         </a>
 
-        <a href="#pricing" onclick="sound.click()" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="View Plans & 7-Day Free Trial">
+        <a href="#pricing" onclick="sound.click()" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="View Plans & Pricing">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>Free Trial</span>
+          <span>Pricing</span>
         </a>
 
         <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="Join Official Better Color Profile Discord">
@@ -522,8 +522,7 @@
                 <div class="flex items-center justify-center gap-1 text-[8.5px]">
                   <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↑</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↓</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↑ ↓</span>
                 </div>
                 <span class="text-[8.5px] text-gray-300 font-semibold">Select</span>
               </div>
@@ -531,8 +530,7 @@
                 <div class="flex items-center justify-center gap-1 text-[8.5px]">
                   <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">←</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">→</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
                 </div>
                 <span class="text-[8.5px] text-gray-300 font-semibold">±5%</span>
               </div>
@@ -540,8 +538,7 @@
                 <div class="flex items-center justify-center gap-1 text-[8px]">
                   <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl + Shift</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">←</span>
-                  <span class="px-1 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">→</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
                 </div>
                 <span class="text-[8.5px] text-sky-300 font-semibold">±1%</span>
               </div>
@@ -564,12 +561,12 @@
           </div>
         </div>
 
-        <!-- Simulated Mouse Cursor & Click Ring (style="z-index: 9999;") -->
-        <div id="ad-simulated-cursor" class="absolute pointer-events-none transition-transform duration-75 ease-out opacity-0" style="left: 50%; top: 50%; z-index: 9999;">
+        <!-- Simulated Mouse Cursor & Click Ring (60 FPS GPU-Accelerated Hardware Transform) -->
+        <div id="ad-simulated-cursor" class="absolute pointer-events-none opacity-0" style="top: 0; left: 0; z-index: 9999; will-change: transform;">
           <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_4px_10px_rgba(0,0,0,0.95)] -translate-x-1 -translate-y-1" viewBox="0 0 24 24" fill="none">
             <path d="M5.5 3.5L19 12L12 14L8.5 21L5.5 3.5Z" fill="#FACC15" stroke="#000000" stroke-width="2" stroke-linejoin="round"/>
           </svg>
-          <div id="ad-cursor-ring" class="absolute -top-3 -left-3 w-12 h-12 rounded-full border-2 border-amber-400 bg-amber-400/25 pointer-events-none scale-0 opacity-0 transition-all duration-300"></div>
+          <div id="ad-cursor-ring" class="absolute -top-3 -left-3 w-12 h-12 rounded-full border-2 border-amber-400 bg-amber-400/25 pointer-events-none scale-0 opacity-0 transition-all duration-200"></div>
         </div>
 
         <!-- ============================================================ -->
@@ -809,7 +806,7 @@
                   <div id="ad-tut-slot-4" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
                     <div class="flex items-center gap-2.5">
                       <div id="ad-tut-slot4-strip" class="w-1 h-6 bg-amber-400 rounded-full hidden"></div>
-                      <img src="assets/icon_cs2.png?v=2.10.31" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <img src="assets/icon_cs2.png?v=2.10.32" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
                       <div>
                         <div id="ad-tut-slot4-title" class="text-xs sm:text-sm font-bold text-white">cs2</div>
                         <div id="ad-tut-slot4-sub" class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 3</div>
@@ -2190,6 +2187,9 @@
     let adInterval = null;
     let adCurrentSec = 0;
     let cachedSavePos = { x: 50, y: 88 };
+    let cachedCopyPos = { x: 41, y: 50 };
+    let stagePctCache = {};
+    let lastStageW = 0, lastStageH = 0;
     const AD_TOTAL_SEC = 28;
     let adIsPlaying = false;
     let adIsMuted = false;
@@ -2381,22 +2381,19 @@
       function adLoop(now) {
         if (!adIsPlaying) return;
 
-        const dt = Math.max(0, Math.min(0.08, (now - lastRafTime) / 1000));
+        const dt = Math.max(0, Math.min(0.05, (now - lastRafTime) / 1000));
         lastRafTime = now;
+        adCurrentSec += dt;
 
         if (sound.adSourceMode === 'file' && audio && !audio.paused) {
-          adCurrentSec += dt;
           const targetAudioSec = audio.currentTime - sound.customAudioOffset;
           if (targetAudioSec >= 0) {
             const drift = targetAudioSec - adCurrentSec;
-            if (Math.abs(drift) > 0.12) {
-              adCurrentSec = targetAudioSec;
-            } else {
-              adCurrentSec += drift * 0.08;
+            // Only correct gross audio desync (> 220ms) to preserve pure, butter-smooth 60fps VSync pacing
+            if (Math.abs(drift) > 0.22) {
+              adCurrentSec += drift * 0.15;
             }
           }
-        } else {
-          adCurrentSec += dt;
         }
 
         if (adCurrentSec >= AD_TOTAL_SEC) {
@@ -2834,14 +2831,26 @@
       const slot4Action = document.getElementById('ad-tut-slot4-action');
       const headingName = document.getElementById('ad-tut-heading-name');
 
-      function getStagePct(el) {
-        if (!el || !stage) return { x: 50, y: 50 };
+      function getStagePct(el, cacheKey) {
+        if (!el || !stage) return (cacheKey && stagePctCache[cacheKey]) ? stagePctCache[cacheKey] : { x: 50, y: 50 };
+        const curW = stage.clientWidth || stage.offsetWidth || 0;
+        const curH = stage.clientHeight || stage.offsetHeight || 0;
+        if (cacheKey && stagePctCache[cacheKey] && curW === lastStageW && curH === lastStageH) {
+          return stagePctCache[cacheKey];
+        }
         const rEl = el.getBoundingClientRect();
         const rSt = stage.getBoundingClientRect();
-        return {
+        if (rEl.width === 0 || rEl.height === 0 || rSt.width === 0) {
+          return (cacheKey && stagePctCache[cacheKey]) ? stagePctCache[cacheKey] : { x: 50, y: 50 };
+        }
+        const res = {
           x: Math.max(2, Math.min(98, ((rEl.left + rEl.width / 2 - rSt.left) / rSt.width) * 100)),
           y: Math.max(2, Math.min(98, ((rEl.top + rEl.height / 2 - rSt.top) / rSt.height) * 100))
         };
+        if (cacheKey) stagePctCache[cacheKey] = res;
+        lastStageW = curW;
+        lastStageH = curH;
+        return res;
       }
 
       function lerp(a, b, p) { return a + (b - a) * p; }
@@ -2937,8 +2946,8 @@
           if (tutTabOptions) tutTabOptions.className = 'px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all';
 
           const t = sec - 1.8; // 0.0s to 2.0s
-          const pThumb = getStagePct(tutThumbBright);
-          const pSave = getStagePct(tutBtnSave);
+          const pThumb = getStagePct(tutThumbBright, 'thumbBright');
+          const pSave = getStagePct(tutBtnSave, 'btnSave');
           if (pSave && pSave.x > 10 && pSave.y > 10) {
             cachedSavePos = pSave;
           }
@@ -2959,15 +2968,14 @@
             const valNum = Math.round(p * 50);
             if (tutValBright) tutValBright.textContent = `+${valNum}%`;
             setAdFilter(`brightness(${1.0 + p * 0.25})`);
-            const currentThumb = getStagePct(tutThumbBright);
-            curX = currentThumb.x;
-            curY = currentThumb.y;
+            // Continuous 60fps mathematical slider follow without layout thrashing
+            curX = pThumb.x + p * 6.8;
+            curY = pThumb.y;
           } else if (t < 1.65) {
             // Move cursor directly down to Save .ICC Profile
             const p = easeInOutCubic((t - 1.15) / 0.5);
-            const currentThumb = getStagePct(tutThumbBright);
-            curX = lerp(currentThumb.x, pSave.x, p);
-            curY = lerp(currentThumb.y, pSave.y, p);
+            curX = lerp(pThumb.x + 6.8, pSave.x, p);
+            curY = lerp(pThumb.y, pSave.y, p);
             if (tutBtnSave) tutBtnSave.style.transform = 'none';
           } else {
             // Click Save .ICC Profile! (Instant switch right upon click!)
@@ -3009,9 +3017,12 @@
           const slot3Action = document.getElementById('ad-tut-slot3-action');
           const btnApplyArena = document.getElementById('ad-tut-btn-apply-arena');
           const slot3Check = document.getElementById('ad-tut-slot3-check');
-          const pSave = getStagePct(tutBtnSave);
-          const pApply = getStagePct(slot3Action);
-          const pCopy = getStagePct(tutBtnCopyShare);
+          const pSave = (cachedSavePos && cachedSavePos.x > 10) ? cachedSavePos : getStagePct(tutBtnSave, 'btnSave');
+          const pApply = getStagePct(slot3Action, 'slot3Action');
+          const pCopy = getStagePct(tutBtnCopyShare, 'btnCopyShare');
+          if (pCopy && pCopy.x > 10) {
+            cachedCopyPos = pCopy;
+          }
 
           // 1. One profile must be ticked ALREADY (Default Profile) before switching to arena!
           if (t < 0.65) {
@@ -3084,8 +3095,8 @@
               btnApplyArena.style.transform = (t > 0.66 && t < 0.82) ? 'scale(0.92)' : 'none';
             }
           } else if (t < 1.65) {
-            // SLIDE DIRECTLY TO Copy Share Code
-            const p = easeInOutCubic((t - 0.85) / 0.80);
+            // SLIDE DIRECTLY TO Copy Share Code (Smooth 60fps easing without discontinuity)
+            const p = easeInOutCubic(Math.max(0, Math.min(1, (t - 0.90) / 0.75)));
             curX = lerp(pApply.x, pCopy.x, p);
             curY = lerp(pApply.y, pCopy.y, p);
             if (btnApplyArena) btnApplyArena.style.transform = 'none';
@@ -3119,13 +3130,14 @@
           }
 
           const t = sec - 8.8; // 0.0s to 4.7s
-          const pInput = getStagePct(discordInputBar);
+          const pInput = getStagePct(discordInputBar, 'discordInput');
 
           if (t < 0.9) {
-            // Cursor moves to Discord chat input bar
+            // Cursor smoothly glides from Copy Share Code over to Discord chat input bar
             const p = easeInOutCubic(t / 0.9);
-            curX = lerp(curX || 60, pInput.x, p);
-            curY = lerp(curY || 80, pInput.y, p);
+            const startCopy = (cachedCopyPos && cachedCopyPos.x > 10) ? cachedCopyPos : { x: 41.2, y: 50.8 };
+            curX = lerp(startCopy.x, pInput.x, p);
+            curY = lerp(startCopy.y, pInput.y, p);
             if (discordInputText) {
               discordInputText.textContent = 'Message #general-chat';
               discordInputText.className = 'text-xs font-normal text-[#949BA4] truncate';
@@ -3179,8 +3191,11 @@
 
         if (simCursor) {
           simCursor.style.opacity = curOp.toString();
-          simCursor.style.left = `${curX}%`;
-          simCursor.style.top = `${curY}%`;
+          const sw = stage ? (stage.clientWidth || stage.offsetWidth || 1280) : 1280;
+          const sh = stage ? (stage.clientHeight || stage.offsetHeight || 720) : 720;
+          const pxX = (curX * sw) / 100;
+          const pxY = (curY * sh) / 100;
+          simCursor.style.transform = `translate3d(${pxX.toFixed(2)}px, ${pxY.toFixed(2)}px, 0)`;
         }
 
       // ============================================================
