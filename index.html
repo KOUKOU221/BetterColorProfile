@@ -580,7 +580,7 @@
         <!-- ============================================================ -->
         <!-- SCENE 1: THE OPENING HOOK                                    -->
         <!-- ============================================================ -->
-        <div id="ad-beat-2" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-[#0B0D12] transition-opacity duration-300 opacity-100 pointer-events-none select-none">
+        <div id="ad-beat-2" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-[#0B0D12] transition-opacity duration-300 opacity-100 pointer-events-auto select-none">
           <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#1E2023] border border-amber-400/40 flex items-center justify-center p-3.5 shadow-[0_0_40px_rgba(250,204,21,0.3)] mb-4">
             <img src="assets/app_logo.png" alt="Better Color Profile Logo" class="w-full h-full object-contain" onerror="this.src='assets/icon.png'" />
           </div>
@@ -590,6 +590,14 @@
           <p class="text-sm sm:text-lg text-gray-300 font-medium max-w-xl mt-3 leading-relaxed">
             Total Color Control Built for Competitive Gaming.
           </p>
+
+          <!-- Sleek Glowing Play Button (Smoothly Centers Stage & Starts Video) -->
+          <button type="button" id="ad-start-play-btn" onclick="startAdAndCenter(event)" class="mt-7 px-8 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm sm:text-base shadow-[0_0_35px_rgba(250,204,21,0.6)] flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 cursor-pointer select-none group/play">
+            <span class="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover/play:scale-110 transition-transform">
+              <svg class="w-4 h-4 fill-current ml-0.5 text-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span>Watch In-Game Showcase</span>
+          </button>
         </div>
 
         <!-- ============================================================ -->
@@ -916,7 +924,7 @@
                         <span>📋 Copy Share Code</span>
                       </button>
                       <!-- Green Inline Toast -->
-                      <div id="ad-tut-share-toast" class="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5 opacity-0 transition-opacity duration-200">
+                      <div id="ad-tut-share-toast" class="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5 opacity-0 transition-opacity duration-200" style="display: none; visibility: hidden;">
                         <span>✓ Share Code Copied: BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
                       </div>
                     </div>
@@ -2269,6 +2277,20 @@
       }
     }
 
+        function startAdAndCenter(e) {
+      if (e) {
+        e.stopPropagation();
+      }
+      const specAd = document.getElementById('spec-ad');
+      if (specAd) {
+        specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (!adIsPlaying) {
+        playSpecAd();
+      }
+    }
+    window.startAdAndCenter = startAdAndCenter;
+
     function toggleAdPlay(e) {
       if (e) {
         if (e.target && (e.target.closest('#ad-floating-volume') || e.target.closest('#ad-beat-5 a') || e.target.closest('#ad-beat-5 button'))) {
@@ -2278,6 +2300,10 @@
       if (adIsPlaying) {
         pauseSpecAd();
       } else {
+        const specAd = document.getElementById('spec-ad');
+        if (specAd) {
+          specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
           restartSpecAd();
         } else {
@@ -2393,6 +2419,13 @@
         b5.style.pointerEvents = 'none';
         b5.classList.remove('opacity-100', 'pointer-events-auto');
         b5.classList.add('opacity-0', 'pointer-events-none');
+      }
+      const shareToastReset = document.getElementById('ad-tut-share-toast');
+      if (shareToastReset) {
+        shareToastReset.style.display = 'none';
+        shareToastReset.style.visibility = 'hidden';
+        shareToastReset.classList.add('opacity-0');
+        shareToastReset.classList.remove('opacity-100');
       }
       adCurrentSec = 0;
       sound.resetAdSoundtrackFlags(0);
@@ -2843,7 +2876,7 @@
           if (tutViewTuner) { tutViewTuner.classList.remove('hidden'); tutViewTuner.style.display = 'flex'; }
           if (tutViewProfiles) { tutViewProfiles.classList.add('hidden'); tutViewProfiles.classList.remove('grid'); }
           if (tutViewOptions) tutViewOptions.classList.add('hidden');
-          if (tutShareToast) tutShareToast.classList.add('opacity-0');
+          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           if (tutDiscordBox) {
             tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
             tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
@@ -2983,7 +3016,7 @@
 
           // 2. Persistent Share Toast state: ONLY visible AFTER Copy Share click (t >= 2.35s)!
           if (t < 2.35) {
-            if (tutShareToast) tutShareToast.classList.add('opacity-0');
+            if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           } else {
             if (tutShareToast) {
               tutShareToast.classList.remove('opacity-0');
@@ -3037,6 +3070,7 @@
         // SUB-PART 2C: DISCORD (#general-chat) (8.8s - 13.5s)
         // ----------------------------------------------------------
         } else {
+          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           if (tutDiscordBox) {
             tutDiscordBox.classList.remove('opacity-0', 'translate-y-4');
             tutDiscordBox.classList.add('opacity-100', 'pointer-events-none', 'translate-y-0');
