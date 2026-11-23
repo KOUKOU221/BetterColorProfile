@@ -13,7 +13,6 @@
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Display%20API-Windows%20Official-success" alt="Uses Official Windows Display APIs" />
   <img src="https://img.shields.io/badge/Release-v2.10.30-EAB308" alt="Version" />
-  <a href="https://bettercolorprofile.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-Try%20in%20Browser-00C853?logo=googlechrome&logoColor=white" alt="Live Demo" /></a>
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
 </p>
@@ -24,7 +23,7 @@
 
 Easily tune monitor colors, organize profiles into quick-access slots, and switch profiles instantly while gaming with global hotkeys and a sleek in-game overlay — with **zero input lag** and **100% anti-cheat safety**.
 
-👉 **[🚀 Try the Live Browser Demo](https://bettercolorprofile.vercel.app/)** • **[📥 Download Latest Installer](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe)**
+👉 **[📥 Download Latest Installer](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe)** • **[🌐 Visit Official Website](https://bettercolorprofile.vercel.app/)**
 
 ---
 
