@@ -397,8 +397,8 @@
         </div>
 
         <!-- 2 1080p60 Gameplay Video Streams for Smooth Crossfades (CS2 & GTA VI Extended) -->
-        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
-        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4?v=2.10.31b" playsinline muted preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
 
         <!-- Static Fallback Accent Layer -->
         <div id="ad-scene-inferno" class="ad-slide absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 opacity-0" style="background-image: url('assets/scene_inferno.jpg');"></div>
@@ -924,7 +924,7 @@
                         <span>📋 Copy Share Code</span>
                       </button>
                       <!-- Green Inline Toast -->
-                      <div id="ad-tut-share-toast" class="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5 opacity-0 transition-opacity duration-200" style="display: none; visibility: hidden;">
+                      <div id="ad-tut-share-toast" class="text-xs font-mono font-bold text-emerald-400 items-center gap-1.5 transition-opacity duration-200" style="display: none; visibility: hidden; opacity: 0;">
                         <span>✓ Share Code Copied: BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
                       </div>
                     </div>
@@ -1219,11 +1219,6 @@
 
         </div>
 
-          </div>
-        </div>
-
-
-
         <!-- ============================================================ -->
         <!-- SCENE 5: DUAL MONITOR BATTLESTATION STAGE                    -->
         <!-- (Large, Photorealistic 2 Monitors with RGB Bias Lighting)     -->
@@ -1350,8 +1345,11 @@
 
         </div>
 
-      <!-- Hidden HTML5 Audio Element for White Bat Audio Track (loaded on play) -->
-      <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="none"></audio>
+        <!-- Hidden HTML5 Audio Element for White Bat Audio Track (loaded on play) -->
+        <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="none"></audio>
+
+      </div> <!-- closes ad-stage-box -->
+    </div> <!-- closes spec-ad (Theater Window) -->
 
   </section>
 
@@ -2311,9 +2309,13 @@
 
     function toggleAdPlay(e) {
       if (e) {
-        if (e.target && (e.target.closest('#ad-floating-volume') || e.target.closest('#ad-beat-5 a') || e.target.closest('#ad-beat-5 button'))) {
+        if (e.target && (e.target.closest('#ad-floating-volume') || e.target.closest('#ad-beat-5') || e.target.closest('#ad-start-play-btn'))) {
           return;
         }
+      }
+      if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
+        // Reached end card: clicking anywhere on stage does NOT restart; user must click Replay button!
+        return;
       }
       if (adIsPlaying) {
         pauseSpecAd();
@@ -2334,11 +2336,7 @@
           }
           renderAdFrame(1.8);
         }
-        if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
-          restartSpecAd();
-        } else {
-          playSpecAd();
-        }
+        playSpecAd();
       }
     }
 
@@ -2442,6 +2440,10 @@
 
     function restartSpecAd() {
       pauseSpecAd();
+      const vidCs2 = document.getElementById('ad-vid-cs2');
+      const vidGta = document.getElementById('ad-vid-gta');
+      if (vidCs2) { vidCs2.currentTime = 0; if (!vidCs2.paused) vidCs2.pause(); }
+      if (vidGta) { vidGta.currentTime = 0; if (!vidGta.paused) vidGta.pause(); }
       const b5 = document.getElementById('ad-beat-5');
       if (b5) {
         b5.style.display = 'none';
@@ -2454,6 +2456,7 @@
       if (shareToastReset) {
         shareToastReset.style.display = 'none';
         shareToastReset.style.visibility = 'hidden';
+        shareToastReset.style.opacity = '0';
         shareToastReset.classList.add('opacity-0');
         shareToastReset.classList.remove('opacity-100');
       }
@@ -2864,8 +2867,8 @@
         if (hudEl) hudEl.style.opacity = '0';
         if (b5) { b5.style.display = 'none'; b5.style.opacity = '0'; b5.style.pointerEvents = 'none'; }
         if (simCursor) simCursor.style.opacity = '0';
-        if (vidCs2) { vidCs2.style.opacity = '0'; if (!vidCs2.paused) vidCs2.pause(); }
-        if (vidGta) { vidGta.style.opacity = '0'; if (!vidGta.paused) vidGta.pause(); }
+        if (vidCs2) { vidCs2.style.opacity = '0'; if (!vidCs2.paused) vidCs2.pause(); vidCs2.currentTime = 0; }
+        if (vidGta) { vidGta.style.opacity = '0'; if (!vidGta.paused) vidGta.pause(); vidGta.currentTime = 0; }
         if (tutDiscordBox) {
           tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
           tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
@@ -2893,8 +2896,8 @@
         if (gameSplitOverlay) gameSplitOverlay.style.opacity = '0';
         if (hudEl) hudEl.style.opacity = '0';
         if (b5) { b5.style.display = 'none'; b5.style.opacity = '0'; b5.style.pointerEvents = 'none'; }
-        if (vidCs2) { vidCs2.style.opacity = '0'; if (!vidCs2.paused) vidCs2.pause(); }
-        if (vidGta) { vidGta.style.opacity = '0'; if (!vidGta.paused) vidGta.pause(); }
+        if (vidCs2) { vidCs2.style.opacity = '0'; if (!vidCs2.paused) vidCs2.pause(); vidCs2.currentTime = 0; }
+        if (vidGta) { vidGta.style.opacity = '0'; if (!vidGta.paused) vidGta.pause(); vidGta.currentTime = 0; }
 
         let curX = 50, curY = 50, curOp = 1;
 
@@ -2906,7 +2909,7 @@
           if (tutViewTuner) { tutViewTuner.classList.remove('hidden'); tutViewTuner.style.display = 'flex'; }
           if (tutViewProfiles) { tutViewProfiles.classList.add('hidden'); tutViewProfiles.classList.remove('grid'); }
           if (tutViewOptions) tutViewOptions.classList.add('hidden');
-          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
+          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.style.opacity = '0'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           if (tutDiscordBox) {
             tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
             tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
@@ -3046,7 +3049,7 @@
 
           // 2. Persistent Share Toast state: ONLY visible AFTER Copy Share click (t >= 2.35s)!
           if (t < 2.35) {
-            if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
+            if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.style.opacity = '0'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           } else {
             if (tutShareToast) {
               tutShareToast.classList.remove('opacity-0');
@@ -3100,7 +3103,7 @@
         // SUB-PART 2C: DISCORD (#general-chat) (8.8s - 13.5s)
         // ----------------------------------------------------------
         } else {
-          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
+          if (tutShareToast) { tutShareToast.style.display = 'none'; tutShareToast.style.visibility = 'hidden'; tutShareToast.style.opacity = '0'; tutShareToast.classList.add('opacity-0'); tutShareToast.classList.remove('opacity-100'); }
           if (tutDiscordBox) {
             tutDiscordBox.classList.remove('opacity-0', 'translate-y-4');
             tutDiscordBox.classList.add('opacity-100', 'pointer-events-none', 'translate-y-0');
@@ -3202,13 +3205,22 @@
           if (vidCs2) {
             vidCs2.style.opacity = '1';
             vidCs2.style.filter = 'none';
+            // Frame-perfect deterministic time sync: CS2 starts at 0.0s of trimmed clip and tracks t
+            const expectedCs2Time = t;
+            if (Math.abs(vidCs2.currentTime - expectedCs2Time) > 0.15) {
+              vidCs2.currentTime = expectedCs2Time;
+            }
             if (adIsPlaying) {
               if (vidCs2.paused) vidCs2.play().catch(() => {});
             } else {
               if (!vidCs2.paused) vidCs2.pause();
             }
           }
-          if (vidGta) { vidGta.style.opacity = '0'; if (!vidGta.paused) vidGta.pause(); }
+          if (vidGta) {
+            vidGta.style.opacity = '0';
+            if (!vidGta.paused) vidGta.pause();
+            vidGta.currentTime = 0;
+          }
 
           // Calibrated Boost ALWAYS ACTIVE ON THE RIGHT SIDE!
           if (splitCalSide) {
@@ -3240,6 +3252,11 @@
           if (vidGta) {
             vidGta.style.opacity = fadeP.toString();
             vidGta.style.filter = 'none';
+            // Frame-perfect deterministic time sync: GTA starts at 0.0s and tracks crossT
+            const expectedGtaTime = crossT;
+            if (Math.abs(vidGta.currentTime - expectedGtaTime) > 0.15) {
+              vidGta.currentTime = expectedGtaTime;
+            }
             if (adIsPlaying) {
               if (vidGta.paused) vidGta.play().catch(() => {});
             } else {
