@@ -160,7 +160,7 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
-            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.32</span>
+            <span class="hidden sm:inline-flex text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-300">v2.10.33</span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">Official User Guide & Documentation</span>
         </div>
@@ -181,7 +181,7 @@
   <section class="relative pt-12 pb-8 px-4 text-center z-10 max-w-5xl mx-auto">
     <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono mb-4">
       <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-      <span>OFFICIAL DOCUMENTATION &bull; RELEASE v2.10.32</span>
+      <span>OFFICIAL DOCUMENTATION &bull; RELEASE v2.10.33</span>
     </div>
 
     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-4">
@@ -192,14 +192,13 @@
       Master display calibration, instant hotkey switching, 100% anti-cheat safe hardware LUT control, and automated game window detection.
     </p>
 
-    <!-- Quick Navigation Jump Pills -->
+        <!-- Quick Navigation Jump Pills -->
     <div id="guide-pills" class="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto text-xs font-semibold">
       <a href="#quick-start" data-section="quick-start" class="guide-pill px-3 py-1.5 rounded-lg border border-amber-400/40 bg-amber-400/10 text-amber-300 transition-colors">🚀 Quick Start</a>
-      <a href="#anti-cheat" data-section="anti-cheat" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">🛡️ Anti-Cheat Safety</a>
       <a href="#display-tuner" data-section="display-tuner" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">🎨 Create Profile (7-Slider Tuner)</a>
-      <a href="#auto-detection" data-section="auto-detection" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">🎮 Auto Game Detection</a>
+      <a href="#profile-switching" data-section="profile-switching" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">⚡ Profile Switching (Hotkeys & Detection)</a>
       <a href="#hud-overlay" data-section="hud-overlay" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">⌨️ In-Game HUD Overlay</a>
-      <a href="#profiles-slots" data-section="profiles-slots" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">📁 Profiles & Slots</a>
+      <a href="#profiles-slots" data-section="profiles-slots" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">📁 Profiles & Sharing</a>
       <a href="#faq" data-section="faq" class="guide-pill px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-gray-300 hover:border-amber-400/40 hover:text-amber-300 transition-colors">❓ FAQ & Help</a>
     </div>
   </section>
@@ -214,15 +213,14 @@
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
           <span>Contents</span>
         </div>
-        <nav id="guide-toc" class="space-y-1">
+                <nav id="guide-toc" class="space-y-1">
           <a href="#quick-start" data-section="quick-start" class="guide-toc-link block px-3 py-2 rounded-lg text-amber-300 font-bold bg-amber-400/10 border-l-2 border-amber-400 transition-colors">1. Quick Start & Setup</a>
-          <a href="#anti-cheat" data-section="anti-cheat" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">2. 100% Anti-Cheat Safety</a>
-          <a href="#display-tuner" data-section="display-tuner" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">3. Create Profile (7-Slider Calibration)</a>
-          <a href="#auto-detection" data-section="auto-detection" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">4. Auto Game Detection</a>
-          <a href="#hud-overlay" data-section="hud-overlay" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">5. HUD Overlay & Hotkeys</a>
-          <a href="#profiles-slots" data-section="profiles-slots" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">6. Profiles & Backup</a>
-          <a href="#faq" data-section="faq" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">7. FAQ & Troubleshooting</a>
-          <a href="#community" data-section="community" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">8. Discord Community</a>
+          <a href="#display-tuner" data-section="display-tuner" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">2. Create Profile (7-Slider Calibration)</a>
+          <a href="#profile-switching" data-section="profile-switching" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">3. Profile Switching (Hotkeys & Auto Detection)</a>
+          <a href="#hud-overlay" data-section="hud-overlay" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">4. In-Game HUD Overlay</a>
+          <a href="#profiles-slots" data-section="profiles-slots" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">5. Profiles, Import & Export</a>
+          <a href="#faq" data-section="faq" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">6. FAQ & Troubleshooting</a>
+          <a href="#community" data-section="community" class="guide-toc-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">7. Discord Community</a>
         </nav>
 
         <div class="pt-4 border-t border-white/10">
@@ -292,60 +290,9 @@
       </section>
 
       <!-- SECTION 2: 100% ANTI-CHEAT SAFETY -->
-      <section id="anti-cheat" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-400/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 font-bold text-lg">2</div>
-          <div>
-            <h2 class="text-xl sm:text-2xl font-black text-white">100% Anti-Cheat Friendly & Kernel Driver Safety</h2>
-            <p class="text-xs text-gray-400">Zero DLL injection, zero game memory access, and 0% FPS impact.</p>
-          </div>
-        </div>
-
-        <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-          <p>
-            Unlike shader injectors like ReShade or custom monitor software that hooks into DirectX, Vulkan, or OpenGL pipelines, **Better Color Profile never interacts with game processes directly**:
-          </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="glass-card rounded-xl p-4 border border-white/5 space-y-2">
-              <div class="font-bold text-white text-xs flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span>Zero Game Injection</span>
-              </div>
-              <p class="text-xs text-gray-400">Never injects DLLs into game processes. Completely invisible to kernel-level anti-cheats (Vanguard, EAC, BattlEye, Ricochet, VAC).</p>
-            </div>
-
-            <div class="glass-card rounded-xl p-4 border border-white/5 space-y-2">
-              <div class="font-bold text-white text-xs flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span>Direct GPU LUT Control</span>
-              </div>
-              <p class="text-xs text-gray-400">Adjustments are applied directly to the hardware color lookup table (LUT) via official Windows GDI APIs (<code class="font-mono text-[10px] text-gray-300">SetDeviceGammaRamp</code>).</p>
-            </div>
-
-            <div class="glass-card rounded-xl p-4 border border-white/5 space-y-2">
-              <div class="font-bold text-white text-xs flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span>0.0ms Input Lag</span>
-              </div>
-              <p class="text-xs text-gray-400">Because LUT transformations are processed by display silicon inside your GPU and monitor, there is zero frame time latency.</p>
-            </div>
-
-            <div class="glass-card rounded-xl p-4 border border-white/5 space-y-2">
-              <div class="font-bold text-white text-xs flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span>Zero FPS Drop</span>
-              </div>
-              <p class="text-xs text-gray-400">Consumes 0% GPU rendering budget. Enjoy identical frame rates with enhanced visibility and vibrant color contrast.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 3: 7-SLIDER HARDWARE CALIBRATION (CREATE PROFILE) -->
       <section id="display-tuner" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">3</div>
+          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">2</div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-white">7-Slider Hardware Calibration (Create Profile)</h2>
             <p class="text-xs text-gray-400">Fine-grained precision controls for esports visibility and creator color accuracy.</p>
@@ -421,106 +368,146 @@
         </div>
       </section>
 
-      <!-- SECTION 4: AUTO GAME & WINDOW DETECTION -->
-      <section id="auto-detection" class="glass-panel rounded-2xl p-6 sm:p-8 border border-amber-400/30 bg-gradient-to-b from-amber-400/5 to-transparent space-y-6">
+      <!-- SECTION 3: PROFILE SWITCHING (HOTKEYS & AUTO DETECTION) -->
+      <section id="profile-switching" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/60 flex items-center justify-center text-amber-300 font-black text-lg">4</div>
+          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">3</div>
           <div>
-            <div class="flex items-center gap-2">
-              <h2 class="text-xl sm:text-2xl font-black text-white">Auto Game & Window Detection</h2>
-              
-            </div>
-            <p class="text-xs text-gray-400">Automatic profile switching when launching games and instant revert on close.</p>
+            <h2 class="text-xl sm:text-2xl font-black text-white">Profile Switching (Hotkeys & Auto Detection)</h2>
+            <p class="text-xs text-gray-400">Two distinct methods for setting your color profiles: manual keyboard shortcuts or automated game window detection.</p>
           </div>
         </div>
 
-        <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+        <div class="space-y-6 text-sm text-gray-300 leading-relaxed">
           <p>
-            You can bind any color profile to an active game or application executable. Better Color Profile continuously tracks foreground windows with zero background overhead and applies your calibration seamlessly.
+            Better Color Profile gives you two powerful, hardware-accelerated methods to switch between your calibrated display presets. You can choose whichever approach fits your personal playstyle best.
           </p>
 
-          <!-- Step-by-Step Walkthrough -->
-          <div class="space-y-3 pt-2">
-            <div class="glass-card rounded-xl p-4 border border-white/10 space-y-2">
-              <span class="font-bold text-amber-300 text-xs flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">1</span>
-                Enable the Master Toggle
-              </span>
-              <p class="text-xs text-gray-400 pl-7">
-                Navigate to <strong class="text-white">Options &rarr; Window Detection</strong> and turn on the <strong class="text-white">Auto Game & Window Detection</strong> master toggle. When this checkbox is unticked, zero background logic or hooks run on your PC.
-              </p>
+          <!-- IMPORTANT USAGE ADVISORY BANNER -->
+          <div class="p-4 rounded-xl border border-amber-400/30 bg-amber-400/10 space-y-2">
+            <div class="font-bold text-amber-300 text-xs flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <span>⚠️ Important: Choose One Method at a Time</span>
+            </div>
+            <p class="text-xs text-gray-300 leading-normal">
+              You should decide which switching method you want to use for your games: either use <strong class="text-white">Global Shortcuts</strong> (Direct Slot or Cycling) <strong class="text-amber-300">OR</strong> use <strong class="text-white">Auto Game Detection</strong>. <span class="text-amber-200 font-semibold">Do not use both methods simultaneously for the same game</span>, to ensure smooth operation and prevent conflicting profile triggers.
+            </p>
+          </div>
+
+          <!-- METHOD A: GLOBAL SHORTCUTS & CYCLING -->
+          <div class="glass-card rounded-xl p-5 border border-white/10 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold font-mono">METHOD A</span>
+                <h3 class="text-base font-bold text-white">Global Keyboard Shortcuts &amp; Profile Cycling</h3>
+              </div>
+              <span class="text-[11px] text-gray-400 font-mono">Full Manual Control</span>
             </div>
 
-            <div class="glass-card rounded-xl p-4 border border-white/10 space-y-2">
-              <span class="font-bold text-amber-300 text-xs flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">2</span>
-                Link a Profile to a Game or Application
-              </span>
-              <p class="text-xs text-gray-400 pl-7">
-                On the left sidebar, <strong class="text-white">right-click any profile card</strong> (Slot 1, Slot 2, etc.) and select <strong class="text-white">&ldquo;Link to Game / Window...&rdquo;</strong>. Choose from the list of running or minimized windows, use the real-time search filter and one-click <strong class="text-white">&ldquo;Refresh&rdquo;</strong> button, or click <strong class="text-white">&ldquo;Browse .exe...&rdquo;</strong> to select any installed game executable.
-              </p>
+            <p class="text-xs text-gray-400">
+              Trigger instant profile transitions from anywhere in Windows or directly inside full-screen games with zero alt-tabbing:
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
+                <span class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                  <span>🎯 Direct Profile Shortcuts</span>
+                </span>
+                <p class="text-xs text-gray-300 leading-normal">
+                  Assign a dedicated, custom hotkey to any individual profile slot directly on its card. Pressing your bound key instantly switches straight to that exact profile without delay.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
+                <span class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                  <span>🔄 Customizable Cycle Hotkey</span>
+                </span>
+                <p class="text-xs text-gray-300 leading-normal">
+                  You can set a single custom cycle shortcut to smoothly cycle forward through your active profiles one by one on the fly, rotating through your presets with just one keybind.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- METHOD B: AUTO GAME & WINDOW DETECTION -->
+          <div class="glass-card rounded-xl p-5 border border-white/10 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-sky-400/20 border border-sky-400/40 text-sky-300 text-xs font-bold font-mono">METHOD B</span>
+                <h3 class="text-base font-bold text-white">Auto Game &amp; Window Detection</h3>
+              </div>
+              <span class="text-[11px] text-gray-400 font-mono">Zero Manual Effort</span>
             </div>
 
-            <div class="glass-card rounded-xl p-4 border border-white/10 space-y-2">
-              <span class="font-bold text-amber-300 text-xs flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">3</span>
-                Visual Icon Badge
-              </span>
-              <p class="text-xs text-gray-400 pl-7">
-                Once linked, the profile card immediately renders the high-res 24&times;24 application icon and process name directly on the card, giving you instant visual confirmation of which profile belongs to which game.
-              </p>
-            </div>
+            <p class="text-xs text-gray-400">
+              Link specific profiles directly to game executables. Better Color Profile monitors the active foreground window with zero background CPU overhead:
+            </p>
 
-            <div class="glass-card rounded-xl p-4 border border-white/10 space-y-2">
-              <span class="font-bold text-amber-300 text-xs flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">4</span>
-                Automated Default Revert
-              </span>
-              <p class="text-xs text-gray-400 pl-7">
-                The moment you focus or tab into your game, Better Color Profile switches to that profile instantly. When you close, minimize, or Alt-Tab out of the game, it **automatically reverts back to your Default Profile** with zero manual intervention.
-              </p>
+            <div class="space-y-3 pt-1">
+              <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span class="text-xs font-bold text-white flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">1</span>
+                  Enable Window Detection
+                </span>
+                <p class="text-xs text-gray-400 pl-7">
+                  Go to <strong class="text-white">Options &rarr; Window Detection</strong> and enable the master switch. When disabled, zero background window tracking occurs.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span class="text-xs font-bold text-white flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">2</span>
+                  Link Profile to Executable (.exe)
+                </span>
+                <p class="text-xs text-gray-400 pl-7">
+                  Right-click any profile card and choose <strong class="text-white">&ldquo;Link to Game / Window...&rdquo;</strong>. Pick from open windows or click &ldquo;Browse .exe...&rdquo; to select game binaries (e.g. <code class="text-amber-300 font-mono">cs2.exe</code>).
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
+                <span class="text-xs font-bold text-white flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-[10px] text-amber-300 font-bold">3</span>
+                  Automated Switch &amp; Revert
+                </span>
+                <p class="text-xs text-gray-400 pl-7">
+                  When you focus into the game window, your calibrated profile engages automatically. When you close or minimize the game, it instantly reverts back to your protected Default Profile.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 5: HUD OVERLAY & HOTKEYS -->
+      <!-- SECTION 4: IN-GAME HUD OVERLAY -->
       <section id="hud-overlay" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">5</div>
+          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">4</div>
           <div>
-            <h2 class="text-xl sm:text-2xl font-black text-white">Global Hotkeys & In-Game HUD Overlay</h2>
-            <p class="text-xs text-gray-400">Switch profiles in milliseconds without leaving full-screen games.</p>
+            <h2 class="text-xl sm:text-2xl font-black text-white">In-Game HUD Overlay</h2>
+            <p class="text-xs text-gray-400">Live on-screen display tuner for real-time calibration without tabbing out.</p>
           </div>
         </div>
 
         <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
           <p>
-            Better Color Profile features a hardware-accelerated, transparent Win32 in-game overlay. It consumes **0% CPU and 0% GPU** when closed, instantly releasing keyboard hooks.
+            The In-Game HUD Overlay renders an ultra-low latency, semi-transparent hardware calibration bar directly on top of your games. You can fine-tune brightness, contrast, gamma, digital vibrance, black equalizer, and clarity while looking straight at the game map.
           </p>
 
-          <div class="glass-card rounded-xl p-5 border border-white/10 space-y-4">
-            <div class="font-bold text-white text-xs uppercase tracking-wider text-amber-300 flex items-center gap-2">
-              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
-              <span>HUD Overlay Controls</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <!-- Keycap shortcuts table -->
+          <div class="space-y-2 pt-2">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">HUD Overlay Navigation Controls</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Toggle HUD Overlay</span>
-                <span class="kbd-badge">RCtrl + Enter</span>
+                <span class="text-gray-300">Select Slider (Up / Down)</span>
+                <span class="kbd-badge">Ctrl + [↑ ↓]</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Navigate Settings</span>
-                <span class="kbd-badge">Ctrl + &uarr; / &darr;</span>
+                <span class="text-gray-300">Coarse Step (&plusmn;5%)</span>
+                <span class="kbd-badge">Ctrl + [← →]</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Coarse Step (&plusmn;5%) / Switch Profile</span>
-                <span class="kbd-badge">Ctrl + &larr; / &rarr;</span>
-              </div>
-              <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Fine Step (&plusmn;1%)</span>
-                <span class="kbd-badge">Ctrl + Shift + &larr; / &rarr;</span>
+                <span class="text-gray-300">Fine Tune (&plusmn;1%)</span>
+                <span class="kbd-badge">Ctrl + Shift + [← →]</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
                 <span class="text-gray-300">Save to Active Profile</span>
@@ -531,71 +518,69 @@
                 <span class="kbd-badge">Ctrl + Shift + S</span>
               </div>
               <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Close Overlay</span>
+                <span class="text-gray-300">Toggle / Close Overlay</span>
                 <span class="kbd-badge">Esc / RCtrl + Enter</span>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Dedicated Profile Shortcut</span>
-                <span class="kbd-badge">Assignable on Card</span>
-              </div>
-              <div class="flex items-center justify-between p-2 rounded-lg bg-white/5">
-                <span class="text-gray-300">Global Cycle Hotkey</span>
-                <span class="kbd-badge">Ctrl + Shift + C</span>
-              </div>
             </div>
-          </div>
-          <!-- Dedicated Card Shortcuts Note -->
-          <div class="p-4 rounded-xl border border-white/10 bg-white/5 space-y-1.5">
-            <div class="font-bold text-amber-300 text-xs flex items-center gap-2">
-              <span>💡 Dedicated Shortcuts on Profile Cards</span>
-            </div>
-            <p class="text-xs text-gray-300 leading-normal">
-              In addition to the global profile cycling hotkey (<code class="font-mono text-amber-200">Ctrl + Shift + C</code>), you can assign a dedicated instant hotkey to any individual profile directly on its card in the main profile list. Press the hotkey anytime in-game to switch straight to that specific preset without cycling.
-            </p>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 6: PROFILES & BACKUP -->
+      <!-- SECTION 5: PROFILES, IMPORT & EXPORT -->
       <section id="profiles-slots" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">6</div>
+          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">5</div>
           <div>
-            <h2 class="text-xl sm:text-2xl font-black text-white">Profiles, Slots & Backups</h2>
-            <p class="text-xs text-gray-400">Managing color profiles, importing custom ICC/ICM files, and backup paths.</p>
+            <h2 class="text-xl sm:text-2xl font-black text-white">Profiles, Import &amp; Export</h2>
+            <p class="text-xs text-gray-400">Managing color profiles, exporting calibrated presets, and sharing codes with friends.</p>
           </div>
         </div>
 
         <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
           <p>
-            All your profiles are stored in plain format directly inside your installation directory:
+            Better Color Profile makes saving, importing, and sharing display calibrations completely straightforward, with no complex directory browsing needed.
           </p>
 
-                    <!-- Profile Groups Feature -->
-          <div class="p-4 rounded-xl border border-amber-400/20 bg-amber-400/5 space-y-1.5 mb-4">
+          <!-- Profile Groups Feature -->
+          <div class="p-4 rounded-xl border border-amber-400/20 bg-amber-400/5 space-y-1.5">
             <div class="font-bold text-amber-300 text-xs flex items-center gap-2">
-              <span>📁 Profile Groups & Organization</span>
+              <span>📁 Profile Groups &amp; Organization</span>
             </div>
             <p class="text-xs text-gray-300 leading-normal">
               Organize your profiles into custom tabbed categories (<code class="font-mono text-amber-200">Group 1</code>, <code class="font-mono text-amber-200">Group 2</code>, etc.). Click the <strong class="text-white">+</strong> button above your profile list to create new groups, allowing you to separate competitive gaming profiles, video editing calibrations, and night mode setups cleanly.
             </p>
           </div>
-          <div class="p-4 rounded-xl bg-black/40 border border-white/10 font-mono text-xs text-amber-300 space-y-1">
-            <div>%LocalAppData%\Programs\BetterColorProfile\list\ &bull; Custom calibrated profiles</div>
-            <div>%LocalAppData%\Programs\BetterColorProfile\.internal\ &bull; Protected default Windows sRGB profile</div>
-            <div>%LocalAppData%\Programs\BetterColorProfile\slots_config.txt &bull; Slot assignments</div>
-          </div>
 
-          <p class="text-xs text-gray-400">
-            To import any monitor calibration profile (e.g. from DisplayCAL, Rtings, or TFTCentral), simply drag and drop the <code class="text-white font-mono">.icm</code> or <code class="text-white font-mono">.icc</code> file into the application or place it directly into the <code class="text-white font-mono">list\</code> folder.
-          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <!-- Method 1: Files (.icm / .icc) -->
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <span class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                <span>💾 Import &amp; Export via Files (.icm / .icc)</span>
+              </span>
+              <p class="text-xs text-gray-300 leading-relaxed">
+                <strong class="text-white">Export:</strong> Click <strong class="text-white">&ldquo;Save .ICC Profile&rdquo;</strong> in the tuner or right-click any profile card to export your calibrated Windows color profile to any folder on your computer.<br/><br/>
+                <strong class="text-white">Import:</strong> Drag and drop any standard <code class="text-amber-200 font-mono">.icm</code> or <code class="text-amber-200 font-mono">.icc</code> file (from DisplayCAL, Rtings, or monitor manufacturers) directly into Better Color Profile to add it to your slots.
+              </p>
+            </div>
+
+            <!-- Method 2: Share Codes -->
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <span class="text-xs font-bold text-amber-300 flex items-center gap-2">
+                <span>📋 Import &amp; Export via Share Code</span>
+              </span>
+              <p class="text-xs text-gray-300 leading-relaxed">
+                <strong class="text-white">Copy Code:</strong> Click the <strong class="text-white">&ldquo;Copy Share Code&rdquo;</strong> button on any profile to generate a lightweight text string (e.g. <code class="text-amber-200 font-mono">BCP-XXXX-...</code>) copied straight to your clipboard.<br/><br/>
+                <strong class="text-white">Apply Code:</strong> Paste any share code from Discord or forums directly into the app to instantly replicate that exact 7-slider color calibration on your monitor in one click.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- SECTION 7: FAQ & TROUBLESHOOTING -->
       <section id="faq" class="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">7</div>
+          <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 font-bold text-lg">6</div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-white">Frequently Asked Questions</h2>
             <p class="text-xs text-gray-400">Answers to common questions and troubleshooting tips.</p>
@@ -629,7 +614,7 @@
       <!-- SECTION 8: COMMUNITY & DISCORD -->
       <section id="community" class="glass-panel rounded-2xl p-6 sm:p-8 border border-[#5865F2]/30 bg-gradient-to-b from-[#5865F2]/10 to-transparent space-y-6">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-[#5865F2]/20 border border-[#5865F2]/40 flex items-center justify-center text-[#9bb0f5] font-bold text-lg">8</div>
+          <div class="w-10 h-10 rounded-xl bg-[#5865F2]/20 border border-[#5865F2]/40 flex items-center justify-center text-[#9bb0f5] font-bold text-lg">7</div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-white">Official Community & Discord</h2>
             <p class="text-xs text-gray-400">Get support, share custom color presets, and chat with fellow gamers.</p>
@@ -699,10 +684,10 @@
     </div>
   </footer>
 
-  <!-- Active ScrollSpy & Section Highlighter -->
+    <!-- Active ScrollSpy & Section Highlighter -->
   <script>
     (function() {
-      const sections = ['quick-start', 'anti-cheat', 'display-tuner', 'auto-detection', 'hud-overlay', 'profiles-slots', 'faq', 'community'];
+      const sections = ['quick-start', 'display-tuner', 'profile-switching', 'hud-overlay', 'profiles-slots', 'faq', 'community'];
       const tocLinks = document.querySelectorAll('.guide-toc-link');
       const pillLinks = document.querySelectorAll('.guide-pill');
 
@@ -724,17 +709,25 @@
         });
       }
 
-      window.addEventListener('scroll', () => {
-        let current = 'quick-start';
-        const scrollY = window.scrollY + 180;
+      function updateActiveOnScroll() {
+        if (window.scrollY < 120) {
+          setActiveSection(sections[0]);
+          return;
+        }
+        let current = sections[0];
         for (const id of sections) {
           const el = document.getElementById(id);
-          if (el && el.offsetTop <= scrollY) {
-            current = id;
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 220) {
+              current = id;
+            }
           }
         }
         setActiveSection(current);
-      }, { passive: true });
+      }
+
+      window.addEventListener('scroll', updateActiveOnScroll, { passive: true });
 
       // Click handler
       document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -746,8 +739,13 @@
         });
       });
 
-      // Default active on load
-      setActiveSection('quick-start');
+      // Default active on load & check initial anchor
+      const initialHash = window.location.hash ? window.location.hash.substring(1) : '';
+      if (initialHash && sections.includes(initialHash)) {
+        setActiveSection(initialHash);
+      } else {
+        updateActiveOnScroll();
+      }
     })();
   </script>
 </body>

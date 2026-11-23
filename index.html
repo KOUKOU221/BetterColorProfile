@@ -328,32 +328,30 @@
         </div>
       </a>
 
-      <!-- Center Navigation: Clean, unified product links -->
-      <nav class="hidden md:flex items-center gap-1.5 lg:gap-2">
-        <a href="guide.html" onclick="sound.click()" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="User Guide & Documentation">
+            <!-- Right: Unified Navigation & Download CTA -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <a href="guide.html" onclick="sound.click()" class="hidden md:flex px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all items-center gap-1.5" title="User Guide & Documentation">
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
           <span>User Guide</span>
         </a>
 
-        <a href="#pricing" onclick="sound.click()" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="View Plans & Pricing">
+        <a href="#pricing" onclick="sound.click()" class="hidden sm:flex px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all items-center gap-1.5" title="View Plans & Pricing">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Pricing</span>
         </a>
 
-        <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5" title="Join Official Better Color Profile Discord">
+        <a href="https://discord.gg/eeVBnK7Hmg" target="_blank" rel="noopener" class="hidden sm:flex px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all items-center gap-1.5" title="Join Official Better Color Profile Discord">
           <svg class="w-3.5 h-3.5 fill-[#5865F2]" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
           <span>Discord</span>
         </a>
 
-        <button onclick="openKeyRecoveryModal(); sound.click();" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 cursor-pointer" title="Recover your license key">
+        <button onclick="openKeyRecoveryModal(); sound.click();" class="hidden sm:flex px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-all items-center gap-1.5 cursor-pointer" title="Recover your license key">
           <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
           <span>Recover Key</span>
         </button>
-      </nav>
 
-      <!-- Right Action CTA: Prominent Download button -->
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord()" class="px-5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-sm font-black text-black theme-bg hover:brightness-110 shadow-xl transition-all flex items-center gap-2 cursor-pointer" title="Download Better Color Profile for Windows">
+        <!-- Download Button -->
+        <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord()" class="px-5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-sm font-black text-black theme-bg hover:brightness-110 shadow-xl transition-all flex items-center gap-2 cursor-pointer ml-1" title="Download Better Color Profile for Windows">
           <span>Download</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         </a>
@@ -400,6 +398,8 @@
 
         <!-- Floating In-Game HUD Overlay (Top-Right, style="z-index: 100;") -->
         <div id="ad-game-split-overlay" class="absolute inset-0 pointer-events-none select-none transition-opacity duration-300 opacity-0" style="z-index: 25;">
+          <!-- Left Half Raw Windows Baseline (Dull / Washed-Out out-of-the-box Display) -->
+          <div id="ad-split-raw-side" class="absolute top-0 bottom-0 left-0 right-1/2" style="backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95); -webkit-backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95);"></div>
           <!-- Right Half Calibrated Backdrop Filter (GPU-Accelerated) -->
           <div id="ad-split-cal-side" class="absolute top-0 bottom-0 left-1/2 right-0 transition-all duration-300" style="backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22); -webkit-backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22);"></div>
 
@@ -561,12 +561,12 @@
           </div>
         </div>
 
-        <!-- Simulated Mouse Cursor & Click Ring (60 FPS GPU-Accelerated Hardware Transform) -->
-        <div id="ad-simulated-cursor" class="absolute pointer-events-none opacity-0" style="top: 0; left: 0; z-index: 9999; will-change: transform;">
+        <!-- Simulated Mouse Cursor & Click Ring (style="z-index: 9999;") -->
+        <div id="ad-simulated-cursor" class="absolute pointer-events-none opacity-0" style="left: 0; top: 0; z-index: 9999; will-change: transform;">
           <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_4px_10px_rgba(0,0,0,0.95)] -translate-x-1 -translate-y-1" viewBox="0 0 24 24" fill="none">
             <path d="M5.5 3.5L19 12L12 14L8.5 21L5.5 3.5Z" fill="#FACC15" stroke="#000000" stroke-width="2" stroke-linejoin="round"/>
           </svg>
-          <div id="ad-cursor-ring" class="absolute -top-3 -left-3 w-12 h-12 rounded-full border-2 border-amber-400 bg-amber-400/25 pointer-events-none scale-0 opacity-0 transition-all duration-200"></div>
+          <div id="ad-cursor-ring" class="absolute -top-3 -left-3 w-12 h-12 rounded-full border-2 border-amber-400 bg-amber-400/25 pointer-events-none scale-0 opacity-0 transition-all duration-300"></div>
         </div>
 
         <!-- ============================================================ -->
@@ -806,7 +806,7 @@
                   <div id="ad-tut-slot-4" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
                     <div class="flex items-center gap-2.5">
                       <div id="ad-tut-slot4-strip" class="w-1 h-6 bg-amber-400 rounded-full hidden"></div>
-                      <img src="assets/icon_cs2.png?v=2.10.32" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <img src="assets/icon_cs2.png?v=2.10.33" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
                       <div>
                         <div id="ad-tut-slot4-title" class="text-xs sm:text-sm font-bold text-white">cs2</div>
                         <div id="ad-tut-slot4-sub" class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 3</div>
@@ -2187,9 +2187,7 @@
     let adInterval = null;
     let adCurrentSec = 0;
     let cachedSavePos = { x: 50, y: 88 };
-    let cachedCopyPos = { x: 41, y: 50 };
-    let stagePctCache = {};
-    let lastStageW = 0, lastStageH = 0;
+    let cachedCopyPos = { x: 41.2, y: 50.8 };
     const AD_TOTAL_SEC = 28;
     let adIsPlaying = false;
     let adIsMuted = false;
@@ -2831,26 +2829,15 @@
       const slot4Action = document.getElementById('ad-tut-slot4-action');
       const headingName = document.getElementById('ad-tut-heading-name');
 
-      function getStagePct(el, cacheKey) {
-        if (!el || !stage) return (cacheKey && stagePctCache[cacheKey]) ? stagePctCache[cacheKey] : { x: 50, y: 50 };
-        const curW = stage.clientWidth || stage.offsetWidth || 0;
-        const curH = stage.clientHeight || stage.offsetHeight || 0;
-        if (cacheKey && stagePctCache[cacheKey] && curW === lastStageW && curH === lastStageH) {
-          return stagePctCache[cacheKey];
-        }
+      function getStagePct(el) {
+        if (!el || !stage) return { x: 50, y: 50 };
         const rEl = el.getBoundingClientRect();
         const rSt = stage.getBoundingClientRect();
-        if (rEl.width === 0 || rEl.height === 0 || rSt.width === 0) {
-          return (cacheKey && stagePctCache[cacheKey]) ? stagePctCache[cacheKey] : { x: 50, y: 50 };
-        }
-        const res = {
+        if (rEl.width === 0 || rEl.height === 0 || rSt.width === 0) return { x: 50, y: 50 };
+        return {
           x: Math.max(2, Math.min(98, ((rEl.left + rEl.width / 2 - rSt.left) / rSt.width) * 100)),
           y: Math.max(2, Math.min(98, ((rEl.top + rEl.height / 2 - rSt.top) / rSt.height) * 100))
         };
-        if (cacheKey) stagePctCache[cacheKey] = res;
-        lastStageW = curW;
-        lastStageH = curH;
-        return res;
       }
 
       function lerp(a, b, p) { return a + (b - a) * p; }
@@ -2946,10 +2933,10 @@
           if (tutTabOptions) tutTabOptions.className = 'px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all';
 
           const t = sec - 1.8; // 0.0s to 2.0s
-          const pThumb = getStagePct(tutThumbBright, 'thumbBright');
-          const pSave = getStagePct(tutBtnSave, 'btnSave');
-          if (pSave && pSave.x > 10 && pSave.y > 10) {
-            cachedSavePos = pSave;
+          const pThumb = getStagePct(tutThumbBright);
+          const pSave = getStagePct(tutBtnSave);
+          if (pSave && pSave.x > 10 && pSave.y > 60) {
+            cachedSavePos = { x: pSave.x, y: pSave.y };
           }
 
           if (t < 0.25) {
@@ -2968,19 +2955,21 @@
             const valNum = Math.round(p * 50);
             if (tutValBright) tutValBright.textContent = `+${valNum}%`;
             setAdFilter(`brightness(${1.0 + p * 0.25})`);
-            // Continuous 60fps mathematical slider follow without layout thrashing
-            curX = pThumb.x + p * 6.8;
-            curY = pThumb.y;
+            const currentThumb = getStagePct(tutThumbBright);
+            curX = currentThumb.x;
+            curY = currentThumb.y;
           } else if (t < 1.65) {
             // Move cursor directly down to Save .ICC Profile
             const p = easeInOutCubic((t - 1.15) / 0.5);
-            curX = lerp(pThumb.x + 6.8, pSave.x, p);
-            curY = lerp(pThumb.y, pSave.y, p);
+            const currentThumb = getStagePct(tutThumbBright);
+            curX = lerp(currentThumb.x, pSave.x, p);
+            curY = lerp(currentThumb.y, pSave.y, p);
             if (tutBtnSave) tutBtnSave.style.transform = 'none';
           } else {
             // Click Save .ICC Profile! (Instant switch right upon click!)
             curX = pSave.x;
             curY = pSave.y;
+            cachedSavePos = { x: pSave.x, y: pSave.y };
             if (cursorRing && t > 1.68 && t < 1.98) {
               cursorRing.classList.remove('scale-0', 'opacity-0');
               cursorRing.classList.add('scale-100', 'opacity-100');
@@ -3017,7 +3006,7 @@
           const slot3Action = document.getElementById('ad-tut-slot3-action');
           const btnApplyArena = document.getElementById('ad-tut-btn-apply-arena');
           const slot3Check = document.getElementById('ad-tut-slot3-check');
-          const pSave = (cachedSavePos && cachedSavePos.x > 10) ? cachedSavePos : getStagePct(tutBtnSave, 'btnSave');
+          const pSave = (cachedSavePos && cachedSavePos.x > 10 && cachedSavePos.y > 60) ? cachedSavePos : { x: 50, y: 88 };
           const pApply = getStagePct(slot3Action, 'slot3Action');
           const pCopy = getStagePct(tutBtnCopyShare, 'btnCopyShare');
           if (pCopy && pCopy.x > 10) {
@@ -3239,7 +3228,7 @@
 
           // Calibrated Boost ALWAYS ACTIVE ON THE RIGHT SIDE!
           if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.30) contrast(1.18) saturate(1.25)';
+            splitCalSide.style.backdropFilter = 'brightness(1.28) contrast(1.30) saturate(1.70)';
             splitCalSide.style.webkitBackdropFilter = 'brightness(1.30) contrast(1.18) saturate(1.25)';
           }
 
@@ -3276,7 +3265,7 @@
 
           // Calibrated Boost ALWAYS ACTIVE ON THE RIGHT SIDE!
           if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.15) contrast(1.20) saturate(1.45)';
+            splitCalSide.style.backdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
             splitCalSide.style.webkitBackdropFilter = 'brightness(1.15) contrast(1.20) saturate(1.45)';
           }
 
