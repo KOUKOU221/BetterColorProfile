@@ -78,10 +78,7 @@
     .glow-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(100px);
-      opacity: 0.22;
-      transition: background 0.8s ease;
-      animation: drift 22s infinite alternate ease-in-out;
+      opacity: 0.16;
     }
 
     .glow-orb-1 {
@@ -89,8 +86,7 @@
       left: 20%;
       width: 650px;
       height: 650px;
-      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-      animation-duration: 25s;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
     }
 
     .glow-orb-2 {
@@ -98,9 +94,7 @@
       right: -10%;
       width: 750px;
       height: 750px;
-      background: radial-gradient(circle, var(--accent-dark) 0%, transparent 70%);
-      animation-duration: 30s;
-      animation-delay: -8s;
+      background: radial-gradient(circle, var(--accent-dark) 0%, transparent 65%);
     }
 
     .glow-orb-3 {
@@ -108,43 +102,21 @@
       left: -15%;
       width: 550px;
       height: 550px;
-      background: radial-gradient(circle, #38BDF8 0%, transparent 70%);
-      opacity: 0.12;
-      animation-duration: 28s;
-      animation-delay: -14s;
+      background: radial-gradient(circle, #38BDF8 0%, transparent 65%);
+      opacity: 0.10;
     }
 
-    @keyframes drift {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.08); }
-      100% { transform: translate(-40px, 70px) scale(0.95); }
-    }
-
-    /* Noise Texture Overlay */
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-
-    /* Apple-like Glass & Border finish */
+    /* Apple-like Glass & Border finish (GPU-friendly, zero backdrop-blur thrashing) */
     .glass-panel {
-      background: rgba(18, 20, 27, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(16, 18, 25, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 
     .glass-card {
-      background: rgba(22, 25, 34, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(20, 23, 32, 0.90);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .glass-card:hover {
@@ -219,21 +191,19 @@
     .eq-bar-2 { animation: eq-bounce-2 0.55s infinite ease-in-out; }
     .eq-bar-3 { animation: eq-bounce-3 0.85s infinite ease-in-out; }
 
-    /* Ultra-Smooth 60/120/144 FPS Hardware-Accelerated Logo Animation */
+    /* Ultra-Smooth 60/120/144 FPS Hardware-Accelerated Logo Animation (transform-only) */
     @keyframes logo-smooth-pulse {
       0%, 100% {
-        transform: translateY(0px) scale(1);
-        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
+        transform: translate3d(0, 0, 0) scale(1);
       }
       50% {
-        transform: translateY(-9px) scale(1.05);
-        filter: drop-shadow(0 18px 36px var(--accent-glow));
+        transform: translate3d(0, -9px, 0) scale(1.05);
       }
     }
     .logo-smooth-pulse {
       animation: logo-smooth-pulse 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      will-change: transform, filter;
-      transform: translateZ(0);
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.65));
+      will-change: transform;
       backface-visibility: hidden;
     }
 
@@ -308,7 +278,6 @@
     <div class="glow-orb glow-orb-2" id="orb-2"></div>
     <div class="glow-orb glow-orb-3" id="orb-3"></div>
   </div>
-  <div class="noise-overlay"></div>
 
   <!-- Scroll Progress Indicator -->
   <div id="scroll-progress" class="fixed top-0 left-0 h-1 theme-bg z-50 transition-all duration-75 w-0"></div>
@@ -377,50 +346,50 @@
     </p>
 
     <!-- ================= EMBEDDED CINEMATIC SPEC AD REEL (THEATER WINDOW) ================= -->
-    <div id="spec-ad" style="transform: translateZ(0); will-change: transform;" class="relative w-full max-w-[1560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_90px_rgba(250,204,21,0.22)] flex flex-col mx-auto mb-16 text-left transition-all">
+    <div id="spec-ad" class="relative w-full max-w-[1560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_90px_rgba(250,204,21,0.22)] flex flex-col mx-auto mb-16 text-left">
       
       <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) with click-to-play -->
-      <div id="ad-stage-box" style="transform: translateZ(0); will-change: transform;" class="relative w-full aspect-video bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
+      <div id="ad-stage-box" class="relative w-full aspect-video bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
 
         <!-- Floating Volume Control Overlay (Shows on mouse move over video) -->
-        <div id="ad-floating-volume" class="absolute bottom-4 right-4 z-50 flex items-center gap-2.5 bg-[#0C0E14]/85 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-[0_6px_25px_rgba(0,0,0,0.85)] opacity-0 pointer-events-none transition-all duration-300 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
+        <div id="ad-floating-volume" class="absolute bottom-4 right-4 z-50 flex items-center gap-2.5 bg-[#0C0E14]/95 px-3.5 py-2 rounded-full border border-white/20 shadow-[0_6px_25px_rgba(0,0,0,0.85)] opacity-0 pointer-events-none transition-opacity duration-300 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
           <button type="button" id="ad-volume-btn" onclick="event.stopPropagation(); toggleAdAudioMute();" class="text-amber-400 hover:text-white text-sm transition-transform active:scale-90 cursor-pointer" title="Toggle Mute">🔊</button>
           <input type="range" id="ad-volume-slider" min="0" max="1" step="0.01" value="0.50" oninput="setAdVolume(this.value)" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" class="w-16 sm:w-20 accent-amber-400 cursor-pointer h-1.5 bg-white/20 rounded-lg" title="Volume">
           <span id="ad-volume-percent" class="font-mono text-[11px] text-amber-300 font-bold min-w-[28px] text-right">50%</span>
         </div>
 
         <!-- 2 1080p60 Gameplay Video Streams for Smooth Crossfades (CS2 & GTA VI Extended) -->
-        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
-        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="metadata" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="metadata" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none z-10"></video>
 
         <!-- Static Fallback Accent Layer -->
-        <div id="ad-scene-inferno" class="ad-slide absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 opacity-0" style="background-image: url('assets/scene_inferno.jpg');"></div>
+        <div id="ad-scene-inferno" class="ad-slide absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-700 opacity-0" style="background-image: url('assets/scene_inferno.jpg');"></div>
 
         <!-- Floating In-Game HUD Overlay (Top-Right, style="z-index: 100;") -->
         <div id="ad-game-split-overlay" class="absolute inset-0 pointer-events-none select-none transition-opacity duration-300 opacity-0" style="z-index: 25;">
-          <!-- Left Half Raw Windows Baseline (Dull / Washed-Out out-of-the-box Display) -->
-          <div id="ad-split-raw-side" class="absolute top-0 bottom-0 left-0 right-1/2" style="backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95); -webkit-backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95);"></div>
-          <!-- Right Half Calibrated Backdrop Filter (GPU-Accelerated) -->
-          <div id="ad-split-cal-side" class="absolute top-0 bottom-0 left-1/2 right-0 transition-all duration-300" style="backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22); -webkit-backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22);"></div>
+          <!-- Left Half Raw Windows Baseline (Pure alpha tint - zero backdrop-filter GPU readback) -->
+          <div id="ad-split-raw-side" class="absolute top-0 bottom-0 left-0 right-1/2" style="background: linear-gradient(90deg, rgba(12, 16, 24, 0.36), rgba(18, 22, 30, 0.30));"></div>
+          <!-- Right Half Calibrated Side (Video itself carries hardware-accelerated CSS filter) -->
+          <div id="ad-split-cal-side" class="absolute top-0 bottom-0 left-1/2 right-0"></div>
 
           <!-- Vertical Divider Line in the Middle (Clean Line, Center Handle Removed) -->
           <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.9)] z-30"></div>
 
           <!-- Left Side Tag: Raw Baseline (Bottom-Left of Center Line) -->
-          <div class="absolute bottom-3.5 sm:bottom-4.5 right-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 flex items-center gap-1.5 shadow-2xl z-30">
+          <div class="absolute bottom-3.5 sm:bottom-4.5 right-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/95 border border-white/20 text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 flex items-center gap-1.5 shadow-2xl z-30">
             <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
             <span>RAW WINDOWS sRGB &bull; UNCHANGED</span>
           </div>
 
           <!-- Right Side Tag: Sliders Applied (Bottom-Right of Center Line) -->
-          <div class="absolute bottom-3.5 sm:bottom-4.5 left-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-amber-400/60 text-[9px] sm:text-[10px] font-mono font-bold text-amber-300 flex items-center gap-1.5 shadow-2xl z-30">
+          <div class="absolute bottom-3.5 sm:bottom-4.5 left-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/95 border border-amber-400/60 text-[9px] sm:text-[10px] font-mono font-bold text-amber-300 flex items-center gap-1.5 shadow-2xl z-30">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_#FACC15]"></span>
             <span>BETTER COLOR PROFILE &bull; SLIDERS APPLIED</span>
           </div>
         </div>
 
         <div id="ad-ingame-hud" class="absolute top-10 sm:top-12 right-3.5 sm:right-6 z-30 transition-all duration-300 opacity-0 pointer-events-none select-none" style="z-index: 100; width: 415px; max-width: 94vw;">
-          <div class="relative bg-[#0A0D12]/98 backdrop-blur-xl border border-white/15 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(250,204,21,0.25)] p-3.5 flex flex-col gap-2 overflow-hidden text-left font-sans">
+          <div class="relative bg-[#0A0D12]/95 border border-white/15 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(250,204,21,0.25)] p-3.5 flex flex-col gap-2 overflow-hidden text-left font-sans">
             
             <!-- Illuminated Top Neon Accent Line -->
             <div class="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
@@ -548,7 +517,7 @@
         </div>
 
         <!-- Floating On-Screen Tactile Keycap Prompt [ F8 ] (Bottom-Left, style="z-index: 100;") -->
-        <div id="ad-ingame-key-prompt" class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 bg-[#101217]/95 backdrop-blur-xl border border-white/20 rounded-2xl px-3.5 py-2 sm:px-4 sm:py-2.5 flex items-center gap-3 shadow-[0_15px_35px_rgba(0,0,0,0.9)] transition-all duration-300 opacity-0 pointer-events-none translate-y-3" style="z-index: 100;">
+        <div id="ad-ingame-key-prompt" class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 bg-[#101217]/95 border border-white/20 rounded-2xl px-3.5 py-2 sm:px-4 sm:py-2.5 flex items-center gap-3 shadow-[0_15px_35px_rgba(0,0,0,0.9)] transition-all duration-300 opacity-0 pointer-events-none translate-y-3" style="z-index: 100;">
           <div id="ad-keycap-f8" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-b from-[#2E333D] to-[#181B22] border-2 border-amber-400 shadow-[0_5px_0_#0D0F14,0_0_20px_rgba(250,204,21,0.5)] flex items-center justify-center font-mono font-black text-xs sm:text-sm text-amber-400 transition-all duration-150">
             F8
           </div>
@@ -1215,7 +1184,7 @@
         <!-- SCENE 5: DUAL MONITOR BATTLESTATION STAGE                    -->
         <!-- (Large, Photorealistic 2 Monitors with RGB Bias Lighting)     -->
         <!-- ============================================================ -->
-        <div id="ad-multimonitor-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-3 sm:p-5 bg-gradient-to-b from-[#08090D] via-[#0E1017] to-[#08090D] backdrop-blur-md transition-opacity duration-400 opacity-0 pointer-events-none select-none">
+        <div id="ad-multimonitor-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-3 sm:p-5 bg-gradient-to-b from-[#08090D] via-[#0E1017] to-[#08090D] transition-opacity duration-400 opacity-0 pointer-events-none select-none">
           <!-- Floating Header Badge -->
           <div class="mb-3 px-4 py-1.5 rounded-full bg-amber-400 text-black font-mono font-black text-xs sm:text-sm shadow-[0_0_25px_rgba(250,204,21,0.5)] uppercase tracking-wider flex items-center gap-2">
             <span>🖥️</span>
@@ -1312,7 +1281,7 @@
         <!-- ============================================================ -->
         <!-- SCENE 4: CLEAN DOWNLOAD END CARD                             -->
         <!-- ============================================================ -->
-        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="event.stopPropagation();">
+        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-[#08090C]/95 opacity-0 pointer-events-none" onclick="event.stopPropagation();">
           
           <!-- Replay Button in Top-Right of the BIG THEATER WINDOW -->
           <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-5 sm:top-6 right-5 sm:right-6 py-2.5 px-4 rounded-full text-xs sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-all flex items-center gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
@@ -1347,7 +1316,7 @@
 
 
   <!-- ================= KINETIC MARQUEE TICKER ================= -->
-  <div class="relative w-full overflow-hidden border-y border-white/5 bg-black/40 py-3 backdrop-blur-md z-10">
+  <div class="relative w-full overflow-hidden border-y border-white/5 bg-[#08090C]/90 py-3 z-10">
     <div class="animate-marquee whitespace-nowrap text-xs font-mono tracking-widest uppercase text-gray-400">
       <span class="mx-6 text-white font-bold">🎯 AUTO GAME DETECTION &amp; SWITCHING</span>
       <span class="mx-6 text-amber-300 font-bold">🎨 7-SLIDER PRECISION CALIBRATION</span>
@@ -1626,7 +1595,7 @@
   <section id="download" class="py-20 px-4 max-w-5xl mx-auto z-10 relative">
     <div class="glass-panel rounded-3xl p-8 sm:p-14 text-center border border-white/15 relative overflow-hidden">
       
-      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full theme-bg blur-[140px] opacity-20 pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full opacity-15 pointer-events-none" style="background: radial-gradient(circle, var(--accent) 0%, transparent 70%);"></div>
 
       <img src="assets/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-6 border border-white/20" />
 
@@ -3165,7 +3134,8 @@
         if (t < 4.5) {
           if (vidCs2) {
             setOpacity(vidCs2, '1');
-            vidCs2.style.filter = 'none';
+            const cs2Filter = 'brightness(1.22) contrast(1.20) saturate(1.45)';
+            if (vidCs2.style.filter !== cs2Filter) vidCs2.style.filter = cs2Filter;
             if (adIsPlaying) {
               if (vidCs2.paused) vidCs2.play().catch(() => {});
             } else {
@@ -3173,11 +3143,6 @@
             }
           }
           if (vidGta) { setOpacity(vidGta, '0'); if (!vidGta.paused) vidGta.pause(); }
-
-          if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.28) contrast(1.30) saturate(1.70)';
-            splitCalSide.style.webkitBackdropFilter = 'brightness(1.28) contrast(1.30) saturate(1.70)';
-          }
 
           setText(hudActiveProfile, 'CS2 Tournament Boost');
           if (hudStatusBadge) {
@@ -3201,17 +3166,13 @@
           }
           if (vidGta) {
             setOpacity(vidGta, fadeP.toString());
-            vidGta.style.filter = 'none';
+            const gtaFilter = 'brightness(1.18) contrast(1.22) saturate(1.55)';
+            if (vidGta.style.filter !== gtaFilter) vidGta.style.filter = gtaFilter;
             if (adIsPlaying) {
               if (vidGta.paused) vidGta.play().catch(() => {});
             } else {
               if (!vidGta.paused) vidGta.pause();
             }
-          }
-
-          if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
-            splitCalSide.style.webkitBackdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
           }
 
           setText(hudActiveProfile, 'GTA VI Vice Neon');
@@ -4248,7 +4209,7 @@
   </script>
 
   <!-- ================= CHOOSE YOUR PLAN MODAL (MATCHING USER SCREENSHOT) ================= -->
-  <div id="plan-modal" class="fixed inset-0 z-[9999999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="if(event.target === this) closePlanModal()">
+  <div id="plan-modal" class="fixed inset-0 z-[9999999] flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300" onclick="if(event.target === this) closePlanModal()">
     <div id="plan-modal-card" class="relative w-full max-w-[440px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
       
       <!-- Modal Header -->
@@ -4315,7 +4276,7 @@
   </div>
 
   <!-- ================= KEY RECOVERY MODAL POPUP ================= -->
-  <div id="key-recovery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+  <div id="key-recovery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="key-recovery-card" class="relative w-full max-w-[480px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
       
       <!-- Modal Header -->
@@ -4708,7 +4669,7 @@
   </script>
 
   <!-- ================= IN-APP FEEDBACK MODAL (MATCHING C# FEEDBACKDIALOG) ================= -->
-  <div id="feedback-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="if(event.target === this) closeFeedbackModal();">
+  <div id="feedback-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300" onclick="if(event.target === this) closeFeedbackModal();">
     <div class="relative w-full max-w-lg rounded-2xl bg-[#1E2026] border border-[#444952] shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col text-left font-sans" onclick="event.stopPropagation();">
       
       <!-- Modal Header -->
