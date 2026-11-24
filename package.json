@@ -1,6 +1,6 @@
 {
   "name": "bettercolorprofile-server",
-  "version": "2.10.33",
+  "version": "2.10.35",
   "description": "Better Color Profile Licensing, Anti-Exploit, Recovery & Admin Backend",
   "main": "api/index.js",
   "scripts": {
@@ -13,5 +13,8 @@
     "anti-exploit"
   ],
   "author": "KOUKOU221",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "puppeteer-core": "^25.18.1"
+  }
 }
