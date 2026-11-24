@@ -322,7 +322,7 @@
         <img src="assets/app_logo.png" alt="Better Color Profile Logo" class="w-9 h-9 rounded-xl shadow-lg border border-white/10 group-hover:scale-105 transition-transform" />
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-black text-sm sm:text-lg text-white tracking-tight whitespace-nowrap">Better Color <span class="theme-accent">Profile</span></span>
+            <span class="font-black text-base sm:text-lg text-white tracking-tight">Better Color <span class="theme-accent">Profile</span></span>
           </div>
           <span class="text-[10px] text-gray-400 hidden md:block">The Modern Windows Color Profile Manager</span>
         </div>
@@ -351,9 +351,9 @@
         </button>
 
         <!-- Download Button -->
-        <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord()" class="px-3.5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-xs sm:text-sm font-black text-black theme-bg hover:brightness-110 shadow-xl transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer ml-1 shrink-0" title="Download Better Color Profile for Windows">
+        <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord()" class="px-5 py-2 sm:px-6 sm:py-2.5 rounded-xl text-sm font-black text-black theme-bg hover:brightness-110 shadow-xl transition-all flex items-center gap-2 cursor-pointer ml-1" title="Download Better Color Profile for Windows">
           <span>Download</span>
-          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         </a>
       </div>
 
@@ -379,8 +379,8 @@
     <!-- ================= EMBEDDED CINEMATIC SPEC AD REEL (THEATER WINDOW) ================= -->
     <div id="spec-ad" style="transform: translateZ(0); will-change: transform;" class="relative w-full max-w-[1560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_90px_rgba(250,204,21,0.22)] flex flex-col mx-auto mb-16 text-left transition-all">
       
-      <!-- Spec Ad Screen Stage (4:3 / min-h on mobile, 16:9 on desktop) with click-to-play -->
-      <div id="ad-stage-box" style="transform: translateZ(0); will-change: transform;" class="relative w-full aspect-[4/3] sm:aspect-video min-h-[350px] sm:min-h-0 bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
+      <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) with click-to-play -->
+      <div id="ad-stage-box" style="transform: translateZ(0); will-change: transform;" class="relative w-full aspect-video bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
 
         <!-- Floating Volume Control Overlay (Shows on mouse move over video) -->
         <div id="ad-floating-volume" class="absolute bottom-4 right-4 z-50 flex items-center gap-2.5 bg-[#0C0E14]/85 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-[0_6px_25px_rgba(0,0,0,0.85)] opacity-0 pointer-events-none transition-all duration-300 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
@@ -390,8 +390,8 @@
         </div>
 
         <!-- 2 1080p60 Gameplay Video Streams for Smooth Crossfades (CS2 & GTA VI Extended) -->
-        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="none" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
-        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="none" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="auto" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
 
         <!-- Static Fallback Accent Layer -->
         <div id="ad-scene-inferno" class="ad-slide absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 opacity-0" style="background-image: url('assets/scene_inferno.jpg');"></div>
@@ -407,142 +407,140 @@
           <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.9)] z-30"></div>
 
           <!-- Left Side Tag: Raw Baseline (Bottom-Left of Center Line) -->
-          <div class="absolute bottom-2.5 sm:bottom-4.5 right-[calc(50%+6px)] sm:right-[calc(50%+14px)] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-white/20 text-[8px] sm:text-[10px] font-mono font-bold text-gray-300 flex items-center gap-1 sm:gap-1.5 shadow-2xl z-30">
+          <div class="absolute bottom-3.5 sm:bottom-4.5 right-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 flex items-center gap-1.5 shadow-2xl z-30">
             <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-            <span class="sm:hidden">RAW sRGB</span>
-            <span class="hidden sm:inline">RAW WINDOWS sRGB &bull; UNCHANGED</span>
+            <span>RAW WINDOWS sRGB &bull; UNCHANGED</span>
           </div>
 
           <!-- Right Side Tag: Sliders Applied (Bottom-Right of Center Line) -->
-          <div class="absolute bottom-2.5 sm:bottom-4.5 left-[calc(50%+6px)] sm:left-[calc(50%+14px)] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-amber-400/60 text-[8px] sm:text-[10px] font-mono font-bold text-amber-300 flex items-center gap-1 sm:gap-1.5 shadow-2xl z-30">
+          <div class="absolute bottom-3.5 sm:bottom-4.5 left-[calc(50%+14px)] px-2.5 py-1 rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-amber-400/60 text-[9px] sm:text-[10px] font-mono font-bold text-amber-300 flex items-center gap-1.5 shadow-2xl z-30">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_#FACC15]"></span>
-            <span class="sm:hidden">CALIBRATED</span>
-            <span class="hidden sm:inline">BETTER COLOR PROFILE &bull; SLIDERS APPLIED</span>
+            <span>BETTER COLOR PROFILE &bull; SLIDERS APPLIED</span>
           </div>
         </div>
 
-        <div id="ad-ingame-hud" class="absolute top-1.5 sm:top-12 right-1.5 sm:right-6 z-30 w-[56%] max-w-[195px] sm:w-[415px] sm:max-w-[94vw] transition-all duration-300 opacity-0 pointer-events-none select-none" style="z-index: 100;">
-          <div class="relative bg-[#0A0D12]/98 backdrop-blur-xl border border-white/15 rounded-lg sm:rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(250,204,21,0.25)] p-1.5 sm:p-3.5 flex flex-col gap-0.5 sm:gap-2 overflow-hidden text-left font-sans">
+        <div id="ad-ingame-hud" class="absolute top-10 sm:top-12 right-3.5 sm:right-6 z-30 transition-all duration-300 opacity-0 pointer-events-none select-none" style="z-index: 100; width: 415px; max-width: 94vw;">
+          <div class="relative bg-[#0A0D12]/98 backdrop-blur-xl border border-white/15 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(250,204,21,0.25)] p-3.5 flex flex-col gap-2 overflow-hidden text-left font-sans">
             
             <!-- Illuminated Top Neon Accent Line -->
-            <div class="absolute top-0 left-4 sm:left-6 right-4 sm:right-6 h-[1.5px] bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+            <div class="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
 
             <!-- Header: Title + Tag + Status Badge Pill -->
-            <div class="flex items-center justify-between pb-0.5 sm:pb-1 border-b border-white/10">
-              <div class="flex items-center gap-1 sm:gap-2 min-w-0">
-                <div class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded bg-amber-400/20 border border-amber-400 flex items-center justify-center shrink-0">
-                  <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white"></div>
+            <div class="flex items-center justify-between pb-1 border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <div class="w-3.5 h-3.5 rounded bg-amber-400/20 border border-amber-400 flex items-center justify-center">
+                  <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
                 </div>
-                <span class="text-[6.5px] sm:text-[10px] font-black text-white tracking-wider font-mono truncate">BETTER COLOR PROFILE</span>
-                <span class="text-[9px] font-semibold text-gray-400 font-mono hidden sm:inline">HUD &bull; Display 1</span>
+                <span class="text-[10px] font-black text-white tracking-wider font-mono">BETTER COLOR PROFILE</span>
+                <span class="text-[9px] font-semibold text-gray-400 font-mono">HUD &bull; Display 1</span>
               </div>
-              <span id="ad-hud-status-badge" class="px-1 py-0.2 sm:px-2 sm:py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-[6px] sm:text-[9px] font-bold text-emerald-400 font-mono flex items-center gap-0.5 sm:gap-1 shrink-0">
-                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="ad-hud-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-[9px] font-bold text-emerald-400 font-mono flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>ACTIVE</span>
               </span>
             </div>
 
             <!-- Row 0: Active Profile Selector Card -->
-            <div id="ad-hud-profile-card" class="flex items-center justify-between px-1.5 sm:px-2.5 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-amber-400/10 border border-amber-400/50 shadow-sm transition-all duration-200">
-              <span class="text-[7px] sm:text-[10.5px] font-bold text-white font-mono">Profile</span>
-              <div class="flex items-center gap-1 sm:gap-2 text-amber-300 font-mono font-bold text-[7px] sm:text-xs min-w-0">
-                <span class="text-amber-400 text-[6.5px] sm:text-[10px]">&lang;</span>
-                <span id="ad-hud-active-profile" class="tracking-wide truncate">CS2 Tournament Boost</span>
-                <span class="text-amber-400 text-[6.5px] sm:text-[10px]">&rang;</span>
+            <div id="ad-hud-profile-card" class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-amber-400/10 border border-amber-400/50 shadow-sm transition-all duration-200">
+              <span class="text-[10.5px] font-bold text-white font-mono">Profile</span>
+              <div class="flex items-center gap-2 text-amber-300 font-mono font-bold text-xs">
+                <span class="text-amber-400 text-[10px]">&lang;</span>
+                <span id="ad-hud-active-profile" class="tracking-wide">CS2 Tournament Boost</span>
+                <span class="text-amber-400 text-[10px]">&rang;</span>
               </div>
             </div>
 
             <!-- 7 Calibration Sliders (HudSlider[]) -->
-            <div class="flex flex-col gap-0.5 sm:gap-1 text-[6px] sm:text-[10px] font-mono">
+            <div class="flex flex-col gap-1 text-[10px] font-mono">
               <!-- 1. Brightness -->
-              <div id="ad-hud-row-bright" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Brightness</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-bright" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Brightness</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-bright" class="h-full bg-amber-400 transition-all duration-300" style="width: 68%;"></div>
                 </div>
-                <span id="ad-hud-val-bright" class="w-6 sm:w-11 text-right text-amber-300 font-bold">+35%</span>
+                <span id="ad-hud-val-bright" class="w-11 text-right text-amber-300 font-bold">+35%</span>
               </div>
 
               <!-- 2. Contrast -->
-              <div id="ad-hud-row-contrast" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Contrast</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-contrast" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Contrast</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-contrast" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
                 </div>
-                <span id="ad-hud-val-contrast" class="w-6 sm:w-11 text-right text-gray-300">0%</span>
+                <span id="ad-hud-val-contrast" class="w-11 text-right text-gray-300">0%</span>
               </div>
 
               <!-- 3. Gamma -->
-              <div id="ad-hud-row-gamma" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Gamma</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-gamma" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Gamma</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-gamma" class="h-full bg-amber-400 transition-all duration-300" style="width: 60%;"></div>
                 </div>
-                <span id="ad-hud-val-gamma" class="w-6 sm:w-11 text-right text-amber-300 font-bold">+20%</span>
+                <span id="ad-hud-val-gamma" class="w-11 text-right text-amber-300 font-bold">+20%</span>
               </div>
 
               <!-- 4. Color Temp -->
-              <div id="ad-hud-row-temp" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Color Temp</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-temp" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Color Temp</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-temp" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
                 </div>
-                <span id="ad-hud-val-temp" class="w-6 sm:w-11 text-right text-amber-300 font-bold">6500K</span>
+                <span id="ad-hud-val-temp" class="w-11 text-right text-amber-300 font-bold">6500K</span>
               </div>
 
               <!-- 5. Digital Vibrance -->
-              <div id="ad-hud-row-vibrance" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Digital Vibrance</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-vibrance" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Digital Vibrance</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-vibrance" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
                 </div>
-                <span id="ad-hud-val-vibrance" class="w-6 sm:w-11 text-right text-gray-300">0%</span>
+                <span id="ad-hud-val-vibrance" class="w-11 text-right text-gray-300">0%</span>
               </div>
 
               <!-- 6. Shadows (Black Equalizer) -->
-              <div id="ad-hud-row-shadows" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-amber-400 w-12 sm:w-24 font-bold truncate">Shadows</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-amber-400/30 relative">
+              <div id="ad-hud-row-shadows" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-amber-400 w-24 font-bold">Shadows</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-amber-400/30 relative">
                   <div id="ad-hud-bar-shadows" class="h-full bg-orange-400 transition-all duration-300" style="width: 68%;"></div>
                 </div>
-                <span id="ad-hud-val-shadows" class="w-6 sm:w-11 text-right text-orange-400 font-bold">+35%</span>
+                <span id="ad-hud-val-shadows" class="w-11 text-right text-orange-400 font-bold">+35%</span>
               </div>
 
               <!-- 7. Clarity -->
-              <div id="ad-hud-row-clarity" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Clarity</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
+              <div id="ad-hud-row-clarity" class="flex items-center justify-between gap-2 py-0.5 px-1 rounded transition-colors">
+                <span class="text-gray-300 w-24">Clarity</span>
+                <div class="flex-1 h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
                   <div id="ad-hud-bar-clarity" class="h-full bg-teal-400 transition-all duration-300" style="width: 58%;"></div>
                 </div>
-                <span id="ad-hud-val-clarity" class="w-6 sm:w-11 text-right text-teal-300 font-bold">+15%</span>
+                <span id="ad-hud-val-clarity" class="w-11 text-right text-teal-300 font-bold">+15%</span>
               </div>
             </div>
 
             <!-- Bottom Keycap Legend Row (HudKeycapItem[]) - 1:1 Parity with Desktop C# HudOverlayForm -->
-            <div class="pt-1 sm:pt-2 border-t border-white/10 grid grid-cols-3 gap-0.5 sm:gap-1 text-center font-mono">
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8.5px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
+            <div class="pt-2 border-t border-white/10 grid grid-cols-3 gap-1 text-center font-mono">
+              <div class="flex flex-col items-center gap-1">
+                <div class="flex items-center justify-center gap-1 text-[8.5px]">
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↑ ↓</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↑ ↓</span>
                 </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-gray-300 font-semibold">Select</span>
+                <span class="text-[8.5px] text-gray-300 font-semibold">Select</span>
               </div>
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8.5px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
+              <div class="flex flex-col items-center gap-1">
+                <div class="flex items-center justify-center gap-1 text-[8.5px]">
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
                 </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-gray-300 font-semibold">±5%</span>
+                <span class="text-[8.5px] text-gray-300 font-semibold">±5%</span>
               </div>
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl+Shift</span>
+              <div class="flex flex-col items-center gap-1">
+                <div class="flex items-center justify-center gap-1 text-[8px]">
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl + Shift</span>
                   <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
+                  <span class="px-1.5 py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
                 </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-sky-300 font-semibold">±1%</span>
+                <span class="text-[8.5px] text-sky-300 font-semibold">±1%</span>
               </div>
             </div>
 
@@ -550,17 +548,16 @@
         </div>
 
         <!-- Floating On-Screen Tactile Keycap Prompt [ F8 ] (Bottom-Left, style="z-index: 100;") -->
-        <div id="ad-ingame-key-prompt" class="absolute bottom-1.5 sm:bottom-6 left-1.5 sm:left-6 bg-[#101217]/95 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl px-2 py-1 sm:px-4 sm:py-2.5 flex items-center gap-1.5 sm:gap-3 shadow-[0_15px_35px_rgba(0,0,0,0.9)] transition-all duration-300 opacity-0 pointer-events-none translate-y-3" style="z-index: 100;">
-          <div id="ad-keycap-f8" class="w-5 h-5 sm:w-10 sm:h-10 rounded-md sm:rounded-xl bg-gradient-to-b from-[#2E333D] to-[#181B22] border border-amber-400 sm:border-2 shadow-[0_3px_0_#0D0F14,0_0_12px_rgba(250,204,21,0.5)] sm:shadow-[0_5px_0_#0D0F14,0_0_20px_rgba(250,204,21,0.5)] flex items-center justify-center font-mono font-black text-[8px] sm:text-sm text-amber-400 transition-all duration-150">
+        <div id="ad-ingame-key-prompt" class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 bg-[#101217]/95 backdrop-blur-xl border border-white/20 rounded-2xl px-3.5 py-2 sm:px-4 sm:py-2.5 flex items-center gap-3 shadow-[0_15px_35px_rgba(0,0,0,0.9)] transition-all duration-300 opacity-0 pointer-events-none translate-y-3" style="z-index: 100;">
+          <div id="ad-keycap-f8" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-b from-[#2E333D] to-[#181B22] border-2 border-amber-400 shadow-[0_5px_0_#0D0F14,0_0_20px_rgba(250,204,21,0.5)] flex items-center justify-center font-mono font-black text-xs sm:text-sm text-amber-400 transition-all duration-150">
             F8
           </div>
           <div class="flex flex-col">
-            <span class="text-[7.5px] sm:text-xs font-bold text-white tracking-wide flex items-center gap-1 sm:gap-1.5">
-              <span class="sm:hidden">CYCLE</span>
-              <span class="hidden sm:inline">PROFILE SWITCH</span>
-              <span id="ad-key-status" class="text-amber-400 font-mono text-[6.5px] sm:text-[10px] font-bold">[PRESS KEY]</span>
+            <span class="text-[10px] sm:text-xs font-bold text-white tracking-wide flex items-center gap-1.5">
+              <span>PROFILE SWITCH</span>
+              <span id="ad-key-status" class="text-amber-400 font-mono text-[9px] sm:text-[10px] font-bold">[PRESS KEY]</span>
             </span>
-            <span class="text-[8.5px] sm:text-[9.5px] font-mono text-gray-400 hidden sm:inline">Cycles Profile Without Minimizing Game</span>
+            <span class="text-[8.5px] sm:text-[9.5px] font-mono text-gray-400">Cycles Profile Without Minimizing Game</span>
           </div>
         </div>
 
@@ -575,21 +572,21 @@
         <!-- ============================================================ -->
         <!-- SCENE 1: THE OPENING HOOK                                    -->
         <!-- ============================================================ -->
-        <div id="ad-beat-2" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 text-center bg-[#0B0D12] transition-opacity duration-300 opacity-100 pointer-events-auto select-none">
-          <div class="w-14 h-14 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl bg-[#1E2023] border border-amber-400/40 flex items-center justify-center p-2.5 sm:p-3.5 shadow-[0_0_40px_rgba(250,204,21,0.3)] mb-2.5 sm:mb-4">
+        <div id="ad-beat-2" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-[#0B0D12] transition-opacity duration-300 opacity-100 pointer-events-auto select-none">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#1E2023] border border-amber-400/40 flex items-center justify-center p-3.5 shadow-[0_0_40px_rgba(250,204,21,0.3)] mb-4">
             <img src="assets/app_logo.png" alt="Better Color Profile Logo" class="w-full h-full object-contain" onerror="this.src='assets/icon.png'" />
           </div>
-          <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight uppercase leading-tight">
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase">
             Meet <span class="theme-accent">Better Color Profile</span>
           </h2>
-          <p class="text-xs sm:text-lg text-gray-300 font-medium max-w-xl mt-1.5 sm:mt-3 leading-relaxed">
+          <p class="text-sm sm:text-lg text-gray-300 font-medium max-w-xl mt-3 leading-relaxed">
             Total Color Control Built for Competitive Gaming.
           </p>
 
           <!-- Sleek Glowing Play Button (Smoothly Centers Stage & Starts Video) -->
-          <button type="button" id="ad-start-play-btn" onclick="startAdAndCenter(event)" class="mt-4 sm:mt-7 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs sm:text-base shadow-[0_0_35px_rgba(250,204,21,0.6)] flex items-center gap-2 sm:gap-3 transition-all transform hover:scale-105 active:scale-95 cursor-pointer select-none group/play">
-            <span class="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-black/15 flex items-center justify-center group-hover/play:scale-110 transition-transform">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4 fill-current ml-0.5 text-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <button type="button" id="ad-start-play-btn" onclick="startAdAndCenter(event)" class="mt-7 px-8 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-sm sm:text-base shadow-[0_0_35px_rgba(250,204,21,0.6)] flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 cursor-pointer select-none group/play">
+            <span class="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center group-hover/play:scale-110 transition-transform">
+              <svg class="w-4 h-4 fill-current ml-0.5 text-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </span>
             <span>Watch Showcase</span>
           </button>
@@ -601,24 +598,24 @@
         <div id="ad-tutorial-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-1 sm:p-2 transition-opacity duration-300 opacity-0 pointer-events-none select-none">
 
           <!-- Full Authentic App Window Shell (1:1 with media_1795247792428_3d794c90.png) -->
-          <div id="ad-tut-app-window" class="relative w-[96%] sm:w-[98%] max-w-[1240px] h-[94%] bg-[#212327] rounded-lg sm:rounded-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
+          <div id="ad-tut-app-window" class="relative w-[96%] sm:w-[98%] max-w-[1240px] h-[92%] sm:h-[94%] bg-[#212327] rounded-xl sm:rounded-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
 
             <!-- Unified Header: Logo + Tabs + Status/Window Controls in ONE Clean Bar (1:1 Authentic Layout) -->
-            <div class="px-1.5 sm:px-6 py-1 sm:py-2 bg-[#1E2023] border-b border-white/5 flex items-center justify-between shrink-0 gap-1 sm:gap-2">
-              <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
-                <img src="assets/app_logo.png" alt="Better Color Profile" class="w-3.5 h-3.5 sm:w-5 sm:h-5 object-contain" onerror="this.src='assets/icon.png'" />
-                <span class="text-xs sm:text-sm font-bold text-white tracking-wide hidden sm:inline whitespace-nowrap">Better Color Profile</span>
+            <div class="px-4 sm:px-6 py-2 bg-[#1E2023] border-b border-white/5 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-2.5">
+                <img src="assets/app_logo.png" alt="Better Color Profile" class="w-4 h-4 sm:w-5 sm:h-5 object-contain" onerror="this.src='assets/icon.png'" />
+                <span class="text-xs sm:text-sm font-bold text-white tracking-wide">Better Color Profile</span>
               </div>
-              <div class="flex items-center gap-0.5 sm:gap-2.5">
-                <button type="button" id="ad-tut-tab-profiles" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap">Profiles</button>
-                <button type="button" id="ad-tut-tab-tuner" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap"><span class="sm:hidden">Create</span><span class="hidden sm:inline">Create Profile</span></button>
-                <button type="button" id="ad-tut-tab-options" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap">Options</button>
+              <div class="flex items-center gap-2 sm:gap-2.5">
+                <button type="button" id="ad-tut-tab-profiles" class="px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all">Profiles</button>
+                <button type="button" id="ad-tut-tab-tuner" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all">Create Profile</button>
+                <button type="button" id="ad-tut-tab-options" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all">Options</button>
               </div>
-              <div class="flex items-center gap-1 sm:gap-3 shrink-0">
-                <span class="hidden md:flex px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-mono font-semibold items-center gap-1 whitespace-nowrap">
+              <div class="flex items-center gap-3">
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-mono font-semibold flex items-center gap-1">
                   <span>✓</span> Pro Active
                 </span>
-                <div class="flex items-center gap-1 sm:gap-2.5 text-gray-500 text-[9px] sm:text-sm">
+                <div class="flex items-center gap-2.5 text-gray-500 text-xs sm:text-sm">
                   <span>&minus;</span>
                   <span>&#9633;</span>
                   <span>&times;</span>
@@ -627,302 +624,300 @@
             </div>
 
             <!-- App Body Content Area (Authentic proportions matching media_1795247792428_3d794c90.png) -->
-            <div class="flex-1 p-1 sm:p-4 bg-[#212327] flex flex-col justify-start overflow-hidden">
+            <div class="flex-1 p-3.5 sm:p-4 bg-[#212327] flex flex-col justify-start overflow-hidden">
 
               <!-- VIEW A: CREATE PROFILE (Centered Calibration Card, 1:1 with media_1795194701789_b1818288.png) -->
-              <div id="ad-tut-view-tuner" class="w-full max-w-4xl mx-auto hidden flex flex-col gap-1 sm:gap-2.5 items-start">
+              <div id="ad-tut-view-tuner" class="w-full max-w-4xl mx-auto hidden flex flex-col gap-2.5 items-start">
                 <!-- Display Calibration Card -->
-                <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1.5 sm:p-4 flex flex-col gap-1 sm:gap-2.5">
-                  <div class="flex items-center justify-between pb-1 sm:pb-1.5 border-b border-white/5 shrink-0">
-                    <span class="text-[8.5px] sm:text-sm font-bold text-white">Display Calibration</span>
+                <div class="w-full bg-[#31343a] rounded-xl border border-white/5 p-3.5 sm:p-4 flex flex-col gap-2.5">
+                  <div class="flex items-center justify-between pb-1.5 border-b border-white/5 shrink-0">
+                    <span class="text-xs sm:text-sm font-bold text-white">Display Calibration</span>
                     <div class="relative">
-                      <button type="button" id="ad-display-dropdown-btn" class="px-1.5 sm:px-3 py-0.5 sm:py-1 rounded sm:rounded-lg bg-[#212327] border border-amber-400/30 text-[7px] sm:text-xs font-mono text-amber-400 font-semibold flex items-center gap-1 sm:gap-1.5">
+                      <button type="button" id="ad-display-dropdown-btn" class="px-3 py-1 rounded-lg bg-[#212327] border border-amber-400/30 text-[10px] sm:text-xs font-mono text-amber-400 font-semibold flex items-center gap-1.5">
                         <span id="ad-display-name">🖥️ Display 1 (Primary)</span>
-                        <span class="text-gray-400 text-[7px] sm:text-[8px]">&#9662;</span>
+                        <span class="text-gray-400 text-[8px]">&#9662;</span>
                       </button>
                     </div>
                   </div>
 
                   <!-- Calibration Sliders (Compact, Uniform Spacing) -->
-                  <div class="space-y-0.5 sm:space-y-2 py-0.5 text-[7px] sm:text-xs font-medium text-gray-300">
+                  <div class="space-y-2 py-0.5 text-[10.5px] sm:text-xs font-medium text-gray-300">
                     <!-- 1. Brightness -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4">
-                      <span class="col-span-3 text-gray-300 truncate">Brightness</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div id="ad-tut-track-bright" class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative overflow-hidden">
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4">
+                      <span class="col-span-3 text-gray-300">Brightness</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div id="ad-tut-track-bright" class="w-full h-1.5 bg-[#212327] rounded-full relative overflow-hidden">
                           <div id="ad-tut-fill-bright" class="absolute top-0 bottom-0 bg-amber-400 rounded-full" style="left: 50%; width: 0%;"></div>
                         </div>
-                        <div id="ad-tut-thumb-bright" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3.5 h-2 sm:h-3.5 rounded-full bg-white border border-amber-400 sm:border-2 shadow-[0_0_10px_rgba(250,204,21,0.8)]" style="left: 50%;"></div>
+                        <div id="ad-tut-thumb-bright" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-white border-2 border-amber-400 shadow-[0_0_10px_rgba(250,204,21,0.8)]" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span id="ad-tut-val-bright" class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-amber-400/40 text-[6.5px] sm:text-[10px] font-mono font-bold text-amber-400 text-center sm:min-w-[42px]">+60%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span id="ad-tut-val-bright" class="w-14 py-0.5 rounded bg-[#212327] border border-amber-400/40 text-[9.5px] sm:text-[10px] font-mono font-bold text-amber-400 text-center min-w-[42px]">+60%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 2. Contrast -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Contrast</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Contrast</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] sm:text-[10px] font-mono text-gray-400 text-center min-w-[42px]">0%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 3. Gamma (Midtones) -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Gamma</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Gamma (Midtones)</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] sm:text-[10px] font-mono text-gray-400 text-center min-w-[42px]">0%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 4. Color Temperature -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Color Temp</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Color Temperature</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[6.5px] sm:text-[10px] font-mono font-bold text-amber-300 text-center sm:min-w-[42px]">6500K</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[9.5px] sm:text-[10px] font-mono font-bold text-amber-300 text-center min-w-[42px]">6500K</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 5. Digital Vibrance -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Vibrance</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Digital Vibrance</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] sm:text-[10px] font-mono text-gray-400 text-center min-w-[42px]">0%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 6. Shadows (Black Equalizer) -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Shadows</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Shadows (Black Equalizer)</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] sm:text-[10px] font-mono text-gray-400 text-center min-w-[42px]">0%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
 
                     <!-- 7. Midtone Clarity -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Clarity</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
+                    <div class="grid grid-cols-12 items-center gap-2.5 sm:gap-4 opacity-70">
+                      <span class="col-span-3 text-gray-400">Midtone Clarity</span>
+                      <div class="col-span-7 relative h-3 flex items-center">
+                        <div class="w-full h-1.5 bg-[#212327] rounded-full"></div>
+                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
                       </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
+                      <div class="col-span-2 flex items-center justify-end gap-1.5">
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] sm:text-[10px] font-mono text-gray-400 text-center min-w-[42px]">0%</span>
+                        <span class="px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Bottom Action Bar (Directly Under Calibration Card) -->
-                <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1 sm:p-3 flex items-center justify-between gap-1.5 sm:gap-3 shrink-0">
-                  <div class="w-24 sm:w-52 px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7.5px] sm:text-sm font-mono text-white truncate">
+                <div class="w-full bg-[#31343a] rounded-xl border border-white/5 p-2.5 sm:p-3 flex items-center justify-between gap-3 shrink-0">
+                  <div class="w-44 sm:w-52 px-3 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs sm:text-sm font-mono text-white">
                     Profile 1
                   </div>
-                  <button type="button" id="ad-tut-btn-save" class="px-2.5 sm:px-8 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-amber-400 hover:bg-amber-300 text-black font-black text-[7.5px] sm:text-sm shadow-[0_0_15px_rgba(250,204,21,0.5)] transition-all flex items-center gap-1 sm:gap-1.5 shrink-0">
-                    <span class="sm:hidden">Save .ICC</span>
-                    <span class="hidden sm:inline">Save .ICC Profile</span>
+                  <button type="button" id="ad-tut-btn-save" class="px-6 sm:px-8 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black font-black text-xs sm:text-sm shadow-[0_0_15px_rgba(250,204,21,0.5)] transition-all flex items-center gap-1.5">
+                    <span>Save .ICC Profile</span>
                   </button>
-                  <button type="button" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7px] sm:text-xs font-semibold text-gray-300 flex items-center gap-1 sm:gap-1.5 opacity-60 shrink-0">
-                    <span>📋 <span class="hidden sm:inline">Copy Share Code</span><span class="sm:hidden">Copy</span></span>
+                  <button type="button" class="px-3.5 sm:px-4 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs font-semibold text-gray-300 flex items-center gap-1.5 opacity-60">
+                    <span>📋 Copy Share Code</span>
                   </button>
-                  <button type="button" class="hidden sm:flex px-3.5 sm:px-4 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs font-semibold text-gray-300 items-center gap-1.5 opacity-60 shrink-0">
+                  <button type="button" class="px-3.5 sm:px-4 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs font-semibold text-gray-300 flex items-center gap-1.5 opacity-60">
                     <span>📥 Import Share Code</span>
                   </button>
                 </div>
               </div>
 
               <!-- VIEW B: PROFILES TAB (1:1 Exact Parity with media_1795247792428_3d794c90.png) -->
-              <div id="ad-tut-view-profiles" class="w-full grid grid-cols-12 gap-1 sm:gap-4 items-start">
+              <div id="ad-tut-view-profiles" class="w-full grid grid-cols-12 gap-3 sm:gap-4 items-start">
                 <!-- Left Sidebar: Profile Slots (4 Slots stacked neatly with natural gap) -->
-                <div class="col-span-4 sm:col-span-3 flex flex-col gap-0.5 sm:gap-2 shrink-0">
-                  <div class="flex items-center gap-1 sm:gap-1.5 pb-0.5 shrink-0">
-                    <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded sm:rounded-md bg-[#31343a] border border-amber-400/40 text-amber-300 text-[7px] sm:text-[10.5px] font-bold">Group 1</span>
-                    <span class="w-3.5 h-3.5 sm:w-5 sm:h-5 rounded sm:rounded-md bg-[#31343a] border border-white/10 text-gray-300 text-[8px] sm:text-xs flex items-center justify-center font-bold">+</span>
+                <div class="col-span-4 sm:col-span-3 flex flex-col gap-2 shrink-0">
+                  <div class="flex items-center gap-1.5 pb-0.5 shrink-0">
+                    <span class="px-2.5 py-0.5 rounded-md bg-[#31343a] border border-amber-400/40 text-amber-300 text-[10.5px] font-bold">Group 1</span>
+                    <span class="w-5 h-5 rounded-md bg-[#31343a] border border-white/10 text-gray-300 text-xs flex items-center justify-center font-bold">+</span>
                   </div>
                   <!-- Slot 1: Default Profile (Initially Active with Checkmark, before switching to arena) -->
-                  <div id="ad-tut-slot-1" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot1-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full shrink-0"></div>
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot1-title" class="text-[7.5px] sm:text-sm font-bold text-amber-300 truncate">Default<span class="hidden sm:inline"> Profile</span></div>
-                        <div class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Standard &bull; Windows sRGB Default</div>
+                  <div id="ad-tut-slot-1" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-2.5">
+                      <div id="ad-tut-slot1-strip" class="w-1 h-6 bg-amber-400 rounded-full"></div>
+                      <div>
+                        <div id="ad-tut-slot1-title" class="text-xs sm:text-sm font-bold text-amber-300">Default Profile</div>
+                        <div class="text-[9px] sm:text-[9.5px] text-gray-400">Standard &bull; Windows sRGB Default</div>
                       </div>
                     </div>
-                    <div id="ad-tut-slot1-action" class="flex items-center justify-end shrink-0 ml-0.5">
-                      <span id="ad-tut-btn-apply-slot1" class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px]" style="display: none;">Apply</span>
-                      <div id="ad-tut-slot1-check" class="w-3 h-3 sm:w-5 sm:h-5 rounded-full border border-amber-400 sm:border-2 flex items-center justify-center text-amber-400 text-[7px] sm:text-xs font-bold">✓</div>
+                    <div id="ad-tut-slot1-action" class="flex items-center justify-end">
+                      <span id="ad-tut-btn-apply-slot1" class="px-2.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[9.5px] sm:text-[10px]" style="display: none;">Apply</span>
+                      <div id="ad-tut-slot1-check" class="w-5 h-5 rounded-full border-2 border-amber-400 flex items-center justify-center text-amber-400 text-xs font-bold">✓</div>
                     </div>
                   </div>
                   <!-- Slot 2: Rust -->
-                  <div id="ad-tut-slot-2" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <img src="assets/icon_rust.png" alt="Rust" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div class="text-[7.5px] sm:text-sm font-bold text-white truncate">Rust</div>
-                        <div class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 1</div>
+                  <div id="ad-tut-slot-2" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <img src="assets/icon_rust.png" alt="Rust" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <div>
+                        <div class="text-xs sm:text-sm font-bold text-white">Rust</div>
+                        <div class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 1</div>
                       </div>
                     </div>
-                    <span class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px] shrink-0 ml-0.5">Apply</span>
+                    <span class="px-2.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[9.5px] sm:text-[10px]">Apply</span>
                   </div>
                   <!-- Slot 3: arena -->
-                  <div id="ad-tut-slot-3" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot3-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full hidden shrink-0"></div>
-                      <img src="assets/icon_arena.png" alt="arena" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot3-title" class="text-[7.5px] sm:text-sm font-bold text-white truncate">arena</div>
-                        <div id="ad-tut-slot3-sub" class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 2</div>
+                  <div id="ad-tut-slot-3" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-2.5">
+                      <div id="ad-tut-slot3-strip" class="w-1 h-6 bg-amber-400 rounded-full hidden"></div>
+                      <img src="assets/icon_arena.png" alt="arena" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <div>
+                        <div id="ad-tut-slot3-title" class="text-xs sm:text-sm font-bold text-white">arena</div>
+                        <div id="ad-tut-slot3-sub" class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 2</div>
                       </div>
                     </div>
-                    <div id="ad-tut-slot3-action" class="flex items-center justify-end shrink-0 ml-0.5">
-                      <span id="ad-tut-btn-apply-arena" class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px] cursor-pointer">Apply</span>
-                      <div id="ad-tut-slot3-check" class="w-3 h-3 sm:w-5 sm:h-5 rounded-full border border-amber-400 sm:border-2 hidden items-center justify-center text-amber-400 text-[7px] sm:text-xs font-bold">✓</div>
+                    <div id="ad-tut-slot3-action" class="flex items-center justify-end">
+                      <span id="ad-tut-btn-apply-arena" class="px-2.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[9.5px] sm:text-[10px] cursor-pointer">Apply</span>
+                      <div id="ad-tut-slot3-check" class="w-5 h-5 rounded-full border-2 border-amber-400 hidden items-center justify-center text-amber-400 text-xs font-bold">✓</div>
                     </div>
                   </div>
                   <!-- Slot 4: cs2 (1:1 with media_1795292896911_320d19a2.png) -->
-                  <div id="ad-tut-slot-4" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot4-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full hidden shrink-0"></div>
-                      <img src="assets/icon_cs2.png?v=2.10.35" alt="cs2" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot4-title" class="text-[7.5px] sm:text-sm font-bold text-white truncate">cs2</div>
-                        <div id="ad-tut-slot4-sub" class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 3</div>
+                  <div id="ad-tut-slot-4" class="p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-2.5">
+                      <div id="ad-tut-slot4-strip" class="w-1 h-6 bg-amber-400 rounded-full hidden"></div>
+                      <img src="assets/icon_cs2.png?v=2.10.34" alt="cs2" class="w-6 h-6 rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
+                      <div>
+                        <div id="ad-tut-slot4-title" class="text-xs sm:text-sm font-bold text-white">cs2</div>
+                        <div id="ad-tut-slot4-sub" class="text-[9px] sm:text-[9.5px] text-gray-400">Profile 3</div>
                       </div>
                     </div>
-                    <div id="ad-tut-slot4-action" class="shrink-0 ml-0.5">
-                      <span class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px]">Apply</span>
+                    <div id="ad-tut-slot4-action">
+                      <span class="px-2.5 py-0.5 rounded bg-amber-400 text-black font-bold text-[9.5px] sm:text-[10px]">Apply</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Right Details Panel: Profile Settings & Copy Share Code (1:1 with media_1795292896911_320d19a2.png) -->
-                <div class="col-span-8 sm:col-span-9 flex flex-col gap-1 sm:gap-2 items-start">
-                  <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1.5 sm:p-4 flex flex-col gap-1 sm:gap-2.5">
+                <div class="col-span-8 sm:col-span-9 flex flex-col gap-2 items-start">
+                  <div class="w-full bg-[#31343a] rounded-xl border border-white/5 p-3.5 sm:p-4 flex flex-col gap-2.5">
                     <!-- Row 1: Profile Name (Left) + Display 1 Selector (Right) -->
-                    <div class="flex items-center justify-between pb-0.5 sm:pb-1 border-b border-white/5 shrink-0">
-                      <div class="flex items-center gap-1 sm:gap-2 min-w-0">
-                        <span class="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.8)] shrink-0"></span>
-                        <span id="ad-tut-heading-name" class="text-[7.5px] sm:text-sm font-bold text-white truncate">arena • Profile 2</span>
+                    <div class="flex items-center justify-between pb-1 border-b border-white/5 shrink-0">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.8)]"></span>
+                        <span id="ad-tut-heading-name" class="text-xs sm:text-sm font-bold text-white">arena • Profile 2</span>
                       </div>
-                      <div class="px-1 sm:px-2.5 py-0.2 sm:py-1 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[6.5px] sm:text-xs font-mono text-gray-200 flex items-center gap-0.5 sm:gap-1.5 shadow-sm shrink-0">
+                      <div class="px-2.5 py-1 rounded-lg bg-[#212327] border border-white/10 text-[10px] sm:text-xs font-mono text-gray-200 flex items-center gap-1.5 shadow-sm">
                         <span>🖥️</span>
-                        <span id="ad-tut-display-text"><span class="sm:hidden">Disp 1</span><span class="hidden sm:inline">Display 1 (Primary)</span></span>
-                        <span class="text-[6px] sm:text-[8px] text-gray-400">&#9662;</span>
+                        <span id="ad-tut-display-text">Display 1 (Primary)</span>
+                        <span class="text-[8px] text-gray-400">&#9662;</span>
                       </div>
                     </div>
 
                     <!-- Row 2: Subheader (Left) + Edit Button (Right) -->
                     <div class="flex items-center justify-between pb-0.5 shrink-0">
-                      <div class="flex items-center gap-1 sm:gap-2">
-                        <span class="text-[7px] sm:text-xs font-bold text-white">Display Calibration</span>
-                        <span class="text-[9px] sm:text-[9.5px] text-gray-400 hidden sm:inline">&bull; Read-Only Calibration</span>
+                      <div class="flex items-center gap-2">
+                        <span class="text-[11px] sm:text-xs font-bold text-white">Display Calibration</span>
+                        <span class="text-[9px] sm:text-[9.5px] text-gray-400">&bull; Read-Only Calibration</span>
                       </div>
-                      <button type="button" class="px-1.5 sm:px-3.5 py-0.2 sm:py-0.5 rounded sm:rounded-md bg-[#212327] border border-white/10 text-[6.5px] sm:text-xs font-medium text-gray-300 hover:text-white transition-colors">Edit</button>
+                      <button type="button" class="px-3.5 py-0.5 rounded-md bg-[#212327] border border-white/10 text-xs font-medium text-gray-300 hover:text-white transition-colors">Edit</button>
                     </div>
 
                     <!-- Row 3-9: 7 Calibration Sliders with Right-Hand Value Badges (1:1 with media_1795292896911_320d19a2.png) -->
-                    <div class="space-y-0.5 sm:space-y-2 py-0 sm:py-0.5 text-[6.5px] sm:text-xs font-medium text-gray-300">
+                    <div class="space-y-1.5 sm:space-y-2 py-0.5 text-[10.5px] sm:text-xs font-medium text-gray-300">
                       <!-- 1. Brightness -->
-                      <div class="flex items-center gap-1 sm:gap-3">
-                        <span class="w-11 sm:w-44 text-gray-300 text-[6.5px] sm:text-xs shrink-0 truncate">Brightness</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                      <div class="flex items-center gap-3">
+                        <span class="w-36 sm:w-44 text-gray-300 text-xs shrink-0">Brightness</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
                           <div id="ad-tut-prof-bar-bright" class="absolute top-0 bottom-0 bg-amber-400 rounded-full" style="left: 50%; width: 25%;"></div>
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300 shadow-[0_0_6px_rgba(250,204,21,0.8)]" style="left: 75%;"></div>
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300 shadow-[0_0_6px_rgba(250,204,21,0.8)]" style="left: 75%;"></div>
                         </div>
-                        <span id="ad-tut-prof-val-bright" class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-300 text-center shrink-0">0%</span>
+                        <span id="ad-tut-prof-val-bright" class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-300 text-center shrink-0">0%</span>
                       </div>
 
                       <!-- 2. Contrast -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Contrast</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Contrast</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
                       </div>
 
                       <!-- 3. Gamma -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Gamma</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Gamma (Midtones)</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
                       </div>
 
                       <!-- 4. Color Temp -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Color Temp</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Color Temperature</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[6px] sm:text-[9.5px] font-mono font-bold text-amber-300 text-center shrink-0">6500K</span>
+                        <span class="w-14 py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[9.5px] font-mono font-bold text-amber-300 text-center shrink-0">6500K</span>
                       </div>
 
                       <!-- 5. Digital Vibrance -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Vibrance</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Digital Vibrance</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
                       </div>
 
                       <!-- 6. Shadows (Black Equalizer) -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Shadows</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Shadows (Black Equalizer)</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
                       </div>
 
                       <!-- 7. Midtone Clarity -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Clarity</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
+                      <div class="flex items-center gap-3 opacity-70">
+                        <span class="w-36 sm:w-44 text-gray-400 text-xs shrink-0">Midtone Clarity</span>
+                        <div class="flex-1 h-1.5 bg-[#212327] rounded-full relative flex items-center">
+                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
                         </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
+                        <span class="w-14 py-0.5 rounded bg-[#212327] border border-white/5 text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
                       </div>
                     </div>
 
                     <!-- Row 10: Copy Share Code Directly Below Sliders (1:1 with media_1795292896911_320d19a2.png) -->
-                    <div class="pt-0.5 sm:pt-1 flex items-center gap-1.5 sm:gap-3 shrink-0">
-                      <button type="button" id="ad-tut-btn-copyshare" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7px] sm:text-xs font-semibold text-gray-200 hover:text-white flex items-center gap-1 sm:gap-2 shadow-sm transition-all">
+                    <div class="pt-1 flex items-center gap-3 shrink-0">
+                      <button type="button" id="ad-tut-btn-copyshare" class="px-4 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs font-semibold text-gray-200 hover:text-white flex items-center gap-2 shadow-sm transition-all">
                         <span>📋 Copy Share Code</span>
                       </button>
                       <!-- Green Inline Toast -->
-                      <div id="ad-tut-share-toast" class="text-[6.5px] sm:text-xs font-mono font-bold text-emerald-400 items-center gap-1 sm:gap-1.5 transition-opacity duration-200" style="display: none; visibility: hidden; opacity: 0;">
-                        <span class="sm:hidden">✓ Copied</span>
-                        <span class="hidden sm:inline">✓ Share Code Copied: BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
+                      <div id="ad-tut-share-toast" class="text-xs font-mono font-bold text-emerald-400 items-center gap-1.5 transition-opacity duration-200" style="display: none; visibility: hidden; opacity: 0;">
+                        <span>✓ Share Code Copied: BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
                       </div>
                     </div>
                   </div>
@@ -1317,25 +1312,25 @@
         <!-- ============================================================ -->
         <!-- SCENE 4: CLEAN DOWNLOAD END CARD                             -->
         <!-- ============================================================ -->
-        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="event.stopPropagation();">
+        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="event.stopPropagation();">
           
           <!-- Replay Button in Top-Right of the BIG THEATER WINDOW -->
-          <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-2.5 sm:top-6 right-2.5 sm:right-6 py-1.5 px-3 sm:py-2.5 sm:px-4 rounded-full text-[11px] sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
-            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 group-hover:rotate-[-45deg] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-5 sm:top-6 right-5 sm:right-6 py-2.5 px-4 rounded-full text-xs sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-all flex items-center gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
+            <svg class="w-4 h-4 text-amber-400 group-hover:rotate-[-45deg] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span>Replay</span>
           </button>
 
           <!-- Middle-Center Dialog Box -->
-          <div class="relative p-5 sm:p-10 rounded-2xl sm:rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-[290px] sm:max-w-md w-full pointer-events-auto" onclick="event.stopPropagation();">
-            <img src="assets/app_logo.png" alt="Better Color Profile" class="w-11 h-11 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl mx-auto shadow-2xl mb-2.5 sm:mb-4 border border-white/20 object-contain" />
-            <h3 class="text-lg sm:text-2xl font-black text-white tracking-tight">Better Color Profile</h3>
-            <p class="text-[10px] sm:text-xs text-gray-400 mt-1 mb-4 sm:mb-6 font-mono">Universal Display Calibration for Windows 11 &amp; 10</p>
+          <div class="relative p-8 sm:p-10 rounded-3xl border border-white/15 bg-gradient-to-b from-[#13151D] to-[#0A0B10] shadow-[0_0_80px_rgba(250,204,21,0.25)] max-w-md w-full pointer-events-auto" onclick="event.stopPropagation();">
+            <img src="assets/app_logo.png" alt="Better Color Profile" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-4 border border-white/20 object-contain" />
+            <h3 class="text-2xl font-black text-white tracking-tight">Better Color Profile</h3>
+            <p class="text-xs text-gray-400 mt-1 mb-6 font-mono">Universal Display Calibration for Windows 11 &amp; 10</p>
 
             <!-- Download Now in the Middle Center -->
             <div class="w-full flex justify-center">
-              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord();" class="w-full py-2.5 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_35px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord();" class="w-full py-4 px-6 rounded-2xl text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_35px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
                 <span>Download Now</span>
-                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               </a>
             </div>
           </div>
@@ -2470,7 +2465,6 @@
       const rect = e.currentTarget.getBoundingClientRect();
       const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
       adCurrentSec = pct * AD_TOTAL_SEC;
-      invalidateTargetPosCache();
       sound.resetAdSoundtrackFlags(adCurrentSec);
 
       if (adCurrentSec < 24.5) {
@@ -2755,29 +2749,6 @@
     function setWidth(el, w) { if (el && el.style.width !== w) el.style.width = w; }
     function setLeft(el, l) { if (el && el.style.left !== l) el.style.left = l; }
 
-    // Dynamic element coordinate targeting for pixel-perfect cursor tracking on any screen size
-    let cachedTargetPositions = {};
-    function invalidateTargetPosCache() {
-      cachedTargetPositions = {};
-    }
-    window.addEventListener('resize', invalidateTargetPosCache, { passive: true });
-
-    function getTargetPos(el, defaultPos) {
-      const stageEl = document.getElementById('ad-stage-box');
-      if (!el || !stageEl) return defaultPos;
-      try {
-        const rEl = el.getBoundingClientRect();
-        const rSt = stageEl.getBoundingClientRect();
-        if (rEl.width === 0 || rEl.height === 0 || rSt.width === 0 || rSt.height === 0) return defaultPos;
-        return {
-          x: ((rEl.left + rEl.width / 2 - rSt.left) / rSt.width) * 100,
-          y: ((rEl.top + rEl.height / 2 - rSt.top) / rSt.height) * 100
-        };
-      } catch (e) {
-        return defaultPos;
-      }
-    }
-
     function renderAdFrame(sec) {
       const timer = getAdEl('ad-timer');
       const bottomTimer = getAdEl('ad-bottom-timer');
@@ -2876,7 +2847,6 @@
       // SCENE 1: THE OPENING HOOK (0.0s - 1.8s)
       // ============================================================
       if (sec < 1.8) {
-        invalidateTargetPosCache();
         setDisplay(b2, 'flex'); setOpacity(b2, '1');
         setDisplay(tutStage, 'none'); setOpacity(tutStage, '0');
         if (tutStage) tutStage.style.pointerEvents = 'none';
@@ -2915,10 +2885,13 @@
 
         let curX = 50, curY = 50, curOp = 1;
 
-        // Dynamic targets computed from rendered elements (pixel-perfect across desktop & mobile)
-        const posThumbStart = cachedTargetPositions.thumbStart || (cachedTargetPositions.thumbStart = getTargetPos(tutThumbBright, { x: 50.0, y: 32.2 }));
-        const posThumbMax   = { x: posThumbStart.x + 10.75, y: posThumbStart.y };
-        const posSave       = cachedTargetPositions.save || (cachedTargetPositions.save = getTargetPos(tutBtnSave, { x: 50.0, y: 48.0 }));
+        // Stage-relative reference targets (fixed percentages, zero layout reflows)
+        const POS_THUMB_START = { x: 50.0, y: 32.2 };
+        const POS_THUMB_MAX   = { x: 60.75, y: 32.2 };
+        const POS_SAVE        = { x: 50.0, y: 88.0 };
+        const POS_ARENA_APPLY = { x: 42.5, y: 39.5 };
+        const POS_COPY_SHARE  = { x: 41.2, y: 50.8 };
+        const POS_DISCORD_IN  = { x: 52.0, y: 88.5 };
 
         // ----------------------------------------------------------
         // SUB-PART 2A: CREATE PROFILE & SAVE DIRECTLY (1.8s - 3.8s)
@@ -2935,28 +2908,29 @@
           }
 
           // Initial slot states (Slot 1 active with checkmark; arena ready with Apply)
-          setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-          setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
+          setClass(slot1, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
+          setClass(slot1Title, 'text-xs sm:text-sm font-bold text-amber-300');
           setDisplay(slot1Strip, 'block');
           setDisplay(btnApplySlot1, 'none');
           setDisplay(slot1Check, 'flex');
 
           setDisplay(btnApplyArena, 'inline-block');
           setDisplay(slot3Check, 'none');
-          setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-          setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
+          setClass(adTutSlot3, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
+          setClass(slot3Title, 'text-xs sm:text-sm font-bold text-white');
           setDisplay(slot3Strip, 'none');
           setText(headingName, 'Default Profile');
 
-          setClass(tutTabTuner, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap');
-          setClass(tutTabProfiles, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
-          setClass(tutTabOptions, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
+          setClass(tutTabTuner, 'px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all');
+          setClass(tutTabProfiles, 'px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all');
+          setClass(tutTabOptions, 'px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all');
 
           const t = sec - 1.8; // 0.0s to 2.0s
+          cachedSavePos = POS_SAVE;
 
           if (t < 0.25) {
-            curX = posThumbStart.x;
-            curY = posThumbStart.y;
+            curX = POS_THUMB_START.x;
+            curY = POS_THUMB_START.y;
             setLeft(tutThumbBright, '50%');
             setWidth(tutFillBright, '0%');
             setText(tutValBright, '0%');
@@ -2970,18 +2944,18 @@
             const valNum = Math.round(p * 50);
             setText(tutValBright, `+${valNum}%`);
             setAdFilter(`brightness(${1.0 + p * 0.25})`);
-            curX = lerp(posThumbStart.x, posThumbMax.x, p);
-            curY = posThumbStart.y;
+            curX = lerp(POS_THUMB_START.x, POS_THUMB_MAX.x, p);
+            curY = POS_THUMB_START.y;
           } else if (t < 1.65) {
-            // Move cursor directly to center of Save .ICC Profile button
+            // Move cursor directly down to Save .ICC Profile
             const p = easeInOutCubic((t - 1.15) / 0.5);
-            curX = lerp(posThumbMax.x, posSave.x, p);
-            curY = lerp(posThumbMax.y, posSave.y, p);
+            curX = lerp(POS_THUMB_MAX.x, POS_SAVE.x, p);
+            curY = lerp(POS_THUMB_MAX.y, POS_SAVE.y, p);
             if (tutBtnSave) tutBtnSave.style.transform = 'none';
           } else {
             // Click Save .ICC Profile!
-            curX = posSave.x;
-            curY = posSave.y;
+            curX = POS_SAVE.x;
+            curY = POS_SAVE.y;
             if (cursorRing && t > 1.68 && t < 1.98) {
               cursorRing.classList.remove('scale-0', 'opacity-0');
               cursorRing.classList.add('scale-100', 'opacity-100');
@@ -3002,34 +2976,30 @@
             tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
           }
 
-          setClass(tutTabProfiles, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap');
-          setClass(tutTabTuner, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
+          setClass(tutTabProfiles, 'px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all');
+          setClass(tutTabTuner, 'px-4 py-1.5 rounded-lg text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all');
 
           const t = sec - 3.8; // 0.0s to 5.0s
 
-          const posSaveReal = cachedTargetPositions.save || getTargetPos(tutBtnSave, { x: 50.0, y: 48.0 });
-          const posArenaApply = cachedTargetPositions.arenaApply || (cachedTargetPositions.arenaApply = getTargetPos(btnApplyArena, { x: 28.5, y: 42.0 }));
-          const posCopyShare = cachedTargetPositions.copyShare || (cachedTargetPositions.copyShare = getTargetPos(tutBtnCopyShare, { x: 45.0, y: 62.0 }));
-
           // 1. One profile must be ticked ALREADY (Default Profile) before switching to arena!
-          if (t < 0.75) {
+          if (t < 0.65) {
             // Slot 1 (Default Profile) is TICKED
-            setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-            setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
+            setClass(slot1, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
+            setClass(slot1Title, 'text-xs sm:text-sm font-bold text-amber-300');
             setDisplay(slot1Strip, 'block');
             setDisplay(btnApplySlot1, 'none');
             setDisplay(slot1Check, 'flex');
 
             setDisplay(btnApplyArena, 'inline-block');
             setDisplay(slot3Check, 'none');
-            setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-            setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
+            setClass(adTutSlot3, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
+            setClass(slot3Title, 'text-xs sm:text-sm font-bold text-white');
             setDisplay(slot3Strip, 'none');
             setText(headingName, 'Default Profile');
           } else {
             // Slot 1 (Default Profile) reverts to inactive Apply
-            setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-            setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
+            setClass(slot1, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
+            setClass(slot1Title, 'text-xs sm:text-sm font-bold text-white');
             setDisplay(slot1Strip, 'none');
             setDisplay(btnApplySlot1, 'inline-block');
             setDisplay(slot1Check, 'none');
@@ -3037,51 +3007,14 @@
             // Slot 3 (arena) is ACTIVE
             setDisplay(btnApplyArena, 'none');
             setDisplay(slot3Check, 'flex');
-            setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-            setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
+            setClass(adTutSlot3, 'p-2 sm:p-2.5 rounded-xl bg-[#31343a] border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
+            setClass(slot3Title, 'text-xs sm:text-sm font-bold text-amber-300');
             setDisplay(slot3Strip, 'block');
             setText(headingName, 'arena • Profile 2');
           }
 
-          // 2. Seamless cursor trajectory from Save .ICC Profile -> arena Apply -> Copy Share Code
-          if (t < 0.65) {
-            const p = easeInOutCubic(t / 0.65);
-            curX = lerp(posSaveReal.x, posArenaApply.x, p);
-            curY = lerp(posSaveReal.y, posArenaApply.y, p);
-          } else if (t < 0.90) {
-            curX = posArenaApply.x;
-            curY = posArenaApply.y;
-            if (cursorRing && t > 0.65 && t < 0.85) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            if (btnApplyArena) {
-              btnApplyArena.style.transform = (t > 0.66 && t < 0.85) ? 'scale(0.92)' : 'none';
-            }
-          } else if (t < 1.65) {
-            const p = easeInOutCubic(Math.max(0, Math.min(1, (t - 0.90) / 0.75)));
-            curX = lerp(posArenaApply.x, posCopyShare.x, p);
-            curY = lerp(posArenaApply.y, posCopyShare.y, p);
-            if (btnApplyArena) btnApplyArena.style.transform = 'none';
-            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
-          } else if (t < 1.95) {
-            curX = posCopyShare.x;
-            curY = posCopyShare.y;
-            if (cursorRing && t > 1.68 && t < 1.88) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            if (tutBtnCopyShare) {
-              tutBtnCopyShare.style.transform = (t > 1.70 && t < 1.88) ? 'scale(0.94)' : 'none';
-            }
-          } else {
-            curX = posCopyShare.x;
-            curY = posCopyShare.y;
-            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
-          }
-
-          // 3. Share Toast state: ONLY show AFTER clicking Copy Share Code (at t >= 1.82s)!
-          if (t < 1.82) {
+          // 2. Persistent Share Toast state
+          if (t < 1.65) {
             setDisplay(tutShareToast, 'none');
             if (tutShareToast) tutShareToast.style.visibility = 'hidden';
             setOpacity(tutShareToast, '0');
@@ -3093,6 +3026,43 @@
               tutShareToast.classList.remove('opacity-0');
               tutShareToast.classList.add('opacity-100');
             }
+          }
+
+          // 3. Seamless cursor trajectory from Save .ICC Profile to arena
+          if (t < 0.65) {
+            const p = easeInOutCubic(t / 0.65);
+            curX = lerp(POS_SAVE.x, POS_ARENA_APPLY.x, p);
+            curY = lerp(POS_SAVE.y, POS_ARENA_APPLY.y, p);
+          } else if (t < 0.90) {
+            curX = POS_ARENA_APPLY.x;
+            curY = POS_ARENA_APPLY.y;
+            if (cursorRing && t > 0.65 && t < 0.82) {
+              cursorRing.classList.remove('scale-0', 'opacity-0');
+              cursorRing.classList.add('scale-100', 'opacity-100');
+            }
+            if (btnApplyArena) {
+              btnApplyArena.style.transform = (t > 0.66 && t < 0.82) ? 'scale(0.92)' : 'none';
+            }
+          } else if (t < 1.65) {
+            const p = easeInOutCubic(Math.max(0, Math.min(1, (t - 0.90) / 0.75)));
+            curX = lerp(POS_ARENA_APPLY.x, POS_COPY_SHARE.x, p);
+            curY = lerp(POS_ARENA_APPLY.y, POS_COPY_SHARE.y, p);
+            if (btnApplyArena) btnApplyArena.style.transform = 'none';
+            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
+          } else if (t < 1.90) {
+            curX = POS_COPY_SHARE.x;
+            curY = POS_COPY_SHARE.y;
+            if (cursorRing && t > 1.62 && t < 1.85) {
+              cursorRing.classList.remove('scale-0', 'opacity-0');
+              cursorRing.classList.add('scale-100', 'opacity-100');
+            }
+            if (tutBtnCopyShare) {
+              tutBtnCopyShare.style.transform = (t > 1.64 && t < 1.85) ? 'scale(0.94)' : 'none';
+            }
+          } else {
+            curX = POS_COPY_SHARE.x;
+            curY = POS_COPY_SHARE.y;
+            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
           }
 
         // ----------------------------------------------------------
@@ -3109,13 +3079,10 @@
 
           const t = sec - 8.8; // 0.0s to 4.7s
 
-          const posCopyShareReal = cachedTargetPositions.copyShare || { x: 45.0, y: 62.0 };
-          const posDiscordIn = cachedTargetPositions.discordIn || (cachedTargetPositions.discordIn = getTargetPos(discordInputText, { x: 52.0, y: 88.5 }));
-
           if (t < 0.9) {
             const p = easeInOutCubic(t / 0.9);
-            curX = lerp(posCopyShareReal.x, posDiscordIn.x, p);
-            curY = lerp(posCopyShareReal.y, posDiscordIn.y, p);
+            curX = lerp(POS_COPY_SHARE.x, POS_DISCORD_IN.x, p);
+            curY = lerp(POS_COPY_SHARE.y, POS_DISCORD_IN.y, p);
             setText(discordInputText, 'Message #general-chat');
             setClass(discordInputText, 'text-xs font-normal text-[#949BA4] truncate');
             if (discordMsgReply) {
@@ -3127,8 +3094,8 @@
               discordReactions.classList.add('opacity-0');
             }
           } else if (t < 1.5) {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
+            curX = POS_DISCORD_IN.x;
+            curY = POS_DISCORD_IN.y;
             if (cursorRing && t > 0.95 && t < 1.35) {
               cursorRing.classList.remove('scale-0', 'opacity-0');
               cursorRing.classList.add('scale-100', 'opacity-100');
@@ -3136,8 +3103,8 @@
             setText(discordInputText, 'BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z');
             setClass(discordInputText, 'text-xs font-mono font-bold text-amber-300 truncate');
           } else if (t < 2.0) {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
+            curX = POS_DISCORD_IN.x;
+            curY = POS_DISCORD_IN.y;
             setText(discordInputText, 'Message #general-chat');
             setClass(discordInputText, 'text-xs font-normal text-[#949BA4] truncate');
             if (discordMsgReply) {
@@ -3145,8 +3112,8 @@
               discordMsgReply.classList.add('opacity-100', 'translate-y-0');
             }
           } else {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
+            curX = POS_DISCORD_IN.x;
+            curY = POS_DISCORD_IN.y;
             if (discordMsgReply) {
               discordMsgReply.classList.remove('opacity-0', 'translate-y-2');
               discordMsgReply.classList.add('opacity-100', 'translate-y-0');
@@ -3214,11 +3181,11 @@
 
           setText(hudActiveProfile, 'CS2 Tournament Boost');
           if (hudStatusBadge) {
-            hudStatusBadge.innerHTML = '<span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-amber-400 animate-pulse"></span><span>ACTIVE</span>';
-            hudStatusBadge.className = 'px-1 py-0.2 sm:px-2 sm:py-0.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-[6px] sm:text-[9px] font-bold text-amber-300 font-mono flex items-center gap-0.5 sm:gap-1 shrink-0';
+            hudStatusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span><span>ACTIVE</span>';
+            hudStatusBadge.className = 'px-2 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-[9px] font-bold text-amber-300 font-mono flex items-center gap-1';
           }
           if (hudBarShadows) { setWidth(hudBarShadows, '68%'); setClass(hudBarShadows, 'h-full bg-orange-400 transition-all duration-300'); }
-          if (hudValShadows) { setText(hudValShadows, '+35%'); setClass(hudValShadows, 'w-6 sm:w-11 text-right text-orange-400 font-bold'); }
+          if (hudValShadows) { setText(hudValShadows, '+35%'); setClass(hudValShadows, 'w-11 text-right text-orange-400 font-bold'); }
           if (hudBarBright) { setWidth(hudBarBright, '68%'); setText(hudValBright, '+35%'); }
           if (hudBarGamma) { setWidth(hudBarGamma, '60%'); setText(hudValGamma, '+20%'); }
 
@@ -3247,13 +3214,11 @@
             splitCalSide.style.webkitBackdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
           }
 
-          if (crossT > 0.25) {
-            setText(hudActiveProfile, 'GTA VI Vice Neon');
-            if (hudBarVibrance) { setWidth(hudBarVibrance, '75%'); setText(hudValVibrance, '+45%'); }
-            if (hudBarContrast) { setWidth(hudBarContrast, '60%'); setText(hudValContrast, '+20%'); }
-            if (hudBarShadows) { setWidth(hudBarShadows, '60%'); setText(hudValShadows, '+20%'); }
-            if (hudBarBright) { setWidth(hudBarBright, '62%'); setText(hudValBright, '+25%'); }
-          }
+          setText(hudActiveProfile, 'GTA VI Vice Neon');
+          if (hudBarVibrance) { setWidth(hudBarVibrance, '75%'); setText(hudValVibrance, '+45%'); }
+          if (hudBarContrast) { setWidth(hudBarContrast, '60%'); setText(hudValContrast, '+20%'); }
+          if (hudBarShadows) { setWidth(hudBarShadows, '60%'); setText(hudValShadows, '+20%'); }
+          if (hudBarBright) { setWidth(hudBarBright, '62%'); setText(hudValBright, '+25%'); }
         }
 
       // ============================================================
