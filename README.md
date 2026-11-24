@@ -12,16 +12,16 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Display%20API-Windows%20Official-success" alt="Uses Official Windows Display APIs" />
-  <img src="https://img.shields.io/badge/Release-v2.10.34-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.30-EAB308" alt="Version" />
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
-  <img src="https://img.shields.io/badge/License-Proprietary%20%2F%20Commercial-blue.svg" alt="License: Proprietary Commercial Software" />
+  <img src="https://img.shields.io/badge/License-Freeware-blue.svg" alt="License: Freeware" />
 </p>
 
 ---
 
 **Better Color Profile** is a lightweight, modern display calibration and color profile manager for **Windows 11 and 10**.
 
-Easily tune monitor colors, organize profiles into quick-access slots, and switch profiles instantly while gaming with global hotkeys and a sleek in-game overlay — with **zero input lag** and **no game-process interaction**.
+Easily tune monitor colors, organize profiles into quick-access slots, and switch profiles instantly while gaming with global hotkeys and a sleek in-game overlay — with **zero input lag** and **100% anti-cheat safety**.
 
 👉 **[📥 Download Latest Installer](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe)** • **[🌐 Visit Official Website](https://bettercolorprofile.vercel.app/)**
 
@@ -74,11 +74,19 @@ Tweak colors and switch profiles inside any game without Alt-Tabbing (`RCtrl + E
 - **Direct Slot Hotkeys**: Assign dedicated shortcuts (e.g. `F1`, `F2`, `Ctrl + 1`) to jump straight to a profile.
 - **Keycode Diagnostics**: Built-in test box confirms key codes and international layout compatibility.
 
-### 🛡️ Uses Official Windows Display & Calibration APIs
-- Interacts only with display output via the standard Windows Color System (`mscms.dll`) and GPU hardware gamma LUT (via `SetDeviceGammaRamp`).
-- **Does not inspect, read, or modify game memory, processes, or DLLs.**
-- No DLL injection, no kernel-mode drivers, and no background CPU usage while gaming.
-- Compatible with Riot Vanguard, Easy Anti-Cheat, BattlEye, and Ricochet because it operates exclusively at the display driver layer, not inside game processes.
+### 🛡️ 100% Anti-Cheat Safe
+- Adjusts display colors directly through official Windows display APIs.
+- Zero DLL injection, zero game memory hooking, and zero background CPU usage.
+- Completely safe for **Riot Vanguard, Easy Anti-Cheat, BattlEye, and Ricochet**.
+
+---
+
+## 🚀 Quick Start
+
+1. **Download**: Grab [**BetterColorProfileSetup.exe**](https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe).
+2. **Install**: Run the setup wizard and launch the app.
+3. **Calibrate**: Use the **Create Profile** tab to adjust your sliders, or pick an existing profile from the **Profiles** tab.
+4. **Play**: Press `RCtrl + Enter` in-game to tweak on the fly, or use your cycle hotkey (`Ctrl + Shift + C`) to swap profiles instantly.
 
 ---
 
@@ -92,7 +100,6 @@ Join our official Discord community to share monitor calibrations, download game
 
 ## 📄 License
 
-**Better Color Profile** is proprietary commercial software (Paid Service with Free Trial). All rights reserved.
-- Official plans, licenses, and key management: [bettercolorprofile.vercel.app](https://bettercolorprofile.vercel.app/#pricing).
+**Better Color Profile** is free proprietary software (Freeware) for personal use.
 
 Copyright © 2026 KOUKOU221. All rights reserved.
