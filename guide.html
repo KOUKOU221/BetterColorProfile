@@ -59,19 +59,15 @@
     }
 
     .glass-panel {
-      background: rgba(17, 19, 24, 0.78);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(17, 19, 24, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
     }
 
     .glass-card {
-      background: rgba(22, 25, 34, 0.72);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(22, 25, 34, 0.90);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .glass-card:hover {
@@ -120,8 +116,7 @@
     .glow-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(110px);
-      opacity: 0.18;
+      opacity: 0.14;
     }
 
     .glow-orb-1 {

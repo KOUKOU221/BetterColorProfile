@@ -78,10 +78,7 @@
     .glow-orb {
       position: absolute;
       border-radius: 9999px;
-      filter: blur(100px);
-      opacity: 0.22;
-      transition: background 0.8s ease;
-      animation: drift 22s infinite alternate ease-in-out;
+      opacity: 0.16;
     }
 
     .glow-orb-1 {
@@ -89,8 +86,7 @@
       left: 20%;
       width: 650px;
       height: 650px;
-      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-      animation-duration: 25s;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
     }
 
     .glow-orb-2 {
@@ -98,9 +94,7 @@
       right: -10%;
       width: 750px;
       height: 750px;
-      background: radial-gradient(circle, var(--accent-dark) 0%, transparent 70%);
-      animation-duration: 30s;
-      animation-delay: -8s;
+      background: radial-gradient(circle, var(--accent-dark) 0%, transparent 65%);
     }
 
     .glow-orb-3 {
@@ -108,43 +102,21 @@
       left: -15%;
       width: 550px;
       height: 550px;
-      background: radial-gradient(circle, #38BDF8 0%, transparent 70%);
-      opacity: 0.12;
-      animation-duration: 28s;
-      animation-delay: -14s;
+      background: radial-gradient(circle, #38BDF8 0%, transparent 65%);
+      opacity: 0.10;
     }
 
-    @keyframes drift {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.08); }
-      100% { transform: translate(-40px, 70px) scale(0.95); }
-    }
-
-    /* Noise Texture Overlay */
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
-
-    /* Apple-like Glass & Border finish */
+    /* Apple-like Glass & Border finish (GPU-friendly, zero backdrop-blur thrashing) */
     .glass-panel {
-      background: rgba(18, 20, 27, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(16, 18, 25, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 
     .glass-card {
-      background: rgba(22, 25, 34, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(20, 23, 32, 0.90);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .glass-card:hover {
@@ -219,21 +191,19 @@
     .eq-bar-2 { animation: eq-bounce-2 0.55s infinite ease-in-out; }
     .eq-bar-3 { animation: eq-bounce-3 0.85s infinite ease-in-out; }
 
-    /* Ultra-Smooth 60/120/144 FPS Hardware-Accelerated Logo Animation */
+    /* Ultra-Smooth 60/120/144 FPS Hardware-Accelerated Logo Animation (transform-only) */
     @keyframes logo-smooth-pulse {
       0%, 100% {
-        transform: translateY(0px) scale(1);
-        filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
+        transform: translate3d(0, 0, 0) scale(1);
       }
       50% {
-        transform: translateY(-9px) scale(1.05);
-        filter: drop-shadow(0 18px 36px var(--accent-glow));
+        transform: translate3d(0, -9px, 0) scale(1.05);
       }
     }
     .logo-smooth-pulse {
       animation: logo-smooth-pulse 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      will-change: transform, filter;
-      transform: translateZ(0);
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.65));
+      will-change: transform;
       backface-visibility: hidden;
     }
 
@@ -308,7 +278,6 @@
     <div class="glow-orb glow-orb-2" id="orb-2"></div>
     <div class="glow-orb glow-orb-3" id="orb-3"></div>
   </div>
-  <div class="noise-overlay"></div>
 
   <!-- Scroll Progress Indicator -->
   <div id="scroll-progress" class="fixed top-0 left-0 h-1 theme-bg z-50 transition-all duration-75 w-0"></div>
@@ -377,203 +346,40 @@
     </p>
 
     <!-- ================= EMBEDDED CINEMATIC SPEC AD REEL (THEATER WINDOW) ================= -->
-    <div id="spec-ad" style="transform: translateZ(0); will-change: transform;" class="relative w-full max-w-[1560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_90px_rgba(250,204,21,0.22)] flex flex-col mx-auto mb-16 text-left transition-all">
+    <div id="spec-ad" class="relative w-full max-w-[1560px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20 bg-[#0C0E14] shadow-[0_0_90px_rgba(250,204,21,0.22)] flex flex-col mx-auto mb-16 text-left">
       
-      <!-- Spec Ad Screen Stage (4:3 / min-h on mobile, 16:9 on desktop) with click-to-play -->
-      <div id="ad-stage-box" style="transform: translateZ(0); will-change: transform;" class="relative w-full aspect-[4/3] sm:aspect-video min-h-[350px] sm:min-h-0 bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
+      <!-- Spec Ad Screen Stage (16:9 Aspect Ratio) with click-to-play -->
+      <div id="ad-stage-box" class="relative w-full aspect-video bg-[#0B0D12] overflow-hidden flex items-center justify-center cursor-pointer group select-none" onclick="toggleAdPlay(event)">
+
+        <!-- Real 1080p 60FPS Showcase Video -->
+        <video id="ad-showcase-video" src="assets/BetterColorProfile_Showcase_1080p60.mp4" playsinline preload="metadata" poster="assets/showcase_preview.png" class="absolute inset-0 w-full h-full object-contain bg-[#0B0D12] z-10"></video>
 
         <!-- Floating Volume Control Overlay (Shows on mouse move over video) -->
-        <div id="ad-floating-volume" class="absolute bottom-4 right-4 z-50 flex items-center gap-2.5 bg-[#0C0E14]/85 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/20 shadow-[0_6px_25px_rgba(0,0,0,0.85)] opacity-0 pointer-events-none transition-all duration-300 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
+        <div id="ad-floating-volume" class="absolute bottom-14 right-3 sm:right-4 z-50 flex items-center gap-2.5 bg-[#0C0E14]/95 px-3.5 py-2 rounded-full border border-white/20 shadow-[0_6px_25px_rgba(0,0,0,0.85)] opacity-0 pointer-events-none transition-opacity duration-300 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
           <button type="button" id="ad-volume-btn" onclick="event.stopPropagation(); toggleAdAudioMute();" class="text-amber-400 hover:text-white text-sm transition-transform active:scale-90 cursor-pointer" title="Toggle Mute">🔊</button>
           <input type="range" id="ad-volume-slider" min="0" max="1" step="0.01" value="0.50" oninput="setAdVolume(this.value)" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" class="w-16 sm:w-20 accent-amber-400 cursor-pointer h-1.5 bg-white/20 rounded-lg" title="Volume">
           <span id="ad-volume-percent" class="font-mono text-[11px] text-amber-300 font-bold min-w-[28px] text-right">50%</span>
         </div>
 
-        <!-- 2 1080p60 Gameplay Video Streams for Smooth Crossfades (CS2 & GTA VI Extended) -->
-        <video id="ad-vid-cs2" src="assets/clip_cs2.mp4" playsinline muted loop preload="none" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
-        <video id="ad-vid-gta" src="assets/clip_gta6_vice.mp4?v=20261121c" playsinline muted loop preload="none" poster="assets/scene_inferno.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none z-10"></video>
+        <!-- Theater Bottom Controls Bar (Play/Pause, Seek Progress, Timecode, Fullscreen) -->
+        <div id="ad-player-controls" class="hidden absolute bottom-0 inset-x-0 z-40 px-3 sm:px-5 py-2.5 sm:py-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex items-center gap-2.5 sm:gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 select-none" onclick="event.stopPropagation();" onmousedown="event.stopPropagation();" onpointerdown="event.stopPropagation();">
+          <button type="button" onclick="toggleAdPlay(event)" class="w-8 h-8 rounded-full bg-white/10 hover:bg-amber-400 text-white hover:text-black flex items-center justify-center transition-colors cursor-pointer shrink-0" title="Play / Pause">
+            <svg id="ad-play-bar-icon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
 
-        <!-- Static Fallback Accent Layer -->
-        <div id="ad-scene-inferno" class="ad-slide absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 opacity-0" style="background-image: url('assets/scene_inferno.jpg');"></div>
-
-        <!-- Floating In-Game HUD Overlay (Top-Right, style="z-index: 100;") -->
-        <div id="ad-game-split-overlay" class="absolute inset-0 pointer-events-none select-none transition-opacity duration-300 opacity-0" style="z-index: 25;">
-          <!-- Left Half Raw Windows Baseline (Dull / Washed-Out out-of-the-box Display) -->
-          <div id="ad-split-raw-side" class="absolute top-0 bottom-0 left-0 right-1/2" style="backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95); -webkit-backdrop-filter: saturate(0.78) contrast(0.92) brightness(0.95);"></div>
-          <!-- Right Half Calibrated Backdrop Filter (GPU-Accelerated) -->
-          <div id="ad-split-cal-side" class="absolute top-0 bottom-0 left-1/2 right-0 transition-all duration-300" style="backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22); -webkit-backdrop-filter: brightness(1.30) contrast(1.18) saturate(1.22);"></div>
-
-          <!-- Vertical Divider Line in the Middle (Clean Line, Center Handle Removed) -->
-          <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.9)] z-30"></div>
-
-          <!-- Left Side Tag: Raw Baseline (Bottom-Left of Center Line) -->
-          <div class="absolute bottom-2.5 sm:bottom-4.5 right-[calc(50%+6px)] sm:right-[calc(50%+14px)] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-white/20 text-[8px] sm:text-[10px] font-mono font-bold text-gray-300 flex items-center gap-1 sm:gap-1.5 shadow-2xl z-30">
-            <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-            <span class="sm:hidden">RAW sRGB</span>
-            <span class="hidden sm:inline">RAW WINDOWS sRGB &bull; UNCHANGED</span>
+          <div id="ad-progress-track" onclick="seekAd(event)" class="relative flex-1 h-2 bg-white/20 hover:h-2.5 rounded-full overflow-hidden cursor-pointer transition-all" title="Seek">
+            <div id="ad-progress-bar" class="h-full bg-amber-400 rounded-full w-0 pointer-events-none"></div>
           </div>
 
-          <!-- Right Side Tag: Sliders Applied (Bottom-Right of Center Line) -->
-          <div class="absolute bottom-2.5 sm:bottom-4.5 left-[calc(50%+6px)] sm:left-[calc(50%+14px)] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-[#0C0E14]/90 backdrop-blur-md border border-amber-400/60 text-[8px] sm:text-[10px] font-mono font-bold text-amber-300 flex items-center gap-1 sm:gap-1.5 shadow-2xl z-30">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_#FACC15]"></span>
-            <span class="sm:hidden">CALIBRATED</span>
-            <span class="hidden sm:inline">BETTER COLOR PROFILE &bull; SLIDERS APPLIED</span>
-          </div>
-        </div>
+          <span id="ad-bottom-timer" class="font-mono text-[10px] sm:text-xs font-bold text-gray-200 tabular-nums shrink-0">00:00 / 00:28</span>
 
-        <div id="ad-ingame-hud" class="absolute top-1.5 sm:top-12 right-1.5 sm:right-6 z-30 w-[56%] max-w-[195px] sm:w-[415px] sm:max-w-[94vw] transition-all duration-300 opacity-0 pointer-events-none select-none" style="z-index: 100;">
-          <div class="relative bg-[#0A0D12]/98 backdrop-blur-xl border border-white/15 rounded-lg sm:rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_25px_rgba(250,204,21,0.25)] p-1.5 sm:p-3.5 flex flex-col gap-0.5 sm:gap-2 overflow-hidden text-left font-sans">
-            
-            <!-- Illuminated Top Neon Accent Line -->
-            <div class="absolute top-0 left-4 sm:left-6 right-4 sm:right-6 h-[1.5px] bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
-
-            <!-- Header: Title + Tag + Status Badge Pill -->
-            <div class="flex items-center justify-between pb-0.5 sm:pb-1 border-b border-white/10">
-              <div class="flex items-center gap-1 sm:gap-2 min-w-0">
-                <div class="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded bg-amber-400/20 border border-amber-400 flex items-center justify-center shrink-0">
-                  <div class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white"></div>
-                </div>
-                <span class="text-[6.5px] sm:text-[10px] font-black text-white tracking-wider font-mono truncate">BETTER COLOR PROFILE</span>
-                <span class="text-[9px] font-semibold text-gray-400 font-mono hidden sm:inline">HUD &bull; Display 1</span>
-              </div>
-              <span id="ad-hud-status-badge" class="px-1 py-0.2 sm:px-2 sm:py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-[6px] sm:text-[9px] font-bold text-emerald-400 font-mono flex items-center gap-0.5 sm:gap-1 shrink-0">
-                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>ACTIVE</span>
-              </span>
-            </div>
-
-            <!-- Row 0: Active Profile Selector Card -->
-            <div id="ad-hud-profile-card" class="flex items-center justify-between px-1.5 sm:px-2.5 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-amber-400/10 border border-amber-400/50 shadow-sm transition-all duration-200">
-              <span class="text-[7px] sm:text-[10.5px] font-bold text-white font-mono">Profile</span>
-              <div class="flex items-center gap-1 sm:gap-2 text-amber-300 font-mono font-bold text-[7px] sm:text-xs min-w-0">
-                <span class="text-amber-400 text-[6.5px] sm:text-[10px]">&lang;</span>
-                <span id="ad-hud-active-profile" class="tracking-wide truncate">CS2 Tournament Boost</span>
-                <span class="text-amber-400 text-[6.5px] sm:text-[10px]">&rang;</span>
-              </div>
-            </div>
-
-            <!-- 7 Calibration Sliders (HudSlider[]) -->
-            <div class="flex flex-col gap-0.5 sm:gap-1 text-[6px] sm:text-[10px] font-mono">
-              <!-- 1. Brightness -->
-              <div id="ad-hud-row-bright" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Brightness</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-bright" class="h-full bg-amber-400 transition-all duration-300" style="width: 68%;"></div>
-                </div>
-                <span id="ad-hud-val-bright" class="w-6 sm:w-11 text-right text-amber-300 font-bold">+35%</span>
-              </div>
-
-              <!-- 2. Contrast -->
-              <div id="ad-hud-row-contrast" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Contrast</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-contrast" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
-                </div>
-                <span id="ad-hud-val-contrast" class="w-6 sm:w-11 text-right text-gray-300">0%</span>
-              </div>
-
-              <!-- 3. Gamma -->
-              <div id="ad-hud-row-gamma" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Gamma</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-gamma" class="h-full bg-amber-400 transition-all duration-300" style="width: 60%;"></div>
-                </div>
-                <span id="ad-hud-val-gamma" class="w-6 sm:w-11 text-right text-amber-300 font-bold">+20%</span>
-              </div>
-
-              <!-- 4. Color Temp -->
-              <div id="ad-hud-row-temp" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Color Temp</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-temp" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
-                </div>
-                <span id="ad-hud-val-temp" class="w-6 sm:w-11 text-right text-amber-300 font-bold">6500K</span>
-              </div>
-
-              <!-- 5. Digital Vibrance -->
-              <div id="ad-hud-row-vibrance" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Digital Vibrance</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-vibrance" class="h-full bg-amber-400 transition-all duration-300" style="width: 50%;"></div>
-                </div>
-                <span id="ad-hud-val-vibrance" class="w-6 sm:w-11 text-right text-gray-300">0%</span>
-              </div>
-
-              <!-- 6. Shadows (Black Equalizer) -->
-              <div id="ad-hud-row-shadows" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-amber-400 w-12 sm:w-24 font-bold truncate">Shadows</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-amber-400/30 relative">
-                  <div id="ad-hud-bar-shadows" class="h-full bg-orange-400 transition-all duration-300" style="width: 68%;"></div>
-                </div>
-                <span id="ad-hud-val-shadows" class="w-6 sm:w-11 text-right text-orange-400 font-bold">+35%</span>
-              </div>
-
-              <!-- 7. Clarity -->
-              <div id="ad-hud-row-clarity" class="flex items-center justify-between gap-1 sm:gap-2 py-0 sm:py-0.5 px-0.5 sm:px-1 rounded transition-colors">
-                <span class="text-gray-300 w-12 sm:w-24 truncate">Clarity</span>
-                <div class="flex-1 h-1 sm:h-1.5 bg-[#1F2228] rounded-full overflow-hidden border border-white/10 relative">
-                  <div id="ad-hud-bar-clarity" class="h-full bg-teal-400 transition-all duration-300" style="width: 58%;"></div>
-                </div>
-                <span id="ad-hud-val-clarity" class="w-6 sm:w-11 text-right text-teal-300 font-bold">+15%</span>
-              </div>
-            </div>
-
-            <!-- Bottom Keycap Legend Row (HudKeycapItem[]) - 1:1 Parity with Desktop C# HudOverlayForm -->
-            <div class="pt-1 sm:pt-2 border-t border-white/10 grid grid-cols-3 gap-0.5 sm:gap-1 text-center font-mono">
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8.5px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
-                  <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">↑ ↓</span>
-                </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-gray-300 font-semibold">Select</span>
-              </div>
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8.5px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl</span>
-                  <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
-                </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-gray-300 font-semibold">±5%</span>
-              </div>
-              <div class="flex flex-col items-center gap-0.5 sm:gap-1">
-                <div class="flex items-center justify-center gap-0.5 sm:gap-1 text-[5px] sm:text-[8px]">
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">Ctrl+Shift</span>
-                  <span class="text-gray-500 font-bold">+</span>
-                  <span class="px-1 sm:px-1.5 py-0 sm:py-0.5 rounded bg-[#2A2E38] border border-white/20 text-white font-bold">← →</span>
-                </div>
-                <span class="text-[5.5px] sm:text-[8.5px] text-sky-300 font-semibold">±1%</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Floating On-Screen Tactile Keycap Prompt [ F8 ] (Bottom-Left, style="z-index: 100;") -->
-        <div id="ad-ingame-key-prompt" class="absolute bottom-1.5 sm:bottom-6 left-1.5 sm:left-6 bg-[#101217]/95 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl px-2 py-1 sm:px-4 sm:py-2.5 flex items-center gap-1.5 sm:gap-3 shadow-[0_15px_35px_rgba(0,0,0,0.9)] transition-all duration-300 opacity-0 pointer-events-none translate-y-3" style="z-index: 100;">
-          <div id="ad-keycap-f8" class="w-5 h-5 sm:w-10 sm:h-10 rounded-md sm:rounded-xl bg-gradient-to-b from-[#2E333D] to-[#181B22] border border-amber-400 sm:border-2 shadow-[0_3px_0_#0D0F14,0_0_12px_rgba(250,204,21,0.5)] sm:shadow-[0_5px_0_#0D0F14,0_0_20px_rgba(250,204,21,0.5)] flex items-center justify-center font-mono font-black text-[8px] sm:text-sm text-amber-400 transition-all duration-150">
-            F8
-          </div>
-          <div class="flex flex-col">
-            <span class="text-[7.5px] sm:text-xs font-bold text-white tracking-wide flex items-center gap-1 sm:gap-1.5">
-              <span class="sm:hidden">CYCLE</span>
-              <span class="hidden sm:inline">PROFILE SWITCH</span>
-              <span id="ad-key-status" class="text-amber-400 font-mono text-[6.5px] sm:text-[10px] font-bold">[PRESS KEY]</span>
-            </span>
-            <span class="text-[8.5px] sm:text-[9.5px] font-mono text-gray-400 hidden sm:inline">Cycles Profile Without Minimizing Game</span>
-          </div>
-        </div>
-
-        <!-- Simulated Mouse Cursor & Click Ring (style="z-index: 9999;") -->
-        <div id="ad-simulated-cursor" class="absolute pointer-events-none opacity-0" style="left: 0; top: 0; z-index: 9999; will-change: transform;">
-          <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_4px_10px_rgba(0,0,0,0.95)] -translate-x-1 -translate-y-1" viewBox="0 0 24 24" fill="none">
-            <path d="M5.5 3.5L19 12L12 14L8.5 21L5.5 3.5Z" fill="#FACC15" stroke="#000000" stroke-width="2" stroke-linejoin="round"/>
-          </svg>
-          <div id="ad-cursor-ring" class="absolute -top-3 -left-3 w-12 h-12 rounded-full border-2 border-amber-400 bg-amber-400/25 pointer-events-none scale-0 opacity-0 transition-all duration-300"></div>
+          <button type="button" onclick="toggleSpecAdFullScreen()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-gray-200 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0" title="Fullscreen">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
+          </button>
         </div>
 
         <!-- ============================================================ -->
-        <!-- SCENE 1: THE OPENING HOOK                                    -->
+        <!-- OPENING CARD ("Watch Showcase")                              -->
         <!-- ============================================================ -->
         <div id="ad-beat-2" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-4 sm:p-6 text-center bg-[#0B0D12] transition-opacity duration-300 opacity-100 pointer-events-auto select-none">
           <div class="w-14 h-14 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl bg-[#1E2023] border border-amber-400/40 flex items-center justify-center p-2.5 sm:p-3.5 shadow-[0_0_40px_rgba(250,204,21,0.3)] mb-2.5 sm:mb-4">
@@ -587,7 +393,7 @@
           </p>
 
           <!-- Sleek Glowing Play Button (Smoothly Centers Stage & Starts Video) -->
-          <button type="button" id="ad-start-play-btn" onclick="startAdAndCenter(event)" class="mt-4 sm:mt-7 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs sm:text-base shadow-[0_0_35px_rgba(250,204,21,0.6)] flex items-center gap-2 sm:gap-3 transition-all transform hover:scale-105 active:scale-95 cursor-pointer select-none group/play">
+          <button type="button" id="ad-start-play-btn" onclick="startAdAndCenter(event)" class="mt-4 sm:mt-7 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold text-xs sm:text-base shadow-[0_0_35px_rgba(250,204,21,0.6)] flex items-center gap-2 sm:gap-3 transition-transform transform hover:scale-105 active:scale-95 cursor-pointer select-none group/play">
             <span class="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-black/15 flex items-center justify-center group-hover/play:scale-110 transition-transform">
               <svg class="w-3 h-3 sm:w-4 sm:h-4 fill-current ml-0.5 text-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </span>
@@ -596,731 +402,12 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- SCENE 2: THE AUTHENTIC C# DESKTOP APP WINDOW                 -->
+        <!-- END CARD ("Download Now" & "Replay")                         -->
         <!-- ============================================================ -->
-        <div id="ad-tutorial-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-1 sm:p-2 transition-opacity duration-300 opacity-0 pointer-events-none select-none">
-
-          <!-- Full Authentic App Window Shell (1:1 with media_1795247792428_3d794c90.png) -->
-          <div id="ad-tut-app-window" class="relative w-[96%] sm:w-[98%] max-w-[1240px] h-[94%] bg-[#212327] rounded-lg sm:rounded-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
-
-            <!-- Unified Header: Logo + Tabs + Status/Window Controls in ONE Clean Bar (1:1 Authentic Layout) -->
-            <div class="px-1.5 sm:px-6 py-1 sm:py-2 bg-[#1E2023] border-b border-white/5 flex items-center justify-between shrink-0 gap-1 sm:gap-2">
-              <div class="flex items-center gap-1 sm:gap-2.5 shrink-0">
-                <img src="assets/app_logo.png" alt="Better Color Profile" class="w-3.5 h-3.5 sm:w-5 sm:h-5 object-contain" onerror="this.src='assets/icon.png'" />
-                <span class="text-xs sm:text-sm font-bold text-white tracking-wide hidden sm:inline whitespace-nowrap">Better Color Profile</span>
-              </div>
-              <div class="flex items-center gap-0.5 sm:gap-2.5">
-                <button type="button" id="ad-tut-tab-profiles" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap">Profiles</button>
-                <button type="button" id="ad-tut-tab-tuner" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap"><span class="sm:hidden">Create</span><span class="hidden sm:inline">Create Profile</span></button>
-                <button type="button" id="ad-tut-tab-options" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap">Options</button>
-              </div>
-              <div class="flex items-center gap-1 sm:gap-3 shrink-0">
-                <span class="hidden md:flex px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-mono font-semibold items-center gap-1 whitespace-nowrap">
-                  <span>✓</span> Pro Active
-                </span>
-                <div class="flex items-center gap-1 sm:gap-2.5 text-gray-500 text-[9px] sm:text-sm">
-                  <span>&minus;</span>
-                  <span>&#9633;</span>
-                  <span>&times;</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- App Body Content Area (Authentic proportions matching media_1795247792428_3d794c90.png) -->
-            <div class="flex-1 p-1 sm:p-4 bg-[#212327] flex flex-col justify-start overflow-hidden">
-
-              <!-- VIEW A: CREATE PROFILE (Centered Calibration Card, 1:1 with media_1795194701789_b1818288.png) -->
-              <div id="ad-tut-view-tuner" class="w-full max-w-4xl mx-auto hidden flex flex-col gap-1 sm:gap-2.5 items-start">
-                <!-- Display Calibration Card -->
-                <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1.5 sm:p-4 flex flex-col gap-1 sm:gap-2.5">
-                  <div class="flex items-center justify-between pb-1 sm:pb-1.5 border-b border-white/5 shrink-0">
-                    <span class="text-[8.5px] sm:text-sm font-bold text-white">Display Calibration</span>
-                    <div class="relative">
-                      <button type="button" id="ad-display-dropdown-btn" class="px-1.5 sm:px-3 py-0.5 sm:py-1 rounded sm:rounded-lg bg-[#212327] border border-amber-400/30 text-[7px] sm:text-xs font-mono text-amber-400 font-semibold flex items-center gap-1 sm:gap-1.5">
-                        <span id="ad-display-name">🖥️ Display 1 (Primary)</span>
-                        <span class="text-gray-400 text-[7px] sm:text-[8px]">&#9662;</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Calibration Sliders (Compact, Uniform Spacing) -->
-                  <div class="space-y-0.5 sm:space-y-2 py-0.5 text-[7px] sm:text-xs font-medium text-gray-300">
-                    <!-- 1. Brightness -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4">
-                      <span class="col-span-3 text-gray-300 truncate">Brightness</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div id="ad-tut-track-bright" class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative overflow-hidden">
-                          <div id="ad-tut-fill-bright" class="absolute top-0 bottom-0 bg-amber-400 rounded-full" style="left: 50%; width: 0%;"></div>
-                        </div>
-                        <div id="ad-tut-thumb-bright" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3.5 h-2 sm:h-3.5 rounded-full bg-white border border-amber-400 sm:border-2 shadow-[0_0_10px_rgba(250,204,21,0.8)]" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span id="ad-tut-val-bright" class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-amber-400/40 text-[6.5px] sm:text-[10px] font-mono font-bold text-amber-400 text-center sm:min-w-[42px]">+60%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 2. Contrast -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Contrast</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 3. Gamma (Midtones) -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Gamma</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 4. Color Temperature -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Color Temp</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[6.5px] sm:text-[10px] font-mono font-bold text-amber-300 text-center sm:min-w-[42px]">6500K</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 5. Digital Vibrance -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Vibrance</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 6. Shadows (Black Equalizer) -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Shadows</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-
-                    <!-- 7. Midtone Clarity -->
-                    <div class="grid grid-cols-12 items-center gap-1 sm:gap-4 opacity-70">
-                      <span class="col-span-3 text-gray-400 truncate">Clarity</span>
-                      <div class="col-span-7 relative h-2 sm:h-3 flex items-center">
-                        <div class="w-full h-0.5 sm:h-1.5 bg-[#212327] rounded-full"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-2 sm:w-3 h-2 sm:h-3 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
-                      </div>
-                      <div class="col-span-2 flex items-center justify-end gap-1 sm:gap-1.5">
-                        <span class="w-8 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6.5px] sm:text-[10px] font-mono text-gray-400 text-center sm:min-w-[42px]">0%</span>
-                        <span class="hidden sm:inline px-1.5 py-0.5 rounded bg-[#282B34] text-gray-400 text-[9px]">&#8635;</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Bottom Action Bar (Directly Under Calibration Card) -->
-                <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1 sm:p-3 flex items-center justify-between gap-1.5 sm:gap-3 shrink-0">
-                  <div class="w-24 sm:w-52 px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7.5px] sm:text-sm font-mono text-white truncate">
-                    Profile 1
-                  </div>
-                  <button type="button" id="ad-tut-btn-save" class="px-2.5 sm:px-8 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-amber-400 hover:bg-amber-300 text-black font-black text-[7.5px] sm:text-sm shadow-[0_0_15px_rgba(250,204,21,0.5)] transition-all flex items-center gap-1 sm:gap-1.5 shrink-0">
-                    <span class="sm:hidden">Save .ICC</span>
-                    <span class="hidden sm:inline">Save .ICC Profile</span>
-                  </button>
-                  <button type="button" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7px] sm:text-xs font-semibold text-gray-300 flex items-center gap-1 sm:gap-1.5 opacity-60 shrink-0">
-                    <span>📋 <span class="hidden sm:inline">Copy Share Code</span><span class="sm:hidden">Copy</span></span>
-                  </button>
-                  <button type="button" class="hidden sm:flex px-3.5 sm:px-4 py-1.5 rounded-lg bg-[#212327] border border-white/10 text-xs font-semibold text-gray-300 items-center gap-1.5 opacity-60 shrink-0">
-                    <span>📥 Import Share Code</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- VIEW B: PROFILES TAB (1:1 Exact Parity with media_1795247792428_3d794c90.png) -->
-              <div id="ad-tut-view-profiles" class="w-full grid grid-cols-12 gap-1 sm:gap-4 items-start">
-                <!-- Left Sidebar: Profile Slots (4 Slots stacked neatly with natural gap) -->
-                <div class="col-span-4 sm:col-span-3 flex flex-col gap-0.5 sm:gap-2 shrink-0">
-                  <div class="flex items-center gap-1 sm:gap-1.5 pb-0.5 shrink-0">
-                    <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded sm:rounded-md bg-[#31343a] border border-amber-400/40 text-amber-300 text-[7px] sm:text-[10.5px] font-bold">Group 1</span>
-                    <span class="w-3.5 h-3.5 sm:w-5 sm:h-5 rounded sm:rounded-md bg-[#31343a] border border-white/10 text-gray-300 text-[8px] sm:text-xs flex items-center justify-center font-bold">+</span>
-                  </div>
-                  <!-- Slot 1: Default Profile (Initially Active with Checkmark, before switching to arena) -->
-                  <div id="ad-tut-slot-1" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot1-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full shrink-0"></div>
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot1-title" class="text-[7.5px] sm:text-sm font-bold text-amber-300 truncate">Default<span class="hidden sm:inline"> Profile</span></div>
-                        <div class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Standard &bull; Windows sRGB Default</div>
-                      </div>
-                    </div>
-                    <div id="ad-tut-slot1-action" class="flex items-center justify-end shrink-0 ml-0.5">
-                      <span id="ad-tut-btn-apply-slot1" class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px]" style="display: none;">Apply</span>
-                      <div id="ad-tut-slot1-check" class="w-3 h-3 sm:w-5 sm:h-5 rounded-full border border-amber-400 sm:border-2 flex items-center justify-center text-amber-400 text-[7px] sm:text-xs font-bold">✓</div>
-                    </div>
-                  </div>
-                  <!-- Slot 2: Rust -->
-                  <div id="ad-tut-slot-2" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <img src="assets/icon_rust.png" alt="Rust" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div class="text-[7.5px] sm:text-sm font-bold text-white truncate">Rust</div>
-                        <div class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 1</div>
-                      </div>
-                    </div>
-                    <span class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px] shrink-0 ml-0.5">Apply</span>
-                  </div>
-                  <!-- Slot 3: arena -->
-                  <div id="ad-tut-slot-3" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot3-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full hidden shrink-0"></div>
-                      <img src="assets/icon_arena.png" alt="arena" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot3-title" class="text-[7.5px] sm:text-sm font-bold text-white truncate">arena</div>
-                        <div id="ad-tut-slot3-sub" class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 2</div>
-                      </div>
-                    </div>
-                    <div id="ad-tut-slot3-action" class="flex items-center justify-end shrink-0 ml-0.5">
-                      <span id="ad-tut-btn-apply-arena" class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px] cursor-pointer">Apply</span>
-                      <div id="ad-tut-slot3-check" class="w-3 h-3 sm:w-5 sm:h-5 rounded-full border border-amber-400 sm:border-2 hidden items-center justify-center text-amber-400 text-[7px] sm:text-xs font-bold">✓</div>
-                    </div>
-                  </div>
-                  <!-- Slot 4: cs2 (1:1 with media_1795292896911_320d19a2.png) -->
-                  <div id="ad-tut-slot-4" class="p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all">
-                    <div class="flex items-center gap-1 sm:gap-2.5 min-w-0">
-                      <div id="ad-tut-slot4-strip" class="w-0.5 sm:w-1 h-3 sm:h-6 bg-amber-400 rounded-full hidden shrink-0"></div>
-                      <img src="assets/icon_cs2.png?v=2.10.35" alt="cs2" class="w-3 h-3 sm:w-6 sm:h-6 rounded sm:rounded-md object-contain shrink-0" onerror="this.src='assets/app_logo.png'" />
-                      <div class="min-w-0">
-                        <div id="ad-tut-slot4-title" class="text-[7.5px] sm:text-sm font-bold text-white truncate">cs2</div>
-                        <div id="ad-tut-slot4-sub" class="text-[6px] sm:text-[9.5px] text-gray-400 truncate hidden sm:block">Profile 3</div>
-                      </div>
-                    </div>
-                    <div id="ad-tut-slot4-action" class="shrink-0 ml-0.5">
-                      <span class="px-1 py-0.2 sm:px-2.5 sm:py-0.5 rounded bg-amber-400 text-black font-bold text-[6.5px] sm:text-[10px]">Apply</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right Details Panel: Profile Settings & Copy Share Code (1:1 with media_1795292896911_320d19a2.png) -->
-                <div class="col-span-8 sm:col-span-9 flex flex-col gap-1 sm:gap-2 items-start">
-                  <div class="w-full bg-[#31343a] rounded-lg sm:rounded-xl border border-white/5 p-1.5 sm:p-4 flex flex-col gap-1 sm:gap-2.5">
-                    <!-- Row 1: Profile Name (Left) + Display 1 Selector (Right) -->
-                    <div class="flex items-center justify-between pb-0.5 sm:pb-1 border-b border-white/5 shrink-0">
-                      <div class="flex items-center gap-1 sm:gap-2 min-w-0">
-                        <span class="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(250,204,21,0.8)] shrink-0"></span>
-                        <span id="ad-tut-heading-name" class="text-[7.5px] sm:text-sm font-bold text-white truncate">arena • Profile 2</span>
-                      </div>
-                      <div class="px-1 sm:px-2.5 py-0.2 sm:py-1 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[6.5px] sm:text-xs font-mono text-gray-200 flex items-center gap-0.5 sm:gap-1.5 shadow-sm shrink-0">
-                        <span>🖥️</span>
-                        <span id="ad-tut-display-text"><span class="sm:hidden">Disp 1</span><span class="hidden sm:inline">Display 1 (Primary)</span></span>
-                        <span class="text-[6px] sm:text-[8px] text-gray-400">&#9662;</span>
-                      </div>
-                    </div>
-
-                    <!-- Row 2: Subheader (Left) + Edit Button (Right) -->
-                    <div class="flex items-center justify-between pb-0.5 shrink-0">
-                      <div class="flex items-center gap-1 sm:gap-2">
-                        <span class="text-[7px] sm:text-xs font-bold text-white">Display Calibration</span>
-                        <span class="text-[9px] sm:text-[9.5px] text-gray-400 hidden sm:inline">&bull; Read-Only Calibration</span>
-                      </div>
-                      <button type="button" class="px-1.5 sm:px-3.5 py-0.2 sm:py-0.5 rounded sm:rounded-md bg-[#212327] border border-white/10 text-[6.5px] sm:text-xs font-medium text-gray-300 hover:text-white transition-colors">Edit</button>
-                    </div>
-
-                    <!-- Row 3-9: 7 Calibration Sliders with Right-Hand Value Badges (1:1 with media_1795292896911_320d19a2.png) -->
-                    <div class="space-y-0.5 sm:space-y-2 py-0 sm:py-0.5 text-[6.5px] sm:text-xs font-medium text-gray-300">
-                      <!-- 1. Brightness -->
-                      <div class="flex items-center gap-1 sm:gap-3">
-                        <span class="w-11 sm:w-44 text-gray-300 text-[6.5px] sm:text-xs shrink-0 truncate">Brightness</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div id="ad-tut-prof-bar-bright" class="absolute top-0 bottom-0 bg-amber-400 rounded-full" style="left: 50%; width: 25%;"></div>
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300 shadow-[0_0_6px_rgba(250,204,21,0.8)]" style="left: 75%;"></div>
-                        </div>
-                        <span id="ad-tut-prof-val-bright" class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-300 text-center shrink-0">0%</span>
-                      </div>
-
-                      <!-- 2. Contrast -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Contrast</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
-                      </div>
-
-                      <!-- 3. Gamma -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Gamma</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
-                      </div>
-
-                      <!-- 4. Color Temp -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Color Temp</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-amber-400/10 border border-amber-400 text-[6px] sm:text-[9.5px] font-mono font-bold text-amber-300 text-center shrink-0">6500K</span>
-                      </div>
-
-                      <!-- 5. Digital Vibrance -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Vibrance</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
-                      </div>
-
-                      <!-- 6. Shadows (Black Equalizer) -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Shadows</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 50%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
-                      </div>
-
-                      <!-- 7. Midtone Clarity -->
-                      <div class="flex items-center gap-1 sm:gap-3 opacity-70">
-                        <span class="w-11 sm:w-44 text-gray-400 text-[6.5px] sm:text-xs shrink-0 truncate">Clarity</span>
-                        <div class="flex-1 h-0.5 sm:h-1.5 bg-[#212327] rounded-full relative flex items-center">
-                          <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-1.5 sm:w-2.5 h-1.5 sm:h-2.5 rounded-full bg-amber-400 border border-amber-300" style="left: 30%;"></div>
-                        </div>
-                        <span class="w-6 sm:w-14 py-0 sm:py-0.5 rounded bg-[#212327] border border-white/5 text-[6px] sm:text-[9.5px] font-mono text-gray-400 text-center shrink-0">0%</span>
-                      </div>
-                    </div>
-
-                    <!-- Row 10: Copy Share Code Directly Below Sliders (1:1 with media_1795292896911_320d19a2.png) -->
-                    <div class="pt-0.5 sm:pt-1 flex items-center gap-1.5 sm:gap-3 shrink-0">
-                      <button type="button" id="ad-tut-btn-copyshare" class="px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg bg-[#212327] border border-white/10 text-[7px] sm:text-xs font-semibold text-gray-200 hover:text-white flex items-center gap-1 sm:gap-2 shadow-sm transition-all">
-                        <span>📋 Copy Share Code</span>
-                      </button>
-                      <!-- Green Inline Toast -->
-                      <div id="ad-tut-share-toast" class="text-[6.5px] sm:text-xs font-mono font-bold text-emerald-400 items-center gap-1 sm:gap-1.5 transition-opacity duration-200" style="display: none; visibility: hidden; opacity: 0;">
-                        <span class="sm:hidden">✓ Copied</span>
-                        <span class="hidden sm:inline">✓ Share Code Copied: BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- VIEW C: OPTIONS TAB (Compact & Centered) -->
-              <div id="ad-tut-view-options" class="w-full max-w-4xl mx-auto hidden flex flex-col gap-2.5 items-start">
-                <div class="w-full bg-[#31343a] rounded-xl border border-white/5 p-3.5 sm:p-4 flex flex-col gap-3">
-                  <div class="flex items-center gap-2 pb-2 border-b border-white/5 shrink-0">
-                    <button type="button" id="ad-opt-pill-pref" class="px-3.5 py-1 rounded-lg bg-[#212327] text-xs font-semibold text-gray-400">Preferences</button>
-                    <button type="button" id="ad-opt-pill-detect" class="px-3.5 py-1 rounded-lg bg-[#212327] text-xs font-semibold text-gray-400">Window Detection</button>
-                    <button type="button" id="ad-opt-pill-cycle" class="px-3.5 py-1 rounded-lg bg-[#212327] text-xs font-semibold text-gray-400">Profile Cycle</button>
-                    <button type="button" id="ad-opt-pill-hud" class="px-3.5 py-1 rounded-lg bg-amber-400/20 border border-amber-400/40 text-xs font-bold text-amber-300">In-Game HUD Overlay</button>
-                  </div>
-
-                  <div class="space-y-2.5 py-1 flex flex-col">
-                    <!-- Toggle 1: Enable Floating HUD -->
-                    <div class="p-3 rounded-xl bg-[#212327] border border-white/5 flex items-center justify-between">
-                      <div>
-                        <div class="text-xs sm:text-sm font-bold text-white">Enable In-Game Floating HUD</div>
-                        <div class="text-[9.5px] sm:text-xs text-gray-400">Toasts profile name &amp; color adjustments seamlessly in full-screen games</div>
-                      </div>
-                      <div id="ad-opt-toggle-hud" class="w-10 h-6 rounded-full bg-amber-400 p-0.5 flex items-center justify-end shadow-[0_0_12px_rgba(250,204,21,0.5)]">
-                        <div class="w-5 h-5 rounded-full bg-black"></div>
-                      </div>
-                    </div>
-
-                    <!-- Toggle 2: Hotkey Assignment -->
-                    <div class="p-3 rounded-xl bg-[#212327] border border-white/5 flex items-center justify-between">
-                      <div>
-                        <div class="text-xs sm:text-sm font-bold text-white">Global Profile Cycle Hotkey</div>
-                        <div class="text-[9.5px] sm:text-xs text-gray-400">Instant toggle between profiles without alt-tabbing</div>
-                      </div>
-                      <div id="ad-opt-hotkey-box" class="px-4 py-1.5 rounded-lg bg-[#31343a] border-2 border-amber-400 text-amber-400 font-mono font-black text-xs sm:text-sm shadow-[0_0_15px_rgba(250,204,21,0.3)]">
-                        [ F8 ]
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Discord Window Layer (1:1 with media_1795289987711_2634483b.png) -->
-        <div id="ad-tut-discord-box" class="absolute inset-0 bg-[#313338] z-30 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 flex flex-row overflow-hidden font-sans select-none text-left">
+        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 text-center bg-[#08090C]/95 opacity-0 pointer-events-none transition-opacity duration-300" style="display: none;" onclick="event.stopPropagation();">
           
-          <!-- Column 1: Far Left Discord Server Strip (#1E1F22) -->
-          <div class="w-12 bg-[#1E1F22] py-3 flex flex-col items-center gap-2.5 shrink-0 border-r border-black/20">
-            <!-- Discord Direct Messages Icon -->
-            <div class="w-8 h-8 rounded-2xl bg-[#313338] hover:bg-[#5865F2] flex items-center justify-center text-white text-xs font-bold transition-all cursor-pointer">
-              <svg class="w-5 h-5 text-gray-300" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-            </div>
-            <div class="w-6 h-[2px] bg-white/10 rounded-full"></div>
-            <!-- Active Better Color Profile Server Icon with Indicator Pill -->
-            <div class="relative w-full flex items-center justify-center">
-              <div class="absolute left-0 w-1 h-8 bg-white rounded-r-full"></div>
-              <div class="w-8 h-8 rounded-2xl bg-amber-400 p-1 flex items-center justify-center shadow-[0_0_15px_rgba(250,204,21,0.4)]">
-                <img src="assets/app_logo.png" alt="BCP" class="w-full h-full object-contain" />
-              </div>
-            </div>
-            <!-- Other Servers Mockup -->
-            <div class="w-8 h-8 rounded-full bg-[#313338] hover:rounded-2xl transition-all flex items-center justify-center text-gray-400 text-xs font-bold">🎮</div>
-            <div class="w-8 h-8 rounded-full bg-[#313338] hover:rounded-2xl transition-all flex items-center justify-center text-gray-400 text-xs font-bold">🔫</div>
-          </div>
-
-          <!-- Column 2: Channels Sidebar (#2B2D31) -->
-          <div class="w-48 sm:w-56 bg-[#2B2D31] flex flex-col justify-between shrink-0 border-r border-black/20 text-xs">
-            <!-- Server Header -->
-            <div class="px-3.5 py-2.5 bg-[#2B2D31] border-b border-black/20 flex items-center justify-between font-bold text-white shadow-sm shrink-0">
-              <span class="truncate">Better Color Profile</span>
-              <span class="text-gray-400 text-xs">⌵</span>
-            </div>
-
-            <!-- Channels Tree -->
-            <div class="flex-1 p-2 space-y-3 overflow-y-auto font-medium text-[11px] text-gray-400">
-              <!-- Top Quick Links -->
-              <div class="space-y-0.5">
-                <div class="px-2 py-1 flex items-center gap-2 hover:bg-white/5 rounded text-gray-300">
-                  <span>📅</span><span>Events</span>
-                </div>
-                <div class="px-2 py-1 flex items-center gap-2 hover:bg-white/5 rounded text-gray-300">
-                  <span>🚀</span><span>Server Boosts</span>
-                </div>
-              </div>
-
-              <!-- Information Category -->
-              <div class="space-y-0.5">
-                <div class="px-1 text-[9px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                  <span>📢</span> INFORMATION
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 hover:bg-white/5 rounded cursor-pointer">
-                  <span class="text-gray-500 font-bold">#</span> rules
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 hover:bg-white/5 rounded cursor-pointer">
-                  <span class="text-gray-500 font-bold">#</span> announcements
-                </div>
-              </div>
-
-              <!-- Community Category -->
-              <div class="space-y-0.5">
-                <div class="px-1 text-[9px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                  <span>💬</span> COMMUNITY
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 bg-white/10 text-white font-semibold rounded-md cursor-pointer">
-                  <span class="text-amber-400 font-bold">#</span> general-chat
-                </div>
-              </div>
-
-              <!-- Support & Feedback -->
-              <div class="space-y-0.5">
-                <div class="px-1 text-[9px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                  <span>🛠</span> SUPPORT &amp; FEEDBACK
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 hover:bg-white/5 rounded cursor-pointer">
-                  <span class="text-gray-500 font-bold">#</span> support
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 hover:bg-white/5 rounded cursor-pointer">
-                  <span class="text-gray-500 font-bold">#</span> feature-requests
-                </div>
-              </div>
-
-              <!-- Color Profiles & Presets -->
-              <div class="space-y-0.5">
-                <div class="px-1 text-[9px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                  <span>🎨</span> COLOR PROFILES &amp; PRESETS
-                </div>
-                <div class="px-2 py-1 flex items-center gap-1.5 hover:bg-white/5 rounded cursor-pointer">
-                  <span class="text-gray-500 font-bold">#</span> profile-sharing
-                </div>
-              </div>
-            </div>
-
-            <!-- Server Footer Pill (No personal profile, as requested by user) -->
-            <div class="p-2 bg-[#232428] border-t border-black/20 flex items-center text-[10px] text-gray-400 shrink-0">
-              <span class="flex items-center gap-1.5 font-semibold text-emerald-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Official Server</span>
-              </span>
-                          </div>
-          </div>
-
-          <!-- Column 3: Main Chat Feed (#313338) -->
-          <div class="flex-1 flex flex-col justify-between bg-[#313338] overflow-hidden">
-            <!-- Channel Header Bar -->
-            <div class="px-4 py-2 bg-[#313338] border-b border-black/20 flex items-center justify-between shrink-0 shadow-sm">
-              <div class="flex items-center gap-2 text-xs font-sans">
-                <span class="text-gray-400 font-bold text-sm">#</span>
-                <span class="text-white font-bold text-sm">general-chat</span>
-                <span class="hidden sm:inline text-gray-400 text-[11px] pl-2 border-l border-white/10">General chat for members and enthusiasts</span>
-              </div>
-              <div class="flex items-center gap-3 text-gray-400 text-xs">
-                <span>🔔</span>
-                <span>📌</span>
-                <span>👥</span>
-                <div class="hidden sm:flex items-center bg-[#1E1F22] px-2 py-0.5 rounded text-[10px] text-gray-400">Search</div>
-              </div>
-            </div>
-
-            <!-- Messages Area -->
-            <div class="flex-1 p-4 space-y-4 overflow-y-auto font-sans">
-              
-              <!-- Channel Welcome Header (from screenshot) -->
-              <div class="space-y-1 pb-2 border-b border-white/5">
-                <div class="w-10 h-10 rounded-full bg-[#404249] flex items-center justify-center text-xl font-bold text-white">#</div>
-                <h3 class="text-lg sm:text-xl font-black text-white">Welcome to #general-chat!</h3>
-                <p class="text-xs text-gray-400">This is the start of the #general-chat channel. General chat for members and enthusiasts</p>
-                <div class="text-[9.5px] font-mono text-gray-500 pt-1">October 4, 2026</div>
-              </div>
-
-              <!-- Official Bot Welcome Message (from screenshot) -->
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 rounded-full bg-amber-400 p-1 flex items-center justify-center shrink-0">
-                  <img src="assets/app_logo.png" alt="Bot" class="w-full h-full object-contain" />
-                </div>
-                <div>
-                  <div class="flex items-center gap-1.5 text-xs">
-                    <span class="font-bold text-white">Better Color Profile</span>
-                    <span class="px-1 py-0.2 rounded bg-[#5865F2] text-[8.5px] font-bold text-white">APP</span>
-                    <span class="text-[9.5px] text-gray-400">10/4/2026 9:46 PM</span>
-                  </div>
-                  <p class="text-gray-300 text-xs mt-1 leading-relaxed">
-                    👋 <strong>Welcome to the official Better Color Profile Discord server!</strong><br />
-                    Feel free to chat, discuss monitors, share your custom color profiles, or ask questions.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Community Message from Shroud_Fan (User explicit request: "do keep the shroud fan message in general chat") -->
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center font-bold text-white text-xs shrink-0">S</div>
-                <div>
-                  <div class="flex items-center gap-2 text-xs">
-                    <span class="font-bold text-white">Shroud_Fan</span>
-                    <span class="text-[9.5px] text-gray-400">Today at 4:18 PM</span>
-                  </div>
-                  <p class="text-gray-300 text-xs mt-0.5">Anyone have a high vibrance profile for Inferno banana &amp; dark apartments?</p>
-                </div>
-              </div>
-
-              <!-- Shared Profile Reply with Share Code -->
-              <div id="ad-discord-msg-reply" class="flex items-start gap-3 transition-all duration-300 opacity-0 translate-y-2">
-                <div class="w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center font-bold text-black text-xs shrink-0">★</div>
-                <div class="flex-1">
-                  <div class="flex items-center gap-2 text-xs">
-                    <span class="font-bold text-amber-400">User</span>
-                    <span class="px-1.5 py-0.2 rounded bg-amber-400/20 text-[8.5px] font-mono text-amber-300 font-bold">VIP</span>
-                    <span class="text-[9.5px] text-gray-400">Just now</span>
-                  </div>
-                  <p class="text-gray-300 text-xs mt-0.5">Here is my Arena Breakout &amp; CS2 visibility calibration! Perfect for dark spots:</p>
-                  
-                  <div class="mt-2 p-3 rounded-xl bg-[#2B2D31] border border-amber-400/40 shadow-lg max-w-md">
-                    <div class="text-xs font-mono text-gray-300 font-bold mb-1 flex items-center gap-1.5">
-                      <span>🎯</span>
-                      <span>arena • Profile 2 (High-Visibility CS2 / ABI)</span>
-                    </div>
-                    <div class="p-2 rounded-lg bg-[#1E1F22] border border-white/5 font-mono text-xs text-amber-300 font-bold flex items-center justify-between">
-                      <span id="ad-discord-code-val">BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z</span>
-                      <span class="text-[9px] text-gray-400 font-normal">One-Click Import</span>
-                    </div>
-                  </div>
-
-                  <!-- Reactions -->
-                  <div id="ad-discord-reactions" class="flex items-center gap-1.5 mt-2 transition-opacity duration-300 opacity-0">
-                    <span class="px-2 py-0.5 rounded-lg bg-[#2B2D31] border border-amber-400/40 text-[10px] text-amber-300 font-mono font-bold flex items-center gap-1">
-                      <span>🔥</span><span>12</span>
-                    </span>
-                    <span class="px-2 py-0.5 rounded-lg bg-[#2B2D31] border border-white/10 text-[10px] text-gray-300 font-mono font-bold flex items-center gap-1">
-                      <span>🎉</span><span>8</span>
-                    </span>
-                    <span class="px-2 py-0.5 rounded-lg bg-[#2B2D31] border border-white/10 text-[10px] text-gray-300 font-mono font-bold flex items-center gap-1">
-                      <span>👑</span><span>4</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Discord Chat Input Bar -->
-            <div class="p-3 bg-[#383A40] border-t border-black/10 shrink-0">
-              <div id="ad-discord-input-bar" class="w-full px-3 py-2 rounded-lg bg-[#383A40] border border-white/10 flex items-center justify-between transition-colors">
-                <div class="flex items-center gap-2">
-                  <span class="text-gray-400 text-xs">+</span>
-                  <span id="ad-discord-input-text" class="text-xs font-normal text-[#949BA4] truncate">Message #general-chat</span>
-                </div>
-                <div class="flex items-center gap-2 text-gray-400 text-xs">
-                  <span>🎁</span>
-                  <span>GIF</span>
-                  <span>🏷️</span>
-                  <span>🙂</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 4: Right Members List (#2B2D31) (As requested: "other discord other users on right side") -->
-          <div class="w-40 sm:w-48 bg-[#2B2D31] hidden lg:flex flex-col p-3 shrink-0 text-xs border-l border-black/20 overflow-y-auto">
-            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">ONLINE</div>
-            <div class="space-y-2">
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-full bg-amber-400 p-0.5"><img src="assets/app_logo.png" class="w-full h-full object-contain" /></div>
-                <span class="font-bold text-white text-[11px] truncate">Better Color Profile</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] font-bold text-white">S</div>
-                <span class="text-gray-200 text-[11px] truncate">Shroud_Fan</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-[10px] font-bold text-white">V</div>
-                <span class="text-gray-200 text-[11px] truncate">ViperCS</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-full bg-sky-600 flex items-center justify-center text-[10px] font-bold text-white">T</div>
-                <span class="text-gray-200 text-[11px] truncate">TacticalAce</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-full bg-amber-600 flex items-center justify-center text-[10px] font-bold text-white">G</div>
-                <span class="text-gray-200 text-[11px] truncate">GammaMaster</span>
-              </div>
-            </div>
-
-            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-4 mb-2">OFFLINE</div>
-            <div class="space-y-1.5 text-gray-500 text-[11px]">
-              <div>OledGamer</div>
-              <div>FastIPS_Pro</div>
-              <div>ShadowHunter</div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- SCENE 5: DUAL MONITOR BATTLESTATION STAGE                    -->
-        <!-- (Large, Photorealistic 2 Monitors with RGB Bias Lighting)     -->
-        <!-- ============================================================ -->
-        <div id="ad-multimonitor-stage" class="ad-slide absolute inset-0 z-20 flex flex-col items-center justify-center p-3 sm:p-5 bg-gradient-to-b from-[#08090D] via-[#0E1017] to-[#08090D] backdrop-blur-md transition-opacity duration-400 opacity-0 pointer-events-none select-none">
-          <!-- Floating Header Badge -->
-          <div class="mb-3 px-4 py-1.5 rounded-full bg-amber-400 text-black font-mono font-black text-xs sm:text-sm shadow-[0_0_25px_rgba(250,204,21,0.5)] uppercase tracking-wider flex items-center gap-2">
-            <span>🖥️</span>
-            <span>INDEPENDENT DUAL-MONITOR HARDWARE LUT</span>
-          </div>
-
-          <!-- Dual Gaming Monitor Setup (w-[94%] max-w-6xl) -->
-          <div class="w-[94%] max-w-6xl grid grid-cols-12 gap-4 sm:gap-6 items-center">
-
-            <!-- Monitor 1: Primary 240Hz Gaming Display -->
-            <div id="ad-mon-1" class="col-span-6 bg-[#16181F] rounded-2xl border-2 border-amber-400 p-2.5 sm:p-3 shadow-[0_0_50px_rgba(250,204,21,0.4)] flex flex-col transition-all duration-300">
-              <!-- Monitor Bezel Header -->
-              <div class="flex items-center justify-between text-[10px] sm:text-xs font-mono text-gray-300 mb-1.5 pb-1 border-b border-white/10">
-                <span class="text-amber-400 font-bold flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-                  Display 1 (Primary &bull; 240Hz Fast-IPS)
-                </span>
-                <span class="px-2 py-0.5 rounded bg-amber-400 text-black font-black text-[8.5px]">PRO ESPORTS</span>
-              </div>
-              <!-- Monitor Screen -->
-              <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black shadow-inner">
-                <img id="ad-mon1-screen" src="assets/scene_inferno.jpg" alt="" class="w-full h-full object-cover transition-all duration-500" style="filter: brightness(1.35) contrast(1.22) saturate(1.28);" />
-                <div class="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/90 font-mono text-[9px] text-amber-300 font-bold border border-amber-400/50 shadow-md">
-                  Shadow Gamma +35% &bull; Dark Visibility Boost
-                </div>
-              </div>
-              <!-- Monitor Stand Neck & Base Representation -->
-              <div class="mt-2 text-center text-[9.5px] sm:text-[10.5px] text-gray-300 font-mono flex items-center justify-between">
-                <span>Curve: <strong class="text-white">Tournament sRGB LUT</strong></span>
-                <span class="text-amber-400 font-bold">CS2_Tournament_Boost.icm</span>
-              </div>
-            </div>
-
-            <!-- Monitor 2: Secondary 144Hz Chat / Eye-Care Display -->
-            <div id="ad-mon-2" class="col-span-6 bg-[#16181F] rounded-2xl border-2 border-indigo-400/80 p-2.5 sm:p-3 shadow-[0_0_35px_rgba(99,102,241,0.35)] flex flex-col transition-all duration-300">
-              <!-- Monitor Bezel Header -->
-              <div class="flex items-center justify-between text-[10px] sm:text-xs font-mono text-gray-300 mb-1.5 pb-1 border-b border-white/10">
-                <span class="text-indigo-300 font-bold flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
-                  Display 2 (Secondary &bull; 144Hz)
-                </span>
-                <span class="px-2 py-0.5 rounded bg-indigo-500 text-white font-black text-[8.5px]">WARM EYE-CARE</span>
-              </div>
-              <!-- Monitor Screen (Authentic Discord Mock with Warm D50 Tone) -->
-              <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-[#2B2D31] flex flex-col justify-between shadow-inner" style="filter: sepia(0.22) saturate(1.15) brightness(0.98);">
-                <!-- Discord Mini Header -->
-                <div class="px-3 py-1.5 bg-[#1E1F22] border-b border-black/20 flex items-center justify-between text-[9px] font-mono text-gray-300">
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-gray-400 font-bold">#</span>
-                    <span class="text-white font-bold">profile-sharing</span>
-                  </div>
-                  <span class="text-[8px] text-indigo-300 font-bold px-1.5 py-0.2 rounded bg-indigo-500/20">WARM D50 ACTIVE</span>
-                </div>
-                <!-- Discord Chat Messages Mock -->
-                <div class="p-2.5 space-y-2 text-[8.5px] font-sans text-gray-300">
-                  <div class="flex items-start gap-2">
-                    <div class="w-5 h-5 rounded-full bg-indigo-500 flex items-center justify-center text-[8px] font-bold text-white shrink-0">D</div>
-                    <div>
-                      <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-indigo-300 text-[8.5px]">Desktop_User</span>
-                        <span class="text-[7.5px] text-gray-400">4:21 PM</span>
-                      </div>
-                      <p class="text-gray-300 text-[8px] mt-0.5">Dual monitor setup is flawless! Gaming on 240Hz, reading Discord glare-free.</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- Bottom Badge -->
-                <div class="px-2 py-1 bg-black/85 font-mono text-[8.5px] text-indigo-300 font-bold border-t border-indigo-400/30 text-center">
-                  Zero Glare &bull; Anti Blue Light &bull; Warm D50 ICC Active
-                </div>
-              </div>
-              <!-- Monitor Stand Neck & Base Representation -->
-              <div class="mt-2 text-center text-[9.5px] sm:text-[10.5px] text-gray-300 font-mono flex items-center justify-between">
-                <span>Curve: <strong class="text-white">Comfort D50 5000K</strong></span>
-                <span class="text-indigo-300 font-bold">Warm_D50_EyeCare.icm</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Bottom Descriptive Note -->
-          <div class="mt-3 text-[11px] sm:text-xs text-gray-300 font-mono text-center">
-            Both displays run dedicated hardware gamma curves simultaneously with zero interference.
-          </div>
-        </div>
-
-        <!-- ============================================================ -->
-        <!-- SCENE 8: BEAT 05 (DOWNLOAD END CARD)                         -->
-        <!-- ============================================================ -->
-                <!-- ============================================================ -->
-        <!-- SCENE 8: BEAT 05 (AUTHENTIC DOWNLOAD END CARD)               -->
-        <!-- ============================================================ -->
-                <!-- ============================================================ -->
-        <!-- ============================================================ -->
-        <!-- SCENE 4: CLEAN DOWNLOAD END CARD                             -->
-        <!-- ============================================================ -->
-        <div id="ad-beat-5" class="ad-slide absolute inset-0 z-30 flex flex-col items-center justify-center p-4 sm:p-6 text-center bg-[#08090C]/95 backdrop-blur-md opacity-0 pointer-events-none" onclick="event.stopPropagation();">
-          
-          <!-- Replay Button in Top-Right of the BIG THEATER WINDOW -->
-          <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-2.5 sm:top-6 right-2.5 sm:right-6 py-1.5 px-3 sm:py-2.5 sm:px-4 rounded-full text-[11px] sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
+          <!-- Replay Button in Top-Right of the Theater Window -->
+          <button type="button" onclick="event.stopPropagation(); restartSpecAd();" class="absolute top-2.5 sm:top-6 right-2.5 sm:right-6 py-1.5 px-3 sm:py-2.5 sm:px-4 rounded-full text-[11px] sm:text-sm font-bold text-gray-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-400/60 shadow-2xl transition-colors flex items-center gap-1.5 sm:gap-2 cursor-pointer z-50 pointer-events-auto group select-none" title="Replay video showcase">
             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 group-hover:rotate-[-45deg] transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
             <span>Replay</span>
           </button>
@@ -1333,7 +420,7 @@
 
             <!-- Download Now in the Middle Center -->
             <div class="w-full flex justify-center">
-              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="if(window.sound) sound.chord();" class="w-full py-2.5 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_35px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <a href="https://github.com/KOUKOU221/BetterColorProfile/releases/latest/download/BetterColorProfileSetup.exe" target="_blank" rel="noopener noreferrer" download="BetterColorProfileSetup.exe" onclick="onEndCardDownloadClick(event);" class="w-full py-2.5 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black text-black bg-amber-400 hover:brightness-110 shadow-[0_0_35px_rgba(250,204,21,0.5)] transition-all flex items-center justify-center gap-2 cursor-pointer">
                 <span>Download Now</span>
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
               </a>
@@ -1342,9 +429,6 @@
 
         </div>
 
-        <!-- Hidden HTML5 Audio Element for White Bat Audio Track (loaded on play) -->
-        <audio id="ad-custom-audio" src="assets/ad_soundtrack.mp3" preload="none"></audio>
-
       </div> <!-- closes ad-stage-box -->
     </div> <!-- closes spec-ad (Theater Window) -->
 
@@ -1352,7 +436,7 @@
 
 
   <!-- ================= KINETIC MARQUEE TICKER ================= -->
-  <div class="relative w-full overflow-hidden border-y border-white/5 bg-black/40 py-3 backdrop-blur-md z-10">
+  <div class="relative w-full overflow-hidden border-y border-white/5 bg-[#08090C]/90 py-3 z-10">
     <div class="animate-marquee whitespace-nowrap text-xs font-mono tracking-widest uppercase text-gray-400">
       <span class="mx-6 text-white font-bold">🎯 AUTO GAME DETECTION &amp; SWITCHING</span>
       <span class="mx-6 text-amber-300 font-bold">🎨 7-SLIDER PRECISION CALIBRATION</span>
@@ -1631,7 +715,7 @@
   <section id="download" class="py-20 px-4 max-w-5xl mx-auto z-10 relative">
     <div class="glass-panel rounded-3xl p-8 sm:p-14 text-center border border-white/15 relative overflow-hidden">
       
-      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full theme-bg blur-[140px] opacity-20 pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full opacity-15 pointer-events-none" style="background: radial-gradient(circle, var(--accent) 0%, transparent 70%);"></div>
 
       <img src="assets/app_logo.png" alt="Logo" class="w-16 h-16 rounded-2xl mx-auto shadow-2xl mb-6 border border-white/20" />
 
@@ -2187,42 +1271,98 @@
 
 
     // -------------------------------------------------------------
-    // 3. 18-SECOND SPEC AD SHOWCASE ENGINE (RICCARDO BOSSO BRIEF)
+    // 3. MP4 SHOWCASE VIDEO THEATER PLAYER (1080p @ 60 FPS)
     // -------------------------------------------------------------
-    let adInterval = null;
-    let adCurrentSec = 0;
-    let cachedSavePos = { x: 50, y: 88 };
-    let cachedCopyPos = { x: 41.2, y: 50.8 };
     const AD_TOTAL_SEC = 28;
     let adIsPlaying = false;
     let adIsMuted = false;
     let adUserVolume = 0.50;
+    let hasStartedShowcase = false;
+
+    function getShowcaseVideo() {
+      return document.getElementById('ad-showcase-video');
+    }
+
+    function formatTimeSec(sec) {
+      const s = Math.max(0, Math.floor(sec));
+      const m = Math.floor(s / 60).toString().padStart(2, '0');
+      const rem = (s % 60).toString().padStart(2, '0');
+      return `${m}:${rem}`;
+    }
+
+    function syncShowcaseUI() {
+      const vid = getShowcaseVideo();
+      const total = (vid && isFinite(vid.duration) && vid.duration > 0) ? vid.duration : AD_TOTAL_SEC;
+      const cur = vid ? vid.currentTime : 0;
+
+      const bar = document.getElementById('ad-progress-bar');
+      if (bar) {
+        bar.style.width = `${Math.min(100, Math.max(0, (cur / total) * 100)).toFixed(2)}%`;
+      }
+      const timer = document.getElementById('ad-bottom-timer');
+      if (timer) {
+        timer.textContent = `${formatTimeSec(cur)} / ${formatTimeSec(total)}`;
+      }
+
+      const b5 = document.getElementById('ad-beat-5');
+      if (b5) {
+        const showEnd = hasStartedShowcase && (cur >= 25.0 || (vid && vid.ended));
+        if (showEnd) {
+          b5.style.display = 'flex';
+          b5.style.opacity = '1';
+          b5.style.pointerEvents = 'auto';
+        } else {
+          b5.style.display = 'none';
+          b5.style.opacity = '0';
+          b5.style.pointerEvents = 'none';
+        }
+      }
+    }
+
+    function updatePlayButtonUI() {
+      const vid = getShowcaseVideo();
+      const isPlaying = vid ? (!vid.paused && !vid.ended) : adIsPlaying;
+      adIsPlaying = isPlaying;
+
+      const controls = document.getElementById('ad-player-controls');
+      if (controls) {
+        if (!hasStartedShowcase) {
+          controls.classList.add('hidden');
+        } else {
+          controls.classList.remove('hidden');
+          if (!isPlaying) {
+            controls.classList.remove('opacity-0');
+            controls.classList.add('opacity-100');
+          } else {
+            controls.classList.add('opacity-0');
+            controls.classList.remove('opacity-100');
+          }
+        }
+      }
+
+      const barIcon = document.getElementById('ad-play-bar-icon');
+      if (barIcon) {
+        if (isPlaying) {
+          barIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        } else if (vid && vid.ended) {
+          barIcon.innerHTML = '<path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>';
+        } else {
+          barIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        }
+      }
+    }
 
     function openSpecAdReel() {
       const adEl = document.getElementById('spec-ad');
-      if (adEl) {
-        adEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      sound.enabled = true;
-      sound.init();
-      const soundLabel = document.getElementById('sound-label');
-      if (soundLabel) soundLabel.textContent = 'Audio: ON';
-      const eq = document.getElementById('eq-bars');
-      if (eq) {
-        eq.classList.remove('opacity-40');
-        eq.children[0].className = 'w-1 bg-amber-400 rounded-full eq-bar-1';
-        eq.children[1].className = 'w-1 bg-amber-400 rounded-full eq-bar-2';
-        eq.children[2].className = 'w-1 bg-amber-400 rounded-full eq-bar-3';
-      }
-      if (!adIsPlaying) {
-        if (adCurrentSec >= AD_TOTAL_SEC) restartSpecAd();
-        else playSpecAd();
-      }
+      if (adEl) adEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const vid = getShowcaseVideo();
+      if (vid && vid.ended) restartSpecAd();
+      else playSpecAd();
     }
 
     function closeSpecAdReel() {
       pauseSpecAd();
-      sound.click();
+      if (typeof sound !== 'undefined') sound.click();
     }
 
     function toggleSpecAdFullScreen() {
@@ -2230,399 +1370,121 @@
       if (!adEl) return;
       if (!document.fullscreenElement && !adEl.classList.contains('spec-ad-theater')) {
         if (adEl.requestFullscreen) {
-          adEl.requestFullscreen().catch(() => {
-            adEl.classList.add('spec-ad-theater');
-          });
+          adEl.requestFullscreen().catch(() => adEl.classList.add('spec-ad-theater'));
         } else if (adEl.webkitRequestFullscreen) {
           adEl.webkitRequestFullscreen();
         } else {
           adEl.classList.add('spec-ad-theater');
         }
       } else {
-        if (document.fullscreenElement) {
-          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
         }
         adEl.classList.remove('spec-ad-theater');
       }
     }
 
-    function onEndCardDownloadClick(e) {
+    function onEndCardDownloadClick() {
       if (window.sound) sound.chord();
       pauseSpecAd();
     }
 
-    function updatePlayButtonUI() {
-      const barIcon = document.getElementById('ad-play-bar-icon');
-      if (barIcon) {
-        if (adIsPlaying) {
-          barIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        } else if (adCurrentSec >= AD_TOTAL_SEC) {
-          barIcon.innerHTML = '<path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>';
-        } else {
-          barIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
-        }
-      }
-
-      const playIcon = document.getElementById('ad-play-icon');
-      const playText = document.getElementById('ad-play-text');
-      if (playIcon && playText) {
-        if (adIsPlaying) {
-          playIcon.textContent = '❚❚';
-          playText.textContent = 'Pause';
-        } else if (adCurrentSec >= AD_TOTAL_SEC) {
-          playIcon.textContent = '↻';
-          playText.textContent = 'Replay';
-        } else {
-          playIcon.textContent = '▶';
-          playText.textContent = 'Play';
-        }
+    function hideOpeningCard() {
+      const b2 = document.getElementById('ad-beat-2');
+      if (b2) {
+        b2.style.display = 'none';
+        b2.style.opacity = '0';
+        b2.style.pointerEvents = 'none';
       }
     }
 
-        function startAdAndCenter(e) {
-      if (e) {
-        e.stopPropagation();
-      }
+    function startAdAndCenter(e) {
+      if (e) e.stopPropagation();
       const specAd = document.getElementById('spec-ad');
-      if (specAd) {
-        specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (specAd) specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const vid = getShowcaseVideo();
+      hideOpeningCard();
+      hasStartedShowcase = true;
+      if (vid && vid.currentTime < 1.8) {
+        vid.currentTime = 1.8;
       }
-      // If at start, jump straight into the showcase action immediately with zero delay
-      if (adCurrentSec < 1.8) {
-        adCurrentSec = 1.8;
-        const b2 = document.getElementById('ad-beat-2');
-        if (b2) { b2.style.display = 'none'; b2.style.opacity = '0'; }
-        const tutStage = document.getElementById('ad-tutorial-stage');
-        if (tutStage) {
-          tutStage.style.display = 'flex';
-          tutStage.style.opacity = '1';
-          tutStage.style.pointerEvents = 'auto';
-        }
-        renderAdFrame(1.8);
-      }
-      if (!adIsPlaying) {
-        playSpecAd();
-      }
+      playSpecAd();
     }
     window.startAdAndCenter = startAdAndCenter;
 
     function toggleAdPlay(e) {
-      if (e) {
-        if (e.target && (e.target.closest('#ad-floating-volume') || e.target.closest('#ad-beat-5') || e.target.closest('#ad-start-play-btn'))) {
-          return;
-        }
+      if (e && e.target && (e.target.closest('#ad-floating-volume') || e.target.closest('#ad-beat-5') || e.target.closest('#ad-start-play-btn') || e.target.closest('#ad-player-controls'))) {
+        if (!e.target.closest('#ad-player-controls button[title="Play / Pause"]')) return;
       }
-      if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
-        // Reached end card: clicking anywhere on stage does NOT restart; user must click Replay button!
+      const vid = getShowcaseVideo();
+      if (!vid) return;
+      if (vid.ended || (hasStartedShowcase && vid.currentTime >= 25.0)) {
+        if (e && e.target && e.target.closest('#ad-player-controls')) {
+          restartSpecAd();
+        }
         return;
       }
-      if (adIsPlaying) {
+      if (!vid.paused) {
         pauseSpecAd();
       } else {
-        const specAd = document.getElementById('spec-ad');
-        if (specAd) {
-          specAd.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (!hasStartedShowcase) {
+          startAdAndCenter(e);
+        } else {
+          playSpecAd();
         }
-        if (adCurrentSec < 1.8) {
-          adCurrentSec = 1.8;
-          const b2 = document.getElementById('ad-beat-2');
-          if (b2) { b2.style.display = 'none'; b2.style.opacity = '0'; }
-          const tutStage = document.getElementById('ad-tutorial-stage');
-          if (tutStage) {
-            tutStage.style.display = 'flex';
-            tutStage.style.opacity = '1';
-            tutStage.style.pointerEvents = 'auto';
-          }
-          renderAdFrame(1.8);
-        }
-        playSpecAd();
       }
     }
 
-    let adRafId = null;
-    let lastRafTime = performance.now();
-
     function playSpecAd() {
-      if (adCurrentSec >= AD_TOTAL_SEC - 0.2) {
-        adCurrentSec = 0;
-        sound.resetAdSoundtrackFlags(0);
-        const audio = document.getElementById('ad-custom-audio');
-        if (audio) {
-          audio.currentTime = sound.customAudioOffset;
-        }
-        renderAdFrame(0);
-      }
-      adIsPlaying = true;
+      const vid = getShowcaseVideo();
+      if (!vid) return;
+      hideOpeningCard();
+      hasStartedShowcase = true;
+      if (vid.ended) vid.currentTime = 0;
+      applyCurrentAdVolume();
+      vid.play().catch(() => {});
       updatePlayButtonUI();
-
-      // Pre-warm video buffers so Scene 3 plays seamlessly
-      const vidCs2Pre = document.getElementById('ad-vid-cs2');
-      const vidGtaPre = document.getElementById('ad-vid-gta');
-      if (vidCs2Pre && vidCs2Pre.readyState === 0) vidCs2Pre.load();
-      if (vidGtaPre && vidGtaPre.readyState === 0) vidGtaPre.load();
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        applyCurrentAdVolume();
-        const targetTime = Math.max(0, sound.customAudioOffset + adCurrentSec);
-        audio.currentTime = targetTime;
-        audio.play().catch(() => {});
-      }
-
-      // Resume active gameplay videos if in Scene 3 (CS2: 13.5 - 18.0, GTA: 18.0 - 24.5)
-      if (adCurrentSec >= 13.5 && adCurrentSec < 24.5) {
-        const vidCs2 = document.getElementById('ad-vid-cs2');
-        const vidGta = document.getElementById('ad-vid-gta');
-        const t = adCurrentSec - 13.5;
-        if (t < 4.5 && vidCs2 && vidCs2.paused) vidCs2.play().catch(() => {});
-        else if (t >= 4.5 && vidGta && vidGta.paused) vidGta.play().catch(() => {});
-      }
-
-      if (adRafId) cancelAnimationFrame(adRafId);
-      lastRafTime = performance.now();
-
-      function adLoop(now) {
-        if (!adIsPlaying) return;
-
-        const dt = Math.max(0, Math.min(0.05, (now - lastRafTime) / 1000));
-        lastRafTime = now;
-        adCurrentSec += dt;
-
-        if (sound.adSourceMode === 'file' && audio && !audio.paused) {
-          const targetAudioSec = audio.currentTime - sound.customAudioOffset;
-          if (targetAudioSec >= 0) {
-            const drift = targetAudioSec - adCurrentSec;
-            // Only correct gross audio desync (> 220ms) to preserve pure, butter-smooth 60fps VSync pacing
-            if (Math.abs(drift) > 0.22) {
-              adCurrentSec += drift * 0.15;
-            }
-          }
-        }
-
-        if (adCurrentSec >= AD_TOTAL_SEC) {
-          adCurrentSec = AD_TOTAL_SEC;
-          renderAdFrame(adCurrentSec);
-          pauseSpecAd();
-          return;
-        }
-
-        renderAdFrame(adCurrentSec);
-        adRafId = requestAnimationFrame(adLoop);
-      }
-
-      adRafId = requestAnimationFrame(adLoop);
+      syncShowcaseUI();
     }
 
     function pauseSpecAd() {
+      const vid = getShowcaseVideo();
+      if (vid && !vid.paused) vid.pause();
       adIsPlaying = false;
-      if (adRafId) {
-        cancelAnimationFrame(adRafId);
-        adRafId = null;
-      }
-      clearInterval(adInterval);
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (audio) audio.pause();
-      sound.stopAdSoundtrack();
-
-      // Pause gameplay videos immediately
-      const vidCs2 = document.getElementById('ad-vid-cs2');
-      const vidGta = document.getElementById('ad-vid-gta');
-      if (vidCs2 && !vidCs2.paused) vidCs2.pause();
-      if (vidGta && !vidGta.paused) vidGta.pause();
-
       updatePlayButtonUI();
     }
 
     function restartSpecAd() {
-      pauseSpecAd();
-      const vidCs2 = document.getElementById('ad-vid-cs2');
-      const vidGta = document.getElementById('ad-vid-gta');
-      if (vidCs2) { vidCs2.currentTime = 0; if (!vidCs2.paused) vidCs2.pause(); }
-      if (vidGta) { vidGta.currentTime = 0; if (!vidGta.paused) vidGta.pause(); }
-      const b5 = document.getElementById('ad-beat-5');
-      if (b5) {
-        b5.style.display = 'none';
-        b5.style.opacity = '0';
-        b5.style.pointerEvents = 'none';
-        b5.classList.remove('opacity-100', 'pointer-events-auto');
-        b5.classList.add('opacity-0', 'pointer-events-none');
-      }
-      const shareToastReset = document.getElementById('ad-tut-share-toast');
-      if (shareToastReset) {
-        shareToastReset.style.display = 'none';
-        shareToastReset.style.visibility = 'hidden';
-        shareToastReset.style.opacity = '0';
-        shareToastReset.classList.add('opacity-0');
-        shareToastReset.classList.remove('opacity-100');
-      }
-      adCurrentSec = 0;
-      sound.resetAdSoundtrackFlags(0);
-      const audio = document.getElementById('ad-custom-audio');
-      if (audio) {
-        audio.currentTime = sound.customAudioOffset;
-      }
-      renderAdFrame(0);
+      const vid = getShowcaseVideo();
+      if (!vid) return;
+      hideOpeningCard();
+      hasStartedShowcase = true;
+      vid.currentTime = 0;
+      syncShowcaseUI();
       playSpecAd();
     }
 
     function seekAd(e) {
+      const vid = getShowcaseVideo();
+      if (!vid) return;
       const rect = e.currentTarget.getBoundingClientRect();
       const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      adCurrentSec = pct * AD_TOTAL_SEC;
-      invalidateTargetPosCache();
-      sound.resetAdSoundtrackFlags(adCurrentSec);
-
-      if (adCurrentSec < 24.5) {
-        const b5 = document.getElementById('ad-beat-5');
-        if (b5) {
-          b5.style.display = 'none';
-          b5.style.opacity = '0';
-          b5.style.pointerEvents = 'none';
-        }
-      }
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        audio.currentTime = Math.max(0, sound.customAudioOffset + adCurrentSec);
-      }
-      renderAdFrame(adCurrentSec);
+      const total = (isFinite(vid.duration) && vid.duration > 0) ? vid.duration : AD_TOTAL_SEC;
+      hideOpeningCard();
+      hasStartedShowcase = true;
+      vid.currentTime = pct * total;
+      syncShowcaseUI();
       updatePlayButtonUI();
     }
-
-    function jumpToBeat(sec) {
-      adCurrentSec = Math.max(0, Math.min(AD_TOTAL_SEC, sec));
-      sound.resetAdSoundtrackFlags(adCurrentSec);
-
-      if (adCurrentSec < 24.5) {
-        const b5 = document.getElementById('ad-beat-5');
-        if (b5) {
-          b5.style.display = 'none';
-          b5.style.opacity = '0';
-          b5.style.pointerEvents = 'none';
-        }
-      }
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        audio.currentTime = Math.max(0, sound.customAudioOffset + adCurrentSec);
-      }
-      renderAdFrame(adCurrentSec);
-      updatePlayButtonUI();
-      sound.click(750);
-    }
-
-    function setAdAudioMode(mode) {
-      sound.adSourceMode = mode;
-      const synthBtn = document.getElementById('ad-mode-synth-btn');
-      const fileBtn = document.getElementById('ad-mode-file-btn');
-      const audio = document.getElementById('ad-custom-audio');
-
-      if (mode === 'synth') {
-        if (synthBtn) {
-          synthBtn.className = 'px-2.5 py-1 rounded-md font-mono text-[11px] font-bold theme-bg text-black transition-all flex items-center gap-1.5';
-        }
-        if (fileBtn) {
-          fileBtn.className = 'px-2.5 py-1 rounded-md font-mono text-[11px] font-medium bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 transition-all flex items-center gap-1.5';
-        }
-        if (audio) audio.pause();
-        sound.enabled = true;
-        sound.init();
-        triggerToast('🎵 Switched to Procedural Synth Soundtrack (124 BPM)');
-      } else {
-        if (fileBtn) {
-          fileBtn.className = 'px-2.5 py-1 rounded-md font-mono text-[11px] font-bold theme-bg text-black transition-all flex items-center gap-1.5';
-        }
-        if (synthBtn) {
-          synthBtn.className = 'px-2.5 py-1 rounded-md font-mono text-[11px] font-medium bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10 transition-all flex items-center gap-1.5';
-        }
-        sound.stopAdSoundtrack();
-        if (audio && adIsPlaying) {
-          applyCurrentAdVolume();
-          audio.currentTime = sound.customAudioOffset + adCurrentSec;
-          audio.play().catch(() => {});
-        }
-        triggerToast('🎵 Switched to Custom Song Audio');
-      }
-    }
-
-    function handleAdSongUpload(e) {
-      const file = e.target.files && e.target.files[0];
-      if (!file) return;
-      const audio = document.getElementById('ad-custom-audio');
-      const nameDisp = document.getElementById('ad-song-name-display');
-      if (audio) {
-        audio.src = URL.createObjectURL(file);
-      }
-      if (nameDisp) {
-        nameDisp.textContent = file.name;
-        nameDisp.title = file.name;
-      }
-      sound.customAudioOffset = 0;
-      const offsetDisp = document.getElementById('ad-offset-display');
-      const offsetSlider = document.getElementById('ad-offset-slider');
-      if (offsetDisp) offsetDisp.textContent = '0.0s';
-      if (offsetSlider) offsetSlider.value = 0;
-
-      setAdAudioMode('file');
-      triggerToast('✓ Loaded song: ' + file.name + ' (Intro ready)');
-    }
-
-    function setSongPreset(sec) {
-      sound.customAudioOffset = sec;
-      const offsetDisp = document.getElementById('ad-offset-display');
-      const offsetSlider = document.getElementById('ad-offset-slider');
-      if (offsetDisp) offsetDisp.textContent = sound.customAudioOffset.toFixed(1) + 's';
-      if (offsetSlider) offsetSlider.value = sound.customAudioOffset;
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        audio.currentTime = sound.customAudioOffset + adCurrentSec;
-      }
-      const desc = sec === 9.5 ? '⚡ 09.5s: 17s Drop lands right on Calibration!' : sec === 0 ? '▶ 00.0s: Atmospheric intro from second zero' : '🔥 17.0s: Immediate high-energy beat drop';
-      triggerToast(desc);
-      sound.click(900);
-    }
-
-    function adjustSongOffset(delta) {
-      sound.customAudioOffset = Math.max(0, Math.round((sound.customAudioOffset + delta) * 10) / 10);
-      const offsetDisp = document.getElementById('ad-offset-display');
-      const offsetSlider = document.getElementById('ad-offset-slider');
-      if (offsetDisp) offsetDisp.textContent = sound.customAudioOffset.toFixed(1) + 's';
-      if (offsetSlider) offsetSlider.value = sound.customAudioOffset;
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        audio.currentTime = sound.customAudioOffset + adCurrentSec;
-      }
-      triggerToast(`⏱️ Song start offset: ${sound.customAudioOffset.toFixed(1)}s (Ends at: ${(sound.customAudioOffset + AD_TOTAL_SEC).toFixed(1)}s)`);
-    }
-
-    function onOffsetSliderChange(val) {
-      sound.customAudioOffset = parseFloat(val) || 0;
-      const offsetDisp = document.getElementById('ad-offset-display');
-      if (offsetDisp) offsetDisp.textContent = sound.customAudioOffset.toFixed(1) + 's';
-
-      const audio = document.getElementById('ad-custom-audio');
-      if (sound.adSourceMode === 'file' && audio) {
-        audio.currentTime = sound.customAudioOffset + adCurrentSec;
-      }
-    }
-
-    const MAX_AUDIO_CEILING = 0.25; // Scaled ceiling: 100% on slider now outputs 0.25 gain (your previous 50% sound level); 50% slider outputs 0.125 gain
 
     function applyCurrentAdVolume() {
-      let volFactor = 1.0;
-      if (adCurrentSec > 26.5) {
-        volFactor = Math.max(0, (AD_TOTAL_SEC - adCurrentSec) / (AD_TOTAL_SEC - 26.5));
+      const vid = getShowcaseVideo();
+      if (vid) {
+        vid.muted = adIsMuted;
+        vid.volume = adIsMuted ? 0 : Math.max(0, Math.min(1, adUserVolume));
       }
-      // Scaled volume: at 100% slider -> 1.00 * 0.25 = 0.25 physical gain (comfortable previous 50% sound level);
-      // at 50% slider (default) -> 0.50 * 0.25 = 0.125 physical gain (gentle background listening)
-      const effectiveVol = adIsMuted ? 0 : (adUserVolume * MAX_AUDIO_CEILING * volFactor);
-      sound.setVolume(effectiveVol);
-      const audio = document.getElementById('ad-custom-audio');
-      if (audio) {
-        audio.volume = Math.max(0, Math.min(1, effectiveVol));
+      if (typeof sound !== 'undefined') {
+        sound.setVolume(adIsMuted ? 0 : adUserVolume * 0.35);
       }
     }
 
@@ -2630,6 +1492,7 @@
       adUserVolume = parseFloat(val);
       if (isNaN(adUserVolume)) adUserVolume = 0.50;
       adUserVolume = Math.max(0, Math.min(1, adUserVolume));
+      if (adUserVolume > 0 && adIsMuted) adIsMuted = false;
 
       const pct = Math.round(adUserVolume * 100);
       const pctElem = document.getElementById('ad-volume-percent');
@@ -2639,20 +1502,15 @@
 
       applyCurrentAdVolume();
       const volBtn = document.getElementById('ad-volume-btn');
-      if (volBtn) volBtn.textContent = adUserVolume === 0 ? '🔇' : adUserVolume < 0.5 ? '🔉' : '🔊';
+      if (volBtn) volBtn.textContent = (adIsMuted || adUserVolume === 0) ? '🔇' : adUserVolume < 0.5 ? '🔉' : '🔊';
     }
 
     function toggleAdAudioMute() {
       adIsMuted = !adIsMuted;
+      applyCurrentAdVolume();
       const volBtn = document.getElementById('ad-volume-btn');
-      if (adIsMuted) {
-        sound.setVolume(0);
-        const audio = document.getElementById('ad-custom-audio');
-        if (audio) audio.volume = 0;
-        if (volBtn) volBtn.textContent = '🔇';
-      } else {
-        applyCurrentAdVolume();
-        if (volBtn) volBtn.textContent = adUserVolume < 0.5 ? '🔉' : '🔊';
+      if (volBtn) {
+        volBtn.textContent = (adIsMuted || adUserVolume === 0) ? '🔇' : adUserVolume < 0.5 ? '🔉' : '🔊';
       }
     }
 
@@ -2663,6 +1521,7 @@
 
       let volTimer = null;
       function showVol() {
+        if (!hasStartedShowcase) return;
         volPill.classList.remove('opacity-0', 'pointer-events-none');
         volPill.classList.add('opacity-100', 'pointer-events-auto');
         if (volTimer) clearTimeout(volTimer);
@@ -2688,7 +1547,6 @@
         }, 1500);
       });
 
-      // Spacebar toggles video play/pause
       document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' && !e.target.matches('input, textarea, select')) {
           const specAd = document.getElementById('spec-ad');
@@ -2703,587 +1561,20 @@
       });
     }
 
-    let currentActiveAdGame = 'arenabreakout';
-    let lastAdFilterStr = '';
-
-    function setAdActiveGame(gameKey, gameTitle) {
-      if (currentActiveAdGame === gameKey && (!gameTitle || document.getElementById('ad-game-title')?.textContent === gameTitle)) {
-        return;
-      }
-      currentActiveAdGame = gameKey;
-      lastAdFilterStr = '';
-      const games = ['arenabreakout', 'thefinals', 'cod', 'cs2', 'pubg', 'apex', 'deltaforce', 'endcard'];
-      games.forEach(g => {
-        const el = document.getElementById('ad-scene-' + g);
-        if (el) {
-          if (g === gameKey) {
-            el.classList.remove('opacity-0');
-            el.classList.add('opacity-100');
-          } else {
-            el.classList.remove('opacity-100');
-            el.classList.add('opacity-0');
-          }
-        }
+    function initShowcasePlayer() {
+      const vid = getShowcaseVideo();
+      if (!vid) return;
+      vid.addEventListener('timeupdate', syncShowcaseUI);
+      vid.addEventListener('loadedmetadata', syncShowcaseUI);
+      vid.addEventListener('play', updatePlayButtonUI);
+      vid.addEventListener('pause', updatePlayButtonUI);
+      vid.addEventListener('ended', () => {
+        adIsPlaying = false;
+        syncShowcaseUI();
+        updatePlayButtonUI();
       });
-      const badge = document.getElementById('ad-game-title');
-      if (badge && gameTitle) {
-        badge.textContent = gameTitle;
-      }
-    }
-
-    function setAdFilter(filterStr) {
-      if (filterStr === lastAdFilterStr) return;
-      lastAdFilterStr = filterStr;
-      const el = document.getElementById('ad-scene-' + currentActiveAdGame);
-      if (el) {
-        el.style.filter = filterStr;
-      }
-    }
-
-        // Cached DOM element dictionary for zero-lookup 60 FPS performance
-    const adEls = {};
-    function getAdEl(id) {
-      if (!adEls[id]) adEls[id] = document.getElementById(id);
-      return adEls[id];
-    }
-
-    // State-guarded setters: ONLY mutate DOM properties when value genuinely changes
-    function setClass(el, cls) { if (el && el.className !== cls) el.className = cls; }
-    function setDisplay(el, disp) { if (el && el.style.display !== disp) el.style.display = disp; }
-    function setOpacity(el, op) { if (el && el.style.opacity !== op) el.style.opacity = op; }
-    function setText(el, txt) { if (el && el.textContent !== txt) el.textContent = txt; }
-    function setWidth(el, w) { if (el && el.style.width !== w) el.style.width = w; }
-    function setLeft(el, l) { if (el && el.style.left !== l) el.style.left = l; }
-
-    // Dynamic element coordinate targeting for pixel-perfect cursor tracking on any screen size
-    let cachedTargetPositions = {};
-    function invalidateTargetPosCache() {
-      cachedTargetPositions = {};
-    }
-    window.addEventListener('resize', invalidateTargetPosCache, { passive: true });
-
-    function getTargetPos(el, defaultPos) {
-      const stageEl = document.getElementById('ad-stage-box');
-      if (!el || !stageEl) return defaultPos;
-      try {
-        const rEl = el.getBoundingClientRect();
-        const rSt = stageEl.getBoundingClientRect();
-        if (rEl.width === 0 || rEl.height === 0 || rSt.width === 0 || rSt.height === 0) return defaultPos;
-        return {
-          x: ((rEl.left + rEl.width / 2 - rSt.left) / rSt.width) * 100,
-          y: ((rEl.top + rEl.height / 2 - rSt.top) / rSt.height) * 100
-        };
-      } catch (e) {
-        return defaultPos;
-      }
-    }
-
-    function renderAdFrame(sec) {
-      const timer = getAdEl('ad-timer');
-      const bottomTimer = getAdEl('ad-bottom-timer');
-      const bar = getAdEl('ad-progress-bar');
-      const stage = getAdEl('ad-stage-box');
-
-      const s = Math.floor(sec).toString().padStart(2, '0');
-      const ms = Math.floor((sec % 1) * 10).toString();
-      const timeStr = `00:${s}.${ms} / 00:28`;
-
-      setText(timer, timeStr);
-      setText(bottomTimer, `00:${s}.${ms}`);
-
-      if (bar) {
-        const pct = Math.min(100, Math.max(0, (sec / AD_TOTAL_SEC) * 100));
-        setWidth(bar, `${pct}%`);
-      }
-
-      if (adIsPlaying && sound.adSourceMode === 'synth') {
-        sound.playAdTick(sec);
-      }
-
-      // Main stage containers
-      const b2 = getAdEl('ad-beat-2');
-      const tutStage = getAdEl('ad-tutorial-stage');
-      const b5 = getAdEl('ad-beat-5');
-
-      const gameSplitOverlay = getAdEl('ad-game-split-overlay');
-      const splitCalSide = getAdEl('ad-split-cal-side');
-
-      const vidCs2 = getAdEl('ad-vid-cs2');
-      const vidGta = getAdEl('ad-vid-gta');
-
-      const hudEl = getAdEl('ad-ingame-hud');
-      const hudActiveProfile = getAdEl('ad-hud-active-profile');
-      const hudStatusBadge = getAdEl('ad-hud-status-badge');
-      const hudBarBright = getAdEl('ad-hud-bar-bright');
-      const hudValBright = getAdEl('ad-hud-val-bright');
-      const hudBarContrast = getAdEl('ad-hud-bar-contrast');
-      const hudValContrast = getAdEl('ad-hud-val-contrast');
-      const hudBarGamma = getAdEl('ad-hud-bar-gamma');
-      const hudValGamma = getAdEl('ad-hud-val-gamma');
-      const hudBarVibrance = getAdEl('ad-hud-bar-vibrance');
-      const hudValVibrance = getAdEl('ad-hud-val-vibrance');
-      const hudBarShadows = getAdEl('ad-hud-bar-shadows');
-      const hudValShadows = getAdEl('ad-hud-val-shadows');
-
-      const simCursor = getAdEl('ad-simulated-cursor');
-      const cursorRing = getAdEl('ad-cursor-ring');
-
-      // Tutorial Stage elements
-      const tutTabProfiles = getAdEl('ad-tut-tab-profiles');
-      const tutTabTuner = getAdEl('ad-tut-tab-tuner');
-      const tutTabOptions = getAdEl('ad-tut-tab-options');
-
-      const tutViewTuner = getAdEl('ad-tut-view-tuner');
-      const tutThumbBright = getAdEl('ad-tut-thumb-bright');
-      const tutFillBright = getAdEl('ad-tut-fill-bright');
-      const tutValBright = getAdEl('ad-tut-val-bright');
-      const tutBtnSave = getAdEl('ad-tut-btn-save');
-
-      const tutViewProfiles = getAdEl('ad-tut-view-profiles');
-      const tutBtnCopyShare = getAdEl('ad-tut-btn-copyshare');
-      const tutShareToast = getAdEl('ad-tut-share-toast');
-
-      // Discord Elements
-      const tutDiscordBox = getAdEl('ad-tut-discord-box');
-      const discordMsgReply = getAdEl('ad-discord-msg-reply');
-      const discordReactions = getAdEl('ad-discord-reactions');
-      const discordInputText = getAdEl('ad-discord-input-text');
-
-      // Profile Slots Elements
-      const slot1 = getAdEl('ad-tut-slot-1');
-      const slot1Title = getAdEl('ad-tut-slot1-title');
-      const slot1Strip = getAdEl('ad-tut-slot1-strip');
-      const btnApplySlot1 = getAdEl('ad-tut-btn-apply-slot1');
-      const slot1Check = getAdEl('ad-tut-slot1-check');
-
-      const adTutSlot3 = getAdEl('ad-tut-slot-3');
-      const slot3Title = getAdEl('ad-tut-slot3-title');
-      const slot3Strip = getAdEl('ad-tut-slot3-strip');
-      const btnApplyArena = getAdEl('ad-tut-btn-apply-arena');
-      const slot3Check = getAdEl('ad-tut-slot3-check');
-      const headingName = getAdEl('ad-tut-heading-name');
-
-      function lerp(a, b, p) { return a + (b - a) * p; }
-      function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
-
-      // Default cursor ring hidden
-      if (cursorRing) {
-        cursorRing.classList.remove('scale-100', 'opacity-100');
-        cursorRing.classList.add('scale-0', 'opacity-0');
-      }
-
-      // ============================================================
-      // SCENE 1: THE OPENING HOOK (0.0s - 1.8s)
-      // ============================================================
-      if (sec < 1.8) {
-        invalidateTargetPosCache();
-        setDisplay(b2, 'flex'); setOpacity(b2, '1');
-        setDisplay(tutStage, 'none'); setOpacity(tutStage, '0');
-        if (tutStage) tutStage.style.pointerEvents = 'none';
-        setOpacity(gameSplitOverlay, '0');
-        setOpacity(hudEl, '0');
-        setDisplay(b5, 'none'); setOpacity(b5, '0');
-        setOpacity(simCursor, '0');
-        if (vidCs2) { setOpacity(vidCs2, '0'); if (!vidCs2.paused) vidCs2.pause(); vidCs2.currentTime = 0; }
-        if (vidGta) { setOpacity(vidGta, '0'); if (!vidGta.paused) vidGta.pause(); vidGta.currentTime = 0; }
-        if (tutDiscordBox) {
-          tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-        }
-        if (discordMsgReply) {
-          discordMsgReply.classList.remove('opacity-100', 'translate-y-0');
-          discordMsgReply.classList.add('opacity-0', 'translate-y-2');
-        }
-        if (discordReactions) {
-          discordReactions.classList.remove('opacity-100');
-          discordReactions.classList.add('opacity-0');
-        }
-        setAdFilter('none');
-
-      // ============================================================
-      // SCENE 2: AUTHENTIC APP WORKFLOW (1.8s - 13.5s)
-      // ============================================================
-      } else if (sec < 13.5) {
-        setDisplay(b2, 'none'); setOpacity(b2, '0');
-        setDisplay(tutStage, 'flex'); setOpacity(tutStage, '1');
-        if (tutStage) tutStage.style.pointerEvents = 'auto';
-        setOpacity(gameSplitOverlay, '0');
-        setOpacity(hudEl, '0');
-        setDisplay(b5, 'none'); setOpacity(b5, '0');
-        if (vidCs2) { setOpacity(vidCs2, '0'); if (!vidCs2.paused) vidCs2.pause(); vidCs2.currentTime = 0; }
-        if (vidGta) { setOpacity(vidGta, '0'); if (!vidGta.paused) vidGta.pause(); vidGta.currentTime = 0; }
-
-        let curX = 50, curY = 50, curOp = 1;
-
-        // Dynamic targets computed from rendered elements (pixel-perfect across desktop & mobile)
-        const posThumbStart = cachedTargetPositions.thumbStart || (cachedTargetPositions.thumbStart = getTargetPos(tutThumbBright, { x: 50.0, y: 32.2 }));
-        const posThumbMax   = { x: posThumbStart.x + 10.75, y: posThumbStart.y };
-        const posSave       = cachedTargetPositions.save || (cachedTargetPositions.save = getTargetPos(tutBtnSave, { x: 50.0, y: 48.0 }));
-
-        // ----------------------------------------------------------
-        // SUB-PART 2A: CREATE PROFILE & SAVE DIRECTLY (1.8s - 3.8s)
-        // ----------------------------------------------------------
-        if (sec < 3.8) {
-          if (tutViewTuner) { tutViewTuner.classList.remove('hidden'); setDisplay(tutViewTuner, 'flex'); }
-          if (tutViewProfiles) { tutViewProfiles.classList.add('hidden'); tutViewProfiles.classList.remove('grid'); }
-          setDisplay(tutShareToast, 'none');
-          if (tutShareToast) tutShareToast.style.visibility = 'hidden';
-          setOpacity(tutShareToast, '0');
-          if (tutDiscordBox) {
-            tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-          }
-
-          // Initial slot states (Slot 1 active with checkmark; arena ready with Apply)
-          setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-          setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
-          setDisplay(slot1Strip, 'block');
-          setDisplay(btnApplySlot1, 'none');
-          setDisplay(slot1Check, 'flex');
-
-          setDisplay(btnApplyArena, 'inline-block');
-          setDisplay(slot3Check, 'none');
-          setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-          setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
-          setDisplay(slot3Strip, 'none');
-          setText(headingName, 'Default Profile');
-
-          setClass(tutTabTuner, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap');
-          setClass(tutTabProfiles, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
-          setClass(tutTabOptions, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
-
-          const t = sec - 1.8; // 0.0s to 2.0s
-
-          if (t < 0.25) {
-            curX = posThumbStart.x;
-            curY = posThumbStart.y;
-            setLeft(tutThumbBright, '50%');
-            setWidth(tutFillBright, '0%');
-            setText(tutValBright, '0%');
-            setAdFilter('none');
-          } else if (t < 1.15) {
-            // Smoothly slide Brightness up from 50% to 75% (+50% Brightness)
-            const p = easeInOutCubic((t - 0.25) / 0.9);
-            const sliderPct = 50 + p * 25; // 50% to 75%
-            setLeft(tutThumbBright, `${sliderPct}%`);
-            setWidth(tutFillBright, `${p * 25}%`);
-            const valNum = Math.round(p * 50);
-            setText(tutValBright, `+${valNum}%`);
-            setAdFilter(`brightness(${1.0 + p * 0.25})`);
-            curX = lerp(posThumbStart.x, posThumbMax.x, p);
-            curY = posThumbStart.y;
-          } else if (t < 1.65) {
-            // Move cursor directly to center of Save .ICC Profile button
-            const p = easeInOutCubic((t - 1.15) / 0.5);
-            curX = lerp(posThumbMax.x, posSave.x, p);
-            curY = lerp(posThumbMax.y, posSave.y, p);
-            if (tutBtnSave) tutBtnSave.style.transform = 'none';
-          } else {
-            // Click Save .ICC Profile!
-            curX = posSave.x;
-            curY = posSave.y;
-            if (cursorRing && t > 1.68 && t < 1.98) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            if (tutBtnSave) {
-              tutBtnSave.style.transform = (t > 1.7 && t < 1.98) ? 'scale(0.95)' : 'none';
-            }
-          }
-
-        // ----------------------------------------------------------
-        // SUB-PART 2B: PROFILES TAB - APPLY & COPY SHARE CODE (3.8s - 8.8s)
-        // ----------------------------------------------------------
-        } else if (sec < 8.8) {
-          if (tutViewTuner) { tutViewTuner.classList.add('hidden'); setDisplay(tutViewTuner, 'none'); }
-          if (tutViewProfiles) { tutViewProfiles.classList.remove('hidden'); tutViewProfiles.classList.add('grid'); }
-          if (tutDiscordBox) {
-            tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-            tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-          }
-
-          setClass(tutTabProfiles, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-bold text-white bg-[#2B2E36] border border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] transition-all whitespace-nowrap');
-          setClass(tutTabTuner, 'px-1.5 sm:px-4 py-0.5 sm:py-1.5 rounded sm:rounded-lg text-[8px] sm:text-xs font-semibold text-gray-400 border border-white/5 bg-[#2B2E36] transition-all whitespace-nowrap');
-
-          const t = sec - 3.8; // 0.0s to 5.0s
-
-          const posSaveReal = cachedTargetPositions.save || getTargetPos(tutBtnSave, { x: 50.0, y: 48.0 });
-          const posArenaApply = cachedTargetPositions.arenaApply || (cachedTargetPositions.arenaApply = getTargetPos(btnApplyArena, { x: 28.5, y: 42.0 }));
-          const posCopyShare = cachedTargetPositions.copyShare || (cachedTargetPositions.copyShare = getTargetPos(tutBtnCopyShare, { x: 45.0, y: 62.0 }));
-
-          // 1. One profile must be ticked ALREADY (Default Profile) before switching to arena!
-          if (t < 0.75) {
-            // Slot 1 (Default Profile) is TICKED
-            setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-            setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
-            setDisplay(slot1Strip, 'block');
-            setDisplay(btnApplySlot1, 'none');
-            setDisplay(slot1Check, 'flex');
-
-            setDisplay(btnApplyArena, 'inline-block');
-            setDisplay(slot3Check, 'none');
-            setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-            setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
-            setDisplay(slot3Strip, 'none');
-            setText(headingName, 'Default Profile');
-          } else {
-            // Slot 1 (Default Profile) reverts to inactive Apply
-            setClass(slot1, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border border-white/5 flex items-center justify-between transition-all');
-            setClass(slot1Title, 'text-[7.5px] sm:text-sm font-bold text-white truncate');
-            setDisplay(slot1Strip, 'none');
-            setDisplay(btnApplySlot1, 'inline-block');
-            setDisplay(slot1Check, 'none');
-
-            // Slot 3 (arena) is ACTIVE
-            setDisplay(btnApplyArena, 'none');
-            setDisplay(slot3Check, 'flex');
-            setClass(adTutSlot3, 'p-0.5 sm:p-2.5 rounded sm:rounded-xl bg-[#31343a] border sm:border-2 border-amber-400 shadow-[0_0_12px_rgba(250,204,21,0.25)] flex items-center justify-between transition-all');
-            setClass(slot3Title, 'text-[7.5px] sm:text-sm font-bold text-amber-300 truncate');
-            setDisplay(slot3Strip, 'block');
-            setText(headingName, 'arena • Profile 2');
-          }
-
-          // 2. Seamless cursor trajectory from Save .ICC Profile -> arena Apply -> Copy Share Code
-          if (t < 0.65) {
-            const p = easeInOutCubic(t / 0.65);
-            curX = lerp(posSaveReal.x, posArenaApply.x, p);
-            curY = lerp(posSaveReal.y, posArenaApply.y, p);
-          } else if (t < 0.90) {
-            curX = posArenaApply.x;
-            curY = posArenaApply.y;
-            if (cursorRing && t > 0.65 && t < 0.85) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            if (btnApplyArena) {
-              btnApplyArena.style.transform = (t > 0.66 && t < 0.85) ? 'scale(0.92)' : 'none';
-            }
-          } else if (t < 1.65) {
-            const p = easeInOutCubic(Math.max(0, Math.min(1, (t - 0.90) / 0.75)));
-            curX = lerp(posArenaApply.x, posCopyShare.x, p);
-            curY = lerp(posArenaApply.y, posCopyShare.y, p);
-            if (btnApplyArena) btnApplyArena.style.transform = 'none';
-            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
-          } else if (t < 1.95) {
-            curX = posCopyShare.x;
-            curY = posCopyShare.y;
-            if (cursorRing && t > 1.68 && t < 1.88) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            if (tutBtnCopyShare) {
-              tutBtnCopyShare.style.transform = (t > 1.70 && t < 1.88) ? 'scale(0.94)' : 'none';
-            }
-          } else {
-            curX = posCopyShare.x;
-            curY = posCopyShare.y;
-            if (tutBtnCopyShare) tutBtnCopyShare.style.transform = 'none';
-          }
-
-          // 3. Share Toast state: ONLY show AFTER clicking Copy Share Code (at t >= 1.82s)!
-          if (t < 1.82) {
-            setDisplay(tutShareToast, 'none');
-            if (tutShareToast) tutShareToast.style.visibility = 'hidden';
-            setOpacity(tutShareToast, '0');
-          } else {
-            setDisplay(tutShareToast, 'inline-flex');
-            if (tutShareToast) tutShareToast.style.visibility = 'visible';
-            setOpacity(tutShareToast, '1');
-            if (tutShareToast) {
-              tutShareToast.classList.remove('opacity-0');
-              tutShareToast.classList.add('opacity-100');
-            }
-          }
-
-        // ----------------------------------------------------------
-        // SUB-PART 2C: DISCORD (#general-chat) (8.8s - 13.5s)
-        // ----------------------------------------------------------
-        } else {
-          setDisplay(tutShareToast, 'none');
-          if (tutShareToast) tutShareToast.style.visibility = 'hidden';
-          setOpacity(tutShareToast, '0');
-          if (tutDiscordBox) {
-            tutDiscordBox.classList.remove('opacity-0', 'translate-y-4');
-            tutDiscordBox.classList.add('opacity-100', 'pointer-events-none', 'translate-y-0');
-          }
-
-          const t = sec - 8.8; // 0.0s to 4.7s
-
-          const posCopyShareReal = cachedTargetPositions.copyShare || { x: 45.0, y: 62.0 };
-          const posDiscordIn = cachedTargetPositions.discordIn || (cachedTargetPositions.discordIn = getTargetPos(discordInputText, { x: 52.0, y: 88.5 }));
-
-          if (t < 0.9) {
-            const p = easeInOutCubic(t / 0.9);
-            curX = lerp(posCopyShareReal.x, posDiscordIn.x, p);
-            curY = lerp(posCopyShareReal.y, posDiscordIn.y, p);
-            setText(discordInputText, 'Message #general-chat');
-            setClass(discordInputText, 'text-xs font-normal text-[#949BA4] truncate');
-            if (discordMsgReply) {
-              discordMsgReply.classList.remove('opacity-100', 'translate-y-0');
-              discordMsgReply.classList.add('opacity-0', 'translate-y-2');
-            }
-            if (discordReactions) {
-              discordReactions.classList.remove('opacity-100');
-              discordReactions.classList.add('opacity-0');
-            }
-          } else if (t < 1.5) {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
-            if (cursorRing && t > 0.95 && t < 1.35) {
-              cursorRing.classList.remove('scale-0', 'opacity-0');
-              cursorRing.classList.add('scale-100', 'opacity-100');
-            }
-            setText(discordInputText, 'BCP-DPG6-8S34-CHJ6-8S34-CHJ0-005Z');
-            setClass(discordInputText, 'text-xs font-mono font-bold text-amber-300 truncate');
-          } else if (t < 2.0) {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
-            setText(discordInputText, 'Message #general-chat');
-            setClass(discordInputText, 'text-xs font-normal text-[#949BA4] truncate');
-            if (discordMsgReply) {
-              discordMsgReply.classList.remove('opacity-0', 'translate-y-2');
-              discordMsgReply.classList.add('opacity-100', 'translate-y-0');
-            }
-          } else {
-            curX = posDiscordIn.x;
-            curY = posDiscordIn.y;
-            if (discordMsgReply) {
-              discordMsgReply.classList.remove('opacity-0', 'translate-y-2');
-              discordMsgReply.classList.add('opacity-100', 'translate-y-0');
-            }
-            if (discordReactions) {
-              discordReactions.classList.remove('opacity-0');
-              discordReactions.classList.add('opacity-100');
-            }
-          }
-        }
-
-        if (simCursor) {
-          setOpacity(simCursor, curOp.toString());
-          const sw = stage ? (stage.clientWidth || stage.offsetWidth || 1280) : 1280;
-          const sh = stage ? (stage.clientHeight || stage.offsetHeight || 720) : 720;
-          const pxX = (curX * sw) / 100;
-          const pxY = (curY * sh) / 100;
-          simCursor.style.transform = `translate3d(${pxX.toFixed(2)}px, ${pxY.toFixed(2)}px, 0)`;
-        }
-
-      // ============================================================
-      // SCENE 3: IN-GAME SPLIT SCREEN COMPARISON (13.5s - 24.5s)
-      // ============================================================
-      } else if (sec < 24.5) {
-        setDisplay(b2, 'none'); setOpacity(b2, '0');
-        setDisplay(tutStage, 'none'); setOpacity(tutStage, '0');
-        if (tutStage) tutStage.style.pointerEvents = 'none';
-        if (tutDiscordBox) {
-          tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-        }
-        setDisplay(b5, 'none'); setOpacity(b5, '0');
-        setOpacity(simCursor, '0');
-        setAdFilter('none');
-
-        setOpacity(gameSplitOverlay, '1');
-        if (hudEl) {
-          hudEl.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-          hudEl.classList.add('opacity-100', 'translate-y-0');
-          setOpacity(hudEl, '1');
-          hudEl.style.transform = 'none';
-        }
-
-        const t = sec - 13.5; // 0.0s to 11.0s
-
-        // ----------------------------------------------------------
-        // SUB-PART 3A: Counter-Strike 2 (13.5s - 18.0s, 4.5s)
-        // ----------------------------------------------------------
-        if (t < 4.5) {
-          if (vidCs2) {
-            setOpacity(vidCs2, '1');
-            vidCs2.style.filter = 'none';
-            if (adIsPlaying) {
-              if (vidCs2.paused) vidCs2.play().catch(() => {});
-            } else {
-              if (!vidCs2.paused) vidCs2.pause();
-            }
-          }
-          if (vidGta) { setOpacity(vidGta, '0'); if (!vidGta.paused) vidGta.pause(); }
-
-          if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.28) contrast(1.30) saturate(1.70)';
-            splitCalSide.style.webkitBackdropFilter = 'brightness(1.28) contrast(1.30) saturate(1.70)';
-          }
-
-          setText(hudActiveProfile, 'CS2 Tournament Boost');
-          if (hudStatusBadge) {
-            hudStatusBadge.innerHTML = '<span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-amber-400 animate-pulse"></span><span>ACTIVE</span>';
-            hudStatusBadge.className = 'px-1 py-0.2 sm:px-2 sm:py-0.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-[6px] sm:text-[9px] font-bold text-amber-300 font-mono flex items-center gap-0.5 sm:gap-1 shrink-0';
-          }
-          if (hudBarShadows) { setWidth(hudBarShadows, '68%'); setClass(hudBarShadows, 'h-full bg-orange-400 transition-all duration-300'); }
-          if (hudValShadows) { setText(hudValShadows, '+35%'); setClass(hudValShadows, 'w-6 sm:w-11 text-right text-orange-400 font-bold'); }
-          if (hudBarBright) { setWidth(hudBarBright, '68%'); setText(hudValBright, '+35%'); }
-          if (hudBarGamma) { setWidth(hudBarGamma, '60%'); setText(hudValGamma, '+20%'); }
-
-        // ----------------------------------------------------------
-        // SUB-PART 3B: GTA VI Extended (18.0s - 24.5s, 6.5s)
-        // ----------------------------------------------------------
-        } else {
-          const crossT = t - 4.5; // 0.0s to 6.5s
-          const fadeP = Math.min(1, crossT / 0.8);
-          if (vidCs2) {
-            setOpacity(vidCs2, (1 - fadeP).toString());
-            if (fadeP >= 1 && !vidCs2.paused) vidCs2.pause();
-          }
-          if (vidGta) {
-            setOpacity(vidGta, fadeP.toString());
-            vidGta.style.filter = 'none';
-            if (adIsPlaying) {
-              if (vidGta.paused) vidGta.play().catch(() => {});
-            } else {
-              if (!vidGta.paused) vidGta.pause();
-            }
-          }
-
-          if (splitCalSide) {
-            splitCalSide.style.backdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
-            splitCalSide.style.webkitBackdropFilter = 'brightness(1.22) contrast(1.32) saturate(1.90)';
-          }
-
-          if (crossT > 0.25) {
-            setText(hudActiveProfile, 'GTA VI Vice Neon');
-            if (hudBarVibrance) { setWidth(hudBarVibrance, '75%'); setText(hudValVibrance, '+45%'); }
-            if (hudBarContrast) { setWidth(hudBarContrast, '60%'); setText(hudValContrast, '+20%'); }
-            if (hudBarShadows) { setWidth(hudBarShadows, '60%'); setText(hudValShadows, '+20%'); }
-            if (hudBarBright) { setWidth(hudBarBright, '62%'); setText(hudValBright, '+25%'); }
-          }
-        }
-
-      // ============================================================
-      // SCENE 4: CLEAN DOWNLOAD END CARD (24.5s - 28.0s)
-      // ============================================================
-      } else {
-        setDisplay(b2, 'none'); setOpacity(b2, '0');
-        setDisplay(tutStage, 'none'); setOpacity(tutStage, '0');
-        if (tutStage) tutStage.style.pointerEvents = 'none';
-        if (tutDiscordBox) {
-          tutDiscordBox.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          tutDiscordBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-        }
-
-        const fadeP = easeInOutCubic(Math.min(1, (sec - 24.5) / 0.8));
-
-        if (vidGta) setOpacity(vidGta, (1 - fadeP).toString());
-        if (gameSplitOverlay) setOpacity(gameSplitOverlay, (1 - fadeP).toString());
-        if (hudEl) setOpacity(hudEl, (1 - fadeP).toString());
-
-        setDisplay(b5, 'flex');
-        setOpacity(b5, fadeP.toString());
-        if (b5) b5.style.pointerEvents = fadeP > 0.5 ? 'auto' : 'none';
-
-        if (fadeP >= 1) {
-          if (vidCs2 && !vidCs2.paused) vidCs2.pause();
-          if (vidGta && !vidGta.paused) vidGta.pause();
-          setAdFilter('none');
-        }
-      }
+      syncShowcaseUI();
+      updatePlayButtonUI();
     }
 
     // 4. SIMULATOR TABS & APP CONTROLS (1:1 DESKTOP APP PARITY)
@@ -3964,58 +2255,6 @@
       window.addEventListener('touchend', onPointerUp);
     }
 
-    // Video Reel Interactive Split Slider Drag Support
-    let isUserDraggingAdSplit = false;
-
-    function setAdSplitPosition(clientX) {
-      const stage = document.getElementById('ad-stage-box');
-      if (!stage) return;
-      const rect = stage.getBoundingClientRect();
-      let pos = (clientX - rect.left) / rect.width;
-      pos = Math.max(0.04, Math.min(0.96, pos));
-      const pct = (pos * 100).toFixed(2);
-
-      const calImg = document.getElementById('ad-split-cal-img');
-      const handle = document.getElementById('ad-split-handle');
-      const simCursor = document.getElementById('ad-simulated-cursor');
-
-      if (calImg) calImg.style.clipPath = `inset(0 0 0 ${pct}%)`;
-      if (handle) handle.style.left = `${pct}%`;
-      if (simCursor) simCursor.style.opacity = '0';
-    }
-
-    const adSplitHandle = document.getElementById('ad-split-handle');
-    if (adSplitHandle) {
-      adSplitHandle.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
-        isUserDraggingAdSplit = true;
-        setAdSplitPosition(e.clientX);
-        if (typeof sound !== 'undefined') sound.click(650);
-      });
-      adSplitHandle.addEventListener('touchstart', (e) => {
-        e.stopPropagation();
-        isUserDraggingAdSplit = true;
-        if (e.touches && e.touches[0]) setAdSplitPosition(e.touches[0].clientX);
-        if (typeof sound !== 'undefined') sound.click(650);
-      }, { passive: true });
-    }
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isUserDraggingAdSplit) return;
-      setAdSplitPosition(e.clientX);
-    });
-    window.addEventListener('touchmove', (e) => {
-      if (!isUserDraggingAdSplit) return;
-      if (e.touches && e.touches[0]) setAdSplitPosition(e.touches[0].clientX);
-    }, { passive: true });
-    window.addEventListener('mouseup', () => {
-      isUserDraggingAdSplit = false;
-    });
-    window.addEventListener('touchend', () => {
-      isUserDraggingAdSplit = false;
-    });
-
-
     // -------------------------------------------------------------
     // 7. SCROLL PROGRESS & SIMULATOR CHAPTER ADVANCEMENT
     // -------------------------------------------------------------
@@ -4045,10 +2284,9 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       selectSlot(3);
-      setAdAudioMode('file');
+      initShowcasePlayer();
       setAdVolume(0.50);
       initFloatingVolumeControls();
-      renderAdFrame(0);
     });
   </script>
 
@@ -4283,7 +2521,7 @@
   </script>
 
   <!-- ================= CHOOSE YOUR PLAN MODAL (MATCHING USER SCREENSHOT) ================= -->
-  <div id="plan-modal" class="fixed inset-0 z-[9999999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="if(event.target === this) closePlanModal()">
+  <div id="plan-modal" class="fixed inset-0 z-[9999999] flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300" onclick="if(event.target === this) closePlanModal()">
     <div id="plan-modal-card" class="relative w-full max-w-[440px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
       
       <!-- Modal Header -->
@@ -4350,7 +2588,7 @@
   </div>
 
   <!-- ================= KEY RECOVERY MODAL POPUP ================= -->
-  <div id="key-recovery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+  <div id="key-recovery-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300">
     <div id="key-recovery-card" class="relative w-full max-w-[480px] bg-[#14161C] border border-[#2B2F3D] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.85)] p-6 sm:p-7 transform scale-95 transition-all duration-300 flex flex-col gap-5 text-left">
       
       <!-- Modal Header -->
@@ -4743,7 +2981,7 @@
   </script>
 
   <!-- ================= IN-APP FEEDBACK MODAL (MATCHING C# FEEDBACKDIALOG) ================= -->
-  <div id="feedback-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="if(event.target === this) closeFeedbackModal();">
+  <div id="feedback-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/85 opacity-0 pointer-events-none transition-opacity duration-300" onclick="if(event.target === this) closeFeedbackModal();">
     <div class="relative w-full max-w-lg rounded-2xl bg-[#1E2026] border border-[#444952] shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col text-left font-sans" onclick="event.stopPropagation();">
       
       <!-- Modal Header -->
