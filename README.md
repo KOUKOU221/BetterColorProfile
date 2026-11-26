@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Display%20API-Windows%20Official-success" alt="Uses Official Windows Display APIs" />
-  <img src="https://img.shields.io/badge/Release-v2.10.42-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.43-EAB308" alt="Version" />
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Proprietary%20%2F%20Commercial-blue.svg" alt="License: Proprietary Commercial Software" />
 </p>
@@ -29,7 +29,7 @@ Easily tune monitor colors, organize profiles into quick-access slots, and switc
 
 <p align="center">
   <a href="https://bettercolorprofile.vercel.app/">
-    <img src="assets/showcase_preview.png" alt="Better Color Profile Showcase" width="100%" />
+    <img src="assets/showcase_preview.gif" alt="Better Color Profile Showcase" width="100%" />
   </a>
 </p>
 
