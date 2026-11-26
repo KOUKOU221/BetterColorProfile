@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Windows-11%20%7C%2010-0078D6?logo=windows&logoColor=white" alt="Windows Support" />
   <img src="https://img.shields.io/badge/Display%20API-Windows%20Official-success" alt="Uses Official Windows Display APIs" />
-  <img src="https://img.shields.io/badge/Release-v2.10.41-EAB308" alt="Version" />
+  <img src="https://img.shields.io/badge/Release-v2.10.42-EAB308" alt="Version" />
   <a href="https://discord.gg/eeVBnK7Hmg"><img src="https://img.shields.io/badge/Discord-Join%20Community-5865F2?logo=discord&logoColor=white" alt="Discord Community" /></a>
   <img src="https://img.shields.io/badge/License-Proprietary%20%2F%20Commercial-blue.svg" alt="License: Proprietary Commercial Software" />
 </p>
