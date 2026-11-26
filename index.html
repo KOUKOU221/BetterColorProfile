@@ -371,7 +371,7 @@
             <div id="ad-progress-bar" class="h-full bg-amber-400 rounded-full w-0 pointer-events-none"></div>
           </div>
 
-          <span id="ad-bottom-timer" class="font-mono text-[10px] sm:text-xs font-bold text-gray-200 tabular-nums shrink-0">00:00 / 00:28</span>
+          <span id="ad-bottom-timer" class="font-mono text-[10px] sm:text-xs font-bold text-gray-200 tabular-nums shrink-0">00:00 / 00:53</span>
 
           <button type="button" onclick="toggleSpecAdFullScreen()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-gray-200 hover:text-white flex items-center justify-center transition-colors cursor-pointer shrink-0" title="Fullscreen">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
@@ -1273,7 +1273,7 @@
     // -------------------------------------------------------------
     // 3. MP4 SHOWCASE VIDEO THEATER PLAYER (1080p @ 60 FPS)
     // -------------------------------------------------------------
-    const AD_TOTAL_SEC = 28;
+    const AD_TOTAL_SEC = 53.8;
     let adIsPlaying = false;
     let adIsMuted = false;
     let adUserVolume = 0.50;
@@ -1306,7 +1306,7 @@
 
       const b5 = document.getElementById('ad-beat-5');
       if (b5) {
-        const showEnd = hasStartedShowcase && (cur >= 25.0 || (vid && vid.ended));
+        const showEnd = hasStartedShowcase && Boolean(vid && vid.ended);
         if (showEnd) {
           b5.style.display = 'flex';
           b5.style.opacity = '1';
