@@ -96,3 +96,9 @@ Join our official Discord community to share monitor calibrations, download game
 - Official plans, licenses, and key management: [bettercolorprofile.vercel.app](https://bettercolorprofile.vercel.app/#pricing).
 
 Copyright © 2026 KOUKOU221. All rights reserved.
+
+---
+
+<p align="center">
+  <a href="https://github.com/KOUKOU221/BetterColorProfile"><strong>⭐ Star this repo</strong></a>
+</p>
