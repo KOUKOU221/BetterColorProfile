@@ -212,6 +212,38 @@ async function handleApiRequest(req, res) {
       }, 200);
     }
 
+    // ── License status whitelist ──────────────────────────────────────────────
+    // Only "ACTIVE" and "TRIALING" statuses are permitted. Any other status
+    // (EXPIRED, CANCELED, PAST_DUE, INCOMPLETE, etc.) must fail closed.
+    const ALLOWED_STATUSES = new Set(["ACTIVE", "TRIALING"]);
+    const licStatus = (lic.status || "ACTIVE").toUpperCase();
+    if (!ALLOWED_STATUSES.has(licStatus)) {
+      return sendJson(res, {
+        success: true,
+        valid: false,
+        status: licStatus.toLowerCase(),
+        error: "Your license is no longer active. Please renew your subscription to continue.",
+      }, 200);
+    }
+
+    // ── Expiry date validation ────────────────────────────────────────────────
+    // Reject if either expires_at or period_end is in the past.
+    const nowMs = Date.now();
+    for (const field of ["expires_at", "period_end"]) {
+      const raw = lic[field];
+      if (raw) {
+        const expMs = typeof raw === "number" ? raw * 1000 : new Date(raw).getTime();
+        if (!isNaN(expMs) && expMs < nowMs) {
+          return sendJson(res, {
+            success: true,
+            valid: false,
+            status: "expired",
+            error: "Your license has expired. Please renew your subscription to continue.",
+          }, 200);
+        }
+      }
+    }
+
     // Single Device HWID Lock
     const nowIso = new Date().toISOString();
     if (hwid) {
@@ -235,6 +267,21 @@ async function handleApiRequest(req, res) {
         }
 
         if (transfer) {
+          // ── Transfer guard: require OTP verification token ─────────────────
+          // The client must supply the transfer_otp that was issued via
+          // /api/license/recover/request-otp and verified server-side.
+          // Without this, any caller who knows a license key can silently
+          // hijack an active seat to a new machine by flipping transfer=true.
+          const transferOtp = (body.transfer_otp || "").trim();
+          const otpValid = transferOtp ? await db.verifyOtp((lic.email || key), transferOtp) : false;
+          if (!otpValid) {
+            return sendJson(res, {
+              success: false,
+              valid: false,
+              status: "transfer_otp_required",
+              error: "To transfer this license to a new PC, please verify your identity first. Use 'Forgot Key / Transfer Device' in the app to receive a one-time code.",
+            }, 403);
+          }
           // Rebind to new device
           lic.hwid = hwid;
           lic.machine_name = machineName;
@@ -269,16 +316,95 @@ async function handleApiRequest(req, res) {
       }
     }
 
+    const isTrial = licStatus === "TRIALING";
+    let daysRemaining = 0;
+    let formattedPeriodEnd = "";
+    const endRaw = lic.period_end || lic.expires_at;
+    if (endRaw) {
+      const endMs = typeof endRaw === "number" ? endRaw * 1000 : new Date(endRaw).getTime();
+      if (!isNaN(endMs) && endMs > nowMs) {
+        daysRemaining = Math.max(1, Math.ceil((endMs - nowMs) / (24 * 60 * 60 * 1000)));
+        formattedPeriodEnd = new Date(endMs).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
+    }
+
     return sendJson(res, {
       success: true,
       valid: true,
-      status: "active",
+      status: licStatus.toLowerCase(),
       plan_title: lic.plan || "Pro License",
       user_email: lic.email || key,
       membership_id: lic.key,
-      is_trial: false,
+      is_trial: isTrial,
+      trial_days_remaining: isTrial ? daysRemaining : 0,
+      days_remaining: daysRemaining,
+      formatted_period_end: formattedPeriodEnd,
       manage_url: "https://whop.com/billing",
       verified_at: nowIso,
+    }, 200);
+  }
+
+  // -------------------------------------------------------------
+  // 1b. IN-APP TRANSFER OTP REQUEST: /api/license/transfer/request-otp
+  // -------------------------------------------------------------
+  if (pathname === "/api/license/transfer/request-otp") {
+    if (req.method !== "POST") return sendJson(res, { error: "Method not allowed" }, 405);
+    const body = await getJsonBody(req);
+    const key = (body.key || "").trim();
+
+    if (!key) {
+      return sendJson(res, { success: false, error: "License key is required." }, 400);
+    }
+
+    let lic = await db.getLicense(key);
+    if (!lic && key.startsWith("mem_")) {
+      lic = await syncWhopLicense(key);
+    }
+
+    if (!lic || !lic.email || !lic.email.includes("@")) {
+      return sendJson(res, {
+        success: false,
+        error: "No recovery email is associated with this license key. Please contact support.",
+      }, 404);
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    await db.setOtp(lic.email, otp);
+
+    const emailResult = await sendEmail({
+      to: lic.email,
+      subject: "Better Color Profile - Device Transfer Verification Code",
+      text: `Your Better Color Profile 6-digit device transfer code is: ${otp}\n\nEnter this code in the app to transfer your license to your new PC.\n\nThis code expires in 15 minutes.`,
+      html: `
+        <div style="font-family:sans-serif; background:#0F1117; color:#FFFFFF; padding:28px; border-radius:12px; max-width:520px;">
+          <h2 style="color:#F59E0B; margin-top:0;">Better Color Profile</h2>
+          <p>You requested to transfer your license to a new PC. Here is your 6-digit verification code:</p>
+          <div style="background:#161922; border:1px solid #F59E0B; border-radius:8px; padding:16px; font-size:32px; font-weight:bold; letter-spacing:8px; text-align:center; color:#F59E0B; font-family:monospace;">
+            ${otp}
+          </div>
+          <p style="font-size:12px; color:#94A3B8; margin-top:16px;">This code expires in 15 minutes. If you did not request this, you can safely ignore this email.</p>
+        </div>
+      `,
+    });
+
+    if (!emailResult.ok) {
+      return sendJson(res, {
+        success: false,
+        error: emailResult.error || "Failed to send verification email.",
+      }, 500);
+    }
+
+    const [localPart, domainPart] = lic.email.split("@");
+    const maskedEmail = `${localPart.slice(0, 2)}***@${domainPart}`;
+
+    return sendJson(res, {
+      success: true,
+      masked_email: maskedEmail,
+      message: `Verification code sent to ${maskedEmail}.`,
     }, 200);
   }
 
@@ -307,6 +433,25 @@ async function handleApiRequest(req, res) {
         status: "BANNED",
         error: lic.ban_reason || "License is deactivated.",
       }, 200);
+    }
+
+    // ── Status whitelist (heartbeat) ──────────────────────────────────────────
+    const HB_ALLOWED = new Set(["ACTIVE", "TRIALING"]);
+    const hbStatus = (lic.status || "ACTIVE").toUpperCase();
+    if (!HB_ALLOWED.has(hbStatus)) {
+      return sendJson(res, { success: false, valid: false, status: hbStatus.toLowerCase(), error: "License is no longer active." }, 200);
+    }
+
+    // ── Expiry date validation (heartbeat) ───────────────────────────────────
+    const hbNow = Date.now();
+    for (const field of ["expires_at", "period_end"]) {
+      const raw = lic[field];
+      if (raw) {
+        const expMs = typeof raw === "number" ? raw * 1000 : new Date(raw).getTime();
+        if (!isNaN(expMs) && expMs < hbNow) {
+          return sendJson(res, { success: false, valid: false, status: "expired", error: "License has expired." }, 200);
+        }
+      }
     }
 
     // SINGLE DEVICE PER KEY CONCURRENCY CONTROL:
@@ -644,9 +789,10 @@ async function handleApiRequest(req, res) {
 // Whop API Sync Helper
 async function syncWhopLicense(keyOrEmail) {
   try {
+    if (!WHOP_API_KEY) return null;
     const isEmail = keyOrEmail.includes("@");
     const targetUrl = isEmail
-      ? `https://api.whop.com/api/v1/members?account_id=biz_uA6wYzQXtOBKuu`
+      ? `https://api.whop.com/api/v1/members?account_id=biz_uA6wYzQXtOBKuu&query=${encodeURIComponent(keyOrEmail)}`
       : `https://api.whop.com/api/v1/memberships/${encodeURIComponent(keyOrEmail)}`;
 
     const res = await fetch(targetUrl, {
@@ -670,8 +816,14 @@ async function syncWhopLicense(keyOrEmail) {
       });
       if (!memRes.ok) return null;
       const memData = await memRes.json();
-      membership = (memData.data || []).find((m) => (m.product?.id || m.product_id) === WHOP_PRODUCT_ID);
+      const matching = (memData.data || []).filter((m) => (m.product?.id || m.product_id) === WHOP_PRODUCT_ID);
+      membership =
+        matching.find((m) => ["active", "trialing"].includes((m.status || "").toLowerCase())) ||
+        matching[0] ||
+        null;
     } else {
+      const prodId = data.product?.id || data.product_id;
+      if (prodId && prodId !== WHOP_PRODUCT_ID) return null;
       membership = data;
     }
 
@@ -681,7 +833,19 @@ async function syncWhopLicense(keyOrEmail) {
       key: membership.id || keyOrEmail,
       email: membership.user?.email || (isEmail ? keyOrEmail : null),
       plan: membership.plan?.title || "Pro License",
-      status: (membership.status || "").toLowerCase() === "active" ? "ACTIVE" : (membership.status || "ACTIVE").toUpperCase(),
+      // ── Strict status mapping from Whop ──────────────────────────────────
+      // Only "active" and "trialing" Whop statuses are admitted as ACTIVE/TRIALING.
+      // Every other status (expired, canceled, past_due, etc.) is preserved as-is
+      // so that the verify endpoint's whitelist rejects it correctly.
+      status: (function () {
+        const s = (membership.status || "").toLowerCase();
+        if (s === "active") return "ACTIVE";
+        if (s === "trialing") return "TRIALING";
+        return (membership.status || "INACTIVE").toUpperCase();
+      })(),
+      // ── Expiry dates from Whop ────────────────────────────────────────────
+      expires_at: membership.expires_at || membership.expiry_date || null,
+      period_end: membership.period_end || null,
       hwid: membership.metadata?.hwid || null,
       machine_name: null,
       created_at: new Date().toISOString(),

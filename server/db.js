@@ -23,64 +23,39 @@ try {
   // Read-only filesystem (e.g. Vercel serverless lambda)
 }
 
+// Keyed stores use a null prototype so that a lookup can never resolve an
+// Object.prototype member. Without this, a request for the "license" named
+// toString / constructor / valueOf / __proto__ returned an inherited object
+// instead of null and was treated as a valid license.
+function createKeyMap() {
+  return Object.create(null);
+}
+
+function hasKey(store, key) {
+  return Object.prototype.hasOwnProperty.call(store, key);
+}
+
+function normalizeKeyMap(source) {
+  const out = createKeyMap();
+  if (source && typeof source === "object" && !Array.isArray(source)) {
+    for (const key of Object.keys(source)) out[key] = source[key];
+  }
+  return out;
+}
+
 // In-memory cache for speed and read-only environments
 let memoryStore = {
-  licenses: {},
+  licenses: createKeyMap(),
   alerts: [],
-  otps: {},
+  otps: createKeyMap(),
 };
-
-// Seed default sample/test licenses
-function seedDefaultLicenses() {
-  const seedKeys = [
-    {
-      key: "mem_svxTbrq6dJiOeR",
-      email: "alroufa21@gmail.com",
-      plan: "Lifetime Admin Pro",
-      status: "ACTIVE",
-      hwid: null,
-      machine_name: null,
-      created_at: "2026-11-06T19:00:00.000Z",
-      last_seen_at: null,
-      note: "Admin / Creator Lifetime Key",
-    },
-    {
-      key: "BCP-PRO-2026-LIFETIME-001",
-      email: "koukou221@admin.bcp",
-      plan: "Pro License",
-      status: "ACTIVE",
-      hwid: null,
-      machine_name: null,
-      created_at: new Date().toISOString(),
-      last_seen_at: null,
-      note: "Master Dev Key",
-    },
-    {
-      key: "BCP-DEMO-TEST-KEY-4491",
-      email: "demo@bettercolorprofile.com",
-      plan: "Pro License",
-      status: "ACTIVE",
-      hwid: null,
-      machine_name: null,
-      created_at: new Date().toISOString(),
-      last_seen_at: null,
-      note: "Public demo test key",
-    },
-  ];
-
-  for (const item of seedKeys) {
-    if (!memoryStore.licenses[item.key]) {
-      memoryStore.licenses[item.key] = item;
-    }
-  }
-}
 
 // Load data from disk if available
 function loadLocalData() {
   try {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, "utf-8");
-      memoryStore.licenses = JSON.parse(raw);
+      memoryStore.licenses = normalizeKeyMap(JSON.parse(raw));
     }
   } catch (e) {
     // Fallback to memory
@@ -94,8 +69,6 @@ function loadLocalData() {
   } catch (e) {
     // Fallback to memory
   }
-
-  seedDefaultLicenses();
 }
 
 // Save data to disk if writable
@@ -254,23 +227,38 @@ module.exports = {
     return memoryStore.alerts;
   },
 
-  // OTP Storage with Attempt Rate-Limiting
+  // OTP Storage with Attempt Rate-Limiting (Memory + Vercel KV)
   async setOtp(email, code, expiresMs = 15 * 60 * 1000) {
     const cleanEmail = email.toLowerCase().trim();
-    memoryStore.otps[cleanEmail] = {
+    const entry = {
       code: String(code).trim(),
       expires_at: Date.now() + expiresMs,
       attempts: 0,
     };
+    memoryStore.otps[cleanEmail] = entry;
+    await kvFetch("SET", `bcp:otp:${cleanEmail}`, JSON.stringify(entry), "EX", Math.ceil(expiresMs / 1000));
   },
 
   async verifyOtp(email, code) {
     const cleanEmail = email.toLowerCase().trim();
-    const entry = memoryStore.otps[cleanEmail];
+    let entry = memoryStore.otps[cleanEmail];
+
+    if (!entry) {
+      const kvOtp = await kvFetch("GET", `bcp:otp:${cleanEmail}`);
+      if (kvOtp) {
+        try {
+          entry = typeof kvOtp === "string" ? JSON.parse(kvOtp) : kvOtp;
+        } catch (e) {
+          entry = null;
+        }
+      }
+    }
+
     if (!entry) return false;
 
     if (Date.now() > entry.expires_at) {
       delete memoryStore.otps[cleanEmail];
+      await kvFetch("DEL", `bcp:otp:${cleanEmail}`);
       return false;
     }
 
@@ -279,16 +267,23 @@ module.exports = {
     // Brute-force protection: invalidate after 5 failed attempts
     if (entry.attempts > 5) {
       delete memoryStore.otps[cleanEmail];
+      await kvFetch("DEL", `bcp:otp:${cleanEmail}`);
       return false;
     }
 
     if (entry.code === String(code).trim()) {
       delete memoryStore.otps[cleanEmail];
+      await kvFetch("DEL", `bcp:otp:${cleanEmail}`);
       return true;
     }
 
     if (entry.attempts >= 5) {
       delete memoryStore.otps[cleanEmail];
+      await kvFetch("DEL", `bcp:otp:${cleanEmail}`);
+    } else {
+      memoryStore.otps[cleanEmail] = entry;
+      const ttlSec = Math.max(1, Math.ceil((entry.expires_at - Date.now()) / 1000));
+      await kvFetch("SET", `bcp:otp:${cleanEmail}`, JSON.stringify(entry), "EX", ttlSec);
     }
 
     return false;
