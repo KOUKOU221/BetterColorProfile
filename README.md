@@ -86,7 +86,7 @@ Tweak colors and switch profiles inside any game without Alt-Tabbing (`RCtrl + E
 
 Join our official Discord community to share monitor calibrations, download game presets, and get support:
 
-👉 **[Join the Better Color Profile Discord](https://discord.gg/eeVBnK7Hmg)**
+👉 **[Join the Discord](https://discord.gg/eeVBnK7Hmg)**
 
 ---
 
