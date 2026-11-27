@@ -343,7 +343,7 @@ async function handleApiRequest(req, res) {
       trial_days_remaining: isTrial ? daysRemaining : 0,
       days_remaining: daysRemaining,
       formatted_period_end: formattedPeriodEnd,
-      manage_url: "https://whop.com/billing",
+      manage_url: "https://whop.com/better-885d/better-color-profile/",
       verified_at: nowIso,
     }, 200);
   }
